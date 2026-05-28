@@ -1,16 +1,14 @@
-# Ninh Hòa Invest AI V22 – Sổ tay đầu tư cá nhân
+# Ninh Hòa Invest AI V23 – Sổ tay đầu tư không cần vị trí
 
-Ứng dụng hỗ trợ nhà đầu tư bất động sản theo dõi tin tức, khu vực, pháp lý và lưu hồ sơ thương vụ tại Ninh Hòa – Khánh Hòa.
+Tác giả sản phẩm: Vũ Hoàng
 
-## Điểm mới V22
+## Điểm mới V23
 
-- Thêm **Sổ tay đầu tư cá nhân**.
-- Lưu lô đất, tin tức, khu vực quan tâm và ghi chú.
-- Theo dõi trạng thái thương vụ: Đang theo dõi, Cần hỏi thêm, Đi xem thực địa, Đang đàm phán, Tạm dừng, Đã loại bỏ.
-- Tin tức ưu tiên ảnh lấy từ bài báo/RSS nếu nguồn cung cấp ảnh; nếu ảnh lỗi, app dùng ảnh minh họa theo chủ đề.
-- Giữ giao diện compact của V21 và phân tích tác động tin tức.
-- Tác giả sản phẩm: **Vũ Hoàng**.
+- Bỏ quyền truy cập vị trí khỏi APK.
+- Pháp lý không còn dùng bản đồ; tập trung hỏi đáp, checklist và nguồn chính thức.
+- Tin tức cố lấy ảnh đại diện từ bài báo nếu có `og:image`/`twitter:image`.
+- Nếu nguồn không cung cấp ảnh, app dùng ảnh minh họa theo chủ đề và ghi nhãn rõ ràng.
+- Mục Khu vực được thiết kế khác với Tin tức: có hồ sơ khu vực, chỉ số và tin riêng theo vùng.
+- Tăng truy vấn tin, lưu tối đa 220 tin.
 
-## Build APK
-
-Dùng GitHub Actions có sẵn trong `.github/workflows/build-apk.yml`.
+Lưu ý: App hỗ trợ sàng lọc đầu tư, không thay thế cơ quan nhà nước, luật sư hoặc kết luận pháp lý cuối cùng.

@@ -1,8 +1,8 @@
-unzip -o NinhHoaInvestAI_NoAPI_V22_SoTayDauTuCaNhan.zip
-cp -r NinhHoaInvestAI_NoAPI_V22_SoTayDauTuCaNhan/. .
-rm -rf NinhHoaInvestAI_NoAPI_V22_SoTayDauTuCaNhan NinhHoaInvestAI_NoAPI_V22_SoTayDauTuCaNhan.zip
+unzip -o NinhHoaInvestAI_NoAPI_V23_NoLocationRealImagesAreaPro.zip
+cp -r NinhHoaInvestAI_NoAPI_V23_NoLocationRealImagesAreaPro/. .
+rm -rf NinhHoaInvestAI_NoAPI_V23_NoLocationRealImagesAreaPro NinhHoaInvestAI_NoAPI_V23_NoLocationRealImagesAreaPro.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Update V22 So tay dau tu ca nhan"
+git commit -m "Update V23 no location real images area pro"
 git push
