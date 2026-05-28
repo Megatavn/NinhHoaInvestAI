@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
         conn.setConnectTimeout(12000);
         conn.setReadTimeout(15000);
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/12.0");
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/14.0");
         conn.setRequestProperty("Accept", "application/rss+xml, application/xml, text/xml, text/html, */*");
         conn.setRequestProperty("Accept-Language", "vi-VN,vi;q=0.9,en;q=0.7");
         int code = conn.getResponseCode();
@@ -153,8 +153,10 @@ public class MainActivity extends Activity {
         settings.setUseWideViewPort(true);
         settings.setAllowFileAccess(true);
         settings.setAllowContentAccess(true);
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/12.0-NoAPI");
+        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/14.0-NoAPI");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -173,6 +175,7 @@ public class MainActivity extends Activity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
+                if (!request.isForMainFrame()) return false;
                 if (url.startsWith("file:///android_asset/") || url.startsWith("about:")) return false;
                 try {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(normalizeOpenUrl(url)));
