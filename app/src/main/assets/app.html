@@ -100,24 +100,79 @@ body.dark .map-card{background:linear-gradient(180deg,rgba(12,34,53,.96),rgba(12
 .gis-diagnostic{display:grid;gap:8px;padding:14px 16px;background:linear-gradient(180deg,rgba(255,255,255,.86),rgba(239,248,252,.72));border-bottom:1px solid #dce8ef}
 .diag-row{display:grid;grid-template-columns:112px 1fr;gap:8px;align-items:start;font-size:12.5px;line-height:1.35}.diag-row b{color:#12314a}.diag-row span{color:#607686;word-break:break-word}
 .gis-layer-list{display:grid;gap:8px;padding:14px 16px}.layer-card{border:1px solid #dce8ef;background:#fff;border-radius:18px;padding:12px;box-shadow:0 8px 22px rgba(6,27,44,.07)}.layer-card.active{border-color:#d7a531;background:#fff8e8}.layer-card b{display:block;font-size:14px}.layer-card span{display:block;color:#6d7f8b;font-size:12px;line-height:1.35;margin-top:4px}.layer-actions{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}.service-score{display:inline-flex;align-items:center;gap:4px;background:#eaf8ef;color:#17663d;border-radius:999px;padding:4px 8px;font-weight:900;font-size:11px}.service-score.warn{background:#fff3df;color:#8a560a}.planning-result-pro.safe .land-code{background:#e8f8ef;color:#11643c}.planning-result-pro.warn .land-code{background:#fff2d0;color:#7b530a}.planning-result-pro.danger .land-code{background:#ffe3df;color:#9d3028}.official-overlay-on #planningMap{outline:3px solid rgba(215,165,49,.38);outline-offset:-3px}
+
+.gis-log-box{font-size:11px;line-height:1.45;color:#516b7d;background:rgba(255,255,255,.75);border-top:1px solid #dce8ef;padding:12px 16px;white-space:pre-wrap;max-height:160px;overflow:auto}.gis-log-box b{color:#092234}.debug-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.debug-actions .btn{font-size:11px;padding:8px 10px}body.dark .gis-log-box{background:rgba(255,255,255,.05);color:#adc0cd;border-color:rgba(255,255,255,.12)}
 body.dark .gis-diagnostic,body.dark .layer-card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}body.dark .diag-row b,body.dark .layer-card b{color:#eef7fb}body.dark .diag-row span,body.dark .layer-card span{color:#adc0cd}
+
+/* ===== V17 NINH HOA PLANNING SOURCE PACK ===== */
+.source-pack-panel{border-radius:28px;overflow:hidden;background:linear-gradient(145deg,#f8fdff,#fff8e7);border:1px solid rgba(215,165,49,.32);box-shadow:0 18px 48px rgba(6,27,44,.12);margin:14px 0}
+.source-pack-head{padding:17px 18px;background:linear-gradient(135deg,#082238,#0f4d75);color:white;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.source-pack-head h3{margin:0;font-size:20px;line-height:1.15}.source-pack-head p{margin:6px 0 0;color:#d7e6ef;font-size:13px;line-height:1.35}.source-pack-body{padding:14px;display:grid;gap:12px}
+.source-search-row{display:grid;grid-template-columns:1fr auto;gap:8px}.source-search-row .btn{padding-left:14px;padding-right:14px}
+.source-group-tabs{display:flex;gap:8px;overflow:auto;padding-bottom:2px}.source-group-tabs .chip{white-space:nowrap}
+.source-pack-card{border-radius:22px;border:1px solid #dce8ef;background:rgba(255,255,255,.88);padding:14px;box-shadow:0 10px 26px rgba(6,27,44,.07)}
+.source-pack-card.very-high{border-color:#b9e8c8;background:linear-gradient(145deg,#f4fff7,#fff)}.source-pack-card.high{border-color:#dbe6ff}.source-pack-card.reference{border-color:#f2d486;background:#fffaf0}
+.source-meta-row{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:8px}.source-pill{display:inline-flex;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900;background:#eef6fb;color:#18405b}.source-pill.gold{background:#fff2d0;color:#7b530a}.source-pill.green{background:#e8f8ef;color:#11643c}.source-pill.blue{background:#e9f1ff;color:#174a80}.source-pill.red{background:#ffe7e2;color:#96362d}
+.source-pack-card h4{margin:0 0 6px;font-size:17px;color:#082238}.source-pack-card p{margin:6px 0;color:#536b7a;line-height:1.48}.source-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.source-actions .btn{font-size:12px;padding:9px 11px}
+.source-insight{border-radius:18px;background:rgba(8,34,56,.06);padding:10px;margin-top:10px;color:#3e5868;font-size:13px;line-height:1.42}.source-insight b{color:#082238}.source-grid-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}.source-grid-metrics div{border-radius:16px;background:rgba(255,255,255,.76);border:1px solid #e5eef3;padding:9px}.source-grid-metrics b{display:block;color:#082238;font-size:15px}.source-grid-metrics span{display:block;font-size:11px;color:#6e808d;margin-top:2px}
+.source-empty{padding:18px;text-align:center;color:#6c7e8b;background:rgba(255,255,255,.65);border-radius:20px}.source-checklist{margin-top:10px;padding-left:18px;color:#475f70;line-height:1.5}.source-checklist li{margin:4px 0}
+body.dark .source-pack-panel{background:rgba(255,255,255,.05);border-color:rgba(215,165,49,.25)}body.dark .source-pack-card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}body.dark .source-pack-card h4,body.dark .source-insight b,body.dark .source-grid-metrics b{color:#f3fbff}body.dark .source-pack-card p,body.dark .source-insight,body.dark .source-checklist{color:#c7d5de}body.dark .source-insight,body.dark .source-grid-metrics div{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.11)}@media(max-width:390px){.source-search-row{grid-template-columns:1fr}.source-grid-metrics{grid-template-columns:1fr}}
+
+
+
+/* V17 Simple User Mode */
+body.simple-mode header{padding-bottom:14px;border-bottom-left-radius:28px;border-bottom-right-radius:28px}
+body.simple-mode .hero{margin-top:12px;gap:10px}
+body.simple-mode .hero h2{font-size:24px;line-height:1.12}
+body.simple-mode .hero p{font-size:13.5px;line-height:1.42}
+body.simple-mode .hero-badges span{font-size:12px;padding:7px 10px}
+body.simple-mode .product-search input{padding:13px 14px;font-size:14px}
+.easy-plan-card{background:linear-gradient(135deg,#082238,#0c4b70);color:#fff;border-radius:26px;padding:18px;margin-bottom:13px;box-shadow:0 18px 44px rgba(6,27,44,.22)}
+.easy-plan-card h3{margin:0 0 8px;font-size:22px;line-height:1.15;letter-spacing:-.5px}
+.easy-plan-card p{margin:0 0 13px;color:#d9eaf3;line-height:1.5}
+.easy-steps{display:grid;gap:8px;margin:12px 0}
+.easy-steps div{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:10px}
+.easy-steps b{min-width:30px;height:30px;border-radius:12px;background:#f4cf63;color:#061b2c;display:grid;place-items:center;font-weight:950}
+.easy-steps span{font-size:13.2px;line-height:1.35;color:#eef7fb}
+.easy-actions{display:grid;grid-template-columns:1fr;gap:8px;margin:12px 0}
+body.simple-mode:not(.advanced-open) .plan-panel,
+body.simple-mode:not(.advanced-open) .planning-mode-tabs,
+body.simple-mode:not(.advanced-open) #officialGisBlock,
+body.simple-mode:not(.advanced-open) #vn2000Block,
+body.simple-mode:not(.advanced-open) #boundaryBlock{display:none!important}
+body.simple-mode:not(.advanced-open) .planning-legend,
+body.simple-mode:not(.advanced-open) .official-map-note{display:none!important}
+body.simple-mode .map-toolbar{grid-template-columns:1fr 1fr;gap:8px}
+body.simple-mode .map-toolbar .btn:nth-child(n+5){display:none}
+body.simple-mode:not(.advanced-open) .map-toolbar .btn:nth-child(3),
+body.simple-mode:not(.advanced-open) .map-toolbar .btn:nth-child(4){display:none}
+body.simple-mode .source-pack-head{grid-template-columns:1fr}
+body.simple-mode .source-pack-head .btn{width:100%}
+body.simple-mode .source-grid-metrics{display:none}
+body.simple-mode .source-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+body.simple-mode .source-actions .btn:nth-child(3){grid-column:1 / -1}
+body.simple-mode .deal-hero h3{font-size:22px}
+body.simple-mode .brief-card h3, body.simple-mode .news-title{letter-spacing:-.3px}
+body.simple-mode .fab-stack button:nth-child(2){display:none}
+body.simple-mode .section-title{font-size:20px}
+@media(max-width:390px){body.simple-mode .hero h2{font-size:22px}body.simple-mode .brand h1{font-size:18px}.easy-plan-card{padding:16px}}
 
 </style>
 </head>
-<body class="product-mode">
+<body class="product-mode simple-mode">
 <div class="app">
   <div id="splash" class="splash"><div class="splash-card"><div class="splash-logo">NH</div><h2>Ninh Hòa Invest AI</h2><p>Bản đồ quy hoạch · VN2000 · Phân tích đầu tư</p><div class="splash-bar"><span></span></div></div></div>
   <div class="orb one"></div><div class="orb two"></div>
   <header>
     <div class="top">
-      <div class="brand"><div class="logo">NH</div><div><h1>Ninh Hòa Invest AI</h1><p>Trợ lý đầu tư BĐS Ninh Hòa</p></div></div>
+      <div class="brand"><div class="logo">NH</div><div><h1>Ninh Hòa Invest AI</h1><p>Kiểm tra tin, khu vực và quy hoạch</p></div></div>
       <div class="header-actions"><div class="live"><span class="dot"></span><span id="liveText">Sẵn sàng</span></div><button class="theme-toggle" onclick="toggleTheme()" aria-label="Đổi giao diện">◐</button></div>
     </div>
     <div class="hero">
-      <h2>Theo dõi thị trường & phân tích lô đất</h2>
-      <p>Tin chọn lọc, khu vực trọng điểm, pháp lý và công cụ chấm điểm đầu tư trong một màn hình gọn gàng.</p>
-      <div class="hero-badges"><span>Tin chọn lọc</span><span>Khu đất</span><span>Phân tích</span></div>
-      <div class="search product-search"><input id="globalSearch" placeholder="Tìm khu vực, tin tức, pháp lý..." oninput="applyFilter();renderLandProfiles()"><button class="btn refresh-mini" onclick="refreshAll(true)" aria-label="Làm mới dữ liệu">↻</button></div>
+      <h2>Kiểm tra bất động sản Ninh Hòa dễ hiểu</h2>
+      <p>Mở app, chọn việc cần làm và xem gợi ý rõ ràng. Không cần hiểu kỹ thuật hay cấu hình API.</p>
+      <div class="hero-badges"><span>1. Xem tin</span><span>2. Kiểm tra đất</span><span>3. Lưu kết quả</span></div>
+      <div class="search product-search"><input id="globalSearch" placeholder="Bạn muốn kiểm tra khu vực nào?" oninput="applyFilter();renderLandProfiles()"><button class="btn refresh-mini" onclick="refreshAll(true)" aria-label="Làm mới dữ liệu">↻</button></div>
     </div>
   </header>
 
@@ -128,17 +183,17 @@ body.dark .gis-diagnostic,body.dark .layer-card{background:rgba(255,255,255,.06)
         <div class="stat"><b id="dealCount">0</b><span>Hồ sơ đã lưu</span></div>
       </div>
       <div class="product-actions">
-        <button class="btn dark" onclick="show('deal',document.querySelectorAll('.nav')[3])">Phân tích lô đất</button>
-        <button class="btn ghost" onclick="show('planning',document.querySelectorAll('.nav')[5])">Bản đồ quy hoạch</button>
+        <button class="btn dark" onclick="show('deal',document.querySelectorAll('.nav')[3])">Kiểm tra lô đất</button>
+        <button class="btn ghost" onclick="show('planning',document.querySelectorAll('.nav')[5])">Kiểm tra quy hoạch</button>
         <button class="btn ghost" onclick="show('news',document.querySelectorAll('.nav')[1])">Xem tin mới</button>
       </div>
-      <h3 class="section-title">Báo cáo nhanh hôm nay</h3>
+      <h3 class="section-title">Hôm nay cần chú ý gì?</h3>
       <div id="dailyBrief"></div>
-      <h3 class="section-title">Mở nhanh công cụ Pro</h3>
-      <div class="grid2"><button class="btn dark" onclick="show('deal',document.querySelectorAll('.nav')[3])">Phân tích Pro</button><button class="btn ghost" onclick="show('land',document.querySelectorAll('.nav')[4])">Tra khu vực</button></div>
-      <h3 class="section-title">Khu vực đáng theo dõi</h3>
+      <h3 class="section-title">Bạn muốn làm gì?</h3>
+      <div class="grid2"><button class="btn dark" onclick="show('deal',document.querySelectorAll('.nav')[3])">Kiểm tra lô đất</button><button class="btn ghost" onclick="show('land',document.querySelectorAll('.nav')[4])">Xem khu vực</button></div>
+      <h3 class="section-title">Khu vực nên theo dõi</h3>
       <div id="homeAreas"></div>
-      <h3 class="section-title">Tin ảnh hưởng đầu tư</h3>
+      <h3 class="section-title">Tin có thể ảnh hưởng giá đất</h3>
       <div id="topImpact"></div>
       <div class="footer">Tác giả: Vũ Hoàng · Dữ liệu công khai/RSS · Thông tin chỉ dùng để tham khảo đầu tư</div>
     </section>
@@ -151,13 +206,13 @@ body.dark .gis-diagnostic,body.dark .layer-card{background:rgba(255,255,255,.06)
     </section>
 
     <section id="briefing" class="section">
-      <h3 class="section-title">Investor Briefing</h3>
+      <h3 class="section-title">Tóm tắt dễ hiểu cho nhà đầu tư</h3>
       <div class="chiprow" id="impactChips"></div>
       <div id="impactList"></div>
     </section>
 
     <section id="deal" class="section">
-      <div class="deal-hero"><h3>Phân tích Pro · Chấm điểm lô đất</h3><p>Nhập thông tin lô đất để app tạo báo cáo: điểm đầu tư, rủi ro, giá/m², chiến lược mua, danh sách cần kiểm tra và kế hoạch hành động.</p></div>
+      <div class="deal-hero"><h3>Kiểm tra lô đất</h3><p>Nhập vài thông tin cơ bản, app sẽ chấm điểm dễ hiểu: nên xem tiếp, cần kiểm tra gì, rủi ro nào cần tránh.</p></div>
       <div class="card formgrid">
         <div class="grid2"><div><div class="label">Khu vực</div><select id="aiArea" class="select"></select></div><div><div class="label">Mục tiêu</div><select id="dealGoal" class="select"><option>Trung hạn 1-3 năm</option><option>Dài hạn 3-5 năm</option><option>Lướt sóng 3-12 tháng</option><option>Tích sản an toàn</option><option>Khai thác dòng tiền</option></select></div></div>
         <div class="grid2"><div><div class="label">Diện tích</div><input id="aiSize" class="input" placeholder="VD: 120m2"></div><div><div class="label">Giá bán</div><input id="aiPrice" class="input" placeholder="VD: 1.8 tỷ"></div></div>
@@ -172,15 +227,15 @@ body.dark .gis-diagnostic,body.dark .layer-card{background:rgba(255,255,255,.06)
           <label class="check"><input type="checkbox" id="hasRedFlag">Có dấu hiệu lộ giới/tranh chấp</label>
         </div></div>
         <div><div class="label">Mô tả thêm</div><textarea id="aiDesc" placeholder="VD: gần đường lớn, gần KCN, đất trồng cây, có lộ giới, đang hỏi quy hoạch..."></textarea></div>
-        <button class="btn dark" onclick="analyzeDeal()">Tạo báo cáo đầu tư Pro</button>
+        <button class="btn dark" onclick="analyzeDeal()">Kiểm tra ngay</button>
       </div>
       <div id="aiResult"></div>
-      <h3 class="section-title">Danh mục phân tích đã lưu</h3>
+      <h3 class="section-title">Lô đất đã lưu</h3>
       <div id="portfolioList"></div>
     </section>
 
     <section id="land" class="section">
-      <h3 class="section-title">Tra cứu khu vực đất chuyên sâu</h3>
+      <h3 class="section-title">Xem khu vực đầu tư</h3>
       <div class="maplite"></div>
       <div class="card formgrid">
         <input id="areaSearch" class="input" placeholder="Tìm khu vực: Ninh Diêm, Ninh Hải, Ninh Xuân..." oninput="renderLandProfiles()">
@@ -195,40 +250,74 @@ body.dark .gis-diagnostic,body.dark .layer-card{background:rgba(255,255,255,.06)
 
 
     <section id="planning" class="section">
+      <div class="easy-plan-card">
+        <h3>Kiểm tra quy hoạch theo cách đơn giản</h3>
+        <p>Chọn vị trí đất, bấm <b>Đọc thử quy hoạch</b>. Nếu hệ thống không đọc tự động, app sẽ mở đúng nguồn chính thức để bạn đối chiếu.</p>
+        <div class="easy-steps">
+          <div><b>1</b><span>Định vị hoặc kéo bản đồ đến lô đất</span></div>
+          <div><b>2</b><span>Bấm đọc thử / mở nguồn chính thức</span></div>
+          <div><b>3</b><span>Lưu kết quả và kiểm tra pháp lý</span></div>
+        </div>
+        <div class="easy-actions"><button class="btn dark" onclick="locatePlanning()">Định vị tôi</button><button class="btn" onclick="readPlanningAtCenter()">Đọc thử quy hoạch</button><button class="btn ghost" onclick="openExternal('https://ninhhoa.khanhhoa.gov.vn/vi/quy-hoach-su-dung-dat')">Mở nguồn Ninh Hòa</button></div>
+        <button class="btn ghost small" onclick="toggleAdvancedTools()">Hiện/ẩn công cụ nâng cao</button>
+      </div>
       <div class="plan-panel">
-        <h3>Bản đồ quy hoạch & đọc loại đất</h3>
-        <p>Tìm lớp ArcGIS công khai, bật lớp màu quy hoạch, đọc mã đất tại điểm/vị trí VN2000 và lưu kết quả để kiểm chứng pháp lý.</p>
+        <h3>Thông tin kỹ thuật</h3>
+        <p>Dành cho người muốn nhập VN2000, vẽ ranh hoặc xem chẩn đoán GIS.</p>
         <div class="plan-stats"><div><b id="planPointCount">0</b><span>Điểm ranh</span></div><div><b id="planArea">0</b><span>m² ước tính</span></div><div><b id="planZone">108°15′</b><span>Kinh tuyến</span></div></div>
       </div>
 
       <div class="planning-mode-tabs">
-        <button class="chip active" onclick="scrollToPlanningBlock('officialGisBlock')">Kết nối GIS</button>
-        <button class="chip" onclick="scrollToPlanningBlock('smartReaderBlock')">Đọc quy hoạch</button>
+        <button class="chip active" onclick="scrollToPlanningBlock('sourcePackBlock')">Nguồn Ninh Hòa</button>
+        <button class="chip" onclick="scrollToPlanningBlock('officialGisBlock')">Kết nối GIS</button>
+        <button class="chip" onclick="scrollToPlanningBlock('smartReaderBlock')">Đọc thử quy hoạch</button>
         <button class="chip" onclick="scrollToPlanningBlock('vn2000Block')">VN2000</button>
         <button class="chip" onclick="scrollToPlanningBlock('boundaryBlock')">Ranh lô</button>
       </div>
 
+
+      <div id="sourcePackBlock" class="source-pack-panel">
+        <div class="source-pack-head">
+          <div>
+            <h3>Nguồn quy hoạch chính thức</h3>
+            <p>Danh sách nguồn đáng tin cậy để kiểm tra khi bản đồ tự động không đọc được.</p>
+          </div>
+          <button class="btn" onclick="copyPlanningSourceChecklist()">Copy các bước kiểm tra</button>
+        </div>
+        <div class="source-pack-body">
+          <div class="source-search-row">
+            <input id="planningSourceSearch" class="input" placeholder="Tìm nguồn: QHSDĐ 2030, Ninh Diêm, Vân Phong, phân khu..." oninput="renderPlanningSourcePack()">
+            <button class="btn dark" onclick="renderPlanningSourcePack()">Lọc</button>
+          </div>
+          <div id="sourceGroupTabs" class="source-group-tabs"></div>
+          <div id="sourcePackList"></div>
+          <div class="source-insight"><b>Cách dùng khi GIS thiếu lớp Ninh Hòa:</b> mở nguồn chính thức phù hợp → đối chiếu xã/phường, số tờ/số thửa, bản đồ đính kèm → lưu ghi chú trong app. Không kết luận theo màu bản đồ nếu chưa có văn bản hoặc xác nhận cơ quan có thẩm quyền.</div>
+        </div>
+      </div>
+
       <div id="officialGisBlock" class="official-gis-shell v15-gis-console">
         <div class="official-gis-head">
-          <div><b>V15 · Planning Layer Pro</b><span>Không nhúng WebView bị chặn nữa. App quét ArcGIS REST, chọn lớp quy hoạch, bật lớp màu và đọc thuộc tính tại điểm.</span></div>
-          <div class="official-gis-actions"><button class="btn" onclick="runGisDiagnostic(true)">Tìm lớp GIS</button><button class="btn ghost" onclick="openExternal('https://gis.khanhhoa.gov.vn/public/8192/')">Mở nguồn</button></div>
+          <div><b>Kiểm tra tự động nếu có dữ liệu</b><span>Tính năng này tự thử đọc dữ liệu. Nếu không có kết quả, dùng nguồn chính thức phía trên.</span></div>
+          <div class="official-gis-actions"><button class="btn" onclick="runGisDiagnostic(true)">Thử đọc tự động</button><button class="btn ghost" onclick="openExternal('https://gis.khanhhoa.gov.vn/public/8192/')">Mở nguồn</button></div>
         </div>
         <div id="gisDiagnostic" class="gis-diagnostic">
           <div class="diag-row"><b>Trạng thái</b><span id="gisDiagStatus">Chưa quét dịch vụ GIS</span></div>
           <div class="diag-row"><b>Dịch vụ đang dùng</b><span id="gisActiveService">--</span></div>
           <div class="diag-row"><b>Lớp đọc</b><span id="gisActiveLayers">--</span></div>
+          <div class="debug-actions"><button class="btn ghost small" onclick="copyGisDebug()">Copy chẩn đoán</button><button class="btn ghost small" onclick="openExternal('https://gis.khanhhoa.gov.vn/arcgis/rest/services?f=pjson')">Mở dữ liệu kỹ thuật</button></div>
         </div>
-        <div id="gisLayerList" class="gis-layer-list"><div class="empty">Bấm “Tìm lớp GIS” để app quét các thư mục ArcGIS công khai. Nếu tìm được MapServer phù hợp, app sẽ tự bật lớp màu và đọc mã đất.</div></div>
+        <div id="gisLogBox" class="gis-log-box"><b>Log GIS:</b> Chưa có dữ liệu. Bấm “Thử đọc tự động”.</div>
+        <div id="gisLayerList" class="gis-layer-list"><div class="empty">Bấm “Thử đọc tự động” để app quét các thư mục ArcGIS công khai. Nếu tìm được MapServer phù hợp, app sẽ tự bật lớp màu và đọc mã đất.</div></div>
       </div>
 
       <div id="smartReaderBlock" class="map-card official-reader">
-        <div class="official-gis-head"><div><b>Bản đồ quy hoạch trong app</b><span>Kéo tâm/chạm vào lô đất rồi bấm Đọc quy hoạch. V15 tự quét folder ArcGIS thay vì nhúng trang GIS bị chặn.</span></div><span id="gisOverlayStatus" class="official-badge warn">Đang chờ lớp GIS</span></div>
+        <div class="official-gis-head"><div><b>Bản đồ chọn vị trí</b><span>Kéo bản đồ đến lô đất rồi bấm đọc thử. Đây là bước sàng lọc, chưa phải kết luận pháp lý.</span></div><span id="gisOverlayStatus" class="official-badge warn">Đang chờ lớp GIS</span></div>
         <div style="position:relative"><div id="planningMap"></div><div class="map-center-cross"></div></div>
         <div class="map-toolbar">
           <button class="btn dark" onclick="locatePlanning()">Định vị</button>
-          <button class="btn" onclick="readPlanningAtCenter()">Đọc quy hoạch</button>
-          <button class="btn ghost" onclick="toggleOfficialPlanningOverlay()">Bật/Tắt lớp màu</button><button class="btn ghost" onclick="runGisDiagnostic(true)">Quét lớp</button>
-          <button class="btn ghost" onclick="addCurrentCenterPoint()">Thêm điểm ranh</button>
+          <button class="btn" onclick="readPlanningAtCenter()">Đọc thử quy hoạch</button>
+          <button class="btn ghost" onclick="toggleOfficialPlanningOverlay()">Bật lớp màu</button><button class="btn ghost" onclick="runGisDiagnostic(true)">Thử đọc</button>
+          <button class="btn ghost" onclick="addCurrentCenterPoint()">Lưu điểm</button>
         </div>
         <div class="planning-legend">
           <div class="legend-item"><span class="legend-color" style="background:#e876d8"></span><b>ODT/ONT</b> Đất ở</div>
@@ -240,24 +329,24 @@ body.dark .gis-diagnostic,body.dark .layer-card{background:rgba(255,255,255,.06)
       </div>
 
       <div class="card plan-readout formgrid">
-        <h3 class="news-title">Kết quả đọc quy hoạch</h3>
-        <div class="planning-quick-actions"><button class="btn dark" onclick="readPlanningAtCenter()">Đọc tâm bản đồ</button><button class="btn ghost" onclick="readPlanningAtLastPoint()">Đọc điểm ranh cuối</button><button class="btn ghost" onclick="copyPlanningCoordinate()">Copy tọa độ</button><button class="btn ghost" onclick="openExternal('https://www.google.com/maps/search/?api=1&query='+planningCenter.lat+','+planningCenter.lng)">Google Maps</button></div>
-        <div id="planningReadout"><div class="empty">Chưa có kết quả. Kéo tâm bản đồ vào lô đất rồi bấm “Đọc quy hoạch”.</div></div>
+        <h3 class="news-title">Kết quả kiểm tra</h3>
+        <div class="planning-quick-actions"><button class="btn dark" onclick="readPlanningAtCenter()">Đọc vị trí đang xem</button><button class="btn ghost" onclick="readPlanningAtLastPoint()">Đọc điểm đã lưu</button><button class="btn ghost" onclick="copyPlanningCoordinate()">Copy tọa độ</button><button class="btn ghost" onclick="openExternal('https://www.google.com/maps/search/?api=1&query='+planningCenter.lat+','+planningCenter.lng)">Google Maps</button></div>
+        <div id="planningReadout"><div class="empty">Chưa có kết quả. Kéo tâm bản đồ vào lô đất rồi bấm “Đọc thử quy hoạch”.</div></div>
       </div>
 
       <div id="vn2000Block" class="card formgrid">
-        <h3 class="news-title">Nhập tọa độ GPS / VN2000</h3>
+        <h3 class="news-title">Nhập tọa độ nâng cao</h3>
         <div class="coord-grid"><input id="gpsLat" class="input" placeholder="Vĩ độ, VD: 12.5201"><input id="gpsLng" class="input" placeholder="Kinh độ, VD: 109.1253"></div>
         <button class="btn dark" onclick="addGpsPoint()">Ghim điểm GPS</button>
         <div class="coord-grid"><input id="vnX" class="input" placeholder="X/Bắc, VD: 1384567"><input id="vnY" class="input" placeholder="Y/Đông, VD: 586123"></div>
-        <div class="coord-grid three"><select id="vnMeridian" class="select" onchange="updatePlanZone()"><option value="108.25">Khánh Hòa 108°15′</option><option value="108.0">108°00′</option><option value="105.75">105°45′</option><option value="107.75">107°45′</option><option value="109.0">109°00′</option></select><select id="vnScale" class="select"><option value="0.9999">TM-3 k=0.9999</option><option value="0.9996">UTM k=0.9996</option></select><button class="btn dark" onclick="convertVN2000Point()">Chuyển & đọc</button></div>
+        <div class="coord-grid three"><select id="vnMeridian" class="select" onchange="updatePlanZone()"><option value="108.25">Khánh Hòa 108°15′</option><option value="108.0">108°00′</option><option value="105.75">105°45′</option><option value="107.75">107°45′</option><option value="109.0">109°00′</option></select><select id="vnScale" class="select"><option value="0.9999">TM-3 k=0.9999</option><option value="0.9996">UTM k=0.9996</option></select><button class="btn dark" onclick="convertVN2000Point()">Chuyển tọa độ</button></div>
         <div class="map-note"><b>Lưu ý:</b> chuyển đổi VN2000 chỉ phục vụ định vị nhanh. Khi giao dịch vẫn cần trích lục địa chính và xác nhận cơ quan có thẩm quyền.</div>
       </div>
 
       <div id="boundaryBlock" class="card formgrid">
-        <h3 class="news-title">Ranh lô đất sơ bộ</h3>
+        <h3 class="news-title">Vẽ ranh lô đất</h3>
         <div id="pointList" class="point-list"></div>
-        <div class="actions"><button class="btn small" onclick="savePlanningProfile()">Lưu hồ sơ vị trí</button><button class="btn ghost small" onclick="copyPlanningSummary()">Tóm tắt kiểm tra</button><button class="btn red small" onclick="clearPlanningPoints()">Xóa ranh</button></div>
+        <div class="actions"><button class="btn small" onclick="savePlanningProfile()">Lưu hồ sơ vị trí</button><button class="btn ghost small" onclick="copyPlanningSummary()">Copy tóm tắt</button><button class="btn red small" onclick="clearPlanningPoints()">Xóa ranh</button></div>
       </div>
 
       <div class="card">
@@ -280,10 +369,10 @@ body.dark .gis-diagnostic,body.dark .layer-card{background:rgba(255,255,255,.06)
   <nav class="bottom">
     <button class="nav active" onclick="show('home',this)"><i>🏠</i>Home</button>
     <button class="nav" onclick="show('news',this)"><i>📰</i>Tin</button>
-    <button class="nav" onclick="show('briefing',this)"><i>🧠</i>Brief</button>
-    <button class="nav" onclick="show('deal',this)"><i>📊</i>Phân tích</button>
-    <button class="nav" onclick="show('land',this)"><i>📍</i>Khu đất</button>
-    <button class="nav" onclick="show('planning',this)"><i>🗺️</i>Bản đồ</button>
+    <button class="nav" onclick="show('briefing',this)"><i>🧠</i>Tóm tắt</button>
+    <button class="nav" onclick="show('deal',this)"><i>📊</i>Kiểm tra</button>
+    <button class="nav" onclick="show('land',this)"><i>📍</i>Khu vực</button>
+    <button class="nav" onclick="show('planning',this)"><i>🗺️</i>Quy hoạch</button>
     <button class="nav" onclick="show('lookup',this)"><i>⚖️</i>Tra cứu</button>
   </nav>
 
@@ -425,13 +514,37 @@ const PLAN_KEY='nhi_v13_plan_profiles';
 let planningMap=null,planningLayer=null,planningPolygon=null,planningMarkers=[],planningPoints=[];
 let planningCenter={lat:12.5201,lng:109.1253};
 const planningOfficialSources=[
- ['GIS Khánh Hòa','Mở hệ thống bản đồ/GIS công khai của Khánh Hòa để đối chiếu lớp thông tin đất đai/quy hoạch.','https://gis.khanhhoa.gov.vn/public/8192/'],
- ['Quy hoạch sử dụng đất Ninh Hòa 2030','Trang công khai bản đồ điều chỉnh quy hoạch sử dụng đất đến năm 2030 của thị xã Ninh Hòa.','https://ninhhoa.khanhhoa.gov.vn/vi/quy-hoach-su-dung-dat/thong-bao-cong-khai-ban-do-dieu-chinh-quy-hoach-su-dung-dat-den-nam-2030-thi-xa-ninh-hoa-tinh-khanh-hoa'],
- ['Cổng thông tin Ninh Hòa','Theo dõi thông báo, tài nguyên môi trường và văn bản địa phương.','https://ninhhoa.khanhhoa.gov.vn/'],
- ['Cổng thông tin Khánh Hòa','Tra cứu văn bản, chỉ đạo điều hành và thủ tục hành chính cấp tỉnh.','https://khanhhoa.gov.vn/'],
- ['Công báo Khánh Hòa','Đối chiếu văn bản pháp lý chính thức, bảng giá đất, quyết định liên quan đất đai.','https://congbaokhanhhoa.gov.vn/']
+ ['QHSDĐ Ninh Hòa 2030','Nguồn công khai bản đồ điều chỉnh quy hoạch sử dụng đất đến năm 2030 của thị xã Ninh Hòa.','https://ninhhoa.khanhhoa.gov.vn/vi/quy-hoach-su-dung-dat/thong-bao-cong-khai-ban-do-dieu-chinh-quy-hoach-su-dung-dat-den-nam-2030-thi-xa-ninh-hoa-tinh-khanh-hoa'],
+ ['Quy hoạch chung Ninh Hòa 2040','Nguồn công bố đồ án điều chỉnh quy hoạch chung thị xã Ninh Hòa đến năm 2040.','https://ninhhoa.khanhhoa.gov.vn/vi/quy-hoach-xay-dung/quyet-dinh-ve-viec-cong-bo-do-an-dieu-chinh-quy-hoach-chung-thi-xa-ninh-hoa-tinh-khanh-hoa-den-nam-2040'],
+ ['Công báo Khánh Hòa','Đối chiếu quyết định, nghị quyết và hiệu lực văn bản pháp lý gốc.','https://congbaokhanhhoa.gov.vn/'],
+ ['Cổng tỉnh Khánh Hòa','Tra cứu hồ sơ quy hoạch tỉnh, văn bản chỉ đạo, thủ tục hành chính.','https://khanhhoa.gov.vn/'],
+ ['IPA/KKT Vân Phong','Nguồn theo dõi dự án, phân khu, công nghiệp, cảng và logistics liên quan Ninh Hòa.','https://ipa.khanhhoa.gov.vn/'],
+ ['GIS Khánh Hòa','Nguồn xem trực quan khi khu vực có lớp công khai; không dùng làm nguồn duy nhất.','https://gis.khanhhoa.gov.vn/public/8192/']
 ];
-function initPlanningV12(){renderPlanningSources();updatePlanStats();renderPointList()}
+
+const planningSourceGroups=[['all','Tất cả'],['ninhhoa','Cổng Ninh Hòa'],['congbao','Công báo'],['tinh','Cổng tỉnh'],['vanphong','Vân Phong'],['gis','GIS/đối chiếu']];
+let activePlanningSourceGroup='all';
+const planningSourcePack=[
+ {group:'ninhhoa',priority:1,reliability:'very-high',title:'Bản đồ điều chỉnh quy hoạch sử dụng đất đến năm 2030 - Ninh Hòa',summary:'Nguồn ưu tiên khi GIS không hiện đủ lớp Ninh Hòa. Dùng để đối chiếu bản đồ quy hoạch sử dụng đất, xã/phường và tài liệu đính kèm.',url:'https://ninhhoa.khanhhoa.gov.vn/vi/quy-hoach-su-dung-dat/thong-bao-cong-khai-ban-do-dieu-chinh-quy-hoach-su-dung-dat-den-nam-2030-thi-xa-ninh-hoa-tinh-khanh-hoa',tags:['QHSDĐ 2030','Ninh Hòa','Nguồn chính thức'],use:'Kiểm tra mục đích sử dụng đất theo quy hoạch đến 2030, ưu tiên khi app không đọc được lớp GIS.'},
+ {group:'ninhhoa',priority:1,reliability:'very-high',title:'Kế hoạch sử dụng đất Ninh Hòa hằng năm',summary:'Dùng để kiểm tra dự án/chuyển mục đích có nằm trong kế hoạch sử dụng đất theo năm hay không.',url:'https://ninhhoa.khanhhoa.gov.vn/vi/quy-hoach-su-dung-dat',tags:['Kế hoạch sử dụng đất','Hằng năm','Nguồn địa phương'],use:'Trước khi mua đất nông nghiệp/đất chuyển mục đích, phải xem kế hoạch sử dụng đất năm gần nhất.'},
+ {group:'ninhhoa',priority:1,reliability:'very-high',title:'Điều chỉnh quy hoạch chung thị xã Ninh Hòa đến năm 2040',summary:'Nguồn định hướng không gian đô thị, công nghiệp, dịch vụ, dân cư và phát triển dài hạn của toàn thị xã.',url:'https://ninhhoa.khanhhoa.gov.vn/vi/quy-hoach-xay-dung/quyet-dinh-ve-viec-cong-bo-do-an-dieu-chinh-quy-hoach-chung-thi-xa-ninh-hoa-tinh-khanh-hoa-den-nam-2040',tags:['QHC 2040','Đô thị','Nguồn chính thức'],use:'Dùng để đánh giá vùng tăng trưởng dài hạn, không thay thế kiểm tra quy hoạch sử dụng đất chi tiết.'},
+ {group:'congbao',priority:1,reliability:'very-high',title:'Quyết định 1138/QĐ-UBND phê duyệt QHC Ninh Hòa 2040',summary:'Nguồn pháp lý gốc để đối chiếu hiệu lực, số quyết định và cơ quan ban hành đồ án quy hoạch chung Ninh Hòa đến năm 2040.',url:'https://congbao.khanhhoa.gov.vn/noi-dung-van-ban/vanbanid/22431',tags:['Pháp lý gốc','QĐ 1138','QHC 2040'],use:'Khi app đưa nhận định theo QHC 2040, nên mở nguồn này để kiểm chứng số văn bản và hiệu lực.'},
+ {group:'congbao',priority:2,reliability:'very-high',title:'Công báo Khánh Hòa - tìm văn bản Ninh Hòa/quy hoạch/đất đai',summary:'Nguồn kiểm chứng quyết định, nghị quyết, bảng giá đất, kế hoạch sử dụng đất và văn bản liên quan.',url:'https://congbaokhanhhoa.gov.vn/',tags:['Công báo','Văn bản pháp lý','Đất đai'],use:'Dùng sau khi thấy tin hoặc bản đồ; ưu tiên văn bản có số ký hiệu, ngày ban hành, ngày hiệu lực.'},
+ {group:'tinh',priority:2,reliability:'very-high',title:'Cổng thông tin Khánh Hòa - quy hoạch tỉnh và điều chỉnh quy hoạch',summary:'Nguồn cấp tỉnh để theo dõi quy hoạch tỉnh, hồ sơ lấy ý kiến, văn bản chỉ đạo và thông tin điều hành.',url:'https://khanhhoa.gov.vn/vi/thong-tin-quy-hoach-ke-hoach',tags:['Quy hoạch tỉnh','Khánh Hòa','Nguồn chính thức'],use:'Dùng để nhìn bức tranh tổng thể Khánh Hòa trước khi soi sâu vào Ninh Hòa.'},
+ {group:'vanphong',priority:2,reliability:'high',title:'IPA Khánh Hòa - Ninh Hòa hướng tới đô thị công nghiệp',summary:'Nguồn tổng quan về định hướng Ninh Hòa, công nghiệp, đô thị và liên kết KKT Vân Phong.',url:'https://ipa.khanhhoa.gov.vn/ninh-hoa-huong-toi-do-thi-cong-nghiep',tags:['Đô thị công nghiệp','Ninh Hòa','IPA'],use:'Dùng cho phân tích đầu tư vùng, đặc biệt các khu Ninh Diêm, Ninh Thủy, Ninh An, Ninh Thọ.'},
+ {group:'vanphong',priority:2,reliability:'high',title:'IPA/KKT Vân Phong - dự án Nam Vân Phong, phân khu 19',summary:'Nguồn dự án và danh mục kêu gọi đầu tư tại Nam Vân Phong/Ninh Phước, liên quan nhóm công nghiệp, năng lượng, logistics.',url:'https://ipa.khanhhoa.gov.vn/to-hop-loc-hoa-dau-nam-van-phong',tags:['Nam Vân Phong','Phân khu 19','Công nghiệp'],use:'Dùng để đánh giá động lực vĩ mô, không dùng thay cho kết luận pháp lý từng thửa.'},
+ {group:'vanphong',priority:2,reliability:'high',title:'Khu đô thị Đông Bắc Ninh Hòa 2',summary:'Nguồn dự án/định hướng khu đô thị tại các phân khu thuộc Ninh Thọ, Ninh An liên quan câu chuyện mở rộng đô thị.',url:'https://ipa.khanhhoa.gov.vn/khu-do-thi-dong-bac-ninh-hoa-2',tags:['Đông Bắc Ninh Hòa','Phân khu 13/14/16','Đô thị'],use:'Dùng để theo dõi động lực đô thị hóa, cần đối chiếu quy hoạch và hiện trạng từng khu.'},
+ {group:'gis',priority:3,reliability:'reference',title:'GIS Khánh Hòa - bản đồ hiện trạng/quy hoạch khi có lớp công khai',summary:'Dùng để xem trực quan và đối chiếu màu/lớp dữ liệu. Nếu thiếu lớp Ninh Hòa hoặc bị chặn, chuyển sang nguồn Ninh Hòa + Công báo.',url:'https://gis.khanhhoa.gov.vn/public/8192/',tags:['GIS','Đối chiếu','Có thể thiếu lớp'],use:'Không nên dùng làm nguồn duy nhất khi quyết định giao dịch.'}
+];
+function renderSourceGroupTabs(){const el=$('sourceGroupTabs');if(!el)return;el.innerHTML=planningSourceGroups.map(g=>`<button class="chip ${activePlanningSourceGroup===g[0]?'active':''}" onclick="activePlanningSourceGroup='${g[0]}';renderSourceGroupTabs();renderPlanningSourcePack()">${g[1]}</button>`).join('')}
+function reliabilityLabel(x){if(x==='very-high')return 'Chính thức';if(x==='high')return 'Nguồn hỗ trợ';return 'Tham khảo'}
+function reliabilityClass(x){if(x==='very-high')return 'green';if(x==='high')return 'blue';return 'gold'}
+function renderPlanningSourcePack(){renderSourceGroupTabs();const el=$('sourcePackList');if(!el)return;const q=noAccent($('planningSourceSearch')?.value||'');let arr=planningSourcePack.filter(s=>{const txt=noAccent([s.title,s.summary,s.tags.join(' '),s.use].join(' '));if(activePlanningSourceGroup!=='all'&&s.group!==activePlanningSourceGroup)return false;if(q&&!txt.includes(q))return false;return true}).sort((a,b)=>a.priority-b.priority);el.innerHTML=arr.length?arr.map(sourcePackCard).join(''):'<div class="source-empty">Không tìm thấy nguồn phù hợp. Thử từ khóa: QHSDĐ, 2040, Vân Phong, Ninh Diêm, Công báo.</div>'}
+function sourcePackCard(s){const searchUrl='https://www.google.com/search?q='+encodeURIComponent((s.title+' '+(s.group==='congbao'?'site:congbaokhanhhoa.gov.vn':s.group==='ninhhoa'?'site:ninhhoa.khanhhoa.gov.vn':s.group==='vanphong'?'site:ipa.khanhhoa.gov.vn':'site:khanhhoa.gov.vn')).trim());return `<article class="source-pack-card ${s.reliability}"><div class="source-meta-row"><span class="source-pill ${reliabilityClass(s.reliability)}">${reliabilityLabel(s.reliability)}</span><span class="source-pill gold">Ưu tiên ${s.priority}</span>${s.tags.map(t=>`<span class="source-pill">${escapeHtml(t)}</span>`).join('')}</div><h4>${escapeHtml(s.title)}</h4><p>${escapeHtml(s.summary)}</p><div class="source-insight"><b>Dùng để làm gì:</b> ${escapeHtml(s.use)}</div><div class="source-grid-metrics"><div><b>${s.group==='ninhhoa'?'Ninh Hòa':s.group==='congbao'?'Pháp lý':s.group==='vanphong'?'Vân Phong':s.group==='tinh'?'Cấp tỉnh':'GIS'}</b><span>Nhóm nguồn</span></div><div><b>${reliabilityLabel(s.reliability)}</b><span>Độ tin cậy</span></div><div><b>${s.priority===1?'Bắt buộc':s.priority===2?'Nên đọc':'Đối chiếu'}</b><span>Khi kiểm tra</span></div></div><div class="source-actions"><button class="btn small" onclick='openExternal(${JSON.stringify(s.url)})'>Mở nguồn</button><button class="btn ghost small" onclick='openExternal(${JSON.stringify(searchUrl)})'>Tìm trong nguồn</button><button class="btn ghost small" onclick='savePlanningSource(${JSON.stringify(s.title).replace(/'/g,"&#39;")},${JSON.stringify(s.url).replace(/'/g,"&#39;")})'>Lưu nguồn</button></div></article>`}
+function savePlanningSource(title,url){const item={id:'src-'+noAccent(title).slice(0,60),title:'Nguồn quy hoạch: '+title,summary:'Nguồn đã lưu để kiểm chứng quy hoạch Ninh Hòa.',link:url,sourceName:'Planning Source Pack',publishedAt:new Date().toISOString(),score:90,badges:['Nguồn chính thức','Pháp lý']};toggleSave(item)}
+function copyPlanningSourceChecklist(){const text='Checklist kiểm chứng quy hoạch Ninh Hòa:\n1) Mở QHSDĐ Ninh Hòa 2030 từ Cổng Ninh Hòa.\n2) Đối chiếu QHC Ninh Hòa 2040 để hiểu định hướng dài hạn.\n3) Kiểm tra văn bản gốc trên Công báo Khánh Hòa.\n4) Nếu liên quan Vân Phong, xem IPA/KKT Vân Phong và phân khu/dự án.\n5) Đối chiếu số tờ, số thửa, trích lục địa chính tại cơ quan có thẩm quyền.\n6) Không kết luận chỉ bằng màu bản đồ hoặc tin môi giới.';navigator.clipboard&&navigator.clipboard.writeText(text);toast('Đã copy checklist kiểm chứng')}
+
+function initPlanningV12(){renderPlanningSources();renderPlanningSourcePack();updatePlanStats();renderPointList()}
 function initPlanningMap(){
   updatePlanZone();
   if(planningMap){setTimeout(()=>planningMap.invalidateSize(),80);return}
@@ -563,14 +676,23 @@ function copyPlanningSummary(){const area=planningPoints.length>=3?formatArea(ca
 
 
 /* ===== V15 Planning Layer Pro ===== */
+
 const OFFICIAL_GIS_URL='https://gis.khanhhoa.gov.vn/public/8192/';
 const ARCGIS_ROOT='https://gis.khanhhoa.gov.vn/arcgis/rest/services';
+const ARCGIS_ROOTS=[
+ 'https://gis.khanhhoa.gov.vn/arcgis/rest/services',
+ 'https://gis.khanhhoa.gov.vn/server/rest/services',
+ 'https://gisportal.khanhhoa.gov.vn/arcgis/rest/services',
+ 'https://gisportal.khanhhoa.gov.vn/server/rest/services',
+ 'http://gis.khanhhoa.gov.vn/arcgis/rest/services',
+ 'http://gis.khanhhoa.gov.vn/server/rest/services'
+];
 let planningArcCandidates=[], planningOverlay=null, planningOverlayVisible=false, planningOverlayService=null, planningOverlayLayerIds=[];
-let gisDiscovering=false, gisLogs=[], gisLastScanAt=null;
-const GIS_LAYER_WORDS=/quy|qhsd|sử dụng|su.?dung|hiện trạng|hien.?trang|đất|dat|loại đất|loai.?dat|mục đích|muc.?dich|chức năng|chuc.?nang|kế hoạch|ke.?hoach|land|planning|zoning|phan.?khu/i;
-const GIS_SERVICE_WORDS=/8192|quy|qhsd|sử dụng|su.?dung.?dat|hiện trạng|hien.?trang|đất|dat|tnmt|tai.?nguyen|planning|land|zoning|không gian|khong.?gian/i;
+let gisDiscovering=false, gisLogs=[], gisLastScanAt=null, gisActiveRoot=ARCGIS_ROOT;
+const GIS_LAYER_WORDS=/quy|qhsd|sử dụng|su.?dung|hiện trạng|hien.?trang|đất|dat|loại đất|loai.?dat|mục đích|muc.?dich|chức năng|chuc.?nang|kế hoạch|ke.?hoach|land|planning|zoning|phan.?khu|odt|ont|tmd|dgt|dkv/i;
+const GIS_SERVICE_WORDS=/8192|quy|qhsd|sử dụng|su.?dung.?dat|hiện trạng|hien.?trang|đất|dat|tnmt|tai.?nguyen|planning|land|zoning|không gian|khong.?gian|hientrang|quyhoach/i;
 const GIS_FOLDER_ALLOW=/^(?!.*(cache|system|utilities|sample|print|gpserver)).*/i;
-const GIS_MANUAL_HINTS=['QHSDD','QuyHoachSuDungDat','Quy_hoach_su_dung_dat','QH_SD_Dat','HienTrangSuDungDat','Hien_trang_su_dung_dat','HTSDD','HTSDD_QHSDD','DatDai','datdai','TNMT/QuyHoachSuDungDat','TNMT/HienTrangSuDungDat','NinhHoa/QuyHoachSuDungDat','NinhHoa/HTSDD','public/8192'];
+const GIS_MANUAL_HINTS=['QHSDD','QuyHoachSuDungDat','Quy_hoach_su_dung_dat','QH_SD_Dat','HienTrangSuDungDat','Hien_trang_su_dung_dat','HTSDD','HTSDD_QHSDD','DatDai','datdai','TNMT/QuyHoachSuDungDat','TNMT/HienTrangSuDungDat','NinhHoa/QuyHoachSuDungDat','NinhHoa/HTSDD','public/8192','KhanhHoa/QuyHoachSuDungDat','KHANHHOA/QuyHoachSuDungDat'];
 function scrollToPlanningBlock(id){const el=$(id);const main=document.querySelector('.main');if(el&&main){main.scrollTo({top:el.offsetTop-10,behavior:'smooth'})}}
 function reloadOfficialGis(){runGisDiagnostic(true)}
 function showOfficialFallback(){}
@@ -578,7 +700,13 @@ function initPlanningV12(){renderPlanningSources();updatePlanStats();renderPoint
 function initPlanningMap(){
   updatePlanZone();
   if(planningMap){setTimeout(()=>planningMap.invalidateSize(),80);return}
-  if(typeof L==='undefined'){$('planningMap').innerHTML='<div class="empty" style="padding:24px">Chưa tải được thư viện bản đồ. Kiểm tra mạng rồi mở lại tab Bản đồ.</div>';return;}
+  if(typeof L==='undefined'){
+    $('planningMap').innerHTML='<div class="empty" style="padding:24px">Đang tải thư viện bản đồ... Nếu mạng yếu, app sẽ thử lại trong vài giây.</div>';
+    window.__leafletRetry=(window.__leafletRetry||0)+1;
+    if(window.__leafletRetry<12)setTimeout(initPlanningMap,800);
+    else $('planningMap').innerHTML='<div class="empty" style="padding:24px">Chưa tải được thư viện bản đồ. Hãy kiểm tra mạng hoặc mở lại app.</div>';
+    return;
+  }
   planningMap=L.map('planningMap',{zoomControl:true,attributionControl:true}).setView([planningCenter.lat,planningCenter.lng],13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:20,attribution:'© OpenStreetMap'}).addTo(planningMap);
   planningLayer=L.layerGroup().addTo(planningMap);
@@ -595,59 +723,73 @@ function setGisDiag(status,service,layers){
   if($('gisActiveService'))$('gisActiveService').textContent=service||'--';
   if($('gisActiveLayers'))$('gisActiveLayers').textContent=layers||'--';
 }
-function logGis(msg){gisLogs.push((new Date()).toLocaleTimeString('vi-VN')+' · '+msg);gisLogs=gisLogs.slice(-12)}
+
+function logGis(msg){gisLogs.push((new Date()).toLocaleTimeString('vi-VN')+' · '+msg);gisLogs=gisLogs.slice(-40);renderGisLogBox()}
+function renderGisLogBox(){const el=$('gisLogBox');if(!el)return;el.innerHTML='<b>Log GIS:</b>\n'+escapeHtml(gisLogs.slice(-16).join('\n')||'Chưa có dữ liệu. Bấm “Thử đọc tự động”.')}
+function copyGisDebug(){const txt=`Ninh Hòa Invest AI GIS Debug\nRoot dùng: ${gisActiveRoot}\nTrạng thái: ${$('gisDiagStatus')?$('gisDiagStatus').textContent:''}\nService: ${$('gisActiveService')?$('gisActiveService').textContent:''}\nLayer: ${$('gisActiveLayers')?$('gisActiveLayers').textContent:''}\nLog:\n${gisLogs.join('\n')}`;try{navigator.clipboard.writeText(txt);toast('Đã copy chẩn đoán GIS')}catch(e){toast(txt)}}
 async function runGisDiagnostic(manual=false){
   if(gisDiscovering){toast('Đang quét GIS, đợi chút...');return}
-  gisDiscovering=true;setGisStatus('Đang quét ArcGIS','warn');setGisDiag('Đang quét thư mục ArcGIS...',planningOverlayService||'--','--');
+  gisDiscovering=true;setGisStatus('Đang quét ArcGIS','warn');setGisDiag('Đang thử nhiều cổng GIS...',planningOverlayService||'--','--');
   try{await discoverPlanningServices(true);gisLastScanAt=new Date();renderGISLayerList();
-    if(planningArcCandidates.length){setGisStatus('Tìm thấy '+planningArcCandidates.length+' lớp','ok');setGisDiag('Đã tìm thấy lớp GIS',planningArcCandidates[0].url,(planningArcCandidates[0].layers||[]).map(l=>l.name).slice(0,3).join(', '));if(!planningOverlay)addOfficialPlanningOverlay(true);if(manual)toast('Đã tìm thấy lớp GIS phù hợp')}
-    else{setGisStatus('Chưa tìm thấy lớp tự động','warn');setGisDiag('Chưa tìm thấy lớp phù hợp','Mở GIS chính thức để kiểm chứng','--');if(manual)toast('Chưa đọc được lớp GIS tự động')}
+    if(planningArcCandidates.length){setGisStatus('Tìm thấy '+planningArcCandidates.length+' lớp','ok');const c=planningArcCandidates[0];setGisDiag('Đã tìm thấy lớp GIS',c.url,(c.layers||[]).map(l=>l.name).slice(0,3).join(', '));if(!planningOverlay)addOfficialPlanningOverlay(true);if(manual)toast('Đã tìm thấy lớp GIS phù hợp')}
+    else{setGisStatus('Chưa tìm thấy lớp tự động','warn');setGisDiag('Không có lớp public đọc được từ APK','Cần proxy ẩn hoặc mở GIS chính thức','--');if(manual)toast('Chưa đọc được lớp GIS tự động')}
   }catch(e){setGisStatus('GIS chưa sẵn sàng','warn');setGisDiag('Lỗi khi quét GIS',String(e&&e.message||e),'--');if(manual)toast('Không quét được GIS: '+(e&&e.message?e.message:'lỗi mạng'))}
-  finally{gisDiscovering=false}
+  finally{gisDiscovering=false;renderGisLogBox()}
 }
 async function discoverPlanningServices(force=false){
   if(planningArcCandidates.length&&!force)return planningArcCandidates;
-  planningArcCandidates=[];gisLogs=[];
-  const roots=[];const folderQueue=[''];
-  try{
-    const rootData=await fetchJson(ARCGIS_ROOT+'?f=pjson',12000);logGis('Root OK');
-    if(Array.isArray(rootData.folders))rootData.folders.filter(f=>GIS_FOLDER_ALLOW.test(f)).slice(0,80).forEach(f=>folderQueue.push(f));
-    collectServicesFromListing(rootData,'',roots);
-  }catch(e){logGis('Root lỗi: '+(e.message||e));}
-  // Quan trọng: ArcGIS thường giấu dịch vụ trong folders. V14 chưa quét folders nên dễ báo “Không có lớp tự động”.
-  for(const folder of folderQueue.slice(1,70)){
-    try{const listing=await fetchJson(ARCGIS_ROOT+'/'+encodeURIComponent(folder)+'?f=pjson',9000);collectServicesFromListing(listing,folder,roots);}
-    catch(e){logGis('Folder '+folder+' lỗi')}
-    if(roots.length>70)break;
+  planningArcCandidates=[];gisLogs=[];const roots=[];
+  // Bước 1: đọc trang GIS chính thức bằng native fetch rồi bóc các URL MapServer/FeatureServer nếu có.
+  try{logGis('Đọc trang GIS chính thức để tìm URL dịch vụ...');const html=await nativeFetch(OFFICIAL_GIS_URL);extractArcUrlsFromText(html,roots);logGis('Từ trang chính thức tìm thấy '+roots.length+' URL dịch vụ');}
+  catch(e){logGis('Không đọc được trang GIS chính thức: '+(e.message||e));}
+  // Bước 2: thử nhiều root ArcGIS/Portal khác nhau.
+  for(const root of ARCGIS_ROOTS){
+    const folderQueue=['']; gisActiveRoot=root; let rootOk=false;
+    try{const rootData=await fetchJson(root+'?f=pjson',12000);rootOk=true;logGis('Root OK: '+root.replace('https://','').replace('http://',''));if(Array.isArray(rootData.folders))rootData.folders.filter(f=>GIS_FOLDER_ALLOW.test(f)).slice(0,90).forEach(f=>folderQueue.push(f));collectServicesFromListing(rootData,'',roots,root);}
+    catch(e){logGis('Root lỗi '+root.replace(/^https?:\/\//,'')+': '+(e.message||e));}
+    if(rootOk){
+      for(const folder of folderQueue.slice(1,80)){
+        try{const listing=await fetchJson(root+'/'+encodeURIComponent(folder)+'?f=pjson',9000);collectServicesFromListing(listing,folder,roots,root);}
+        catch(e){/* giữ log gọn */}
+        if(roots.length>120)break;
+      }
+    }
+    GIS_MANUAL_HINTS.forEach(h=>roots.push({url:root+'/'+h+'/MapServer',name:h,type:'MapServer',score:55,manual:true,root}));
   }
-  GIS_MANUAL_HINTS.forEach(h=>roots.push({url:ARCGIS_ROOT+'/'+h+'/MapServer',name:h,type:'MapServer',score:65,manual:true}));
-  const dedup=[...new Map(roots.map(r=>[r.url,r])).values()].sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,80);
+  const dedup=[...new Map(roots.map(r=>[r.url,r])).values()].sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,140);
+  logGis('Tổng URL dịch vụ cần thử: '+dedup.length);
   for(const svc of dedup){
     try{
       const info=await fetchJson(svc.url+'?f=pjson',9000);
-      const layers=(info.layers||[]).map(l=>({...l,score:scoreLayer(l)})).filter(l=>l.score>20).sort((a,b)=>b.score-a.score).slice(0,18);
-      // Nếu service có nhiều layer nhưng tên không rõ, vẫn giữ vài layer để identify all thử đọc thuộc tính.
-      const fallbackLayers=layers.length?layers:(info.layers||[]).slice(0,10).map(l=>({...l,score:10}));
-      if(fallbackLayers.length){planningArcCandidates.push({url:svc.url,name:info.mapName||info.serviceDescription||svc.name,layers:fallbackLayers,serviceScore:svc.score||scoreService(svc.name),fullName:svc.name,info});}
-    }catch(e){logGis('Service lỗi: '+svc.url.split('/arcgis/rest/services/').pop())}
-    if(planningArcCandidates.length>=18)break;
+      const allLayers=(info.layers||[]);
+      const layers=allLayers.map(l=>({...l,score:scoreLayer(l)})).filter(l=>l.score>18).sort((a,b)=>b.score-a.score).slice(0,24);
+      const fallbackLayers=layers.length?layers:allLayers.slice(0,12).map(l=>({...l,score:10}));
+      if(fallbackLayers.length){planningArcCandidates.push({url:svc.url,name:info.mapName||info.serviceDescription||svc.name,layers:fallbackLayers,serviceScore:svc.score||scoreService(svc.name),fullName:svc.name,info,root:svc.root});logGis('Có lớp: '+(svc.name||svc.url).slice(0,80));}
+    }catch(e){/* bỏ qua service chết */}
+    if(planningArcCandidates.length>=24)break;
   }
   planningArcCandidates.sort((a,b)=>((b.serviceScore||0)+bestLayerScore(b))-((a.serviceScore||0)+bestLayerScore(a)));
+  if(planningArcCandidates[0])gisActiveRoot=planningArcCandidates[0].root||rootFromService(planningArcCandidates[0].url)||ARCGIS_ROOT;
   return planningArcCandidates;
 }
-function collectServicesFromListing(data,folder,roots){
-  if(!data||!Array.isArray(data.services))return;
-  data.services.forEach(s=>{
-    const type=s.type||'MapServer'; if(!/MapServer|FeatureServer/i.test(type))return;
-    const name=s.name||''; const baseName=name.includes('/')?name:(folder?folder+'/'+name:name);
-    const url=ARCGIS_ROOT+'/'+baseName+'/'+type;
-    roots.push({url,name:baseName,type,score:scoreService(baseName+' '+type)});
-  });
+function extractArcUrlsFromText(text,roots){
+  if(!text)return; const found=new Set();
+  const reAbs=/https?:\\?\/\\?\/[^"'<>\s]+?\/(?:arcgis|server)\/rest\/services\/[^"'<>\s]+?\/(?:MapServer|FeatureServer)/ig;
+  const clean=u=>u.replace(/\\\//g,'/').replace(/[),;]+$/,'');
+  let m; while((m=reAbs.exec(text))){const url=clean(m[0]);found.add(url)}
+  const reRel=/\/arcgis\/rest\/services\/([^"'<>\s]+?\/(?:MapServer|FeatureServer))/ig;
+  while((m=reRel.exec(text))){found.add('https://gis.khanhhoa.gov.vn/arcgis/rest/services/'+clean(m[1]))}
+  found.forEach(url=>roots.push({url,name:url.split('/rest/services/').pop(),type:/FeatureServer/i.test(url)?'FeatureServer':'MapServer',score:scoreService(url),manual:false,root:rootFromService(url)}));
 }
-function scoreService(name){const t=noAccent(String(name||'').toLowerCase());let sc=0;if(/qhsd|quy.?hoach|ke.?hoach|planning|zoning/.test(t))sc+=70;if(/hien.?trang|htsdd|su.?dung.?dat|land|dat/.test(t))sc+=55;if(/tnmt|tai.?nguyen|public|8192/.test(t))sc+=25;if(/ninh.?hoa|van.?phong|khanh.?hoa/.test(t))sc+=15;if(/base|nen|anh|satellite|hanh.?chinh|dia.?gioi/.test(t))sc-=25;return sc}
-function scoreLayer(l){const t=noAccent(((l.name||'')+' '+(l.description||'')+' '+(l.type||'')).toLowerCase());let sc=0;if(/qhsd|quy.?hoach|ke.?hoach|planning|zoning|phan.?khu/.test(t))sc+=70;if(/hien.?trang|htsdd|su.?dung.?dat|muc.?dich|loai.?dat|dat/.test(t))sc+=60;if(/thua.?dat|ranh|dia.?chinh/.test(t))sc+=28;if(/giao.?thong|cong.?vien|cay.?xanh|thuong.?mai|dan.?cu/.test(t))sc+=20;if(/nen|base|anh|satellite|ranh.?gioi|hanh.?chinh/.test(t))sc-=18;return sc}
+function rootFromService(url){const idx=url.indexOf('/rest/services/');return idx>0?url.slice(0,idx+'/rest/services'.length):ARCGIS_ROOT}
+function collectServicesFromListing(data,folder,roots,root=ARCGIS_ROOT){
+  if(!data||!Array.isArray(data.services))return;
+  data.services.forEach(s=>{const type=s.type||'MapServer'; if(!/MapServer|FeatureServer/i.test(type))return;const name=s.name||''; const baseName=name.includes('/')?name:(folder?folder+'/'+name:name);const url=root+'/'+baseName+'/'+type;roots.push({url,name:baseName,type,score:scoreService(baseName+' '+type),root});});
+}
+function scoreService(name){const t=noAccent(String(name||'').toLowerCase());let sc=0;if(/qhsd|quy.?hoach|ke.?hoach|planning|zoning/.test(t))sc+=75;if(/hien.?trang|htsdd|su.?dung.?dat|land|dat/.test(t))sc+=58;if(/tnmt|tai.?nguyen|public|8192|datdai|dia.?chinh/.test(t))sc+=28;if(/ninh.?hoa|van.?phong|khanh.?hoa/.test(t))sc+=15;if(/base|nen|anh|satellite|hanh.?chinh|dia.?gioi/.test(t))sc-=22;return sc}
+function scoreLayer(l){const t=noAccent(((l.name||'')+' '+(l.description||'')+' '+(l.type||'')).toLowerCase());let sc=0;if(/qhsd|quy.?hoach|ke.?hoach|planning|zoning|phan.?khu/.test(t))sc+=72;if(/hien.?trang|htsdd|su.?dung.?dat|muc.?dich|loai.?dat|dat/.test(t))sc+=62;if(/thua.?dat|ranh|dia.?chinh/.test(t))sc+=30;if(/odt|ont|tmd|dgt|dkv|giao.?thong|cong.?vien|cay.?xanh|thuong.?mai|dan.?cu/.test(t))sc+=25;if(/nen|base|anh|satellite|ranh.?gioi|hanh.?chinh/.test(t))sc-=18;return sc}
 function bestLayerScore(c){return Math.max(0,...(c.layers||[]).map(l=>l.score||0))}
-function renderGISLayerList(){const el=$('gisLayerList');if(!el)return;if(!planningArcCandidates.length){el.innerHTML='<div class="empty">Chưa có lớp tự động. Bấm “Tìm lớp GIS”. V15 sẽ quét cả thư mục con ArcGIS, không chỉ root như bản cũ.</div>';return}el.innerHTML=planningArcCandidates.slice(0,8).map((c,i)=>`<div class="layer-card ${i===0?'active':''}"><b>${escapeHtml(c.name||c.fullName||'Dịch vụ GIS')}</b><span>${escapeHtml(c.url.replace(ARCGIS_ROOT+'/',''))}</span><span class="service-score ${bestLayerScore(c)<55?'warn':''}">Điểm lớp ${bestLayerScore(c)}</span><span>${(c.layers||[]).slice(0,4).map(l=>escapeHtml(l.name||('Layer '+l.id))).join(' · ')}</span><div class="layer-actions"><button class="btn small" onclick="selectPlanningCandidate(${i})">Dùng lớp này</button><button class="btn ghost small" onclick='openExternal(${JSON.stringify(c.url)})'>Mở REST</button></div></div>`).join('')}
+function renderGISLayerList(){const el=$('gisLayerList');if(!el)return;if(!planningArcCandidates.length){el.innerHTML='<div class="empty">Chưa có lớp tự động. Nếu log báo root/trang GIS bị chặn thì APK không thể đọc trực tiếp; cần dùng proxy ẩn để người dùng vẫn không phải nhập API.</div>';return}el.innerHTML=planningArcCandidates.slice(0,10).map((c,i)=>`<div class="layer-card ${i===0?'active':''}"><b>${escapeHtml(c.name||c.fullName||'Dịch vụ GIS')}</b><span>${escapeHtml(c.url.replace((c.root||ARCGIS_ROOT)+'/', ''))}</span><span class="service-score ${bestLayerScore(c)<55?'warn':''}">Điểm lớp ${bestLayerScore(c)}</span><span>${(c.layers||[]).slice(0,5).map(l=>escapeHtml(l.name||('Layer '+l.id))).join(' · ')}</span><div class="layer-actions"><button class="btn small" onclick="selectPlanningCandidate(${i})">Dùng lớp này</button><button class="btn ghost small" onclick='openExternal(${JSON.stringify(c.url)})'>Mở REST</button></div></div>`).join('')}
 function selectPlanningCandidate(i){const cand=planningArcCandidates[i];if(!cand)return;planningArcCandidates.splice(i,1);planningArcCandidates.unshift(cand);if(planningOverlay){planningMap.removeLayer(planningOverlay);planningOverlay=null;planningOverlayVisible=false}addOfficialPlanningOverlay(false);renderGISLayerList();toast('Đã chọn lớp GIS')}
 function makeArcGISTileLayer(serviceUrl,layerIds){
   return L.TileLayer.extend({
@@ -666,7 +808,7 @@ async function addOfficialPlanningOverlay(auto=false){
 function toggleOfficialPlanningOverlay(){addOfficialPlanningOverlay(false)}
 async function queryKhanhHoaPlanningArcGIS(lat,lng){
  const candidates=await discoverPlanningServices(false);
- if(!candidates.length)return {status:'notfound',message:'Không tìm thấy dịch vụ ArcGIS phù hợp. Hãy bấm “Tìm lớp GIS” hoặc mở nguồn chính thức để kiểm chứng.'};
+ if(!candidates.length)return {status:'notfound',message:'Không tìm thấy dịch vụ ArcGIS phù hợp. Hãy bấm “Thử đọc tự động” hoặc mở nguồn chính thức để kiểm chứng.'};
  for(const cand of candidates.slice(0,10)){
    const su=cand.url; const layers=cand.layers||[];
    try{const pad=0.01;const layerParam=layers.length?'visible:'+layers.map(l=>l.id).join(','):'all';const identify=`${su}/identify?f=json&tolerance=10&returnGeometry=false&geometryType=esriGeometryPoint&sr=4326&geometry=${encodeURIComponent(JSON.stringify({x:lng,y:lat,spatialReference:{wkid:4326}}))}&mapExtent=${lng-pad},${lat-pad},${lng+pad},${lat+pad}&imageDisplay=1200,1200,96&layers=${encodeURIComponent(layerParam)}`;const idres=await fetchJson(identify,10000);if(idres&&idres.results&&idres.results.length){const ranked=idres.results.map(r=>({r,score:scoreAttributes(r.attributes||{})+scoreLayer({name:r.layerName||''})})).sort((a,b)=>b.score-a.score);const best=ranked[0].r;const out=normalizePlanningAttributes(best.attributes||{}, best.layerName||best.layerId||cand.name, su);if(out.landCode!=='--'||out.landType)return out;}}
@@ -695,6 +837,10 @@ function renderPlanningReadout(r){
 function planningRiskLevel(code,type){const t=noAccent((code+' '+type).toLowerCase());if(/odt|ont|dat o|dan cu/.test(t))return{level:'safe',message:'Có dấu hiệu là đất ở/dân cư, phù hợp nghiên cứu tiếp nhưng vẫn phải kiểm tra sổ, lộ giới và quy hoạch chi tiết.',action:'Đối chiếu số thửa, sổ riêng, đường vào, quy hoạch chi tiết và giá thực tế xung quanh.'};if(/dgt|giao thong|dkv|cong vien|cay xanh|son|mnc|mat nuoc|song|kenh|suoi/.test(t))return{level:'danger',message:'Có dấu hiệu thuộc giao thông, công viên/cây xanh hoặc mặt nước; rủi ro cao nếu mua theo mục đích đất ở.',action:'Không xuống tiền theo mục đích ở nếu chưa có xác nhận pháp lý rõ ràng từ cơ quan có thẩm quyền.'};if(/tmd|thuong mai|dich vu|skc|skk|cong nghiep|san xuat/.test(t))return{level:'warn',message:'Có thể là đất thương mại dịch vụ/công nghiệp/sản xuất; không nên mặc định là thổ cư.',action:'Kiểm tra mục đích sử dụng, thời hạn, khả năng chuyển mục đích và quy hoạch phân khu.'};if(/lua|cln|hnk|luc|nong nghiep|rsx|rph/.test(t))return{level:'warn',message:'Có dấu hiệu đất nông nghiệp/lâm nghiệp; tiềm năng phụ thuộc khả năng chuyển mục đích và quy hoạch.',action:'Kiểm tra kế hoạch sử dụng đất hằng năm, điều kiện tách thửa/chuyển mục đích và giá không nên mua theo tin đồn.'};return{level:'warn',message:'Chưa đủ dữ liệu để kết luận loại đất; chỉ nên xem là kết quả sàng lọc ban đầu.',action:'Mở GIS chính thức, so sánh màu/chú giải và xin xác nhận số tờ/số thửa trước khi giao dịch.'}}
 function addGpsPoint(){const lat=parseFloat(($('gpsLat').value||'').replace(',','.'));const lng=parseFloat(($('gpsLng').value||'').replace(',','.'));if(!isFinite(lat)||!isFinite(lng)||Math.abs(lat)>90||Math.abs(lng)>180){toast('Tọa độ GPS chưa hợp lệ');return}addPlanningPoint(lat,lng,'Nhập GPS');initPlanningMap();planningMap.setView([lat,lng],17);setTimeout(()=>readPlanningPoint(lat,lng,'Nhập GPS'),300)}
 function convertVN2000Point(){const rawX=parseFloat(($('vnX').value||'').replace(',','.'));const rawY=parseFloat(($('vnY').value||'').replace(',','.'));if(!isFinite(rawX)||!isFinite(rawY)){toast('Vui lòng nhập X/Y VN2000');return}const lon0=parseFloat($('vnMeridian').value||'108.25');const k0=parseFloat($('vnScale').value||'0.9999');let northing=rawX,easting=rawY;if(rawY>900000&&rawX<900000){northing=rawY;easting=rawX}const gps=vn2000ToLatLng(easting,northing,lon0,k0);if(!gps||!isFinite(gps.lat)||!isFinite(gps.lng)){toast('Không chuyển được tọa độ');return}if(gps.lat<7||gps.lat>24||gps.lng<100||gps.lng>113){toast('Tọa độ sau chuyển đổi nằm ngoài Việt Nam, hãy kiểm tra X/Y hoặc kinh tuyến trục.')}addPlanningPoint(gps.lat,gps.lng,'VN2000 → GPS');initPlanningMap();planningMap.setView([gps.lat,gps.lng],17);setTimeout(()=>readPlanningPoint(gps.lat,gps.lng,'VN2000 → GPS'),450)}
+
+
+function toggleAdvancedTools(){document.body.classList.toggle('advanced-open');toast(document.body.classList.contains('advanced-open')?'Đã mở công cụ nâng cao':'Đã ẩn công cụ nâng cao')}
+function openSimplePlanning(){show('planning',document.querySelectorAll('.nav')[5]);setTimeout(()=>{const el=document.querySelector('.easy-plan-card');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},180)}
 
 initV10();initPlanningV12();loadCache();populateAreaSelectors();renderChips();renderTimeChips();renderImpactChips();renderLandChips();loadLegal();renderLandProfiles();renderPortfolio();if(!JSON.parse(localStorage.getItem(CACHE_KEY)||'[]').length)refreshAll(false);
 </script>

@@ -1,0 +1,7 @@
+unzip -o NinhHoaInvestAI_NoAPI_V16_PlanningSourcePack.zip
+cp -r NinhHoaInvestAI_NoAPI_V16_PlanningSourcePack/. .
+rm -rf NinhHoaInvestAI_NoAPI_V16_PlanningSourcePack NinhHoaInvestAI_NoAPI_V16_PlanningSourcePack.zip
+
+git add .
+git commit -m "Update V16 Ninh Hoa Planning Source Pack"
+git push
