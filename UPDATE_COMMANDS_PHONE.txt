@@ -1,7 +1,8 @@
-unzip -o NinhHoaInvestAI_NoAPI_V21_NewsIntelligenceCompactUX.zip
-cp -r NinhHoaInvestAI_NoAPI_V21_NewsIntelligenceCompactUX/. .
-rm -rf NinhHoaInvestAI_NoAPI_V21_NewsIntelligenceCompactUX NinhHoaInvestAI_NoAPI_V21_NewsIntelligenceCompactUX.zip
+unzip -o NinhHoaInvestAI_NoAPI_V22_SoTayDauTuCaNhan.zip
+cp -r NinhHoaInvestAI_NoAPI_V22_SoTayDauTuCaNhan/. .
+rm -rf NinhHoaInvestAI_NoAPI_V22_SoTayDauTuCaNhan NinhHoaInvestAI_NoAPI_V22_SoTayDauTuCaNhan.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
+
 git add -A
-git commit -m "Update V21 News Intelligence Compact UX"
+git commit -m "Update V22 So tay dau tu ca nhan"
 git push
