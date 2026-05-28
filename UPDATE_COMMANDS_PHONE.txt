@@ -1,8 +1,8 @@
-unzip -o NinhHoaInvestAI_NoAPI_V29_3_StrictNinhHoaNewsFix.zip
-cp -r NinhHoaInvestAI_NoAPI_V29_3_StrictNinhHoaNewsFix/. .
-rm -rf NinhHoaInvestAI_NoAPI_V29_3_StrictNinhHoaNewsFix NinhHoaInvestAI_NoAPI_V29_3_StrictNinhHoaNewsFix.zip
+unzip -o NinhHoaInvestAI_NoAPI_V29_4_ImportantNewsThrottle.zip
+cp -r NinhHoaInvestAI_NoAPI_V29_4_ImportantNewsThrottle/. .
+rm -rf NinhHoaInvestAI_NoAPI_V29_4_ImportantNewsThrottle NinhHoaInvestAI_NoAPI_V29_4_ImportantNewsThrottle.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Update V29.3 strict Ninh Hoa news filter"
+git commit -m "Update V29.4 important news throttle"
 git push

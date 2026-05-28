@@ -758,7 +758,7 @@ function startV27AutoNews(){setInterval(()=>{if(!document.hidden)refreshIfStale(
 })();
 
 
-if(!state.news.length)state.news=fallbackNews.map(normalizeNews);render();setTimeout(()=>{if((state.news||[]).length<100)refreshNews('quick');else refreshIfStale();hydrateNewsImages();startV27AutoNews();},800);
+if(!state.news.length)state.news=fallbackNews.map(normalizeNews);render();setTimeout(()=>{refreshIfStale();hydrateNewsImages();startV27AutoNews();},800);
 </script>
 
 <script>
@@ -1260,6 +1260,157 @@ if(!state.news.length)state.news=fallbackNews.map(normalizeNews);render();setTim
     if(panel && !document.querySelector('.strictNotice')) panel.insertAdjacentHTML('afterend','<div class="strictNotice">Đã bật lọc nghiêm ngặt Ninh Hòa<small>Loại tin Hà Nội/Bắc Ninh/Tây Ninh/Ninh Bình nếu không liên quan trực tiếp Ninh Hòa.</small></div>');
   };
   setTimeout(()=>{try{state.news=strictMerge([...(state.news||[]),...fallbackNews]); store('news',state.news); render();}catch(e){console.warn('V29.3 strict news fix',e)}},220);
+})();
+</script>
+
+
+<script>
+(function(){
+  // ===== V29.4 Important News + Refresh Throttle =====
+  // Mục tiêu: không tự làm mới liên tục, giữ các tin hạ tầng/logistics quan trọng dù không nhắc trực tiếp Ninh Hòa.
+  const V294_REFRESH_HOURS = 6;
+  const V294_MAX_NEWS = 140;
+  const V294_IMPORTANT = [
+    {
+      title:'Sắp triển khai thu phí không dừng trên cao tốc Khánh Hòa - Buôn Ma Thuột',
+      source:'PLO',
+      url:'https://plo.vn/sap-trien-khai-thu-phi-khong-dung-tren-cao-toc-khanh-hoa-buon-ma-thuot-post910040.html',
+      summary:'Tin hạ tầng cần lưu ý vì cao tốc Khánh Hòa - Buôn Ma Thuột có thể ảnh hưởng đến kết nối vùng, dòng di chuyển và kỳ vọng đầu tư quanh Khánh Hòa/Ninh Hòa.',
+      category:'Hạ tầng', area:['Ninh Hòa','Ninh Xuân','Khánh Hòa'], impactScore:94, qualityScore:96, qualityLevel:'Tin cần lưu ý', pinned:true, pubDate:'2026-05-24', ts:new Date('2026-05-24T08:00:00+07:00').getTime()
+    },
+    {
+      title:'Đã nghiệm thu 20km đầu cao tốc Khánh Hòa - Buôn Ma Thuột, tuần tới đưa vào hoạt động',
+      source:'Tuổi Trẻ',
+      url:'https://tuoitre.vn/da-nghiem-thu-20km-dau-cao-toc-khanh-hoa-buon-ma-thuot-tuan-toi-dua-vao-hoat-dong-20260524181351034.htm',
+      summary:'Tin hạ tầng mới về tiến độ cao tốc Khánh Hòa - Buôn Ma Thuột. Cần theo dõi tác động đến kết nối khu vực, tâm lý thị trường và nhóm đất gần trục giao thông.',
+      category:'Hạ tầng', area:['Ninh Hòa','Ninh Xuân','Khánh Hòa'], impactScore:96, qualityScore:97, qualityLevel:'Tin cần lưu ý', pinned:true, pubDate:'2026-05-24', ts:new Date('2026-05-24T18:13:00+07:00').getTime()
+    },
+    {
+      title:'Việt Nam dự kiến có thêm trung tâm logistics và trung chuyển quốc tế tại tỉnh có bờ biển dài nhất cả nước',
+      source:'Người Quan Sát',
+      url:'https://nguoiquansat.vn/viet-nam-du-kien-co-them-trung-tam-logistics-va-trung-chuyen-quoc-te-tai-tinh-co-bo-bien-dai-nhat-ca-nuoc-292879.html',
+      summary:'Tin logistics cần theo dõi nếu liên quan Khánh Hòa/Vân Phong. Nhóm cảng, logistics, trung chuyển quốc tế có thể tác động đến kỳ vọng khu vực Vân Phong và các vùng liên quan Ninh Hòa.',
+      category:'Vân Phong', area:['Vân Phong','Ninh Hòa','Khánh Hòa'], impactScore:92, qualityScore:94, qualityLevel:'Tin cần lưu ý', pinned:true, pubDate:'2026-05-27', ts:new Date('2026-05-27T08:00:00+07:00').getTime()
+    }
+  ];
+  function v294Text(n){return normalizeVN((((n&&n.title)||'')+' '+((n&&n.summary)||'')+' '+((n&&n.source)||'')+' '+((n&&n.category)||'')+' '+((n&&n.area)||[]).join(' ')).toLowerCase())}
+  function v294IsImportantInfrastructure(n){
+    const t=v294Text(n);
+    return /cao toc khanh hoa buon ma thuot|cao toc van phong nha trang|logistics|trung chuyen quoc te|trung tam logistics|cang|van phong/.test(t) && /khanh hoa|ninh hoa|van phong|nam van phong|bac hon heo|ninh xuan/.test(t);
+  }
+  function v294Normalize(n){
+    n=normalizeNews(n);
+    if(n.pinned || v294IsImportantInfrastructure(n)){
+      n.qualityScore=Math.max(Number(n.qualityScore||0),92);
+      n.impactScore=Math.max(Number(n.impactScore||0),88);
+      n.qualityLevel=n.pinned?'Tin cần lưu ý':'Hạ tầng/logistics cần lưu ý';
+      n.qualityReason=n.qualityReason || 'tin hạ tầng/logistics có thể tác động gián tiếp đến Ninh Hòa';
+      if(!n.area || !n.area.length) n.area=['Ninh Hòa','Khánh Hòa'];
+    }
+    return n;
+  }
+  const oldStrictRelevant=window.strictRelevant;
+  // Nếu file cũ không expose strictRelevant thì mở rộng tại lớp merge riêng phía dưới.
+  function v294Relevant(n){
+    n=v294Normalize(n);
+    if(n.pinned || v294IsImportantInfrastructure(n)) return true;
+    if(typeof oldStrictRelevant==='function') return oldStrictRelevant(n);
+    if(typeof v29IsRelevant==='function') return v29IsRelevant(n);
+    const t=v294Text(n);
+    return /ninh hoa|ninh diem|ninh hai|doc let|ninh xuan|ninh an|van phong|khanh hoa/.test(t);
+  }
+  function v294Key(n){
+    let t=normalizeVN(String(n?.title||''));
+    t=t.replace(/toan van|quyet dinh|ubnd|bao dien tu|google tin tuc|tin moi/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+    if(/cao toc khanh hoa buon ma thuot/.test(t)) return 'cao-toc-khanh-hoa-buon-ma-thuot-'+(n.source||'').toLowerCase().slice(0,12);
+    if(/logistics|trung chuyen quoc te/.test(t)) return 'logistics-van-phong-khanh-hoa-'+(n.source||'').toLowerCase().slice(0,12);
+    return t.split(' ').filter(w=>w.length>2).slice(0,12).join('-') || t.slice(0,80);
+  }
+  function v294Rank(n){
+    const pin=n.pinned?100000:0;
+    const t=typeof newsTs==='function'?newsTs(n):Number(n.ts||0);
+    const h=t?Math.max(0,(Date.now()-t)/36e5):9999;
+    const fresh=t?(h<24?120:h<168?90:h<720?45:8):0;
+    return pin + fresh + Number(n.qualityScore||0)*2.2 + Number(n.impactScore||0)*1.5;
+  }
+  function v294Merge(items){
+    const all=[...V294_IMPORTANT,...(items||[])].map(v294Normalize).filter(v294Relevant);
+    const by={};
+    all.forEach(n=>{
+      if(!n.title) return;
+      const k=v294Key(n);
+      if(!by[k] || v294Rank(n)>v294Rank(by[k])) by[k]=n;
+    });
+    return Object.values(by).sort((a,b)=>v294Rank(b)-v294Rank(a)).slice(0,V294_MAX_NEWS);
+  }
+  window.mergeNewsItems=function(items){return v294Merge(items)};
+  window.getAllNews=function(){return v294Merge([...(state.news||[]),...fallbackNews])};
+  const oldGetFiltered=window.getFilteredNews;
+  window.getFilteredNews=function(filter=state.filter){
+    let list=getAllNews(); const f=filter||'Mới nhất'; const ff=normalizeVN(f);
+    if(f==='Tác động cao') list=list.filter(n=>n.pinned || (n.impactScore||0)>=80 || (n.qualityScore||0)>=86);
+    else if(f==='Ninh Hòa') list=list.filter(n=>/ninh hoa|ninh hoà|ninh diem|ninh hai|doc let|ninh xuan|ninh an|tan dinh|cao toc khanh hoa buon ma thuot/.test(v294Text(n)) || (n.area||[]).includes('Ninh Hòa'));
+    else if(f==='Vân Phong') list=list.filter(n=>/van phong|bac hon heo|nam van phong|phan khu 16|phan khu 17|phan khu 19|logistics|cang|trung chuyen/.test(v294Text(n)));
+    else if(['Hạ tầng','Quy hoạch','Pháp lý'].includes(f)) list=list.filter(n=>v294Text(n).includes(ff) || normalizeVN(n.category||'').includes(ff));
+    if(state.area&&state.area!=='Tất cả'){
+      const a=areaProfiles.find(x=>x.name===state.area);
+      if(a) list=list.filter(n=>(n.area||[]).includes(a.name) || (typeof matchesArea==='function'&&matchesArea(n,a)) || (a.name==='Ninh Hòa'&&v294IsImportantInfrastructure(n)));
+    }
+    return list.sort((a,b)=>v294Rank(b)-v294Rank(a)).slice(0,90);
+  };
+  // Tự cập nhật nhẹ: chỉ kiểm tra khi mở/quay lại app và dữ liệu cũ hơn 6 giờ. Không quét liên tục theo phút nữa.
+  window.refreshIfStale=function(){
+    const last=Date.parse(load('newsLastRefresh','')||'')||0;
+    const hasEnough=(state.news||[]).length>=35;
+    if(!last){ if(!hasEnough) return; }
+    if(last && Date.now()-last < V294_REFRESH_HOURS*60*60*1000) return;
+    if(typeof refreshNews==='function') refreshNews('quick');
+  };
+  window.startV27AutoNews=function(){
+    // Không dùng setInterval lặp liên tục. Chỉ kiểm tra khi người dùng quay lại app.
+    document.addEventListener('visibilitychange',()=>{ if(!document.hidden) refreshIfStale(); });
+  };
+  const oldRefreshNews=window.refreshNews;
+  window.refreshNews=async function(mode='quick'){
+    // Manual-friendly: khi người dùng bấm Cập nhật sẽ quét; sau quét luôn trộn tin cần lưu ý.
+    if(typeof toast==='function') toast(mode==='deep'?'Đang quét sâu tin quan trọng...':'Đang cập nhật tin mới...');
+    try{
+      const qs=(typeof v27BuildQueries==='function'?v27BuildQueries(mode):[]).slice(0, mode==='deep'?55:22);
+      let found=[], ok=0, fail=0;
+      state.newsStatus={mode:mode==='deep'?'Đang quét sâu':'Đang cập nhật',found:0,queries:qs.length,ok:0,fail:0,progress:0,updated:load('newsLastRefresh','')};
+      if(typeof renderNewsStatusOnly==='function') renderNewsStatusOnly();
+      for(let i=0;i<qs.length;i++){
+        try{
+          const url='https://news.google.com/rss/search?q='+encodeURIComponent(qs[i])+'&hl=vi&gl=VN&ceid=VN:vi';
+          const xml=await nativeFetch(url);
+          found=found.concat(parseRss(xml,qs[i])); ok++;
+        }catch(e){fail++;}
+        state.newsStatus={mode:state.newsStatus.mode,found:found.length,queries:qs.length,ok,fail,progress:Math.round((i+1)/Math.max(qs.length,1)*100),updated:load('newsLastRefresh','')};
+        if(state.tab==='news' && i%4===0 && typeof renderNewsStatusOnly==='function') renderNewsStatusOnly();
+      }
+      state.news=v294Merge([...found,...(state.news||[]),...fallbackNews]);
+      const stamp=new Date().toLocaleString('vi-VN');
+      store('news',state.news); store('newsLastRefresh',stamp);
+      state.newsStatus={mode:'Đã cập nhật',found:found.length,queries:qs.length,ok,fail,progress:100,updated:stamp}; store('newsStatus',state.newsStatus);
+      render(); if(typeof hydrateNewsImages==='function') hydrateNewsImages();
+      if(typeof toast==='function') toast('Đã cập nhật '+state.news.length+' tin chọn lọc');
+    }catch(e){ console.warn('V29.4 refresh fallback',e); if(oldRefreshNews) oldRefreshNews(mode); }
+  };
+  const oldRenderNews=window.renderNews;
+  window.renderNews=function(){
+    oldRenderNews();
+    const panel=document.querySelector('.ninhFocusPanel');
+    if(panel && !document.querySelector('.v294Note')){
+      panel.insertAdjacentHTML('afterend','<div class="v294Note"><b>Chế độ cập nhật vừa phải</b><span>App không quét liên tục nữa. Tin hạ tầng/logistics quan trọng được ưu tiên giữ lại, kể cả khi không nhắc trực tiếp Ninh Hòa.</span></div>');
+    }
+  };
+  const css=document.createElement('style'); css.textContent=`
+    .v294Note{background:#fff8e8;border:1px solid #f0d89a;color:#6b4a06;border-radius:18px;padding:10px 12px;margin:8px 0 12px;font-weight:900;line-height:1.35}
+    .v294Note span{display:block;color:#725a28;font-weight:750;font-size:12px;margin-top:3px}
+    .tag.pinned,.impactPill.pinned{background:#fff0d3!important;color:#7d5205!important;border:1px solid rgba(215,165,49,.35)}
+  `; document.head.appendChild(css);
+  // Lọc lại cache hiện có và thêm tin cần lưu ý ngay khi mở.
+  setTimeout(()=>{try{state.news=v294Merge([...(state.news||[]),...fallbackNews]); store('news',state.news); render();}catch(e){console.warn('V29.4 important news init',e)}},320);
 })();
 </script>
 

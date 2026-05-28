@@ -1,11 +1,10 @@
-# Ninh Hòa Invest AI V29.3 – Sửa lọc tin Ninh Hòa nghiêm ngặt
+# Ninh Hòa Invest AI V29.4
 
-Bản này sửa lỗi tin không liên quan như Hà Nội/Bắc Ninh/Tây Ninh lọt vào bảng tin do Google News trả kết quả theo query.
+Bản cập nhật: Important News & Refresh Throttle.
 
-## Điểm mới
-- Không dùng từ khóa query để gắn tag khu vực.
-- Chỉ giữ tin có Ninh Hòa/khu vực con hoặc Vân Phong/Khánh Hòa có liên quan rõ.
-- Loại mạnh các tin Hà Nội, Bắc Ninh, Tây Ninh, Ninh Bình, Quảng Ninh... nếu không liên quan trực tiếp Ninh Hòa.
-- Giữ tập trung: Mới nhất, Tác động cao, Ninh Hòa, Vân Phong, Hạ tầng, Quy hoạch, Pháp lý.
+- Không tự làm mới tin liên tục theo phút.
+- Chỉ tự kiểm tra lại khi dữ liệu cũ khoảng 6 giờ hoặc người dùng bấm Cập nhật.
+- Thêm nhóm tin cần lưu ý: cao tốc Khánh Hòa - Buôn Ma Thuột, logistics/Vân Phong, hạ tầng tác động gián tiếp đến Ninh Hòa.
+- Tiếp tục lọc nghiêm tin lệch khu vực như Hà Nội/Bắc Ninh/Tây Ninh/Ninh Bình nếu không liên quan.
 
 Tác giả sản phẩm: Vũ Hoàng
