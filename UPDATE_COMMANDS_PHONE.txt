@@ -1,8 +1,8 @@
-unzip -o NinhHoaInvestAI_NoAPI_V29_4_ImportantNewsThrottle.zip
-cp -r NinhHoaInvestAI_NoAPI_V29_4_ImportantNewsThrottle/. .
-rm -rf NinhHoaInvestAI_NoAPI_V29_4_ImportantNewsThrottle NinhHoaInvestAI_NoAPI_V29_4_ImportantNewsThrottle.zip
+unzip -o NinhHoaInvestAI_NoAPI_V29_7_CleanProductUI.zip
+cp -r NinhHoaInvestAI_NoAPI_V29_7_CleanProductUI/. .
+rm -rf NinhHoaInvestAI_NoAPI_V29_7_CleanProductUI NinhHoaInvestAI_NoAPI_V29_7_CleanProductUI.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Update V29.4 important news throttle"
+git commit -m "Update V29.7 clean product UI"
 git push
