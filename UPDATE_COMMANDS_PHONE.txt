@@ -1,10 +1,8 @@
-Upload file ZIP V29.2 vào Codespaces rồi chạy:
-
-unzip -o NinhHoaInvestAI_NoAPI_V29_2_YeuToGiaTriRuiRoLoDat.zip
-cp -r NinhHoaInvestAI_NoAPI_V29_2_YeuToGiaTriRuiRoLoDat/. .
-rm -rf NinhHoaInvestAI_NoAPI_V29_2_YeuToGiaTriRuiRoLoDat NinhHoaInvestAI_NoAPI_V29_2_YeuToGiaTriRuiRoLoDat.zip
+unzip -o NinhHoaInvestAI_NoAPI_V29_3_StrictNinhHoaNewsFix.zip
+cp -r NinhHoaInvestAI_NoAPI_V29_3_StrictNinhHoaNewsFix/. .
+rm -rf NinhHoaInvestAI_NoAPI_V29_3_StrictNinhHoaNewsFix NinhHoaInvestAI_NoAPI_V29_3_StrictNinhHoaNewsFix.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Update V29.2 value risk rules for land parcel"
+git commit -m "Update V29.3 strict Ninh Hoa news filter"
 git push

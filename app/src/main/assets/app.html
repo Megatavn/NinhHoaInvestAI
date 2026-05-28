@@ -1140,5 +1140,128 @@ if(!state.news.length)state.news=fallbackNews.map(normalizeNews);render();setTim
 })();
 </script>
 
+
+
+<script>
+// ===== V29.3 Strict Ninh Hòa News Fix: không để từ khóa tìm kiếm làm nhiễu tag/khu vực =====
+(function(){
+  const UNRELATED_PROVINCES = /h[aà] n[oộ]i|th[uủ] 1[oô]|ninh b[iì]nh|b[aắ]c ninh|t[aâ]y ninh|ninh thu[aậ]n|qu[aả]ng ninh|h[oò]a b[iì]nh|b[iì]nh [dđ][iị]nh|b[iì]nh d[uư][oơ]ng|b[iì]nh ph[uư][oơ]c|long an|[dđ][oồ]ng nai|l[aâ]m [dđ][oồ]ng|ngh[eệ] an|thanh h[oó]a|qu[aả]ng ng[aã]i|qu[aả]ng nam|[dđ][aà] n[aẵ]ng/i;
+  const DIRECT_NINHHOA = /ninh\s*h[oòóỏõọoaàáảãạ]\b|ninh\s+di[eê]m|ninh\s+h[aả]i|d[oô]c\s+l[eê]t|ninh\s+xu[aâ]n|ninh\s+an|ninh\s+th[oọ]|ninh\s+th[uủ]y|ninh\s+ph[uụ]ng|ninh\s+ph[uư][oơ]c|ninh\s+[ií]ch|ninh\s+sim|t[aâ]n\s+[dđ][iị]nh|b[aắ]c\s+h[oò]n\s+h[eè]o|[dđ][oô]ng\s+b[aắ]c\s+ninh\s+h[oòóỏõọoaàáảãạ]/i;
+  const STRATEGIC_NH = /v[aâ]n\s+phong|nam\s+v[aâ]n\s+phong|b[aắ]c\s+v[aâ]n\s+phong|khu\s+kinh\s+t[eế]\s+v[aâ]n\s+phong|cao\s+t[oố]c\s+kh[aá]nh\s+h[oòóỏõọoaàáảãạ]\s*[-–]?\s*bu[oô]n\s+ma\s+thu[oộ]t|cao\s+t[oố]c\s+v[aâ]n\s+phong|ph[aâ]n\s+khu\s+1[679]|b[aắ]c\s+h[oò]n\s+h[eè]o|[dđ][oô]ng\s+b[aắ]c\s+ninh\s+h[oòóỏõọoaàáảãạ]/i;
+  const KHANHHOA = /kh[aá]nh\s+h[oòóỏõọoaàáảãạ]|v[aâ]n\s+phong|nha\s+trang|ninh\s+h[oòóỏõọoaàáảãạ]/i;
+  function visibleText(n){return [n?.title,n?.summary,n?.source].filter(Boolean).join(' ')}
+  function visibleNorm(n){return normalizeVN(visibleText(n))}
+  function isBadLocation(n){
+    const raw=visibleText(n);
+    if(!UNRELATED_PROVINCES.test(raw)) return false;
+    // Nếu tiêu đề/nội dung đồng thời có Ninh Hòa hoặc Khánh Hòa rất rõ thì giữ; còn lại loại.
+    return !(DIRECT_NINHHOA.test(raw) || (/kh[aá]nh\s+h[oòóỏõọoaàáảãạ]/i.test(raw) && /ninh\s*h/i.test(raw)));
+  }
+  function strictRelevant(n){
+    const raw=visibleText(n);
+    const txt=visibleNorm(n);
+    if(isBadLocation(n)) return false;
+    if(DIRECT_NINHHOA.test(raw)) return true;
+    // Vân Phong/cao tốc chỉ giữ khi chính tiêu đề/tóm tắt có Khánh Hòa hoặc tín hiệu Ninh Hòa/Bắc Hòn Hèo/Nam Vân Phong.
+    if(STRATEGIC_NH.test(raw) && KHANHHOA.test(raw)) return true;
+    if(/van phong|bac hon heo|nam van phong|dong bac ninh hoa|phan khu 16|phan khu 17|phan khu 19/.test(txt)) return true;
+    return false;
+  }
+  function strictAreaFromText(n){
+    const text=visibleText(n);
+    const areas=[];
+    for(const a of areaProfiles){
+      if(a.keys && a.keys.some(k=>normalizeVN(text).includes(normalizeVN(k)))) areas.push(a.name);
+    }
+    if(DIRECT_NINHHOA.test(text) && !areas.includes('Ninh Hòa')) areas.unshift('Ninh Hòa');
+    if(/v[aâ]n\s+phong/i.test(text) && !areas.includes('Vân Phong')) areas.push('Vân Phong');
+    return [...new Set(areas)].slice(0,3);
+  }
+  function strictCategoryFromText(n){return categoryOf((n?.title||'')+' '+(n?.summary||''));}
+  function strictNormalize(n){
+    n=normalizeNews(n||{});
+    const txt=(n.title||'')+' '+(n.summary||'');
+    n.category=strictCategoryFromText(n);
+    const ar=strictAreaFromText(n);
+    n.area=ar.length?ar:['Ninh Hòa'];
+    n.impactScore=scoreImpact(txt+' '+n.category+' '+n.area.join(' '));
+    n.qualityScore=typeof v29FocusScore==='function'?v29FocusScore(n):(n.qualityScore||60);
+    n.qualityLevel=n.qualityScore>=86?'Trọng tâm cao':n.qualityScore>=74?'Đáng đọc':n.qualityScore>=62?'Theo dõi':'Tham khảo';
+    n.qualityReason=typeof v29Reason==='function'?v29Reason(n):'tin liên quan Ninh Hòa';
+    return n;
+  }
+  function strictKey(n){
+    let t=normalizeVN(String(n?.title||''));
+    t=t.replace(/toan van|quyet dinh|ubnd|bao dien tu|google tin tuc/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+    return t.split(' ').filter(w=>w.length>2).slice(0,12).join('-')||t.slice(0,80);
+  }
+  function strictMerge(items){
+    const by={};
+    (items||[]).forEach(x=>{
+      let n=strictNormalize(x);
+      if(!n.title || !strictRelevant(n)) return;
+      if(n.qualityScore<56) return;
+      const k=strictKey(n);
+      if(!by[k] || (n.qualityScore||0)>(by[k].qualityScore||0) || ((n.qualityScore||0)===(by[k].qualityScore||0) && (newsTs(n)||0)>(newsTs(by[k])||0))) by[k]=n;
+    });
+    return Object.values(by).sort((a,b)=>((newsTs(b)||0)-(newsTs(a)||0)) || ((b.qualityScore||0)-(a.qualityScore||0)) || ((b.impactScore||0)-(a.impactScore||0))).slice(0,150);
+  }
+  window.mergeNewsItems=function(items){return strictMerge(items)};
+  window.getAllNews=function(){return strictMerge([...(state.news||[]),...fallbackNews])};
+  window.getFilteredNews=function(filter=state.filter){
+    let list=getAllNews(); const f=filter||'Mới nhất'; const ff=normalizeVN(f);
+    if(f==='Tác động cao') list=list.filter(n=>(n.impactScore||0)>=78 || (n.qualityScore||0)>=80);
+    else if(f==='Ninh Hòa') list=list.filter(n=>/ninh hoa|ninh hoà|ninh diem|ninh hai|doc let|ninh xuan|ninh an|tan dinh/.test(visibleNorm(n)) || (n.area||[]).includes('Ninh Hòa'));
+    else if(f==='Vân Phong') list=list.filter(n=>/van phong|bac hon heo|nam van phong|phan khu 16|phan khu 17|phan khu 19|logistics|cang/.test(visibleNorm(n)));
+    else if(['Hạ tầng','Quy hoạch','Pháp lý'].includes(f)) list=list.filter(n=>visibleNorm(n).includes(ff) || normalizeVN(n.category||'').includes(ff));
+    if(state.area&&state.area!=='Tất cả'){
+      const a=areaProfiles.find(x=>x.name===state.area);
+      if(a) list=list.filter(n=>strictAreaFromText(n).includes(a.name) || matchesArea(n,a));
+    }
+    return list.sort((a,b)=> (f==='Tác động cao'?((b.impactScore||0)-(a.impactScore||0)):((newsTs(b)||0)-(newsTs(a)||0))) || ((b.qualityScore||0)-(a.qualityScore||0))).slice(0,100);
+  };
+  // Ghi đè parseRss: không cộng từ khóa query vào title/category/area để tránh tin Hà Nội/Bắc Ninh lọt vào do query Ninh Hòa.
+  window.parseRss=function(xml,q){
+    const doc=new DOMParser().parseFromString(xml,'text/xml');
+    return [...doc.querySelectorAll('item')].slice(0,22).map(item=>{
+      const title=item.querySelector('title')?.textContent||'';
+      const link=item.querySelector('link')?.textContent||'';
+      const desc=item.querySelector('description')?.textContent||'';
+      const source=item.querySelector('source')?.textContent||'Google Tin tức';
+      const pubDate=item.querySelector('pubDate')?.textContent||'';
+      let image='';
+      const media=item.getElementsByTagName('media:content')[0]||item.getElementsByTagName('media:thumbnail')[0];
+      if(media) image=media.getAttribute('url')||'';
+      const enc=item.querySelector('enclosure'); if(!image&&enc) image=enc.getAttribute('url')||'';
+      if(!image){const m=desc.match(/<img[^>]+src=["']([^"']+)["']/i); if(m) image=m[1].replace(/&amp;/g,'&')}
+      const clean=desc.replace(/<[^>]*>/g,' ').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();
+      return strictNormalize({title,source,url:link,image,summary:clean||'Tin liên quan cần mở nguồn để đọc chi tiết.',pubDate,ts:Date.parse(pubDate)||0,query:q});
+    }).filter(x=>x.title && strictRelevant(x) && !/youtube|tiktok|facebook/i.test(x.title));
+  };
+  const oldRefresh=window.refreshNews;
+  window.refreshNews=async function(mode='quick'){
+    if(typeof toast==='function') toast('Đang lọc tin Ninh Hòa thật sự...');
+    let found=[]; const qs=(typeof v27BuildQueries==='function'?v27BuildQueries(mode):queries).slice(0, mode==='quick'?28:55);
+    for(let i=0;i<qs.length;i++){
+      const q=qs[i];
+      try{ const url='https://news.google.com/rss/search?q='+encodeURIComponent(q)+'&hl=vi&gl=VN&ceid=VN:vi'; const xml=await nativeFetch(url); found=found.concat(parseRss(xml,q)); }
+      catch(e){}
+    }
+    state.news=strictMerge([...found,...fallbackNews]);
+    store('news',state.news); store('newsLastRefresh',new Date().toLocaleString('vi-VN'));
+    state.filter='Mới nhất'; state.area='Tất cả'; render(); hydrateNewsImages();
+    if(typeof toast==='function') toast('Đã lọc còn '+state.news.length+' tin đúng trọng tâm');
+  };
+  const css=document.createElement('style'); css.textContent=`.strictNotice{background:#eefbf4;border:1px solid #bde6cf;color:#12543a;border-radius:18px;padding:10px 12px;font-weight:800;margin:8px 0}.strictNotice small{display:block;color:#527466;font-weight:700;margin-top:2px}`; document.head.appendChild(css);
+  const oldRenderNews=window.renderNews;
+  window.renderNews=function(){
+    oldRenderNews();
+    const panel=document.querySelector('.ninhFocusPanel');
+    if(panel && !document.querySelector('.strictNotice')) panel.insertAdjacentHTML('afterend','<div class="strictNotice">Đã bật lọc nghiêm ngặt Ninh Hòa<small>Loại tin Hà Nội/Bắc Ninh/Tây Ninh/Ninh Bình nếu không liên quan trực tiếp Ninh Hòa.</small></div>');
+  };
+  setTimeout(()=>{try{state.news=strictMerge([...(state.news||[]),...fallbackNews]); store('news',state.news); render();}catch(e){console.warn('V29.3 strict news fix',e)}},220);
+})();
+</script>
+
 </body>
 </html>
