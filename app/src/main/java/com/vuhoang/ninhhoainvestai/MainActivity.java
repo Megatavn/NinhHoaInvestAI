@@ -95,8 +95,8 @@ public class MainActivity extends Activity {
         conn.setConnectTimeout(12000);
         conn.setReadTimeout(15000);
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/14.0");
-        conn.setRequestProperty("Accept", "application/rss+xml, application/xml, text/xml, text/html, */*");
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/15.0");
+        conn.setRequestProperty("Accept", "application/json, text/plain, application/rss+xml, application/xml, text/xml, text/html, */*");
         conn.setRequestProperty("Accept-Language", "vi-VN,vi;q=0.9,en;q=0.7");
         int code = conn.getResponseCode();
         InputStream is = code >= 400 ? conn.getErrorStream() : conn.getInputStream();
@@ -156,7 +156,7 @@ public class MainActivity extends Activity {
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/14.0-NoAPI");
+        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/15.0-NoAPI");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
