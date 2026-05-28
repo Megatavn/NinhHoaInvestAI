@@ -1,21 +1,16 @@
-# Ninh Hòa Invest AI V12 – Planning Map & VN2000
+# Ninh Hòa Invest AI V13 – Planning Reader
 
-Bản V12 bổ sung tab **Bản đồ** để hỗ trợ nhà đầu tư tra cứu vị trí, nhập tọa độ GPS/VN2000, vẽ ranh thửa sơ bộ, đo diện tích ước tính và mở nguồn quy hoạch chính thức để kiểm chứng.
+Bản V13 bổ sung công cụ đọc quy hoạch tại điểm trên bản đồ.
 
-## Điểm mới
+Tính năng chính:
+- Giữ toàn bộ tính năng V12: tin tức, briefing, khu đất, phân tích lô đất, bản đồ, VN2000.
+- Thêm nút **Đọc điểm giữa bản đồ** và **Đọc điểm ranh cuối**.
+- App thử truy vấn lớp GIS công khai của Khánh Hòa qua ArcGIS REST nếu nguồn cho phép.
+- Nếu đọc được thuộc tính, app hiển thị mã/loại đất như ODT, ONT, TMD, DKV, DGT, CLN, LUA...
+- Nếu nguồn chặn truy vấn tự động, app chuyển sang chế độ kiểm chứng thủ công: copy tọa độ, mở GIS Khánh Hòa và Google Maps.
+- Có cảnh báo pháp lý: kết quả chỉ dùng sàng lọc, không thay thế xác nhận từ cơ quan có thẩm quyền.
 
-- Không cần API/backend/token.
-- Bản đồ OpenStreetMap trong app.
-- Định vị GPS khi người dùng cấp quyền vị trí.
-- Nhập tọa độ GPS và ghim vị trí.
-- Nhập tọa độ VN2000, chuyển sang GPS tham khảo.
-- Hỗ trợ kinh tuyến trục Khánh Hòa 108°15′ và một số lựa chọn khác.
-- Chạm bản đồ để thêm điểm ranh.
-- Vẽ ranh lô đất sơ bộ bằng nhiều điểm.
-- Tính diện tích ước lượng.
-- Lưu hồ sơ vị trí vào mục đã lưu.
-- Mở nhanh nguồn quy hoạch/GIS/Công báo/Cổng tỉnh để đối chiếu.
+Lưu ý quan trọng:
+- Để đọc chính xác 100% lô đất thuộc đất ở, thương mại dịch vụ, công viên, giao thông... cần lớp dữ liệu quy hoạch chính thức có thuộc tính và cho phép truy vấn.
+- Nếu nguồn GIS không mở truy vấn/CORS, app không được phép “đoán bừa” từ màu bản đồ vì có thể gây rủi ro pháp lý.
 
-## Lưu ý pháp lý
-
-Tính năng bản đồ và chuyển đổi tọa độ chỉ dùng để hỗ trợ sàng lọc đầu tư. Không thay thế trích lục địa chính, bản đồ quy hoạch chính thức, giấy chứng nhận quyền sử dụng đất hoặc xác nhận từ cơ quan có thẩm quyền.
