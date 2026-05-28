@@ -1,12 +1,14 @@
-# Ninh Hòa Invest AI V25.1 – AI Đọc Sổ Build Fix
+# Ninh Hòa Invest AI V25.2 – Đọc sổ Build Safe
 
-Bản này sửa lỗi build V25 trên GitHub Actions.
+Bản này sửa lỗi build GitHub Actions bằng cách tắt OCR native ML Kit.
 
-## Điểm sửa
-- Chuyển OCR native sang Google Play Services ML Kit để build nhẹ và ổn định hơn.
-- Giữ tính năng chọn ảnh sổ, OCR, bóc thông tin và chấm điểm lô đất.
+## Điểm chính
+- Không còn dependency ML Kit nên build APK ổn định hơn.
+- Người dùng vẫn chọn ảnh sổ để xem trước.
+- Người dùng nhập/dán nội dung quan trọng từ sổ: số thửa, tờ bản đồ, diện tích, loại đất, ghi chú quy hoạch, giá bán, link Google Maps.
+- App bóc thông tin, chấm điểm lô đất, cảnh báo rủi ro và lưu báo cáo vào Sổ tay đầu tư.
 - Không yêu cầu quyền vị trí.
-- Giữ tác giả sản phẩm: Vũ Hoàng.
+- Tác giả sản phẩm: Vũ Hoàng.
 
 ## Lưu ý
-OCR phụ thuộc chất lượng ảnh. Nếu ảnh cong, mờ hoặc chữ quá nhỏ, người dùng vẫn có thể sửa tay/dán thông tin sổ trước khi tạo báo cáo.
+OCR tự động bằng ML Kit sẽ được đưa lại sau khi tách thành bản native ổn định hoặc có backend xử lý riêng.

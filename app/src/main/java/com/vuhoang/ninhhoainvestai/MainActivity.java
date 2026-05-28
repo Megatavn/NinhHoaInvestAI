@@ -16,11 +16,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import com.google.mlkit.vision.common.InputImage;
-import com.google.mlkit.vision.text.Text;
-import com.google.mlkit.vision.text.TextRecognition;
-import com.google.mlkit.vision.text.TextRecognizer;
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -31,7 +26,6 @@ import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends Activity {
     private static final int REQ_FILE_CHOOSER = 601;
-    private static final int REQ_OCR_IMAGE = 602;
     private WebView webView;
     private ValueCallback<Uri[]> filePathCallback;
 
@@ -57,16 +51,9 @@ public class MainActivity extends Activity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("image/*");
-                        intent.addCategory(Intent.CATEGORY_OPENABLE);
-                        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        startActivityForResult(Intent.createChooser(intent, "Chọn ảnh sổ đỏ/sổ hồng"), REQ_OCR_IMAGE);
-                    } catch (Exception e) {
-                        Toast.makeText(MainActivity.this, "Không mở được bộ chọn ảnh", Toast.LENGTH_SHORT).show();
-                        sendOcrResult("__ERROR__" + e.getMessage());
-                    }
+                    // V25.2: tắt OCR native để build ổn định.
+                    // Ảnh vẫn được chọn/xem trước qua input trong WebView; người dùng nhập hoặc dán nội dung sổ để app bóc thông tin.
+                    sendOcrResult("__ERROR__OCR native tạm tắt để bản APK build ổn định. Hãy chọn ảnh xem trước và nhập/dán thông tin sổ vào ô chữ.");
                 }
             });
         }
@@ -132,7 +119,7 @@ public class MainActivity extends Activity {
         conn.setConnectTimeout(12000);
         conn.setReadTimeout(15000);
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/25.1");
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/25.2");
         conn.setRequestProperty("Accept", "application/json, text/plain, application/rss+xml, application/xml, text/xml, text/html, */*");
         conn.setRequestProperty("Accept-Language", "vi-VN,vi;q=0.9,en;q=0.7");
         int code = conn.getResponseCode();
@@ -193,7 +180,7 @@ public class MainActivity extends Activity {
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/25.1-NoAPI");
+        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/25.2-NoAPI");
         webView.addJavascriptInterface(new AndroidBridge(), "Android");
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -252,33 +239,6 @@ public class MainActivity extends Activity {
                 filePathCallback = null;
             }
             return;
-        }
-        if (requestCode == REQ_OCR_IMAGE) {
-            if (resultCode == RESULT_OK && data != null && data.getData() != null) {
-                try {
-                    InputImage image = InputImage.fromFilePath(this, data.getData());
-                    TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
-                    recognizer.process(image)
-                            .addOnSuccessListener(new com.google.android.gms.tasks.OnSuccessListener<Text>() {
-                                @Override
-                                public void onSuccess(Text text) {
-                                    sendOcrResult(text.getText());
-                                }
-                            })
-                            .addOnFailureListener(new com.google.android.gms.tasks.OnFailureListener() {
-                                @Override
-                                public void onFailure(Exception e) {
-                                    sendOcrResult("__ERROR__" + e.getMessage());
-                                    Toast.makeText(MainActivity.this, "Chưa đọc được ảnh. Hãy nhập tay thông tin chính.", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                } catch (Exception e) {
-                    sendOcrResult("__ERROR__" + e.getMessage());
-                    Toast.makeText(this, "Không đọc được ảnh. Hãy nhập tay thông tin chính.", Toast.LENGTH_LONG).show();
-                }
-            } else {
-                sendOcrResult("__CANCELLED__");
-            }
         }
     }
 

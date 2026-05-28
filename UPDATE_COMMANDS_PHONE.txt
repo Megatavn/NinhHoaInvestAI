@@ -1,8 +1,8 @@
-unzip -o NinhHoaInvestAI_NoAPI_V25_1_AI_DocSo_BuildFix.zip
-cp -r NinhHoaInvestAI_NoAPI_V25_1_AI_DocSo_BuildFix/. .
-rm -rf NinhHoaInvestAI_NoAPI_V25_1_AI_DocSo_BuildFix NinhHoaInvestAI_NoAPI_V25_1_AI_DocSo_BuildFix.zip
+unzip -o NinhHoaInvestAI_NoAPI_V25_2_AI_DocSo_BuildSafe.zip
+cp -r NinhHoaInvestAI_NoAPI_V25_2_AI_DocSo_BuildSafe/. .
+rm -rf NinhHoaInvestAI_NoAPI_V25_2_AI_DocSo_BuildSafe NinhHoaInvestAI_NoAPI_V25_2_AI_DocSo_BuildSafe.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Fix V25.1 AI doc so build"
+git commit -m "Fix V25.2 doc so build safe"
 git push
