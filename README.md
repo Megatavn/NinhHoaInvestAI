@@ -1,14 +1,15 @@
-# Ninh Hòa Invest AI V25.2 – Đọc sổ Build Safe
+# Ninh Hòa Invest AI V26 – Trợ lý thửa đất & tọa độ
 
-Bản này sửa lỗi build GitHub Actions bằng cách tắt OCR native ML Kit.
+Ứng dụng hỗ trợ nhà đầu tư bất động sản Ninh Hòa theo dõi tin tức, lưu sổ tay đầu tư và tạo hồ sơ thửa đất từ thông tin sổ, tọa độ góc ranh, Google Maps và giá bán.
 
-## Điểm chính
-- Không còn dependency ML Kit nên build APK ổn định hơn.
-- Người dùng vẫn chọn ảnh sổ để xem trước.
-- Người dùng nhập/dán nội dung quan trọng từ sổ: số thửa, tờ bản đồ, diện tích, loại đất, ghi chú quy hoạch, giá bán, link Google Maps.
-- App bóc thông tin, chấm điểm lô đất, cảnh báo rủi ro và lưu báo cáo vào Sổ tay đầu tư.
-- Không yêu cầu quyền vị trí.
-- Tác giả sản phẩm: Vũ Hoàng.
+## Điểm mới V26
 
-## Lưu ý
-OCR tự động bằng ML Kit sẽ được đưa lại sau khi tách thành bản native ổn định hoặc có backend xử lý riêng.
+- Trợ lý thửa đất & tọa độ.
+- Nhập bảng tọa độ X/Y từ sổ để vẽ sơ bộ hình thửa.
+- Tính diện tích ước lượng từ tọa độ và so sánh với diện tích trên giấy.
+- Dán link Google Maps để lưu vị trí.
+- Chấm điểm pháp lý, tọa độ/diện tích, quy hoạch, vị trí và giá trị đầu tư.
+- Lưu hồ sơ thửa đất vào Sổ tay đầu tư cá nhân.
+- Không yêu cầu quyền vị trí, không cần API/backend.
+
+Tác giả sản phẩm: Vũ Hoàng
