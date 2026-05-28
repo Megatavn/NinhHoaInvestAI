@@ -1,11 +1,7 @@
-# Ninh Hòa Invest AI V19.1 – Tiếng Việt đầy đủ & dễ dùng
+# Ninh Hòa Invest AI V20 – Premium UX Rebuild
 
-Bản này tối ưu cho người dùng phổ thông, không rành kỹ thuật và không biết tiếng Anh.
+Bản V20 thiết kế lại giao diện theo hướng dễ dùng, tiếng Việt rõ ràng, tương phản cao, loại bỏ phần kỹ thuật không cần thiết, tập trung vào Tin tức, Kiểm tra lô đất, Khu vực và Pháp lý.
 
-## Điểm chính
+## Build APK bằng GitHub Actions
 
-- Giao diện tiếng Việt đầy đủ hơn.
-- Đổi các thuật ngữ khó sang tiếng Việt dễ hiểu.
-- Thêm hướng dẫn 3 bước trong Phòng phân tích thương vụ.
-- Giữ nguyên: tin tức, khu vực, pháp lý/quy hoạch an toàn, hồ sơ thương vụ, lưu kết quả.
-- Không cần API, không cần backend, không cần người dùng cấu hình kỹ thuật.
+Upload toàn bộ source lên GitHub, vào tab Actions và chạy workflow Build APK.
