@@ -1,7 +1,0 @@
-unzip -o NinhHoaInvestAI_NoAPI_V7_1_SourceFix.zip
-cp -r NinhHoaInvestAI_NoAPI_V7_1_SourceFix/. .
-rm -rf NinhHoaInvestAI_NoAPI_V7_1_SourceFix NinhHoaInvestAI_NoAPI_V7_1_SourceFix.zip
-
-git add .
-git commit -m "Fix V7 source links opening RSS XML"
-git push

@@ -91,7 +91,7 @@ public class MainActivity extends Activity {
         conn.setConnectTimeout(12000);
         conn.setReadTimeout(15000);
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/7.1");
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/8.0");
         conn.setRequestProperty("Accept", "application/rss+xml, application/xml, text/xml, text/html, */*");
         conn.setRequestProperty("Accept-Language", "vi-VN,vi;q=0.9,en;q=0.7");
         int code = conn.getResponseCode();
@@ -149,7 +149,7 @@ public class MainActivity extends Activity {
         settings.setAllowFileAccess(true);
         settings.setAllowContentAccess(true);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/7.1-NoAPI");
+        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/8.0-NoAPI");
 
         webView.addJavascriptInterface(new AndroidBridge(), "Android");
         webView.setWebChromeClient(new WebChromeClient());

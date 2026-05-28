@@ -1,0 +1,7 @@
+unzip -o NinhHoaInvestAI_NoAPI_V8_DealScoringPro.zip
+cp -r NinhHoaInvestAI_NoAPI_V8_DealScoringPro/. .
+rm -rf NinhHoaInvestAI_NoAPI_V8_DealScoringPro NinhHoaInvestAI_NoAPI_V8_DealScoringPro.zip
+
+git add .
+git commit -m "Update V8 Deal Scoring Pro"
+git push

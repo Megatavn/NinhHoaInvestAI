@@ -1,15 +1,32 @@
-# Ninh Hòa Invest AI V7.1 – Source Link Fix
+# Ninh Hòa Invest AI V8 – Deal Scoring Pro
 
-Bản V7.1 sửa lỗi bấm **Mở nguồn** nhưng bị mở ra trang XML/RSS của Google News.
+Bản V8 tập trung mạnh vào **chấm điểm lô đất chuyên nghiệp** cho nhà đầu tư bất động sản tại Ninh Hòa – Khánh Hòa.
 
-## Điểm sửa chính
+## Điểm mới chính
 
-- Nút **Mở nguồn** không còn mở `news.google.com/rss/...` dạng XML.
-- Các link tìm kiếm Google News RSS được chuyển sang trang Google News dạng đọc được.
-- Khi đọc RSS Google News, app ưu tiên lấy link bài báo gốc trong phần mô tả.
-- Các link RSS như Công báo Chính phủ được chuyển sang trang web chính để người dùng dễ đọc.
-- Đổi cache tin sang `nhi_v71_news` để tránh dùng lại cache cũ chứa link RSS lỗi.
-- Giữ toàn bộ tính năng V7: Khu đất, hồ sơ khu vực, so sánh khu vực, AI Briefing, AI phân tích lô đất, tra cứu pháp lý.
+- Không cần API, backend, token hay cấu hình kỹ thuật.
+- Thêm tab **V8** để phân tích lô đất chuyên sâu.
+- Form phân tích mới gồm: khu vực, mục tiêu đầu tư, diện tích, giá bán, loại đất, pháp lý, đường trước đất, mặt tiền, yếu tố vị trí và mô tả rủi ro.
+- Tự tính **giá/m²** và so sánh với mốc tham khảo nội bộ của từng khu vực.
+- Tạo báo cáo gồm:
+  - Điểm đầu tư 0–100
+  - Xếp hạng A/B+/B/C/D
+  - Điểm chi tiết: giá, pháp lý, vị trí, tăng trưởng, thanh khoản, rủi ro
+  - Vùng giá đàm phán đề xuất
+  - Cờ đỏ cần kiểm tra
+  - Kế hoạch kiểm chứng 7 bước
+  - Chiến lược xuống tiền hoặc loại bỏ
+- Có thể lưu báo cáo vào **Danh mục phân tích** trên máy.
+- Giữ toàn bộ tính năng V7.1:
+  - Sửa lỗi mở nguồn RSS/XML
+  - Tin tức No API
+  - Investor Briefing
+  - Tra cứu khu vực đất chuyên sâu
+  - Tra cứu pháp lý và nguồn chính thống
+
+## Lưu ý
+
+Các mức giá tham khảo trong app chỉ dùng để sàng lọc và hỗ trợ tư duy đầu tư. Đây không phải bảng giá nhà nước, không phải định giá thị trường chính thức và không thay thế việc kiểm tra pháp lý thực tế.
 
 ## Cách build APK bằng GitHub Actions
 

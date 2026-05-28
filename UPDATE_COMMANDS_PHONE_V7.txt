@@ -1,7 +1,0 @@
-unzip -o NinhHoaInvestAI_NoAPI_V7_AreaIntelligence.zip
-cp -r NinhHoaInvestAI_NoAPI_V7/. .
-rm -rf NinhHoaInvestAI_NoAPI_V7 NinhHoaInvestAI_NoAPI_V7_AreaIntelligence.zip
-
-git add .
-git commit -m "Update V7 Area Intelligence land lookup"
-git push
