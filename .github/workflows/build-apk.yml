@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches: [ main, master ]
+    paths:
+      - 'app/**'
+      - 'build.gradle'
+      - 'settings.gradle'
+      - '.github/workflows/build-apk.yml'
 
 jobs:
   build:
@@ -23,7 +28,7 @@ jobs:
           cache: gradle
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.10.2'
 
@@ -39,5 +44,5 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NinhHoaInvestAI-debug-apk
+          name: NinhHoaInvestAI-noapi-debug-apk
           path: app/build/outputs/apk/debug/*.apk

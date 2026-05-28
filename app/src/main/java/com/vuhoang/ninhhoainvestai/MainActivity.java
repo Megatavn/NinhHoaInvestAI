@@ -3,24 +3,115 @@ package com.vuhoang.ninhhoainvestai;
 import android.app.Activity;
 import android.os.Bundle;
 import android.graphics.Color;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.net.Uri;
-import android.content.Intent;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends Activity {
     private WebView webView;
 
+    public class AndroidBridge {
+        @JavascriptInterface
+        public void openExternal(String url) {
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(MainActivity.this, "Không mở được liên kết", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @JavascriptInterface
+        public void toast(String message) {
+            Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+        }
+
+        @JavascriptInterface
+        public void fetchUrl(final String requestId, final String url) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String payload;
+                    try {
+                        payload = httpGet(url);
+                    } catch (Exception e) {
+                        payload = "__ERROR__" + e.getMessage();
+                    }
+                    final String script = "window.__nativeFetchDone && window.__nativeFetchDone(" + quote(requestId) + "," + quote(payload) + ")";
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            webView.evaluateJavascript(script, null);
+                        }
+                    });
+                }
+            }).start();
+        }
+    }
+
+    private String httpGet(String urlText) throws Exception {
+        URL url = new URL(urlText);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setInstanceFollowRedirects(true);
+        conn.setConnectTimeout(12000);
+        conn.setReadTimeout(15000);
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/5.0");
+        conn.setRequestProperty("Accept", "application/rss+xml, application/xml, text/xml, text/html, */*");
+        conn.setRequestProperty("Accept-Language", "vi-VN,vi;q=0.9,en;q=0.7");
+        int code = conn.getResponseCode();
+        InputStream is = code >= 400 ? conn.getErrorStream() : conn.getInputStream();
+        if (is == null) throw new Exception("HTTP " + code);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        char[] buf = new char[4096];
+        int n;
+        while ((n = reader.read(buf)) != -1) sb.append(buf, 0, n);
+        reader.close();
+        conn.disconnect();
+        if (code >= 400) throw new Exception("HTTP " + code);
+        return sb.toString();
+    }
+
+    private String quote(String s) {
+        if (s == null) return "null";
+        StringBuilder out = new StringBuilder("\"");
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            switch (c) {
+                case '\\': out.append("\\\\"); break;
+                case '"': out.append("\\\""); break;
+                case '\n': out.append("\\n"); break;
+                case '\r': out.append("\\r"); break;
+                case '\t': out.append("\\t"); break;
+                default:
+                    if (c < 32) out.append(String.format("\\u%04x", (int)c));
+                    else out.append(c);
+            }
+        }
+        out.append("\"");
+        return out.toString();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getWindow().setStatusBarColor(Color.parseColor("#061B2F"));
-        getWindow().setNavigationBarColor(Color.parseColor("#061B2F"));
+        getWindow().setStatusBarColor(Color.parseColor("#061B2C"));
+        getWindow().setNavigationBarColor(Color.parseColor("#061B2C"));
 
         webView = new WebView(this);
         webView.setLayoutParams(new ViewGroup.LayoutParams(
@@ -36,52 +127,31 @@ public class MainActivity extends Activity {
         settings.setUseWideViewPort(true);
         settings.setAllowFileAccess(true);
         settings.setAllowContentAccess(true);
-        settings.setAllowFileAccessFromFileURLs(true);
-        settings.setAllowUniversalAccessFromFileURLs(true);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        settings.setTextZoom(100);
-        settings.setDefaultTextEncodingName("utf-8");
+        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/5.0-NoAPI");
 
+        webView.addJavascriptInterface(new AndroidBridge(), "Android");
+        webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                return handleUrl(request.getUrl().toString());
-            }
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return handleUrl(url);
-            }
-
-            private boolean handleUrl(String url) {
-                if (url == null) return false;
-                if (url.startsWith("file:///android_asset/")) return false;
-                if (url.startsWith("http://") || url.startsWith("https://")) {
-                    try {
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                        startActivity(intent);
-                    } catch (Exception ignored) {}
+                String url = request.getUrl().toString();
+                if (url.startsWith("file:///android_asset/") || url.startsWith("about:")) return false;
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
                     return true;
+                } catch (Exception e) {
+                    return false;
                 }
-                return false;
             }
         });
-        webView.setWebChromeClient(new WebChromeClient());
         webView.loadUrl("file:///android_asset/app.html");
-
         setContentView(webView);
     }
 
     @Override
     public void onBackPressed() {
-        if (webView != null) {
-            webView.evaluateJavascript("window.appBack && window.appBack()", value -> {
-                if ("true".equals(value)) return;
-                if (webView.canGoBack()) webView.goBack();
-                else MainActivity.super.onBackPressed();
-            });
-        } else {
-            super.onBackPressed();
-        }
+        webView.evaluateJavascript("window.__appBack && window.__appBack()", null);
     }
 }

@@ -1,6 +1,4 @@
-plugins {
-    id 'com.android.application'
-}
+plugins { id 'com.android.application' }
 
 android {
     namespace 'com.vuhoang.ninhhoainvestai'
@@ -10,7 +8,7 @@ android {
         applicationId 'com.vuhoang.ninhhoainvestai'
         minSdk 23
         targetSdk 35
-        versionCode 4
-        versionName '3.0.0-pro-news'
+        versionCode 15
+        versionName '5.0.0-smart-news'
     }
 }
