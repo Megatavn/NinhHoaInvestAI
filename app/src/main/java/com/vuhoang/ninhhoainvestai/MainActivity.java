@@ -51,7 +51,9 @@ public class MainActivity extends Activity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    sendOcrResult("__ERROR__Chọn ảnh để xem trước, sau đó nhập hoặc dán thông tin trên sổ để app phân tích.");
+                    // V25.2: tắt OCR native để build ổn định.
+                    // Ảnh vẫn được chọn/xem trước qua input trong WebView; người dùng nhập hoặc dán nội dung sổ để app bóc thông tin.
+                    sendOcrResult("__ERROR__OCR native tạm tắt để bản APK build ổn định. Hãy chọn ảnh xem trước và nhập/dán thông tin sổ vào ô chữ.");
                 }
             });
         }
@@ -178,7 +180,7 @@ public class MainActivity extends Activity {
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/29.7-NoAPI");
+        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/27-NoAPI");
         webView.addJavascriptInterface(new AndroidBridge(), "Android");
         webView.setWebChromeClient(new WebChromeClient() {
             @Override

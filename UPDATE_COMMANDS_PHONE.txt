@@ -1,8 +1,8 @@
-unzip -o NinhHoaInvestAI_NoAPI_V29_7_CleanProductUI.zip
-cp -r NinhHoaInvestAI_NoAPI_V29_7_CleanProductUI/. .
-rm -rf NinhHoaInvestAI_NoAPI_V29_7_CleanProductUI NinhHoaInvestAI_NoAPI_V29_7_CleanProductUI.zip
+unzip -o NinhHoaInvestAI_NoAPI_V29_5_NewsLogicAuditFix.zip
+cp -r NinhHoaInvestAI_NoAPI_V29_5_NewsLogicAuditFix/. .
+rm -rf NinhHoaInvestAI_NoAPI_V29_5_NewsLogicAuditFix NinhHoaInvestAI_NoAPI_V29_5_NewsLogicAuditFix.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Update V29.7 clean product UI"
+git commit -m "Update V29.5 news logic audit fix"
 git push
