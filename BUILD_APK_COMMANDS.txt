@@ -1,0 +1,11 @@
+# Nếu máy đã có Android Studio/Gradle/Android SDK:
+# Windows PowerShell:
+cd NinhHoaInvestAI_AndroidStudio_REAL_BUILD
+./gradlew.bat assembleDebug
+
+# macOS/Linux:
+cd NinhHoaInvestAI_AndroidStudio_REAL_BUILD
+./gradlew assembleDebug
+
+# Lưu ý: ZIP này không kèm Gradle wrapper vì wrapper cần Android Studio/Gradle tạo.
+# Cách dễ nhất: mở bằng Android Studio rồi Build APK.

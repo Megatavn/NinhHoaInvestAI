@@ -1,0 +1,41 @@
+BUILD APK BẰNG ĐIỆN THOẠI - KHÔNG CẦN PC
+App: Ninh Hòa Invest AI
+Tác giả trong app: Vũ Hoàng
+
+CÁCH LÀM TRÊN ĐIỆN THOẠI:
+
+1. Vào github.com bằng Chrome/Safari trên điện thoại.
+2. Đăng nhập hoặc tạo tài khoản GitHub.
+3. Bấm dấu + -> New repository.
+4. Đặt tên repo, ví dụ:
+   NinhHoaInvestAI
+5. Chọn Public hoặc Private đều được.
+6. Tạo repo xong, bấm Add file -> Upload files.
+7. Giải nén file ZIP project này trên điện thoại trước.
+8. Upload TOÀN BỘ file/thư mục bên trong project lên GitHub.
+   Quan trọng: phải có các mục:
+   - app/
+   - build.gradle
+   - settings.gradle
+   - .github/workflows/build-apk.yml
+9. Sau khi upload xong, vào tab Actions.
+10. Chọn workflow Build APK.
+11. Bấm Run workflow.
+12. Đợi GitHub build xong.
+13. Mở workflow vừa chạy -> kéo xuống Artifacts.
+14. Tải file NinhHoaInvestAI-debug-apk.zip.
+15. Giải nén ZIP đó trên điện thoại, bạn sẽ thấy file app-debug.apk.
+16. Cài app-debug.apk.
+
+NẾU KHÔNG THẤY TAB ACTIONS:
+- Vào repo -> Settings -> Actions -> General -> Allow all actions.
+- Quay lại tab Actions và chạy lại.
+
+NẾU BÁO LỖI BUILD:
+- Chụp màn hình lỗi ở tab Actions gửi lại cho ChatGPT.
+- Mình sẽ sửa project theo lỗi đó.
+
+LƯU Ý:
+- Đây là APK debug để cài thử nghiệm.
+- Android có thể hỏi quyền cài app không rõ nguồn gốc. Hãy bật cho trình duyệt/trình quản lý file.
+- Nếu từng cài app cùng package bị lỗi, hãy gỡ app cũ trước khi cài APK mới.
