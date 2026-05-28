@@ -4,15 +4,21 @@ android {
     namespace 'com.vuhoang.ninhhoainvestai'
     compileSdk 35
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
     defaultConfig {
         applicationId 'com.vuhoang.ninhhoainvestai'
         minSdk 23
         targetSdk 35
-        versionCode 40
-        versionName '25.0.0-ai-doc-so-cham-diem-lo-dat'
+        versionCode 41
+        versionName '25.1.0-ai-doc-so-build-fix'
     }
 }
 
 dependencies {
-    implementation 'com.google.mlkit:text-recognition:16.0.1'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:19.0.1'
+    implementation 'com.google.android.gms:play-services-base:18.5.0'
 }

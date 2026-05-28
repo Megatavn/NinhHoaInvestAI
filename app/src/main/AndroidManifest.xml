@@ -8,6 +8,7 @@
         android:icon="@drawable/ic_launcher"
         android:roundIcon="@drawable/ic_launcher"
         android:resizeableActivity="true">
+        <meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="ocr" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

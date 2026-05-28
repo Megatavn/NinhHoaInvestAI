@@ -132,7 +132,7 @@ public class MainActivity extends Activity {
         conn.setConnectTimeout(12000);
         conn.setReadTimeout(15000);
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/25.0");
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/25.1");
         conn.setRequestProperty("Accept", "application/json, text/plain, application/rss+xml, application/xml, text/xml, text/html, */*");
         conn.setRequestProperty("Accept-Language", "vi-VN,vi;q=0.9,en;q=0.7");
         int code = conn.getResponseCode();
@@ -193,7 +193,7 @@ public class MainActivity extends Activity {
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/25.0-NoAPI");
+        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/25.1-NoAPI");
         webView.addJavascriptInterface(new AndroidBridge(), "Android");
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -255,10 +255,6 @@ public class MainActivity extends Activity {
         }
         if (requestCode == REQ_OCR_IMAGE) {
             if (resultCode == RESULT_OK && data != null && data.getData() != null) {
-                try {
-                    final Uri uri = data.getData();
-                    getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                } catch (Exception ignored) {}
                 try {
                     InputImage image = InputImage.fromFilePath(this, data.getData());
                     TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);

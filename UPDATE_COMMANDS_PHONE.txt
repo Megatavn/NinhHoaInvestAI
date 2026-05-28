@@ -1,12 +1,8 @@
-Upload file ZIP V25 vào Codespaces rồi chạy:
-
-unzip -o NinhHoaInvestAI_NoAPI_V25_AI_DocSo_ChamDiemLoDat.zip
-cp -r NinhHoaInvestAI_NoAPI_V25_AI_DocSo_ChamDiemLoDat/. .
-rm -rf NinhHoaInvestAI_NoAPI_V25_AI_DocSo_ChamDiemLoDat NinhHoaInvestAI_NoAPI_V25_AI_DocSo_ChamDiemLoDat.zip
+unzip -o NinhHoaInvestAI_NoAPI_V25_1_AI_DocSo_BuildFix.zip
+cp -r NinhHoaInvestAI_NoAPI_V25_1_AI_DocSo_BuildFix/. .
+rm -rf NinhHoaInvestAI_NoAPI_V25_1_AI_DocSo_BuildFix NinhHoaInvestAI_NoAPI_V25_1_AI_DocSo_BuildFix.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Update V25 AI doc so cham diem lo dat"
+git commit -m "Fix V25.1 AI doc so build"
 git push
-
-Sau đó vào GitHub → Actions → Build APK → Artifacts để tải APK mới.
