@@ -1,0 +1,10 @@
+Upload file NinhHoaInvestAI_NoAPI_V19_1_FullVietnameseEasy.zip vào Codespaces, rồi chạy:
+
+unzip -o NinhHoaInvestAI_NoAPI_V19_1_FullVietnameseEasy.zip
+cp -r NinhHoaInvestAI_NoAPI_V19_1_FullVietnameseEasy/. .
+rm -rf NinhHoaInvestAI_NoAPI_V19_1_FullVietnameseEasy NinhHoaInvestAI_NoAPI_V19_1_FullVietnameseEasy.zip
+rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
+
+git add -A
+git commit -m "Update V19.1 full Vietnamese easy mode"
+git push

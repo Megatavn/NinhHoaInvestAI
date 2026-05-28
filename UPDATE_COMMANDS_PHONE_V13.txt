@@ -1,7 +1,0 @@
-unzip -o NinhHoaInvestAI_NoAPI_V13_PlanningReader.zip
-cp -r NinhHoaInvestAI_NoAPI_V13_PlanningReader/. .
-rm -rf NinhHoaInvestAI_NoAPI_V13_PlanningReader NinhHoaInvestAI_NoAPI_V13_PlanningReader.zip
-
-git add .
-git commit -m "Update V13 Planning Reader"
-git push

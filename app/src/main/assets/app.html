@@ -157,20 +157,30 @@ body.simple-mode .fab-stack button:nth-child(2){display:none}
 body.simple-mode .section-title{font-size:20px}
 @media(max-width:390px){body.simple-mode .hero h2{font-size:22px}body.simple-mode .brand h1{font-size:18px}.easy-plan-card{padding:16px}}
 
+
+
+/* ===== V19 DEAL INTELLIGENCE ROOM ===== */
+.room-hero{background:linear-gradient(135deg,#061b2c 0%,#0e4568 58%,#2e6f8d 100%);color:white;border-radius:30px;padding:21px;margin-bottom:14px;box-shadow:0 24px 56px rgba(6,27,44,.28);position:relative;overflow:hidden}.room-hero:after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(245,213,123,.48),transparent 70%)}.room-hero h3{font-size:25px;line-height:1.1;margin:0 0 8px;letter-spacing:-.6px}.room-hero p{color:#d8eaf3;margin:0;line-height:1.52}.room-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.room-badges span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}.room-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.room-kpi div{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:10px;text-align:center}.room-kpi b{display:block;font-size:20px;color:#ffe9a9}.room-kpi span{font-size:11px;color:#d7e6ef}.room-scorecard{display:grid;gap:10px}.room-score-row{background:#f7fbfd;border:1px solid #dceaf1;border-radius:18px;padding:12px}.room-score-row .split{margin-bottom:8px}.room-verdict{border-radius:28px;padding:20px;color:white;background:linear-gradient(135deg,#09243a,#13577f);box-shadow:0 20px 45px rgba(6,27,44,.23);margin-bottom:13px}.room-verdict.good{background:linear-gradient(135deg,#0d3c2a,#1c8d5d)}.room-verdict.warn{background:linear-gradient(135deg,#503508,#bd7a1e)}.room-verdict.bad{background:linear-gradient(135deg,#4a1511,#b63d33)}.room-verdict .score{font-size:56px}.room-memo{background:#fffaf0;border:1px solid #f1d88e;border-radius:24px;padding:15px;line-height:1.55}.room-killer{background:#fff1ee;border:1px solid #ffc9c0;border-radius:20px;padding:12px;color:#81342b;line-height:1.45}.room-safe{background:#edf9f2;border:1px solid #bde8ca;border-radius:20px;padding:12px;color:#174b28;line-height:1.45}.room-thesis{background:#eef7fb;border:1px solid #d2e7f0;border-radius:20px;padding:12px;line-height:1.45}.room-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}.room-tabs button{padding:10px 8px;border-radius:16px;font-size:12px}.room-mini-label{font-size:12px;color:#7a8b97;margin-top:4px}.room-table{width:100%;border-collapse:separate;border-spacing:0 8px}.room-table td{background:#f7fbfd;padding:10px;font-size:13px;vertical-align:top}.room-table td:first-child{border-top-left-radius:14px;border-bottom-left-radius:14px;font-weight:900;width:46%}.room-table td:last-child{border-top-right-radius:14px;border-bottom-right-radius:14px;color:#526b7c}.room-saved-card{border-left:5px solid var(--gold)}.room-saved-card.good{border-left-color:#18a76b}.room-saved-card.warn{border-left-color:#db8a22}.room-saved-card.bad{border-left-color:#d94d42}.bottom{grid-template-columns:repeat(6,1fr)}@media(max-width:390px){.room-kpi{grid-template-columns:1fr}.room-tabs{grid-template-columns:1fr}.bottom{gap:3px}.nav{font-size:10px}}
+
+
+.easy-room-guide{background:#fff;border:1px solid #e6eef3;border-radius:24px;padding:14px;margin:12px 0;box-shadow:0 10px 28px rgba(10,36,58,.08)}
+.simple-mode .room-badges span{font-size:11px}
+.simple-mode .room-table td:first-child{width:42%}
+
 </style>
 </head>
 <body class="product-mode simple-mode">
 <div class="app">
-  <div id="splash" class="splash"><div class="splash-card"><div class="splash-logo">NH</div><h2>Ninh Hòa Invest AI</h2><p>Bản đồ quy hoạch · VN2000 · Phân tích đầu tư</p><div class="splash-bar"><span></span></div></div></div>
+  <div id="splash" class="splash"><div class="splash-card"><div class="splash-logo">NH</div><h2>Ninh Hòa Invest AI</h2><p>Tin tức · Khu vực · Quy hoạch an toàn</p><div class="splash-bar"><span></span></div></div></div>
   <div class="orb one"></div><div class="orb two"></div>
   <header>
     <div class="top">
-      <div class="brand"><div class="logo">NH</div><div><h1>Ninh Hòa Invest AI</h1><p>Kiểm tra tin, khu vực và quy hoạch</p></div></div>
+      <div class="brand"><div class="logo">NH</div><div><h1>Ninh Hòa Invest AI</h1><p>Phân tích thương vụ BĐS Ninh Hòa</p></div></div>
       <div class="header-actions"><div class="live"><span class="dot"></span><span id="liveText">Sẵn sàng</span></div><button class="theme-toggle" onclick="toggleTheme()" aria-label="Đổi giao diện">◐</button></div>
     </div>
     <div class="hero">
-      <h2>Kiểm tra bất động sản Ninh Hòa dễ hiểu</h2>
-      <p>Mở app, chọn việc cần làm và xem gợi ý rõ ràng. Không cần hiểu kỹ thuật hay cấu hình API.</p>
+      <h2>Phòng phân tích thương vụ Ninh Hòa</h2>
+      <p>Lập hồ sơ, chấm điểm, tính biên an toàn và kế hoạch thoát hàng trước khi xuống tiền.</p>
       <div class="hero-badges"><span>1. Xem tin</span><span>2. Kiểm tra đất</span><span>3. Lưu kết quả</span></div>
       <div class="search product-search"><input id="globalSearch" placeholder="Bạn muốn kiểm tra khu vực nào?" oninput="applyFilter();renderLandProfiles()"><button class="btn refresh-mini" onclick="refreshAll(true)" aria-label="Làm mới dữ liệu">↻</button></div>
     </div>
@@ -183,14 +193,14 @@ body.simple-mode .section-title{font-size:20px}
         <div class="stat"><b id="dealCount">0</b><span>Hồ sơ đã lưu</span></div>
       </div>
       <div class="product-actions">
-        <button class="btn dark" onclick="show('deal',document.querySelectorAll('.nav')[3])">Kiểm tra lô đất</button>
-        <button class="btn ghost" onclick="show('planning',document.querySelectorAll('.nav')[5])">Kiểm tra quy hoạch</button>
-        <button class="btn ghost" onclick="show('news',document.querySelectorAll('.nav')[1])">Xem tin mới</button>
+        <button class="btn dark" onclick="show('room',document.querySelector('[data-nav="room"]'))">Phân tích thương vụ</button>
+        <button class="btn ghost" onclick="show('planning',document.querySelector('[data-nav="planning"]'))">Kiểm tra quy hoạch</button>
+        <button class="btn ghost" onclick="show('news',document.querySelector('[data-nav="news"]'))">Xem tin mới</button>
       </div>
       <h3 class="section-title">Hôm nay cần chú ý gì?</h3>
       <div id="dailyBrief"></div>
       <h3 class="section-title">Bạn muốn làm gì?</h3>
-      <div class="grid2"><button class="btn dark" onclick="show('deal',document.querySelectorAll('.nav')[3])">Kiểm tra lô đất</button><button class="btn ghost" onclick="show('land',document.querySelectorAll('.nav')[4])">Xem khu vực</button></div>
+      <div class="grid2"><button class="btn dark" onclick="show('room',document.querySelector('[data-nav="room"]'))">Phân tích thương vụ</button><button class="btn ghost" onclick="show('land',document.querySelector('[data-nav="land"]'))">Xem khu vực</button></div>
       <h3 class="section-title">Khu vực nên theo dõi</h3>
       <div id="homeAreas"></div>
       <h3 class="section-title">Tin có thể ảnh hưởng giá đất</h3>
@@ -199,7 +209,7 @@ body.simple-mode .section-title{font-size:20px}
     </section>
 
     <section id="news" class="section">
-      <div class="toolbar"><button class="btn small" onclick="refreshAll(true)">Làm mới tin</button><button class="btn ghost small" onclick="loadMoreFeeds()">Thêm nguồn</button><button class="btn ghost small" onclick="clearCache()">Xóa cache</button></div>
+      <div class="toolbar"><button class="btn small" onclick="refreshAll(true)">Làm mới tin</button><button class="btn ghost small" onclick="loadMoreFeeds()">Thêm nguồn</button><button class="btn ghost small" onclick="clearCache()">Xóa tin tạm</button></div>
       <div class="chiprow" id="catChips"></div>
       <div class="chiprow" id="timeChips"></div>
       <div id="newsList"></div>
@@ -209,6 +219,50 @@ body.simple-mode .section-title{font-size:20px}
       <h3 class="section-title">Tóm tắt dễ hiểu cho nhà đầu tư</h3>
       <div class="chiprow" id="impactChips"></div>
       <div id="impactList"></div>
+    </section>
+
+
+
+    <section id="room" class="section">
+      <div class="room-hero">
+        <h3>Phòng phân tích thương vụ</h3>
+        <p>Nhập thông tin lô đất, app sẽ tóm tắt cơ hội, cảnh báo rủi ro, gợi ý giá an toàn và việc cần làm tiếp theo.</p>
+        <div class="room-badges"><span>Hồ sơ thương vụ</span><span>Biên an toàn</span><span>Kế hoạch thoát hàng</span><span>Điều kiện phải dừng</span></div>
+        <div class="room-kpi"><div><b>5</b><span>trụ cột phân tích</span></div><div><b>0–100</b><span>điểm thương vụ</span></div><div><b>1</b><span>phán quyết rõ ràng</span></div></div>
+      </div>
+
+      <div class="card easy-room-guide">
+        <h3 class="news-title">Cách dùng rất đơn giản</h3>
+        <div class="easy-steps">
+          <div><b>1</b><span>Nhập thông tin bạn biết về lô đất</span></div>
+          <div><b>2</b><span>Bấm tạo hồ sơ để app phân tích</span></div>
+          <div><b>3</b><span>Xem kết luận: nên xem tiếp, hỏi thêm hay dừng lại</span></div>
+        </div>
+      </div>
+
+      <div class="card formgrid">
+        <h3 class="news-title">Hồ sơ thương vụ</h3>
+        <div class="grid2"><div><div class="label">Khu vực</div><select id="roomArea" class="select"></select></div><div><div class="label">Giai đoạn</div><select id="roomStage" class="select"><option>Mới xem sơ bộ</option><option>Sắp đi xem thực địa</option><option>Đang trả giá</option><option>Sắp đặt cọc</option></select></div></div>
+        <div class="grid2"><div><div class="label">Diện tích</div><input id="roomSize" class="input" placeholder="VD: 120m2"></div><div><div class="label">Giá rao</div><input id="roomPrice" class="input" placeholder="VD: 1.8 tỷ"></div></div>
+        <div class="grid2"><div><div class="label">Loại đất</div><select id="roomType" class="select"><option>Đất ở</option><option>Đất nông nghiệp/CLN/HNK</option><option>Đất thương mại dịch vụ</option><option>Chưa rõ mục đích</option></select></div><div><div class="label">Giấy tờ</div><select id="roomLegal" class="select"><option>Sổ riêng</option><option>Sổ chung</option><option>Chưa rõ</option><option>Giấy tay</option><option>Có dấu hiệu vướng quy hoạch</option></select></div></div>
+        <div class="grid2"><div><div class="label">Thời gian nắm giữ</div><select id="roomHold" class="select"><option>6-12 tháng</option><option>1-3 năm</option><option>3-5 năm</option><option>Trên 5 năm</option></select></div><div><div class="label">Sau này muốn bán lại cho ai?</div><select id="roomBuyer" class="select"><option>Người mua ở thật</option><option>Nhà đầu tư khác</option><option>Khai thác kinh doanh/cho thuê</option><option>Chưa rõ đầu ra</option></select></div></div>
+        <div class="grid2"><div><div class="label">Giá mong muốn bán lại</div><input id="roomTargetPrice" class="input" placeholder="VD: 2.2 tỷ"></div><div><div class="label">Tiền mua đất</div><select id="roomCapital" class="select"><option>Vốn tự có</option><option>Có vay một phần</option><option>Vay nhiều / áp lực trả tiền</option></select></div></div>
+        <div><div class="label">Lý do bạn đang cân nhắc lô này</div><textarea id="roomThesis" placeholder="Vì sao lô này đáng xem? VD: gần dân cư, gần trục hạ tầng, giá còn dư địa, pháp lý rõ..."></textarea></div>
+        <div><div class="label">Điểm chưa yên tâm / rủi ro đã biết</div><textarea id="roomWeakness" placeholder="VD: chưa rõ quy hoạch, đường nhỏ, giá cao, nghe tin từ môi giới, chưa xem sổ..."></textarea></div>
+        <div><div class="label">Dấu hiệu rủi ro cần đánh dấu</div><div class="checkgrid">
+          <label class="check"><input type="checkbox" id="roomFomo">Có dấu hiệu thúc ép mua nhanh / sợ bỏ lỡ</label>
+          <label class="check"><input type="checkbox" id="roomUnclearPlanning">Chưa kiểm tra quy hoạch/kế hoạch sử dụng đất</label>
+          <label class="check"><input type="checkbox" id="roomRoadRisk">Đường vào/lộ giới chưa rõ</label>
+          <label class="check"><input type="checkbox" id="roomNeedFastExit">Cần bán lại trong thời gian ngắn</label>
+          <label class="check"><input type="checkbox" id="roomNoCompare">Chưa so sánh 3 lô khác</label>
+          <label class="check"><input type="checkbox" id="roomBrokerOnly">Thông tin chủ yếu từ môi giới</label>
+        </div></div>
+        <div class="actions"><button class="btn dark" onclick="analyzeRoomDeal()">Tạo hồ sơ dễ hiểu</button><button class="btn ghost" onclick="fillRoomFromDealForm()">Lấy từ kiểm tra nhanh</button></div>
+      </div>
+
+      <div id="roomResult"></div>
+      <h3 class="section-title">Hồ sơ thương vụ đã lưu</h3>
+      <div id="roomList"></div>
     </section>
 
     <section id="deal" class="section">
@@ -250,111 +304,71 @@ body.simple-mode .section-title{font-size:20px}
 
 
     <section id="planning" class="section">
-      <div class="easy-plan-card">
-        <h3>Kiểm tra quy hoạch theo cách đơn giản</h3>
-        <p>Chọn vị trí đất, bấm <b>Đọc thử quy hoạch</b>. Nếu hệ thống không đọc tự động, app sẽ mở đúng nguồn chính thức để bạn đối chiếu.</p>
+      <div class="easy-plan-card v18-safe-plan">
+        <h3>Kiểm tra quy hoạch đơn giản & an toàn</h3>
+        <p>App không tự kết luận loại đất khi nguồn GIS công khai không đủ dữ liệu. Người dùng chọn vị trí, mở nguồn chính thức và lưu kết quả kiểm chứng.</p>
         <div class="easy-steps">
-          <div><b>1</b><span>Định vị hoặc kéo bản đồ đến lô đất</span></div>
-          <div><b>2</b><span>Bấm đọc thử / mở nguồn chính thức</span></div>
-          <div><b>3</b><span>Lưu kết quả và kiểm tra pháp lý</span></div>
+          <div><b>1</b><span>Chọn vị trí lô đất trên bản đồ</span></div>
+          <div><b>2</b><span>Mở nguồn Ninh Hòa/Công báo để đối chiếu</span></div>
+          <div><b>3</b><span>Lưu ghi chú trước khi giao dịch</span></div>
         </div>
-        <div class="easy-actions"><button class="btn dark" onclick="locatePlanning()">Định vị tôi</button><button class="btn" onclick="readPlanningAtCenter()">Đọc thử quy hoạch</button><button class="btn ghost" onclick="openExternal('https://ninhhoa.khanhhoa.gov.vn/vi/quy-hoach-su-dung-dat')">Mở nguồn Ninh Hòa</button></div>
-        <button class="btn ghost small" onclick="toggleAdvancedTools()">Hiện/ẩn công cụ nâng cao</button>
-      </div>
-      <div class="plan-panel">
-        <h3>Thông tin kỹ thuật</h3>
-        <p>Dành cho người muốn nhập VN2000, vẽ ranh hoặc xem chẩn đoán GIS.</p>
-        <div class="plan-stats"><div><b id="planPointCount">0</b><span>Điểm ranh</span></div><div><b id="planArea">0</b><span>m² ước tính</span></div><div><b id="planZone">108°15′</b><span>Kinh tuyến</span></div></div>
+        <div class="easy-actions">
+          <button class="btn dark" onclick="locatePlanning()">Định vị tôi</button>
+          <button class="btn" onclick="addCurrentCenterPoint()">Lưu vị trí</button>
+          <button class="btn ghost" onclick="copyPlanningCoordinate()">Copy tọa độ</button>
+        </div>
       </div>
 
-      <div class="planning-mode-tabs">
-        <button class="chip active" onclick="scrollToPlanningBlock('sourcePackBlock')">Nguồn Ninh Hòa</button>
-        <button class="chip" onclick="scrollToPlanningBlock('officialGisBlock')">Kết nối GIS</button>
-        <button class="chip" onclick="scrollToPlanningBlock('smartReaderBlock')">Đọc thử quy hoạch</button>
-        <button class="chip" onclick="scrollToPlanningBlock('vn2000Block')">VN2000</button>
-        <button class="chip" onclick="scrollToPlanningBlock('boundaryBlock')">Ranh lô</button>
+      <div class="map-card official-reader v18-map-card">
+        <div class="official-gis-head"><div><b>Bản đồ chọn vị trí</b><span>Kéo bản đồ tới lô đất. Đây là công cụ định vị và lưu hồ sơ, không thay thế xác nhận pháp lý.</span></div><span class="official-badge">Hỗ trợ định vị</span></div>
+        <div style="position:relative"><div id="planningMap"></div><div class="map-center-cross"></div></div>
+        <div class="map-toolbar">
+          <button class="btn dark" onclick="locatePlanning()">Định vị</button>
+          <button class="btn" onclick="addCurrentCenterPoint()">Lưu điểm</button>
+          <button class="btn ghost" onclick="copyPlanningCoordinate()">Copy tọa độ</button>
+          <button class="btn ghost" onclick="openExternal('https://www.google.com/maps/search/?api=1&query='+planningCenter.lat+','+planningCenter.lng)">Google Maps</button>
+        </div>
+        <p class="official-map-note"><b>Vị trí đang xem:</b> <span id="v18CurrentCoord">--</span>. Hãy dùng tọa độ này để đối chiếu trên nguồn chính thức hoặc hỏi cơ quan có thẩm quyền theo số tờ/số thửa.</p>
       </div>
 
-
-      <div id="sourcePackBlock" class="source-pack-panel">
+      <div id="sourcePackBlock" class="source-pack-panel v18-source-pack">
         <div class="source-pack-head">
           <div>
-            <h3>Nguồn quy hoạch chính thức</h3>
-            <p>Danh sách nguồn đáng tin cậy để kiểm tra khi bản đồ tự động không đọc được.</p>
+            <h3>Nguồn chính thức cần kiểm tra</h3>
+            <p>Ưu tiên Cổng Ninh Hòa, Công báo Khánh Hòa, Cổng tỉnh Khánh Hòa và IPA/KKT Vân Phong.</p>
           </div>
           <button class="btn" onclick="copyPlanningSourceChecklist()">Copy các bước kiểm tra</button>
         </div>
         <div class="source-pack-body">
           <div class="source-search-row">
-            <input id="planningSourceSearch" class="input" placeholder="Tìm nguồn: QHSDĐ 2030, Ninh Diêm, Vân Phong, phân khu..." oninput="renderPlanningSourcePack()">
+            <input id="planningSourceSearch" class="input" placeholder="Tìm nguồn: QHSDĐ 2030, Công báo, Vân Phong..." oninput="renderPlanningSourcePack()">
             <button class="btn dark" onclick="renderPlanningSourcePack()">Lọc</button>
           </div>
           <div id="sourceGroupTabs" class="source-group-tabs"></div>
           <div id="sourcePackList"></div>
-          <div class="source-insight"><b>Cách dùng khi GIS thiếu lớp Ninh Hòa:</b> mở nguồn chính thức phù hợp → đối chiếu xã/phường, số tờ/số thửa, bản đồ đính kèm → lưu ghi chú trong app. Không kết luận theo màu bản đồ nếu chưa có văn bản hoặc xác nhận cơ quan có thẩm quyền.</div>
+          <div class="source-insight"><b>Nguyên tắc an toàn:</b> App chỉ hỗ trợ định vị, gom nguồn và lưu kết quả. Không kết luận loại đất theo màu bản đồ hoặc nguồn không rõ. Trước khi mua/bán cần đối chiếu sổ, số tờ/số thửa, trích lục địa chính, quy hoạch và văn bản có hiệu lực.</div>
         </div>
       </div>
 
-      <div id="officialGisBlock" class="official-gis-shell v15-gis-console">
-        <div class="official-gis-head">
-          <div><b>Kiểm tra tự động nếu có dữ liệu</b><span>Tính năng này tự thử đọc dữ liệu. Nếu không có kết quả, dùng nguồn chính thức phía trên.</span></div>
-          <div class="official-gis-actions"><button class="btn" onclick="runGisDiagnostic(true)">Thử đọc tự động</button><button class="btn ghost" onclick="openExternal('https://gis.khanhhoa.gov.vn/public/8192/')">Mở nguồn</button></div>
-        </div>
-        <div id="gisDiagnostic" class="gis-diagnostic">
-          <div class="diag-row"><b>Trạng thái</b><span id="gisDiagStatus">Chưa quét dịch vụ GIS</span></div>
-          <div class="diag-row"><b>Dịch vụ đang dùng</b><span id="gisActiveService">--</span></div>
-          <div class="diag-row"><b>Lớp đọc</b><span id="gisActiveLayers">--</span></div>
-          <div class="debug-actions"><button class="btn ghost small" onclick="copyGisDebug()">Copy chẩn đoán</button><button class="btn ghost small" onclick="openExternal('https://gis.khanhhoa.gov.vn/arcgis/rest/services?f=pjson')">Mở dữ liệu kỹ thuật</button></div>
-        </div>
-        <div id="gisLogBox" class="gis-log-box"><b>Log GIS:</b> Chưa có dữ liệu. Bấm “Thử đọc tự động”.</div>
-        <div id="gisLayerList" class="gis-layer-list"><div class="empty">Bấm “Thử đọc tự động” để app quét các thư mục ArcGIS công khai. Nếu tìm được MapServer phù hợp, app sẽ tự bật lớp màu và đọc mã đất.</div></div>
+      <div class="card formgrid v18-check-card">
+        <h3 class="news-title">Ghi chú kiểm tra của tôi</h3>
+        <textarea id="planningUserNote" placeholder="VD: Lô đất tại Ninh Diêm, đã mở QHSDĐ 2030, cần hỏi thêm lộ giới và mục đích sử dụng đất..."></textarea>
+        <div class="actions"><button class="btn dark" onclick="saveSimplePlanningNote()">Lưu ghi chú</button><button class="btn ghost" onclick="copySimplePlanningNote()">Copy ghi chú</button><button class="btn ghost" onclick="copyPlanningSourceChecklist()">Copy checklist</button></div>
       </div>
 
-      <div id="smartReaderBlock" class="map-card official-reader">
-        <div class="official-gis-head"><div><b>Bản đồ chọn vị trí</b><span>Kéo bản đồ đến lô đất rồi bấm đọc thử. Đây là bước sàng lọc, chưa phải kết luận pháp lý.</span></div><span id="gisOverlayStatus" class="official-badge warn">Đang chờ lớp GIS</span></div>
-        <div style="position:relative"><div id="planningMap"></div><div class="map-center-cross"></div></div>
-        <div class="map-toolbar">
-          <button class="btn dark" onclick="locatePlanning()">Định vị</button>
-          <button class="btn" onclick="readPlanningAtCenter()">Đọc thử quy hoạch</button>
-          <button class="btn ghost" onclick="toggleOfficialPlanningOverlay()">Bật lớp màu</button><button class="btn ghost" onclick="runGisDiagnostic(true)">Thử đọc</button>
-          <button class="btn ghost" onclick="addCurrentCenterPoint()">Lưu điểm</button>
-        </div>
-        <div class="planning-legend">
-          <div class="legend-item"><span class="legend-color" style="background:#e876d8"></span><b>ODT/ONT</b> Đất ở</div>
-          <div class="legend-item"><span class="legend-color" style="background:#f4b09e"></span><b>TMD/SKC</b> TM-DV/sản xuất</div>
-          <div class="legend-item"><span class="legend-color" style="background:#f2a23b"></span><b>DGT</b> Giao thông</div>
-          <div class="legend-item"><span class="legend-color" style="background:#80dfd9"></span><b>SON/MNC</b> Sông, mặt nước</div>
-        </div>
-        <p class="official-map-note">Lớp màu tự động phụ thuộc dịch vụ ArcGIS công khai. Nếu nguồn không cho xuất lớp bản đồ, app vẫn đọc bằng truy vấn thuộc tính và mở được GIS chính thức để kiểm chứng.</p>
-      </div>
-
-      <div class="card plan-readout formgrid">
-        <h3 class="news-title">Kết quả kiểm tra</h3>
-        <div class="planning-quick-actions"><button class="btn dark" onclick="readPlanningAtCenter()">Đọc vị trí đang xem</button><button class="btn ghost" onclick="readPlanningAtLastPoint()">Đọc điểm đã lưu</button><button class="btn ghost" onclick="copyPlanningCoordinate()">Copy tọa độ</button><button class="btn ghost" onclick="openExternal('https://www.google.com/maps/search/?api=1&query='+planningCenter.lat+','+planningCenter.lng)">Google Maps</button></div>
-        <div id="planningReadout"><div class="empty">Chưa có kết quả. Kéo tâm bản đồ vào lô đất rồi bấm “Đọc thử quy hoạch”.</div></div>
-      </div>
-
-      <div id="vn2000Block" class="card formgrid">
-        <h3 class="news-title">Nhập tọa độ nâng cao</h3>
+      <details class="card formgrid v18-advanced">
+        <summary><b>Công cụ nâng cao</b> — nhập tọa độ GPS/VN2000 hoặc vẽ ranh nếu cần</summary>
         <div class="coord-grid"><input id="gpsLat" class="input" placeholder="Vĩ độ, VD: 12.5201"><input id="gpsLng" class="input" placeholder="Kinh độ, VD: 109.1253"></div>
         <button class="btn dark" onclick="addGpsPoint()">Ghim điểm GPS</button>
         <div class="coord-grid"><input id="vnX" class="input" placeholder="X/Bắc, VD: 1384567"><input id="vnY" class="input" placeholder="Y/Đông, VD: 586123"></div>
         <div class="coord-grid three"><select id="vnMeridian" class="select" onchange="updatePlanZone()"><option value="108.25">Khánh Hòa 108°15′</option><option value="108.0">108°00′</option><option value="105.75">105°45′</option><option value="107.75">107°45′</option><option value="109.0">109°00′</option></select><select id="vnScale" class="select"><option value="0.9999">TM-3 k=0.9999</option><option value="0.9996">UTM k=0.9996</option></select><button class="btn dark" onclick="convertVN2000Point()">Chuyển tọa độ</button></div>
         <div class="map-note"><b>Lưu ý:</b> chuyển đổi VN2000 chỉ phục vụ định vị nhanh. Khi giao dịch vẫn cần trích lục địa chính và xác nhận cơ quan có thẩm quyền.</div>
-      </div>
-
-      <div id="boundaryBlock" class="card formgrid">
-        <h3 class="news-title">Vẽ ranh lô đất</h3>
+        <h3 class="news-title">Điểm/rang đã lưu</h3>
         <div id="pointList" class="point-list"></div>
         <div class="actions"><button class="btn small" onclick="savePlanningProfile()">Lưu hồ sơ vị trí</button><button class="btn ghost small" onclick="copyPlanningSummary()">Copy tóm tắt</button><button class="btn red small" onclick="clearPlanningPoints()">Xóa ranh</button></div>
-      </div>
+      </details>
 
-      <div class="card">
-        <h3 class="news-title">Nguồn chính thức để kiểm chứng</h3>
-        <p class="news-summary">Ứng dụng hỗ trợ sàng lọc nhanh. Kết luận pháp lý cuối cùng phải đối chiếu bản đồ quy hoạch, số tờ/số thửa, trích lục địa chính và văn bản có hiệu lực.</p>
-        <div id="planningSources" class="actions"></div>
-      </div>
-      <div class="warnline"><b>Checklist khi xem quy hoạch</b><ul class="brief-list"><li>Ưu tiên kiểm tra ODT/ONT nếu mục tiêu mua đất ở.</li><li>Cẩn trọng với TMD, DGT, DKV, cây xanh/công viên, mặt nước, hành lang giao thông.</li><li>Không mua chỉ theo màu bản đồ; cần kiểm tra sổ, hiện trạng, quy hoạch và kế hoạch sử dụng đất mới nhất.</li></ul></div>
+      <div class="warnline"><b>Checklist trước khi xuống tiền</b><ul class="brief-list"><li>Kiểm tra số tờ/số thửa, sổ đỏ/sổ hồng và hiện trạng sử dụng đất.</li><li>Đối chiếu QHSDĐ Ninh Hòa, quy hoạch chung, kế hoạch sử dụng đất hằng năm và Công báo.</li><li>Hỏi rõ lộ giới, tranh chấp, thế chấp, khả năng tách thửa/chuyển mục đích.</li><li>Không dùng kết quả trong app thay cho xác nhận pháp lý từ cơ quan có thẩm quyền.</li></ul></div>
     </section>
 
     <section id="lookup" class="section">
@@ -367,16 +381,15 @@ body.simple-mode .section-title{font-size:20px}
   </main>
 
   <nav class="bottom">
-    <button class="nav active" onclick="show('home',this)"><i>🏠</i>Home</button>
-    <button class="nav" onclick="show('news',this)"><i>📰</i>Tin</button>
-    <button class="nav" onclick="show('briefing',this)"><i>🧠</i>Tóm tắt</button>
-    <button class="nav" onclick="show('deal',this)"><i>📊</i>Kiểm tra</button>
-    <button class="nav" onclick="show('land',this)"><i>📍</i>Khu vực</button>
-    <button class="nav" onclick="show('planning',this)"><i>🗺️</i>Quy hoạch</button>
-    <button class="nav" onclick="show('lookup',this)"><i>⚖️</i>Tra cứu</button>
+    <button class="nav active" data-nav="home" onclick="show('home',this)"><i>🏠</i>Trang chủ</button>
+    <button class="nav" data-nav="news" onclick="show('news',this)"><i>📰</i>Tin</button>
+    <button class="nav" data-nav="room" onclick="show('room',this)"><i>🏦</i>Thương vụ</button>
+    <button class="nav" data-nav="land" onclick="show('land',this)"><i>📍</i>Khu vực</button>
+    <button class="nav" data-nav="planning" onclick="show('planning',this)"><i>🛡️</i>Pháp lý</button>
+    <button class="nav" data-nav="lookup" onclick="show('lookup',this)"><i>⭐</i>Lưu</button>
   </nav>
 
-  <div class="fab-stack"><button onclick="refreshAll(true)" aria-label="Làm mới">↻</button><button onclick="toggleTheme()" aria-label="Dark mode">◐</button><button onclick="scrollTopV10()" aria-label="Lên đầu">↑</button></div>
+  <div class="fab-stack"><button onclick="refreshAll(true)" aria-label="Làm mới">↻</button><button onclick="toggleTheme()" aria-label="Đổi sáng/tối">◐</button><button onclick="scrollTopV10()" aria-label="Lên đầu">↑</button></div>
 
   <div class="modal" id="modal" onclick="closeModal(event)"><div class="sheet"><button class="btn ghost small" onclick="hideModal()">← Về danh sách</button><h3 id="modalTitle"></h3><div id="modalTags" class="tagrow"></div><div id="modalBody"></div><p class="source-line" id="modalSource"></p><div class="actions"><button class="btn" id="modalOpen">Mở nguồn</button><button class="btn ghost" id="modalSave">Lưu</button></div></div></div>
 </div>
@@ -433,7 +446,7 @@ const landProfiles=[
 function setLive(s){$('liveText').textContent=s}
 function noAccent(s=''){return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase()}
 function decodeHtml(s=''){const t=document.createElement('textarea');t.innerHTML=s;return t.value.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim()}
-function escapeHtml(s=''){return String(s).replace(/[&<>\"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function escapeHtml(s=''){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
 function parseDate(s){const d=new Date(s);return isNaN(d)?new Date():d}
 function daysOld(s){return (Date.now()-parseDate(s).getTime())/86400000}
 function formatDate(s){try{return parseDate(s).toLocaleString('vi-VN')}catch{return''}}
@@ -490,7 +503,7 @@ function analyzeDeal(){const profile=landProfiles.find(a=>a.id===$('aiArea').val
 function buildRedFlags(d){let r=[];if(d.legal!=='Sổ riêng')r.push('Pháp lý chưa phải sổ riêng: cần xác minh kỹ trước khi đặt cọc.');if(d.ppm&&d.ppm>d.profile.refMax*1.25)r.push('Giá/m² đang cao hơn mạnh so với mốc tham khảo nội bộ của khu vực.');if(d.road&&d.road<3)r.push('Đường trước đất nhỏ, có thể ảnh hưởng thanh khoản và xây dựng.');if(d.front&&d.front<4)r.push('Mặt tiền hẹp, khó khai thác thương mại hoặc xây dựng đẹp.');if(d.size>400)r.push('Diện tích lớn có thể khó ra hàng, cần chia chiến lược thanh khoản.');if(d.desc.includes('lo gioi')||d.desc.includes('tranh chap')||d.desc.includes('quy hoach'))r.push('Mô tả có dấu hiệu lộ giới/tranh chấp/quy hoạch: phải dừng để kiểm chứng.');if(!$('hasResidential').checked&&d.profile.group!=='tourism')r.push('Chưa có dân cư hiện hữu: thanh khoản có thể phụ thuộc kỳ vọng tương lai.');return r.length?r:['Chưa phát hiện cờ đỏ lớn từ dữ liệu đã nhập, nhưng vẫn cần kiểm tra quy hoạch, sổ và giá giao dịch thực tế.']}
 function buildActionPlan(profile,legal,ppm){return ['Kiểm tra sổ, chủ sở hữu, thế chấp và tranh chấp tại cơ quan/nguồn có thẩm quyền.','Đối chiếu quy hoạch sử dụng đất, lộ giới, khả năng xây dựng/tách thửa/chuyển mục đích.','So sánh ít nhất 3-5 lô cùng tuyến/khu vực để xác định giá thực.','Đi thực địa vào 2 khung giờ khác nhau để kiểm tra đường, dân cư, ngập, tiếng ồn, tiện ích.','Đọc tin mới liên quan '+profile.name+' và mở nguồn gốc trước khi tin vào môi giới.','Nếu pháp lý chưa sạch, không đặt cọc hoặc phải có điều khoản hoàn cọc rõ ràng.','Chỉ xuống tiền khi giá mua tạo được biên an toàn so với mục tiêu đầu tư.']}
 function dealStrategy(total,profile,ppm,legal,goal){if(total>=82)return `Chiến lược: có thể vào bước thẩm định sâu. Ưu tiên đàm phán giá trong vùng an toàn, khóa pháp lý bằng điều khoản đặt cọc rõ. Phù hợp mục tiêu ${goal}.`;if(total>=74)return `Chiến lược: tiếp tục theo dõi và thương lượng. Lô có tiềm năng tại ${profile.name}, nhưng cần kiểm chứng pháp lý và giá giao dịch thực tế trước khi đặt cọc.`;if(total>=66)return 'Chiến lược: chưa vội xuống tiền. Chỉ mua nếu có chiết khấu đủ tốt hoặc có bằng chứng pháp lý/quy hoạch rõ ràng hơn.';return 'Chiến lược: tạm loại khỏi danh sách ưu tiên. Rủi ro hiện cao hơn lợi thế, nên tìm lô khác cùng khu vực có pháp lý sạch và giá tốt hơn.'}
-function renderDealResult(d){let cls=d.total>=74?'good':d.total>=60?'warn':'bad';$('aiResult').innerHTML=`<div class="result"><div class="split"><div><div class="score">${d.total}<small>/100</small></div><h3>${escapeHtml(d.level)}</h3></div><div class="grade">${d.grade}</div></div><p>${escapeHtml(d.strategy)}</p><div class="minirow"><div class="minibox"><b>${d.ppm||'?'}</b><span>Triệu/m²</span></div><div class="minibox"><b>${d.fairLow}-${d.fairHigh}</b><span>Vùng đàm phán</span></div><div class="minibox"><b>${d.profile.score}</b><span>Điểm khu vực</span></div></div></div><article class="card deal-card ${cls}"><h3 class="news-title">Bảng điểm chi tiết</h3>${Object.entries(d.scores).map(([k,v])=>`<div style="margin:12px 0"><div class="split"><b>${escapeHtml(k.replace('_',' '))}</b><span>${v}/100</span></div><div class="bar"><span style="width:${v}%"></span></div></div>`).join('')}<table class="table"><tr><td>Khu vực</td><td>${escapeHtml(d.area)}</td></tr><tr><td>Loại đất</td><td>${escapeHtml(d.type)}</td></tr><tr><td>Pháp lý</td><td>${escapeHtml(d.legal)}</td></tr><tr><td>Giá bán</td><td>${d.price?d.price+' triệu':'Chưa nhập'}</td></tr><tr><td>Diện tích</td><td>${d.size?d.size+' m²':'Chưa nhập'}</td></tr></table><div class="actions"><button class="btn small" onclick="saveDeal()">Lưu báo cáo</button><button class="btn ghost small" onclick="showAreaDetail(landProfiles.find(x=>x.id==='${d.profileId}'))">Xem khu vực</button><button class="btn ghost small" onclick='openExternal(${JSON.stringify(googleNewsWeb(d.area+' Khánh Hòa quy hoạch đất đai'))})'>Tin liên quan</button></div></article><div class="warnline"><b>Cờ đỏ cần kiểm tra</b><ul class="brief-list">${d.redFlags.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div><div class="goodline" style="margin-top:12px"><b>Kế hoạch kiểm chứng 7 bước</b><ul class="brief-list">${d.actions.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`}
+function renderDealResult(d){let cls=d.total>=74?'good':d.total>=60?'warn':'bad';$('aiResult').innerHTML=`<div class="result"><div class="split"><div><div class="score">${d.total}<small>/100</small></div><h3>${escapeHtml(d.level)}</h3></div><div class="grade">${d.grade}</div></div><p>${escapeHtml(d.strategy)}</p><div class="minirow"><div class="minibox"><b>${d.ppm||'?'}</b><span>Triệu/m²</span></div><div class="minibox"><b>${d.fairLow}-${d.fairHigh}</b><span>Vùng đàm phán</span></div><div class="minibox"><b>${d.profile.score}</b><span>Điểm khu vực</span></div></div></div><article class="card deal-card ${cls}"><h3 class="news-title">Bảng điểm chi tiết</h3>${Object.entries(d.scores).map(([k,v])=>`<div style="margin:12px 0"><div class="split"><b>${roomScoreLabel(k)}</b><span>${v}/100</span></div><div class="bar"><span style="width:${v}%"></span></div></div>`).join('')}<table class="table"><tr><td>Khu vực</td><td>${escapeHtml(d.area)}</td></tr><tr><td>Loại đất</td><td>${escapeHtml(d.type)}</td></tr><tr><td>Pháp lý</td><td>${escapeHtml(d.legal)}</td></tr><tr><td>Giá bán</td><td>${d.price?d.price+' triệu':'Chưa nhập'}</td></tr><tr><td>Diện tích</td><td>${d.size?d.size+' m²':'Chưa nhập'}</td></tr></table><div class="actions"><button class="btn small" onclick="saveDeal()">Lưu báo cáo</button><button class="btn ghost small" onclick="showAreaDetail(landProfiles.find(x=>x.id==='${d.profileId}'))">Xem khu vực</button><button class="btn ghost small" onclick='openExternal(${JSON.stringify(googleNewsWeb(d.area+' Khánh Hòa quy hoạch đất đai'))})'>Tin liên quan</button></div></article><div class="warnline"><b>Cờ đỏ cần kiểm tra</b><ul class="brief-list">${d.redFlags.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div><div class="goodline" style="margin-top:12px"><b>Kế hoạch kiểm chứng 7 bước</b><ul class="brief-list">${d.actions.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`}
 function deals(){try{return JSON.parse(localStorage.getItem(DEAL_KEY)||'[]')}catch(e){return[]}}
 function saveDeal(){if(!lastDeal){toast('Chưa có báo cáo để lưu');return}let ds=deals();ds.unshift(lastDeal);localStorage.setItem(DEAL_KEY,JSON.stringify(ds.slice(0,50)));renderPortfolio();renderHome();toast('Đã lưu báo cáo Pro')}
 function deleteDeal(id){let ds=deals().filter(d=>d.id!==id);localStorage.setItem(DEAL_KEY,JSON.stringify(ds));renderPortfolio();renderHome();toast('Đã xóa báo cáo')}
@@ -541,7 +554,7 @@ function reliabilityLabel(x){if(x==='very-high')return 'Chính thức';if(x==='h
 function reliabilityClass(x){if(x==='very-high')return 'green';if(x==='high')return 'blue';return 'gold'}
 function renderPlanningSourcePack(){renderSourceGroupTabs();const el=$('sourcePackList');if(!el)return;const q=noAccent($('planningSourceSearch')?.value||'');let arr=planningSourcePack.filter(s=>{const txt=noAccent([s.title,s.summary,s.tags.join(' '),s.use].join(' '));if(activePlanningSourceGroup!=='all'&&s.group!==activePlanningSourceGroup)return false;if(q&&!txt.includes(q))return false;return true}).sort((a,b)=>a.priority-b.priority);el.innerHTML=arr.length?arr.map(sourcePackCard).join(''):'<div class="source-empty">Không tìm thấy nguồn phù hợp. Thử từ khóa: QHSDĐ, 2040, Vân Phong, Ninh Diêm, Công báo.</div>'}
 function sourcePackCard(s){const searchUrl='https://www.google.com/search?q='+encodeURIComponent((s.title+' '+(s.group==='congbao'?'site:congbaokhanhhoa.gov.vn':s.group==='ninhhoa'?'site:ninhhoa.khanhhoa.gov.vn':s.group==='vanphong'?'site:ipa.khanhhoa.gov.vn':'site:khanhhoa.gov.vn')).trim());return `<article class="source-pack-card ${s.reliability}"><div class="source-meta-row"><span class="source-pill ${reliabilityClass(s.reliability)}">${reliabilityLabel(s.reliability)}</span><span class="source-pill gold">Ưu tiên ${s.priority}</span>${s.tags.map(t=>`<span class="source-pill">${escapeHtml(t)}</span>`).join('')}</div><h4>${escapeHtml(s.title)}</h4><p>${escapeHtml(s.summary)}</p><div class="source-insight"><b>Dùng để làm gì:</b> ${escapeHtml(s.use)}</div><div class="source-grid-metrics"><div><b>${s.group==='ninhhoa'?'Ninh Hòa':s.group==='congbao'?'Pháp lý':s.group==='vanphong'?'Vân Phong':s.group==='tinh'?'Cấp tỉnh':'GIS'}</b><span>Nhóm nguồn</span></div><div><b>${reliabilityLabel(s.reliability)}</b><span>Độ tin cậy</span></div><div><b>${s.priority===1?'Bắt buộc':s.priority===2?'Nên đọc':'Đối chiếu'}</b><span>Khi kiểm tra</span></div></div><div class="source-actions"><button class="btn small" onclick='openExternal(${JSON.stringify(s.url)})'>Mở nguồn</button><button class="btn ghost small" onclick='openExternal(${JSON.stringify(searchUrl)})'>Tìm trong nguồn</button><button class="btn ghost small" onclick='savePlanningSource(${JSON.stringify(s.title).replace(/'/g,"&#39;")},${JSON.stringify(s.url).replace(/'/g,"&#39;")})'>Lưu nguồn</button></div></article>`}
-function savePlanningSource(title,url){const item={id:'src-'+noAccent(title).slice(0,60),title:'Nguồn quy hoạch: '+title,summary:'Nguồn đã lưu để kiểm chứng quy hoạch Ninh Hòa.',link:url,sourceName:'Planning Source Pack',publishedAt:new Date().toISOString(),score:90,badges:['Nguồn chính thức','Pháp lý']};toggleSave(item)}
+function savePlanningSource(title,url){const item={id:'src-'+noAccent(title).slice(0,60),title:'Nguồn quy hoạch: '+title,summary:'Nguồn đã lưu để kiểm chứng quy hoạch Ninh Hòa.',link:url,sourceName:'Bộ nguồn quy hoạch',publishedAt:new Date().toISOString(),score:90,badges:['Nguồn chính thức','Pháp lý']};toggleSave(item)}
 function copyPlanningSourceChecklist(){const text='Checklist kiểm chứng quy hoạch Ninh Hòa:\n1) Mở QHSDĐ Ninh Hòa 2030 từ Cổng Ninh Hòa.\n2) Đối chiếu QHC Ninh Hòa 2040 để hiểu định hướng dài hạn.\n3) Kiểm tra văn bản gốc trên Công báo Khánh Hòa.\n4) Nếu liên quan Vân Phong, xem IPA/KKT Vân Phong và phân khu/dự án.\n5) Đối chiếu số tờ, số thửa, trích lục địa chính tại cơ quan có thẩm quyền.\n6) Không kết luận chỉ bằng màu bản đồ hoặc tin môi giới.';navigator.clipboard&&navigator.clipboard.writeText(text);toast('Đã copy checklist kiểm chứng')}
 
 function initPlanningV12(){renderPlanningSources();renderPlanningSourcePack();updatePlanStats();renderPointList()}
@@ -714,8 +727,7 @@ function initPlanningMap(){
   planningMap.on('click',e=>{planningCenter={lat:+e.latlng.lat.toFixed(6),lng:+e.latlng.lng.toFixed(6)};planningMap.panTo(e.latlng);addPlanningPoint(e.latlng.lat,e.latlng.lng,'Chạm bản đồ quy hoạch')});
   setTimeout(()=>planningMap.invalidateSize(),180);
   renderPlanningMap();
-  // Chạy quét nhẹ một lần, nhưng không khóa UI nếu nguồn GIS chậm.
-  setTimeout(()=>runGisDiagnostic(false),450);
+  // V18: không tự quét GIS để tránh chậm app và tránh kết luận sai khu vực.
 }
 function setGisStatus(text,mode){const el=$('gisOverlayStatus');if(!el)return;el.textContent=text;el.className='official-badge '+(mode==='ok'?'':'warn')}
 function setGisDiag(status,service,layers){
@@ -840,7 +852,7 @@ function convertVN2000Point(){const rawX=parseFloat(($('vnX').value||'').replace
 
 
 function toggleAdvancedTools(){document.body.classList.toggle('advanced-open');toast(document.body.classList.contains('advanced-open')?'Đã mở công cụ nâng cao':'Đã ẩn công cụ nâng cao')}
-function openSimplePlanning(){show('planning',document.querySelectorAll('.nav')[5]);setTimeout(()=>{const el=document.querySelector('.easy-plan-card');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},180)}
+function openSimplePlanning(){show('planning',document.querySelector('[data-nav="planning"]'));setTimeout(()=>{const el=document.querySelector('.easy-plan-card');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},180)}
 
 
 /* ===== V17.1 GIS NINH HOA FIX: do not use Van Ninh layer for Ninh Hoa ===== */
@@ -927,7 +939,112 @@ function copyPlanningChecklist(){
 }
 
 
-initV10();initPlanningV12();loadCache();populateAreaSelectors();renderChips();renderTimeChips();renderImpactChips();renderLandChips();loadLegal();renderLandProfiles();renderPortfolio();if(!JSON.parse(localStorage.getItem(CACHE_KEY)||'[]').length)refreshAll(false);
+
+// ===== V18 SAFE PLANNING MODE =====
+function updateV18Coord(){
+  const el=$('v18CurrentCoord');
+  if(el && planningCenter) el.textContent=(+planningCenter.lat).toFixed(6)+', '+(+planningCenter.lng).toFixed(6);
+}
+const __v18OldInitPlanningMap = initPlanningMap;
+initPlanningMap=function(){
+  __v18OldInitPlanningMap();
+  updateV18Coord();
+  if(planningMap && !planningMap.__v18CoordHook){
+    planningMap.__v18CoordHook=true;
+    planningMap.on('moveend', updateV18Coord);
+    planningMap.on('click', updateV18Coord);
+  }
+}
+function saveSimplePlanningNote(){
+  const note=($('planningUserNote')&&$('planningUserNote').value||'').trim();
+  if(!note){toast('Hãy nhập ghi chú trước khi lưu');return}
+  const profiles=planningProfiles();
+  profiles.unshift({id:Date.now(),created:new Date().toLocaleString('vi-VN'),points:[{lat:planningCenter.lat,lng:planningCenter.lng,note}],area:0,type:'safe-planning-note'});
+  localStorage.setItem(PLAN_KEY,JSON.stringify(profiles.slice(0,80)));
+  toast('Đã lưu ghi chú kiểm tra');
+}
+function copySimplePlanningNote(){
+  const note=($('planningUserNote')&&$('planningUserNote').value||'').trim();
+  const txt=`Ghi chú kiểm tra quy hoạch Ninh Hòa\nTọa độ: ${planningCenter.lat}, ${planningCenter.lng}\nGhi chú: ${note||'chưa nhập'}\nViệc cần làm: đối chiếu QHSDĐ Ninh Hòa, Công báo Khánh Hòa, số tờ/số thửa, trích lục địa chính và xác nhận tại cơ quan có thẩm quyền.`;
+  try{navigator.clipboard.writeText(txt);toast('Đã copy ghi chú')}catch(e){toast(txt)}
+}
+
+
+
+// ===== V19 DEAL INTELLIGENCE ROOM =====
+const ROOM_KEY='nhi_v19_deal_rooms';
+let lastRoomDeal=null;
+function clamp(n,min,max){return Math.max(min,Math.min(max,Math.round(n)))}
+function roomDeals(){try{return JSON.parse(localStorage.getItem(ROOM_KEY)||'[]')}catch(e){return[]}}
+function initV19Room(){
+  if($('roomArea')) $('roomArea').innerHTML=landProfiles.map(a=>`<option value="${a.id}">${escapeHtml(a.name)}</option>`).join('');
+}
+function fillRoomFromDealForm(){
+  try{
+    if($('roomArea')&&$('aiArea'))$('roomArea').value=$('aiArea').value;
+    if($('roomSize')&&$('aiSize'))$('roomSize').value=$('aiSize').value;
+    if($('roomPrice')&&$('aiPrice'))$('roomPrice').value=$('aiPrice').value;
+    if($('roomLegal')&&$('aiLegal'))$('roomLegal').value=roomLegalMap($('aiLegal').value);
+    if($('roomType')&&$('dealType'))$('roomType').value=roomTypeMap($('dealType').value);
+    if($('roomThesis')&&$('aiDesc'))$('roomThesis').value=$('aiDesc').value;
+    toast('Đã lấy dữ liệu từ form Kiểm tra cũ');
+  }catch(e){toast('Chưa có dữ liệu để lấy')}
+}
+function roomLegalMap(v){if(v==='Sổ riêng')return 'Sổ riêng';if(v==='Sổ chung')return 'Sổ chung';if(v==='Đất giấy tay')return 'Giấy tay';if(String(v).includes('quy hoạch'))return 'Có dấu hiệu vướng quy hoạch';return 'Chưa rõ'}
+function roomTypeMap(v){if(v==='Đất ở')return 'Đất ở';if(String(v).includes('thương mại'))return 'Đất thương mại dịch vụ';if(String(v).includes('CLN')||String(v).includes('HNK'))return 'Đất nông nghiệp/CLN/HNK';return 'Chưa rõ mục đích'}
+function roomFlags(){return {
+  fomo:$('roomFomo')?.checked, planning:$('roomUnclearPlanning')?.checked, road:$('roomRoadRisk')?.checked,
+  fast:$('roomNeedFastExit')?.checked, compare:$('roomNoCompare')?.checked, broker:$('roomBrokerOnly')?.checked
+}}
+function analyzeRoomDeal(){
+  const profile=landProfiles.find(a=>a.id===$('roomArea').value)||landProfiles[0];
+  const price=num($('roomPrice').value), size=num($('roomSize').value), target=num($('roomTargetPrice').value);
+  const ppm=price&&size?price/size:0;
+  const legal=$('roomLegal').value, type=$('roomType').value, hold=$('roomHold').value, buyer=$('roomBuyer').value, capital=$('roomCapital').value, stage=$('roomStage').value;
+  const thesis=($('roomThesis').value||'').trim(), weakness=($('roomWeakness').value||'').trim();
+  const f=roomFlags();
+  let legalScore=legal==='Sổ riêng'?90:legal==='Sổ chung'?62:legal==='Giấy tay'?15:legal.includes('quy hoạch')?25:40;
+  if(type==='Đất ở')legalScore+=5;if(type==='Chưa rõ mục đích')legalScore-=10;if(f.planning)legalScore-=18;if(f.road)legalScore-=10;
+  let priceScore=58;if(ppm){if(ppm<profile.refMin*.85)priceScore=82;else if(ppm<=profile.refMax)priceScore=76;else if(ppm<=profile.refMax*1.18)priceScore=58;else priceScore=36}
+  if(f.compare)priceScore-=10;if(f.fomo)priceScore-=8;
+  let exitScore=profile.liquidity;if(hold==='6-12 tháng'&&profile.liquidity<75)exitScore-=14;if(buyer==='Chưa rõ đầu ra')exitScore-=18;if(f.fast)exitScore-=18;if(capital.includes('Vay nhiều'))exitScore-=16;else if(capital.includes('vay'))exitScore-=7;
+  let thesisScore=thesis.length>80?82:thesis.length>35?68:45;if(/pháp lý|phap ly|quy hoạch|quy hoach|giá|gia|thanh khoản|thanh khoan|dân cư|dan cu/i.test(thesis))thesisScore+=8;if(f.broker)thesisScore-=12;
+  let areaScore=profile.score;if(type.includes('nông nghiệp')&&hold==='6-12 tháng')areaScore-=12;if(type==='Đất thương mại dịch vụ'&&buyer==='Người mua ở thật')areaScore-=8;
+  const scores={Pháp_lý:clamp(legalScore,5,96),Giá_mua:clamp(priceScore,5,96),Đầu_ra:clamp(exitScore,5,96),Khu_vực:clamp(areaScore,5,96),Luận_điểm:clamp(thesisScore,5,96)};
+  const total=clamp(scores.Pháp_lý*.28+scores.Giá_mua*.24+scores.Đầu_ra*.20+scores.Khu_vực*.18+scores.Luận_điểm*.10,1,99);
+  const grade=total>=84?'A':total>=76?'B+':total>=66?'B':total>=55?'C':'D';
+  const verdict=total>=80?'Có thể đưa vào danh sách thẩm định sâu':total>=68?'Có thể nghiên cứu tiếp, chưa nên đặt cọc':total>=56?'Chỉ theo dõi hoặc đàm phán chiết khấu mạnh':'Nên loại khỏi danh sách ưu tiên';
+  const riskLevel=total>=76?'Thấp-vừa':total>=62?'Trung bình':total>=50?'Cao':'Rất cao';
+  const safeMin=profile.refMin*.82, safeMax=Math.min(profile.refMax*.96, ppm?ppm*.92:profile.refMax*.96);
+  const safeTotalLow=size?Math.round(safeMin*size):0, safeTotalHigh=size?Math.round(safeMax*size):0;
+  const killers=roomDealKillers({legal,type,ppm,profile,f,capital,buyer,hold,weakness});
+  const exit=roomExitPlan({profile,buyer,hold,capital,price,target,ppm,size,f});
+  const next=roomNextSteps(profile,legal,ppm,f);
+  const thesisTracker=roomThesisTracker(profile,thesis,weakness);
+  const memo=roomMemo(profile,{price,size,ppm,target,legal,type,hold,buyer,capital,stage,total,grade,verdict,riskLevel,safeMin,safeMax,safeTotalLow,safeTotalHigh,killers,exit,next,thesis,weakness,thesisTracker,scores});
+  lastRoomDeal={id:'room-'+Date.now(),createdAt:new Date().toISOString(),area:profile.name,profileId:profile.id,price,size,ppm:ppm?Math.round(ppm*10)/10:0,target,legal,type,hold,buyer,capital,stage,total,grade,verdict,riskLevel,safeMin:Math.round(safeMin*10)/10,safeMax:Math.round(safeMax*10)/10,safeTotalLow,safeTotalHigh,killers,exit,next,thesis,weakness,thesisTracker,scores,memo,profile};
+  renderRoomResult(lastRoomDeal);renderHome();
+}
+function roomDealKillers(d){let r=[];if(d.legal==='Giấy tay')r.push('Giấy tay hoặc giấy tờ không rõ: rủi ro rất cao, không nên đặt cọc.');if(d.legal.includes('quy hoạch')||d.f.planning)r.push('Chưa xác minh quy hoạch/lộ giới: dừng ở bước kiểm chứng, chưa xuống tiền.');if(d.ppm&&d.ppm>d.profile.refMax*1.25)r.push('Giá/m² vượt vùng tham khảo nội bộ: dễ mua đỉnh nếu không có lợi thế đặc biệt.');if(d.f.fast&&d.profile.liquidity<78)r.push('Cần bán nhanh trong khu thanh khoản chưa mạnh: rủi ro kẹt hàng.');if(d.capital.includes('Vay nhiều'))r.push('Vay nhiều tạo áp lực dòng tiền, không phù hợp với lô thanh khoản chậm.');if(d.buyer==='Chưa rõ đầu ra')r.push('Chưa xác định người mua lại/người khai thác: thiếu kế hoạch thoát hàng.');if(d.f.broker)r.push('Thông tin chủ yếu từ môi giới: cần văn bản/sổ/nguồn chính thức để đối chiếu.');if((d.weakness||'').toLowerCase().includes('tranh chấp'))r.push('Có dấu hiệu tranh chấp: loại khỏi danh sách cho đến khi xác minh xong.');return r.length?r:['Chưa phát hiện điều kiện loại bỏ ngay, nhưng vẫn cần kiểm tra sổ, quy hoạch, lộ giới và giá thực tế.']}
+function roomExitPlan(d){let list=[];if(d.buyer==='Người mua ở thật')list.push('Đầu ra nên dựa vào dân cư, tiện ích, đường vào và khả năng xây dựng thực tế.');if(d.buyer==='Nhà đầu tư khác')list.push('Đầu ra phụ thuộc tin hạ tầng/tâm lý thị trường; cần biên an toàn giá mua cao hơn.');if(d.buyer==='Khai thác kinh doanh/cho thuê')list.push('Cần kiểm tra khả năng khai thác thực tế, pháp lý xây dựng và nhu cầu thuê.');if(d.buyer==='Chưa rõ đầu ra')list.push('Chưa có đầu ra rõ: chỉ nên xem tiếp nếu giá rất tốt và pháp lý sạch.');if(d.hold==='6-12 tháng')list.push('Khung giữ ngắn: chỉ phù hợp khi thanh khoản mạnh, giá mua thấp và pháp lý hoàn chỉnh.');if(d.hold==='1-3 năm')list.push('Khung giữ trung hạn: cần theo dõi tiến độ hạ tầng, dân cư và tin quy hoạch chính thức.');if(d.hold.includes('3-5')||d.hold.includes('Trên'))list.push('Khung giữ dài hơn giúp giảm áp lực bán, nhưng cần vốn dự phòng và kiểm chứng pháp lý kỹ.');if(d.capital.includes('vay'))list.push('Có vay: đặt ngưỡng cắt lỗ/giảm kỳ vọng nếu quá 12 tháng không bán được.');if(d.target&&d.price&&d.target>d.price)list.push('Kỳ vọng lợi nhuận cần được kiểm chứng bằng giá giao dịch thật, không chỉ lời rao.');return list}
+function roomNextSteps(profile,legal,ppm,f){let n=['Yêu cầu sổ/số tờ/số thửa và kiểm tra chủ sở hữu, thế chấp, tranh chấp.','Đối chiếu quy hoạch Ninh Hòa/Công báo/Cổng tỉnh, không kết luận theo lời môi giới.','So sánh tối thiểu 3-5 lô cùng tuyến/khu vực để biết giá thật.','Đi thực địa kiểm tra đường, dân cư, thoát nước, lộ giới và tiện ích.'];if(ppm)n.push(`Chỉ đàm phán nếu giá mua tạo biên an toàn so với mốc ${profile.refMin}-${profile.refMax} triệu/m² nội bộ.`);if(f.fomo)n.push('Dừng 24 giờ trước khi quyết định để tránh FOMO.');if(legal!=='Sổ riêng')n.push('Nếu pháp lý chưa sạch, phải có điều khoản hoàn cọc rõ ràng hoặc không đặt cọc.');return n}
+function roomThesisTracker(profile,thesis,weakness){return ['Luận điểm hạ tầng/khu vực có được xác nhận bằng tin chính thống không?','Giá khu vực có giao dịch thật hay chỉ là giá rao?','Thanh khoản thực tế: ai sẽ mua lại và vì sao họ mua?','Pháp lý lô đất có còn đúng như giả định ban đầu không?',`Với ${profile.name}, cần theo dõi động lực chính: ${profile.drivers.slice(0,2).join(', ')}.`]}
+function roomMemo(profile,d){let ppmText=d.ppm?`${Math.round(d.ppm*10)/10} triệu/m²`:'chưa đủ dữ liệu';let margin=d.ppm?`Vùng mua an toàn nội bộ khoảng ${Math.round(d.safeMin*10)/10}-${Math.round(d.safeMax*10)/10} triệu/m²`:'Cần nhập giá và diện tích để tính vùng mua an toàn';return `Thương vụ tại ${profile.name} đang được xếp hạng ${d.grade} với điểm ${d.total}/100. Giá/m² hiện tại: ${ppmText}. ${margin}. Phán quyết: ${d.verdict}. Trọng tâm thẩm định là pháp lý, quy hoạch, đầu ra thanh khoản và mức giá mua có đủ biên an toàn hay không.`}
+function roomScoreLabel(k){return ({legal:'Giấy tờ & pháp lý', price:'Giá mua', exit:'Khả năng bán lại', area:'Khu vực', safety:'Biên an toàn', risk:'Rủi ro'}[k]||String(k).replace('_',' '))}
+function renderRoomResult(d){let cls=d.total>=76?'good':d.total>=60?'warn':'bad';$('roomResult').innerHTML=`<div class="room-verdict ${cls}"><div class="split"><div><div class="score">${d.total}<small>/100</small></div><h3>${escapeHtml(d.verdict)}</h3><p>Hạng ${d.grade} · Rủi ro ${escapeHtml(d.riskLevel)}</p></div><div class="grade">${d.grade}</div></div><div class="room-kpi"><div><b>${d.ppm||'?'}</b><span>Triệu/m²</span></div><div><b>${d.safeMin}-${d.safeMax}</b><span>Vùng an toàn/m²</span></div><div><b>${d.profile.score}</b><span>Điểm khu vực</span></div></div></div><article class="card"><h3 class="news-title">Tóm tắt thương vụ</h3><div class="room-memo">${escapeHtml(d.memo)}</div><table class="room-table"><tr><td>Khu vực</td><td>${escapeHtml(d.area)}</td></tr><tr><td>Giai đoạn</td><td>${escapeHtml(d.stage)}</td></tr><tr><td>Giá rao</td><td>${d.price?d.price+' triệu':'Chưa nhập'}</td></tr><tr><td>Diện tích</td><td>${d.size?d.size+' m²':'Chưa nhập'}</td></tr><tr><td>Giấy tờ</td><td>${escapeHtml(d.legal)}</td></tr><tr><td>Đầu ra dự kiến</td><td>${escapeHtml(d.buyer)}</td></tr></table><div class="actions"><button class="btn small" onclick="saveRoomDeal()">Lưu hồ sơ</button><button class="btn ghost small" onclick="copyRoomMemo()">Copy tóm tắt</button><button class="btn ghost small" onclick='openExternal(${JSON.stringify(googleNewsWeb(d.area+' quy hoạch hạ tầng bất động sản Khánh Hòa'))})'>Tin liên quan</button></div></article><article class="card"><h3 class="news-title">Bảng điểm thương vụ</h3><div class="room-scorecard">${Object.entries(d.scores).map(([k,v])=>`<div class="room-score-row"><div class="split"><b>${roomScoreLabel(k)}</b><span>${v}/100</span></div><div class="bar"><span style="width:${v}%"></span></div></div>`).join('')}</div></article><div class="card"><h3 class="news-title">Biên an toàn giá</h3><div class="room-safe"><b>Giá mua còn an toàn không?</b><p>${d.safeTotalLow&&d.safeTotalHigh?`Nếu diện tích nhập đúng, vùng tổng giá nội bộ nên nghiên cứu khoảng ${d.safeTotalLow}-${d.safeTotalHigh} triệu. Giá rao hiện tại ${d.price?d.price+' triệu':'chưa nhập'}.`: 'Nhập giá và diện tích để app tính vùng giá mua an toàn.'}</p></div></div><div class="card"><h3 class="news-title">Điều kiện phải dừng — không nên đặt cọc</h3><div class="room-killer"><ul class="brief-list">${d.killers.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div></div><div class="card"><h3 class="news-title">Kế hoạch thoát hàng — nếu mua xong khó bán</h3><div class="room-thesis"><ul class="brief-list">${d.exit.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div></div><div class="card"><h3 class="news-title">Theo dõi lý do đầu tư — sau này kiểm tra lại</h3><ul class="brief-list">${d.thesisTracker.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div><div class="goodline"><b>Việc cần làm tiếp</b><ul class="brief-list">${d.next.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`;document.querySelector('.main').scrollTo({top:$('roomResult').offsetTop-10,behavior:'smooth'})}
+function saveRoomDeal(){if(!lastRoomDeal){toast('Chưa có hồ sơ để lưu');return}let list=roomDeals();list.unshift(lastRoomDeal);localStorage.setItem(ROOM_KEY,JSON.stringify(list.slice(0,60)));renderRoomList();renderHome();toast('Đã lưu hồ sơ thương vụ')}
+function deleteRoomDeal(id){let list=roomDeals().filter(x=>x.id!==id);localStorage.setItem(ROOM_KEY,JSON.stringify(list));renderRoomList();renderHome();toast('Đã xóa hồ sơ')}
+function openRoomDeal(d){lastRoomDeal=d;renderRoomResult(d);show('room',document.querySelector('[data-nav="room"]'))}
+function renderRoomList(){if(!$('roomList'))return;let list=roomDeals();$('roomList').innerHTML=list.length?list.map(d=>`<article class="card room-saved-card ${d.total>=76?'good':d.total>=60?'warn':'bad'}"><div class="split"><div><h3 class="news-title">${escapeHtml(d.area)}</h3><p class="news-summary">${escapeHtml(d.verdict)}</p></div><div class="grade">${escapeHtml(d.grade)}</div></div><div class="profile-grid"><div class="metric"><b>${d.total}</b><span>Điểm</span></div><div class="metric"><b>${d.ppm||'?'}</b><span>Triệu/m²</span></div><div class="metric"><b>${escapeHtml(d.legal)}</b><span>Giấy tờ</span></div><div class="metric"><b>${escapeHtml(d.hold)}</b><span>Nắm giữ</span></div></div><p class="smalltext">${formatDate(d.createdAt)}</p><div class="actions"><button class="btn ghost small" onclick='openRoomDeal(${safeJson(d)})'>Mở lại</button><button class="btn red small" onclick='deleteRoomDeal(${JSON.stringify(d.id)})'>Xóa</button></div></article>`).join(''):'<div class="empty">Chưa có hồ sơ thương vụ nào. Hãy tạo hồ sơ đầu tiên.</div>'}
+function copyRoomMemo(){if(!lastRoomDeal){toast('Chưa có memo để copy');return}const d=lastRoomDeal;const txt=`TÓM TẮT THƯƠNG VỤ\nKhu vực: ${d.area}\nĐiểm: ${d.total}/100 - Hạng ${d.grade}\nPhán quyết: ${d.verdict}\nGiá/m²: ${d.ppm||'?'} triệu/m²\nBiên an toàn: ${d.safeMin}-${d.safeMax} triệu/m²\n\nTóm tắt:\n${d.memo}\n\nĐiều kiện phải dừng:\n- ${d.killers.join('\n- ')}\n\nKế hoạch thoát hàng:\n- ${d.exit.join('\n- ')}\n\nViệc cần làm:\n- ${d.next.join('\n- ')}`;try{navigator.clipboard.writeText(txt);toast('Đã copy tóm tắt thương vụ')}catch(e){toast(txt)}}
+const __v19OldRenderHome=renderHome;
+renderHome=function(){__v19OldRenderHome();try{if($('dealCount'))$('dealCount').textContent=deals().length+roomDeals().length}catch(e){}}
+const __v19OldShow=show;
+show=function(id,el){__v19OldShow(id,el);if(id==='room'){renderRoomList()}if(id==='lookup'){renderSaved()}}
+function openSimplePlanning(){show('planning',document.querySelector('[data-nav="planning"]'));setTimeout(()=>{const el=document.querySelector('.easy-plan-card');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},180)}
+
+
+initV10();initPlanningV12();loadCache();populateAreaSelectors();initV19Room();renderChips();renderTimeChips();renderImpactChips();renderLandChips();loadLegal();renderLandProfiles();renderPortfolio();renderRoomList();if(!JSON.parse(localStorage.getItem(CACHE_KEY)||'[]').length)refreshAll(false);
 </script>
 </body>
 </html>

@@ -1,7 +1,0 @@
-unzip -o NinhHoaInvestAI_NoAPI_V15_PlanningLayerPro.zip
-cp -r NinhHoaInvestAI_NoAPI_V15_PlanningLayerPro/. .
-rm -rf NinhHoaInvestAI_NoAPI_V15_PlanningLayerPro NinhHoaInvestAI_NoAPI_V15_PlanningLayerPro.zip
-
-git add .
-git commit -m "Update V15 Planning Layer Pro"
-git push

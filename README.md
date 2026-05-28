@@ -1,12 +1,11 @@
-# Ninh Hòa Invest AI V15.1 – GIS Recovery
+# Ninh Hòa Invest AI V19.1 – Tiếng Việt đầy đủ & dễ dùng
 
-Bản sửa phần GIS khi V15 không tìm được lớp tự động.
+Bản này tối ưu cho người dùng phổ thông, không rành kỹ thuật và không biết tiếng Anh.
 
-Điểm mới:
-- Không nhúng WebView GIS bị chặn.
-- Thử nhiều endpoint: gis.khanhhoa.gov.vn và gisportal.khanhhoa.gov.vn, cả /arcgis/rest và /server/rest.
-- Đọc trang GIS chính thức bằng native fetch để bóc link MapServer/FeatureServer nếu có.
-- Hiển thị log chẩn đoán GIS và nút Copy chẩn đoán để gửi lại khi lỗi.
-- Tự retry khi thư viện bản đồ Leaflet tải chậm.
+## Điểm chính
 
-Nếu vẫn không tìm thấy lớp: nguồn GIS không cho APK truy vấn trực tiếp, cần chuyển sang hướng proxy ẩn/official data mirror. Người dùng cuối vẫn không cần nhập API.
+- Giao diện tiếng Việt đầy đủ hơn.
+- Đổi các thuật ngữ khó sang tiếng Việt dễ hiểu.
+- Thêm hướng dẫn 3 bước trong Phòng phân tích thương vụ.
+- Giữ nguyên: tin tức, khu vực, pháp lý/quy hoạch an toàn, hồ sơ thương vụ, lưu kết quả.
+- Không cần API, không cần backend, không cần người dùng cấu hình kỹ thuật.

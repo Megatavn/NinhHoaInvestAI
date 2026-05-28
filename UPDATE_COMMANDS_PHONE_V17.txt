@@ -1,7 +1,0 @@
-unzip -o NinhHoaInvestAI_NoAPI_V17_SimpleUserMode.zip
-cp -r NinhHoaInvestAI_NoAPI_V17_SimpleUserMode/. .
-rm -rf NinhHoaInvestAI_NoAPI_V17_SimpleUserMode NinhHoaInvestAI_NoAPI_V17_SimpleUserMode.zip
-
-git add .
-git commit -m "Update V17 Simple User Mode"
-git push
