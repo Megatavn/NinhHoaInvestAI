@@ -8,7 +8,7 @@ android {
         applicationId 'com.vuhoang.ninhhoainvestai'
         minSdk 23
         targetSdk 35
-        versionCode 16
-        versionName '6.0.0-investor-briefing'
+        versionCode 17
+        versionName '7.0.0-area-intelligence'
     }
 }
