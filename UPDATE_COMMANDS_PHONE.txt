@@ -1,8 +1,0 @@
-unzip -o NinhHoaInvestAI_NoAPI_V23_NoLocationRealImagesAreaPro.zip
-cp -r NinhHoaInvestAI_NoAPI_V23_NoLocationRealImagesAreaPro/. .
-rm -rf NinhHoaInvestAI_NoAPI_V23_NoLocationRealImagesAreaPro NinhHoaInvestAI_NoAPI_V23_NoLocationRealImagesAreaPro.zip
-rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
-
-git add -A
-git commit -m "Update V23 no location real images area pro"
-git push
