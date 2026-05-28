@@ -120,7 +120,7 @@ body.dark .source-pack-panel{background:rgba(255,255,255,.05);border-color:rgba(
 
 
 
-/* V17 Simple User Mode */
+/* V17.1 Simple GIS Fix */
 body.simple-mode header{padding-bottom:14px;border-bottom-left-radius:28px;border-bottom-right-radius:28px}
 body.simple-mode .hero{margin-top:12px;gap:10px}
 body.simple-mode .hero h2{font-size:24px;line-height:1.12}
@@ -841,6 +841,91 @@ function convertVN2000Point(){const rawX=parseFloat(($('vnX').value||'').replace
 
 function toggleAdvancedTools(){document.body.classList.toggle('advanced-open');toast(document.body.classList.contains('advanced-open')?'Đã mở công cụ nâng cao':'Đã ẩn công cụ nâng cao')}
 function openSimplePlanning(){show('planning',document.querySelectorAll('.nav')[5]);setTimeout(()=>{const el=document.querySelector('.easy-plan-card');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},180)}
+
+
+/* ===== V17.1 GIS NINH HOA FIX: do not use Van Ninh layer for Ninh Hoa ===== */
+const GIS_EXCLUDE_SERVICE_WORDS=/van.?ninh|van_ninh|vanninh|cam.?lam|nha.?trang|dien.?khanh|khanh.?son|khanh.?vinh|cam.?ranh/i;
+const GIS_NINHHOA_WORDS=/ninh.?hoa|ninhhoa|ninh_hoa|thi.?xa.?ninh.?hoa|tx.?ninh.?hoa|dong.?bac.?ninh.?hoa|bac.?hon.?heo|nam.?van.?phong|ninh.?diem|ninh.?hai|ninh.?xuan|ninh.?an|ninh.?thuy|ninh.?phuoc|ninh.?ich|ninh.?phung|tan.?dinh|hon.?heo/i;
+const GIS_NINHHOA_MANUAL_HINTS=[
+ 'NinhHoa/HTSDD_NinhHoa','NinhHoa/QHSDD_NinhHoa','NinhHoa/QHSDD_2030','NinhHoa/QuyHoachSuDungDat','NinhHoa/QuyHoachChung2040','NinhHoa/HTSDD',
+ 'VanPhong/QHSDD_NinhHoa','VanPhong/HTSDD_NinhHoa','VanPhong/NinhHoa','VanPhong/BacHonHeo','VanPhong/DongBacNinhHoa','VanPhong/NamVanPhong','VanPhong/PhanKhu16','VanPhong/PhanKhu17','VanPhong/PhanKhu19',
+ 'QHSDD/NinhHoa','QHSDD_NinhHoa','HTSDD_NinhHoa','QuyHoach/NinhHoa','QuyHoachSuDungDat/NinhHoa'
+];
+function isNinhHoaCandidate(c){const txt=noAccent(((c&&c.name)||'')+' '+((c&&c.url)||'')+' '+((c&&c.fullName)||'')).toLowerCase();return GIS_NINHHOA_WORDS.test(txt)}
+function isWrongDistrictCandidate(c){const txt=noAccent(((c&&c.name)||'')+' '+((c&&c.url)||'')+' '+((c&&c.fullName)||'')).toLowerCase();return GIS_EXCLUDE_SERVICE_WORDS.test(txt)&&!GIS_NINHHOA_WORDS.test(txt)}
+function makeNinhHoaFallbackNotice(){return `<div class="source-insight"><b>Kết luận quét GIS:</b> Không dùng lớp Vạn Ninh/Nha Trang/Cam Lâm cho Ninh Hòa. Nếu chưa có lớp Ninh Hòa public, app chuyển sang nguồn chính thức: Cổng Ninh Hòa, Công báo Khánh Hòa, Cổng tỉnh và IPA/KKT Vân Phong.</div><div class="actions"><button class="btn small" onclick="openExternal('https://ninhhoa.khanhhoa.gov.vn/vi/quy-hoach-su-dung-dat/thong-bao-cong-khai-ban-do-dieu-chinh-quy-hoach-su-dung-dat-den-nam-2030-thi-xa-ninh-hoa-tinh-khanh-hoa')">Mở QHSDĐ Ninh Hòa 2030</button><button class="btn ghost small" onclick="openExternal('https://congbao.khanhhoa.gov.vn/noi-dung-van-ban/vanbanid/22431')">QHC Ninh Hòa 2040</button><button class="btn ghost small" onclick="copyPlanningChecklist()">Copy checklist</button></div>`}
+
+const __oldScoreService = scoreService;
+scoreService=function(name){
+ const t=noAccent(String(name||'').toLowerCase());
+ let sc=__oldScoreService(name);
+ if(GIS_NINHHOA_WORDS.test(t)) sc+=220;
+ if(/van.?phong/.test(t) && /ninh.?hoa|hon.?heo|dong.?bac|nam.?van.?phong|phan.?khu.?16|phan.?khu.?17|phan.?khu.?19/.test(t)) sc+=120;
+ if(GIS_EXCLUDE_SERVICE_WORDS.test(t) && !GIS_NINHHOA_WORDS.test(t)) sc-=500;
+ return sc;
+};
+
+const __oldDiscoverPlanningServices = discoverPlanningServices;
+discoverPlanningServices=async function(force=false){
+  const candidates=await __oldDiscoverPlanningServices(force);
+  const filtered=(planningArcCandidates||[]).filter(c=>!isWrongDistrictCandidate(c));
+  const exact=filtered.filter(isNinhHoaCandidate);
+  if(exact.length){planningArcCandidates=exact.concat(filtered.filter(c=>!isNinhHoaCandidate(c))).slice(0,30);logGis('V17.1: ưu tiên lớp có dấu hiệu thuộc Ninh Hòa: '+exact.length);}
+  else{
+    const wrong=(planningArcCandidates||[]).filter(isWrongDistrictCandidate);
+    if(wrong.length){logGis('V17.1: loại '+wrong.length+' lớp không thuộc Ninh Hòa, ví dụ: '+(wrong[0].name||wrong[0].url));}
+    planningArcCandidates=[];
+  }
+  renderGISLayerList();
+  return planningArcCandidates;
+};
+
+const __oldDiscoverBody = discoverPlanningServices;
+// bổ sung danh sách gợi ý Ninh Hòa vào biến manual cũ nếu có
+try{ if(Array.isArray(GIS_MANUAL_HINTS)){ GIS_NINHHOA_MANUAL_HINTS.forEach(x=>{if(!GIS_MANUAL_HINTS.includes(x))GIS_MANUAL_HINTS.unshift(x)}) } }catch(e){}
+
+renderGISLayerList=function(){
+ const el=$('gisLayerList');if(!el)return;
+ if(!planningArcCandidates.length){
+  el.innerHTML='<div class="empty"><b>Chưa tìm thấy lớp GIS tự động riêng cho Ninh Hòa.</b><br>App đã loại các lớp không đúng khu vực như Vạn Ninh/Nha Trang để tránh đọc sai loại đất. Dùng nguồn Ninh Hòa chính thức bên dưới để kiểm chứng.</div>'+makeNinhHoaFallbackNotice();
+  return;
+ }
+ el.innerHTML=planningArcCandidates.slice(0,10).map((c,i)=>{
+   const wrong=isWrongDistrictCandidate(c), exact=isNinhHoaCandidate(c);
+   return `<div class="layer-card ${i===0?'active':''} ${wrong?'bad':''}"><b>${escapeHtml(c.name||c.fullName||'Dịch vụ GIS')}</b><span>${escapeHtml(c.url.replace((c.root||ARCGIS_ROOT)+'/', ''))}</span><span class="service-score ${wrong?'warn':exact?'':'warn'}">${exact?'Ưu tiên Ninh Hòa':'Cần kiểm tra khu vực'}</span><span>${(c.layers||[]).slice(0,5).map(l=>escapeHtml(l.name||('Layer '+l.id))).join(' · ')}</span><div class="layer-actions"><button class="btn small" onclick="selectPlanningCandidate(${i})">Dùng lớp này</button><button class="btn ghost small" onclick='openExternal(${JSON.stringify(c.url)})'>Mở REST</button></div></div>`
+ }).join('')
+};
+
+selectPlanningCandidate=function(i){
+ const cand=planningArcCandidates[i];if(!cand)return;
+ if(isWrongDistrictCandidate(cand)){toast('Lớp này không thuộc Ninh Hòa, không nên dùng để kết luận');return;}
+ planningArcCandidates.splice(i,1);planningArcCandidates.unshift(cand);if(planningOverlay){planningMap.removeLayer(planningOverlay);planningOverlay=null;planningOverlayVisible=false}addOfficialPlanningOverlay(false);renderGISLayerList();toast('Đã chọn lớp GIS Ninh Hòa')
+};
+
+const __oldQueryPlanning = queryKhanhHoaPlanningArcGIS;
+queryKhanhHoaPlanningArcGIS=async function(lat,lng){
+ const candidates=await discoverPlanningServices(false);
+ if(!candidates.length){return {status:'notfound',lat:+lat.toFixed(6),lng:+lng.toFixed(6),message:'Không tìm thấy lớp GIS public riêng cho Ninh Hòa. App đã tránh dùng nhầm lớp Vạn Ninh/Nha Trang. Hãy kiểm chứng bằng nguồn Ninh Hòa chính thức.',source:'Cổng Ninh Hòa + Công báo Khánh Hòa'}};
+ const safe=candidates.filter(c=>!isWrongDistrictCandidate(c));
+ if(!safe.length){return {status:'notfound',lat:+lat.toFixed(6),lng:+lng.toFixed(6),message:'Các lớp tìm được không đúng khu vực Ninh Hòa nên app không dùng để tránh sai quy hoạch.',source:'Nguồn chính thức Ninh Hòa'}};
+ planningArcCandidates=safe;
+ return await __oldQueryPlanning(lat,lng);
+};
+
+const __oldRenderPlanningReadout = renderPlanningReadout;
+renderPlanningReadout=function(r){
+ __oldRenderPlanningReadout(r);
+ if(r && r.status!=='auto'){
+   const el=$('planningReadout');
+   if(el){ el.innerHTML += `<div class="planning-result-pro warn"><h4>Hướng kiểm chứng Ninh Hòa</h4><p>Với Ninh Hòa, ưu tiên nguồn Cổng Ninh Hòa + Công báo Khánh Hòa thay vì cố đọc lớp GIS không public.</p>${makeNinhHoaFallbackNotice()}</div>`; }
+ }
+};
+
+function copyPlanningChecklist(){
+ const txt='Checklist kiểm chứng quy hoạch Ninh Hòa:\n1) Ghi tọa độ/vị trí lô đất.\n2) Mở bản đồ QHSDĐ Ninh Hòa đến 2030 trên Cổng Ninh Hòa.\n3) Đối chiếu xã/phường, số tờ/số thửa, màu quy hoạch và chú giải.\n4) Mở Công báo Khánh Hòa để kiểm tra quyết định/quy hoạch chung Ninh Hòa 2040.\n5) Kiểm tra kế hoạch sử dụng đất hằng năm.\n6) Xin xác nhận tại UBND/Phòng TNMT trước khi đặt cọc.';
+ try{navigator.clipboard.writeText(txt);toast('Đã copy checklist kiểm chứng')}catch(e){toast(txt)}
+}
+
 
 initV10();initPlanningV12();loadCache();populateAreaSelectors();renderChips();renderTimeChips();renderImpactChips();renderLandChips();loadLegal();renderLandProfiles();renderPortfolio();if(!JSON.parse(localStorage.getItem(CACHE_KEY)||'[]').length)refreshAll(false);
 </script>

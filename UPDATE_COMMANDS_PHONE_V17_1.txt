@@ -1,0 +1,7 @@
+unzip -o NinhHoaInvestAI_NoAPI_V17_1_GISNinhHoaFix.zip
+cp -r NinhHoaInvestAI_NoAPI_V17_1_GISNinhHoaFix/. .
+rm -rf NinhHoaInvestAI_NoAPI_V17_1_GISNinhHoaFix NinhHoaInvestAI_NoAPI_V17_1_GISNinhHoaFix.zip
+
+git add .
+git commit -m "Update V17.1 GIS Ninh Hoa fix"
+git push
