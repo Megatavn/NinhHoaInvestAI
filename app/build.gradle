@@ -13,8 +13,8 @@ android {
         applicationId 'com.vuhoang.ninhhoainvestai'
         minSdk 23
         targetSdk 35
-        versionCode 43
-        versionName '26.0.0-tro-ly-thua-dat-toa-do'
+        versionCode 60
+        versionName '30.0.0-news-timeline-intelligence'
     }
 }
 

@@ -1,8 +1,8 @@
-unzip -o NinhHoaInvestAI_NoAPI_V29_5_NewsLogicAuditFix.zip
-cp -r NinhHoaInvestAI_NoAPI_V29_5_NewsLogicAuditFix/. .
-rm -rf NinhHoaInvestAI_NoAPI_V29_5_NewsLogicAuditFix NinhHoaInvestAI_NoAPI_V29_5_NewsLogicAuditFix.zip
+unzip -o NinhHoaInvestAI_NoAPI_V30_NewsTimelineIntelligence.zip
+cp -r NinhHoaInvestAI_NoAPI_V30_NewsTimelineIntelligence/. .
+rm -rf NinhHoaInvestAI_NoAPI_V30_NewsTimelineIntelligence NinhHoaInvestAI_NoAPI_V30_NewsTimelineIntelligence.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Update V29.5 news logic audit fix"
+git commit -m "Update V30 News Timeline Intelligence"
 git push
