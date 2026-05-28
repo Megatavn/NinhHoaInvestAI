@@ -1,7 +1,10 @@
-# Ninh Hòa Invest AI V20 – Premium UX Rebuild
+# Ninh Hòa Invest AI V21
 
-Bản V20 thiết kế lại giao diện theo hướng dễ dùng, tiếng Việt rõ ràng, tương phản cao, loại bỏ phần kỹ thuật không cần thiết, tập trung vào Tin tức, Kiểm tra lô đất, Khu vực và Pháp lý.
+Bản V21 – News Intelligence & Compact UX.
 
-## Build APK bằng GitHub Actions
-
-Upload toàn bộ source lên GitHub, vào tab Actions và chạy workflow Build APK.
+- Header gọn hơn.
+- Card tin tức đẹp hơn, ảnh ngang.
+- Lọc tin theo khu vực.
+- Phân tích tác động tin tức chuyên sâu hơn.
+- Mục hướng dẫn riêng cho người dùng.
+- Tăng số lượng truy vấn tin tức và giới hạn lưu tin lên 180.

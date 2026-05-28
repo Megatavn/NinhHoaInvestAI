@@ -1,8 +1,7 @@
-unzip -o NinhHoaInvestAI_NoAPI_V20_PremiumUXRebuild.zip
-cp -r NinhHoaInvestAI_NoAPI_V20_PremiumUXRebuild/. .
-rm -rf NinhHoaInvestAI_NoAPI_V20_PremiumUXRebuild NinhHoaInvestAI_NoAPI_V20_PremiumUXRebuild.zip
+unzip -o NinhHoaInvestAI_NoAPI_V21_NewsIntelligenceCompactUX.zip
+cp -r NinhHoaInvestAI_NoAPI_V21_NewsIntelligenceCompactUX/. .
+rm -rf NinhHoaInvestAI_NoAPI_V21_NewsIntelligenceCompactUX NinhHoaInvestAI_NoAPI_V21_NewsIntelligenceCompactUX.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
-
 git add -A
-git commit -m "Update V20 Premium UX Rebuild"
+git commit -m "Update V21 News Intelligence Compact UX"
 git push

@@ -44,5 +44,5 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NinhHoaInvestAI-v7-area-intelligence-apk
+          name: NinhHoaInvestAI-v21-news-intelligence-apk
           path: app/build/outputs/apk/debug/*.apk
