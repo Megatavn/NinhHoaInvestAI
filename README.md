@@ -1,13 +1,33 @@
-# Ninh Hòa Invest AI V27 – Live News Intelligence
+# Ninh Hòa Invest AI V29.2 – Quy tắc giá trị/rủi ro lô đất
 
-Ứng dụng hỗ trợ theo dõi tin tức mới, phân tích tác động đầu tư, kiểm tra lô đất, sổ tay đầu tư cá nhân và trợ lý thửa đất/tọa độ cho khu vực Ninh Hòa – Khánh Hòa.
+Bản V29.2 – Quy tắc giá trị/rủi ro lô đất
 
-## Điểm mới V27
-- Nâng cấp bảng tin mới liên tục: ưu tiên tin 24h/7 ngày và quét sâu nhiều nguồn.
-- Tăng giới hạn lưu tin lên 360 tin.
-- Quét theo cụm nguồn chính thống/báo lớn: Báo Khánh Hòa, Cổng Ninh Hòa, Công báo Khánh Hòa, Cổng tỉnh, IPA/KKT Vân Phong, Tuổi Trẻ, VnExpress, PLO, Báo Chính phủ, Dân Trí, Vietnamnet, VOV, Nhân Dân...
-- Thêm trạng thái cập nhật: số nguồn quét, số nguồn OK, lần cập nhật gần nhất.
-- Tự cập nhật khi mở app/quay lại app nếu dữ liệu cũ quá 20 phút.
-- Phân tích tin sâu hơn theo độ mới, nguồn, khu vực ảnh hưởng, mức tác động và hành động đề xuất.
+- hiện trạng là đất lúa/đất nông nghiệp;
+- thông tin quy hoạch hoặc ghi chú cho thấy có định hướng **đất ở/thổ cư**;
+- người dùng muốn mô phỏng cơ hội tăng giá khi chuyển từ đất lúa sang thổ cư.
 
-Tác giả sản phẩm: Vũ Hoàng.
+## Điểm mới
+- Không còn tự động xem mọi chữ “quy hoạch” là rủi ro xấu.
+- Nếu ghi rõ **quy hoạch thổ cư / quy hoạch đất ở / chuyển mục đích đất ở**, app sẽ đánh giá như một cơ hội cần kiểm chứng.
+- Thêm khối **Cơ hội quy hoạch thổ cư** trong báo cáo.
+- Mô phỏng hệ số tăng giá **x5** theo giả định người dùng.
+- Vẫn cảnh báo cần kiểm tra:
+  - kế hoạch sử dụng đất hằng năm;
+  - điều kiện chuyển mục đích;
+  - tiền sử dụng đất;
+  - phần giao thông/lộ giới nếu có;
+  - xác nhận từ cơ quan có thẩm quyền.
+
+## Lưu ý
+App chỉ hỗ trợ sàng lọc đầu tư, không thay thế kết luận pháp lý, trích lục địa chính hoặc xác nhận quy hoạch chính thức.
+
+Tác giả sản phẩm: Vũ Hoàng
+
+
+## V29.2
+- Thêm quy tắc lô góc/hai mặt tiền: cộng mạnh điểm vị trí, thanh khoản, giá trị.
+- Thêm cảnh báo gần mộ/nghĩa trang: giảm mạnh giá trị và khả năng bán lại.
+- Thêm cảnh báo quy hoạch đường, trường học, công viên/cây xanh: phần bị vướng không nên tính giá như phần sử dụng bình thường.
+- Thêm chip gợi ý ghi chú để người dùng non-tech nhập nhanh.
+
+Tác giả sản phẩm: Vũ Hoàng

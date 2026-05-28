@@ -53,6 +53,14 @@ body.dark{background:#06121d;color:#eaf4f9}body.dark .card,body.dark .newsCard,b
 .newsCard .freshChip,.leadNews .freshChip{margin-left:6px}.sourceTrust{font-size:10px;font-weight:950;border-radius:999px;background:#eef7ff;color:#0b5275;padding:5px 8px}.deepScanHint{background:#fff8e8;border:1px solid #f1d790;color:#61430a;border-radius:18px;padding:11px 12px;font-weight:800;line-height:1.38;margin:8px 0 12px}.scanProgress{height:8px;background:rgba(255,255,255,.16);border-radius:999px;overflow:hidden;width:100%;margin-top:8px}.scanProgress i{display:block;height:100%;background:linear-gradient(90deg,#ffdf70,#31e99a);border-radius:999px;transition:width .25s ease}
 @media(max-width:430px){.newsHealth{grid-template-columns:1fr 1fr 1fr}.liveNewsPanel{padding:13px}.feedToolbar button{padding:9px 11px;font-size:12px}}
 
+
+/* V27.1 Focused News Filters */
+.compactLive{padding:14px 15px;margin-bottom:12px}
+.compactLiveTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.compactLive h2{font-size:18px;margin:0 0 4px}.compactLive p{font-size:13px;margin:0;color:rgba(255,255,255,.84)}
+.compactLive .mini{white-space:nowrap}.liveRow.compact{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.smallStat{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.12);font-size:12px;font-weight:900;color:white;border:1px solid rgba(255,255,255,.16)}
+.focusedFilters{padding-top:0;margin-top:0}.focusedFilters .chip{padding:10px 14px}
+.newsHealth,.deepScanHint,.feedToolbar{display:none!important}
 </style>
 </head>
 <body>
@@ -60,7 +68,7 @@ body.dark{background:#06121d;color:#eaf4f9}body.dark .card,body.dark .newsCard,b
   <header class="topBar">
     <div class="brandRow">
       <div class="logo">NH</div>
-      <div class="brandText"><b>Ninh Hòa<br>Invest AI</b><span>Tin mới & phân tích liên tục</span></div>
+      <div class="brandText"><b>Ninh Hòa<br>Invest AI</b><span>Chỉ tập trung Ninh Hòa</span></div>
       <div class="miniPill"><i class="dot"></i><span id="countTop">0 tin</span></div>
       <button class="circleBtn" onclick="toggleDark()" title="Đổi giao diện">◐</button>
     </div>
@@ -93,7 +101,7 @@ const load=(k,d)=>{try{return JSON.parse(localStorage.getItem('v22_'+k))??d}catc
 const esc=s=>String(s??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[m]));
 const state={tab:'home',filter:'Tất cả',area:'Tất cả',book:'Tổng quan',news:load('news',[]),saved:load('saved',[]),deals:load('deals',[]),areasSaved:load('areasSaved',[]),notes:load('notes',[])};
 const navs=[['home','🏠','Trang chủ'],['news','📰','Tin tức'],['check','🛡️','Kiểm tra'],['areas','📍','Khu vực'],['saved','⭐','Sổ tay']];
-const quick=['Tất cả','Ninh Hòa','Vân Phong','Hạ tầng','Quy hoạch','Pháp lý','Dốc Lết'];
+const quick=['Tất cả','Ninh Hòa','Vân Phong','Hạ tầng','Pháp lý'];
 const queries=[
 'Ninh Hòa Khánh Hòa bất động sản quy hoạch hạ tầng','Ninh Hòa quy hoạch sử dụng đất 2030','Ninh Hòa quy hoạch chung 2040','Ninh Hòa đô thị công nghiệp du lịch','Ninh Hòa lên đô thị Khánh Hòa','Ninh Hòa thị xã quy hoạch đất đai','Ninh Diêm Vân Phong khu công nghiệp cảng logistics','Ninh Diêm Ninh Hòa quy hoạch phân khu','Ninh Hải Dốc Lết du lịch biển bất động sản','Dốc Lết Ninh Hòa du lịch quy hoạch','Ninh Xuân Ninh Hòa hạ tầng đất đai','Ninh Xuân cao tốc Khánh Hòa Buôn Ma Thuột','Ninh An Ninh Hòa Vân Phong quy hoạch','Tân Định Ninh Hòa đô thị Khánh Hòa','Khu kinh tế Vân Phong Ninh Hòa','Nam Vân Phong Ninh Phước Ninh Hòa','Bắc Hòn Hèo Ninh Hòa quy hoạch','Đông Bắc Ninh Hòa phân khu 16','Phân khu 17 Bắc Hòn Hèo Ninh Hòa','Phân khu 19 Nam Vân Phong Ninh Hòa','cao tốc Khánh Hòa Buôn Ma Thuột Ninh Hòa','cao tốc Vân Phong Nha Trang Ninh Hòa','bảng giá đất Khánh Hòa Ninh Hòa','Công báo Khánh Hòa Ninh Hòa quy hoạch đất','Báo Khánh Hòa Ninh Hòa đô thị','Cổng Ninh Hòa quy hoạch sử dụng đất','IPA Khánh Hòa Ninh Hòa Vân Phong','Khánh Hòa hạ tầng cảng biển logistics','Khánh Hòa quy hoạch tỉnh bất động sản','Khánh Hòa pháp lý đất đai','Tuổi Trẻ Khánh Hòa Ninh Hòa cao tốc','VnExpress Khánh Hòa Vân Phong Ninh Hòa','PLO Khánh Hòa cao tốc Vân Phong','Báo Chính phủ Khánh Hòa quy hoạch Vân Phong','Dân trí Khánh Hòa hạ tầng bất động sản','Thanh Niên Khánh Hòa Ninh Hòa quy hoạch','Vietnamnet Khánh Hòa Vân Phong hạ tầng','VOV Khánh Hòa Vân Phong Ninh Hòa','Nhân Dân Khánh Hòa Ninh Hòa quy hoạch','Cafeland Khánh Hòa Ninh Hòa Vân Phong'
 ];
@@ -203,7 +211,7 @@ function newsCard(n){n=normalizeNews(n);const a=analysisFor(n);const noPhoto=!is
 function areaNewsCard(n){n=normalizeNews(n);const a=analysisFor(n);const noPhoto=!isRealImage(n);return `<article class="areaMiniNews ${noPhoto?'noPhoto':''}">${newsVisual(n)}<div><div class="newsMetricRow"><span class="impactPill ${impactClass(n.impactScore)}">${n.impactScore}/100</span><span class="tag area">${esc((n.area||[])[0]||'Khánh Hòa')}</span><span class="tag">${esc(n.category||'Tin')}</span></div><h3>${esc(n.title)}</h3><p>${esc(a.action)}</p>${sourceLine(n)}<div class="actions compact"><button class="mini gold" onclick='briefNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Phân tích</button><button class="mini" onclick='saveNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Lưu</button></div></div></article>`}
 function savedNewsCard(n){n=normalizeNews(n);return `<div class="savedNewsCard"><div class="savedIcon">${categoryIcon(n)}</div><div><b>${esc(n.title)}</b><small style="display:block;color:#5d707d;margin-top:5px;font-weight:800">${esc(cleanSourceName(n.source))} · ${esc((n.area||[])[0]||'Khánh Hòa')} · Tác động ${n.impactScore}/100</small><div class="actions compact"><button class="mini gold" onclick='briefNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Phân tích</button><button class="mini" onclick="openUrl('${esc(n.url||'')}')">Mở nguồn</button></div></div></div>`}
 function renderHome(){const news=getFilteredNews('Tất cả').slice(0,4);document.getElementById('home').innerHTML=`<div class="heroCompact"><div class="ctaGrid"><button class="cta" onclick="go('news')"><span>📊</span><b>Bảng tin đầu tư</b><small>Tin gọn, không ảnh minh họa lặp lại.</small></button><button class="cta" onclick="go('check')"><span>🛡️</span><b>Kiểm tra đất</b><small>Sàng lọc trước khi đi xem hoặc đặt cọc.</small></button><button class="cta" onclick="go('saved')"><span>⭐</span><b>Sổ tay</b><small>Lưu lô đất, tin và ghi chú quan trọng.</small></button></div></div><div class="card" style="background:linear-gradient(135deg,#fff,#f6fbfd)"><h2>Bảng điều khiển cá nhân</h2><p>Theo dõi tin có tác động, lô đất đang xem và khu vực quan tâm trong một nơi.</p><div class="dashGrid"><div class="dashBox"><b>${state.deals.length}</b><span>Lô đất</span></div><div class="dashBox"><b>${state.saved.length}</b><span>Tin đã lưu</span></div><div class="dashBox"><b>${state.areasSaved.length}</b><span>Khu vực</span></div><div class="dashBox"><b>${state.news.length||fallbackNews.length}</b><span>Tin đang theo dõi</span></div></div><button class="primary gold" onclick="go('saved')">Mở sổ tay</button><div class="footerCredit">Tác giả sản phẩm: <b>Vũ Hoàng</b></div></div><div class="sectionTitle"><h2>Tin tác động cao</h2><span>ưu tiên phân tích, không ưu tiên ảnh giả</span></div><div class="newsGrid">${news.map((n,i)=>newsCard(n,i)).join('')}</div><div class="sectionTitle"><h2>Khu vực nổi bật</h2><span>ảnh riêng cho hồ sơ khu vực</span></div><div class="areaDeck">${areaProfiles.slice(0,3).map(areaCard).join('')}</div>`}
-function renderNews(){const cats=['Tất cả','Hạ tầng','Quy hoạch','Pháp lý','Vân Phong','Ninh Hòa','Dốc Lết'];const areas=['Tất cả',...areaProfiles.map(a=>a.name)];const list=getFilteredNews();const lead=list[0];document.getElementById('news').innerHTML=`<div class="chips">${cats.map(c=>`<button class="chip ${state.filter===c?'active':''}" onclick="state.filter='${c}';state.area='Tất cả';renderNews()">${c}</button>`).join('')}</div><div class="chips">${areas.map(a=>`<button class="chip ${state.area===a?'active':''}" onclick="state.area='${a}';renderNews()">${a}</button>`).join('')}</div>${lead?leadCard(lead):''}<div class="sectionTitle"><h2>${state.area==='Tất cả'?'Tin mới & phân tích liên tục':'Tin quanh '+state.area}</h2><span>${list.length} kết quả</span></div><div class="newsGrid">${list.slice(1,120).map(newsCard).join('')}</div>`}
+function renderNews(){const cats=['Tất cả','Hạ tầng','Quy hoạch','Pháp lý','Vân Phong','Ninh Hòa','Dốc Lết'];const areas=['Tất cả',...areaProfiles.map(a=>a.name)];const list=getFilteredNews();const lead=list[0];document.getElementById('news').innerHTML=`<div class="chips">${cats.map(c=>`<button class="chip ${state.filter===c?'active':''}" onclick="state.filter='${c}';state.area='Tất cả';renderNews()">${c}</button>`).join('')}</div><div class="chips">${areas.map(a=>`<button class="chip ${state.area===a?'active':''}" onclick="state.area='${a}';renderNews()">${a}</button>`).join('')}</div>${lead?leadCard(lead):''}<div class="sectionTitle"><h2>${state.area==='Tất cả'?'Chỉ tập trung Ninh Hòa':'Tin quanh '+state.area}</h2><span>${list.length} kết quả</span></div><div class="newsGrid">${list.slice(1,120).map(newsCard).join('')}</div>`}
 // V24: vẫn cố lấy ảnh thật cho tin nổi bật, nhưng feed không còn dùng ảnh minh họa giả.
 
 
@@ -322,7 +330,7 @@ function saveCertificateReport(){
   toast('Đã lưu báo cáo vào Sổ tay');
 }
 function renderCheck(){
-  document.getElementById('check').innerHTML=`<div class="certHero"><h2>Đọc sổ & chấm điểm lô đất</h2><p>Chọn ảnh sổ để xem trước, nhập hoặc dán thông tin trên sổ, dán link Google Maps và nhập giá nếu có. App sẽ bóc thông tin quan trọng, cảnh báo rủi ro và tạo báo cáo sàng lọc.</p><div class="certSteps"><div class="certStep"><span>📄</span>1. Chọn ảnh sổ</div><div class="certStep"><span>📍</span>2. Dán vị trí</div><div class="certStep"><span>📊</span>3. Tạo báo cáo</div></div><div class="privacyNote">Bảo mật: app không yêu cầu quyền vị trí, không bắt nhập API. Ảnh chỉ dùng để bạn xem trước; dữ liệu phân tích lấy từ nội dung bạn nhập/dán.</div></div><div class="card"><h2>1. Ảnh sổ đỏ/sổ hồng</h2><p>Ưu tiên ảnh rõ mặt thông tin thửa đất và mặt sơ đồ/tọa độ. Bản ổn định này không dùng OCR native để tránh lỗi build; hãy nhập hoặc dán các dòng quan trọng từ sổ.</p><div class="docUpload"><button class="goldBtn" onclick="startCertificateOcr()">Chọn ảnh sổ để xem trước</button><label>Chọn ảnh để xem trước<input id="cert_images" type="file" accept="image/*" multiple onchange="previewCertImages(event)" style="display:none"></label></div><div id="cert_previews" class="docPreviewGrid"></div><div class="field"><label>Nội dung sổ / dán thông tin sổ</label><textarea id="cert_ocr" placeholder="Nhập/dán các dòng như: số thửa, tờ bản đồ, diện tích, loại đất, thời hạn, ghi chú quy hoạch..."></textarea><button class="mini" style="margin-top:8px" onclick="fillCertFields(extractCertificateFields(document.getElementById('cert_ocr').value));toast('Đã bóc thông tin từ ô chữ')">Bóc thông tin từ ô chữ</button></div></div><div class="card"><h2>2. Thông tin lô đất</h2><div class="formGrid"><div class="field"><label>Số thửa</label><input class="input" id="cert_parcel" placeholder="54"></div><div class="field"><label>Tờ bản đồ</label><input class="input" id="cert_sheet" placeholder="14"></div><div class="field"><label>Diện tích (m²)</label><input class="input" id="cert_area" inputmode="decimal" placeholder="1519,5"></div><div class="field"><label>Loại đất</label><input class="input" id="cert_landtype" placeholder="Đất chuyên trồng lúa / đất ở..."></div><div class="field"><label>Thời hạn sử dụng</label><input class="input" id="cert_expiry" placeholder="22/12/2068"></div><div class="field"><label>Diện tích vướng quy hoạch (m²)</label><input class="input" id="cert_planarea" inputmode="decimal" placeholder="313,6"></div></div><div class="field" style="margin-top:12px"><label>Địa chỉ / khu vực</label><input class="input" id="cert_address" placeholder="Tổ dân phố, phường/xã, Ninh Hòa..."></div><div class="field" style="margin-top:12px"><label>Ghi chú quy hoạch trên sổ</label><input class="input" id="cert_planning" placeholder="Ví dụ: thửa đất có ... m² thuộc quy hoạch giao thông"></div></div><div class="card"><h2>3. Vị trí & giá bán</h2><div class="mapsInput"><input class="input" id="cert_maps" placeholder="Dán link Google Maps nếu có"><button class="mini gold" onclick="openUrl(document.getElementById('cert_maps').value||'https://maps.google.com')">Mở</button></div><div class="formGrid" style="margin-top:12px"><div class="field"><label>Giá bán (tỷ đồng, nếu có)</label><input class="input" id="cert_price" inputmode="decimal" placeholder="1.8"></div><div class="field"><label>Ghi chú thêm</label><input class="input" id="cert_note" placeholder="Đường vào, dân cư, môi giới nói gì..."></div></div><button class="primary gold" style="width:100%;margin-top:14px" onclick="analyzeCertificateDeal()">Tạo báo cáo lô đất</button></div><div class="card result" id="certResult"></div><div class="card"><h2>Kiểm tra nhanh kiểu cũ</h2><p>Không có ảnh sổ? Bạn vẫn có thể nhập thông tin cơ bản để sàng lọc.</p><div class="actions"><button class="primary soft" onclick="renderBasicDealForm()">Mở form kiểm tra cơ bản</button></div></div><div id="basicDealSlot"></div>`;
+  document.getElementById('check').innerHTML=`<div class="certHero"><h2>Đọc sổ & chấm điểm lô đất</h2><p>Chọn ảnh sổ để xem trước, nhập hoặc dán thông tin trên sổ, dán link Google Maps và nhập giá nếu có. App sẽ bóc thông tin quan trọng, cảnh báo rủi ro và tạo báo cáo sàng lọc.</p><div class="certSteps"><div class="certStep"><span>📄</span>1. Chọn ảnh sổ</div><div class="certStep"><span>📍</span>2. Dán vị trí</div><div class="certStep"><span>📊</span>3. Tạo báo cáo</div></div><div class="privacyNote">Bảo mật: app không yêu cầu quyền vị trí, không bắt nhập API. Ảnh chỉ dùng để bạn xem trước; dữ liệu phân tích lấy từ nội dung bạn nhập/dán.</div></div><div class="card"><h2>1. Ảnh sổ đỏ/sổ hồng</h2><p>Ưu tiên ảnh rõ mặt thông tin thửa đất và mặt sơ đồ/tọa độ. Bản ổn định này không dùng OCR native để tránh lỗi build; hãy nhập hoặc dán các dòng quan trọng từ sổ.</p><div class="docUpload"><button class="goldBtn" onclick="startCertificateOcr()">Chọn ảnh sổ để xem trước</button><label>Chọn ảnh để xem trước<input id="cert_images" type="file" accept="image/*" multiple onchange="previewCertImages(event)" style="display:none"></label></div><div id="cert_previews" class="docPreviewGrid"></div><div class="field"><label>Nội dung sổ / dán thông tin sổ</label><textarea id="cert_ocr" placeholder="Nhập/dán các dòng như: số thửa, tờ bản đồ, diện tích, loại đất, thời hạn, ghi chú quy hoạch..."></textarea><button class="mini" style="margin-top:8px" onclick="fillCertFields(extractCertificateFields(document.getElementById('cert_ocr').value));toast('Đã bóc thông tin từ ô chữ')">Bóc thông tin từ ô chữ</button></div></div><div class="card"><h2>2. Thông tin lô đất</h2><div class="formGrid"><div class="field"><label>Số thửa</label><input class="input" id="cert_parcel" placeholder="54"></div><div class="field"><label>Tờ bản đồ</label><input class="input" id="cert_sheet" placeholder="14"></div><div class="field"><label>Diện tích (m²)</label><input class="input" id="cert_area" inputmode="decimal" placeholder="1519,5"></div><div class="field"><label>Loại đất</label><input class="input" id="cert_landtype" placeholder="Đất chuyên trồng lúa / đất ở..."></div><div class="field"><label>Thời hạn sử dụng</label><input class="input" id="cert_expiry" placeholder="22/12/2068"></div><div class="field"><label>Diện tích vướng quy hoạch (m²)</label><input class="input" id="cert_planarea" inputmode="decimal" placeholder="313,6"></div></div><div class="field" style="margin-top:12px"><label>Địa chỉ / khu vực</label><input class="input" id="cert_address" placeholder="Tổ dân phố, phường/xã, Ninh Hòa..."></div><div class="field" style="margin-top:12px"><label>Ghi chú quy hoạch trên sổ</label><input class="input" id="cert_planning" placeholder="Ví dụ: quy hoạch thổ cư/đất ở; hoặc phần nào vướng giao thông/lộ giới"></div></div><div class="card"><h2>3. Vị trí & giá bán</h2><div class="mapsInput"><input class="input" id="cert_maps" placeholder="Dán link Google Maps nếu có"><button class="mini gold" onclick="openUrl(document.getElementById('cert_maps').value||'https://maps.google.com')">Mở</button></div><div class="formGrid" style="margin-top:12px"><div class="field"><label>Giá bán (tỷ đồng, nếu có)</label><input class="input" id="cert_price" inputmode="decimal" placeholder="1.8"></div><div class="field"><label>Ghi chú thêm</label><input class="input" id="cert_note" placeholder="Đường vào, dân cư, môi giới nói gì..."></div></div><button class="primary gold" style="width:100%;margin-top:14px" onclick="analyzeCertificateDeal()">Tạo báo cáo lô đất</button></div><div class="card result" id="certResult"></div><div class="card"><h2>Kiểm tra nhanh kiểu cũ</h2><p>Không có ảnh sổ? Bạn vẫn có thể nhập thông tin cơ bản để sàng lọc.</p><div class="actions"><button class="primary soft" onclick="renderBasicDealForm()">Mở form kiểm tra cơ bản</button></div></div><div id="basicDealSlot"></div>`;
 }
 function renderBasicDealForm(){
   const slot=document.getElementById('basicDealSlot'); if(!slot)return;
@@ -455,9 +463,9 @@ function renderCheck(){
 Thửa đất số: 54; tờ bản đồ số: 14
 Loại đất: Đất chuyên trồng lúa
 Diện tích: 1519,5 m²
-Ghi chú: 313,6 m² thuộc quy hoạch giao thông
+Ghi chú: quy hoạch thổ cư/đất ở; nếu có phần vướng giao thông thì ghi rõ diện tích
 1   1383278,92   595884,76
-2   1383282,99   595885,94"></textarea></div><button class="primary gold" style="width:100%;margin-top:12px" onclick="fillParcelFromCertificate()">Bóc thông tin từ nội dung dán</button></div><div class="card"><h2>2. Thông tin hồ sơ</h2><div class="formGrid"><div class="field"><label>Tên hồ sơ</label><input class="input" id="parcel_name" placeholder="Lô đất TDP 16 Ninh Hòa"></div><div class="field"><label>Khu vực/địa chỉ</label><input class="input" id="parcel_area_name" placeholder="Phường Ninh Hòa, Khánh Hòa"></div><div class="field"><label>Số thửa</label><input class="input" id="parcel_number" placeholder="54"></div><div class="field"><label>Tờ bản đồ</label><input class="input" id="parcel_sheet" placeholder="14"></div><div class="field"><label>Diện tích trên giấy (m²)</label><input class="input" id="parcel_cert_area" inputmode="decimal" placeholder="1519,5"></div><div class="field"><label>Loại đất</label><input class="input" id="parcel_landtype" placeholder="Đất chuyên trồng lúa / đất ở..."></div><div class="field"><label>Diện tích vướng quy hoạch (m²)</label><input class="input" id="parcel_plan_area" inputmode="decimal" placeholder="313,6"></div><div class="field"><label>Giá bán (tỷ đồng)</label><input class="input" id="parcel_price" inputmode="decimal" placeholder="1.8"></div></div><div class="field" style="margin-top:12px"><label>Link Google Maps</label><input class="input" id="parcel_maps" placeholder="Dán link Google Maps nếu có"></div><div class="field" style="margin-top:12px"><label>Ghi chú/rủi ro đang biết</label><textarea id="parcel_note" placeholder="Ví dụ: đất lúa, có quy hoạch giao thông, đường vào nhỏ..."></textarea></div></div><div class="card"><h2>3. Tọa độ góc ranh</h2><p>Nhập theo từng dòng: STT X Y hoặc X Y. App sẽ tính diện tích ước lượng bằng công thức hình học và vẽ sơ đồ sơ bộ.</p><div class="field"><label>Bảng tọa độ X/Y</label><textarea id="parcel_coords" class="coordArea" placeholder="1   1383278,92   595884,76
+2   1383282,99   595885,94"></textarea></div><button class="primary gold" style="width:100%;margin-top:12px" onclick="fillParcelFromCertificate()">Bóc thông tin từ nội dung dán</button></div><div class="card"><h2>2. Thông tin hồ sơ</h2><div class="formGrid"><div class="field"><label>Tên hồ sơ</label><input class="input" id="parcel_name" placeholder="Lô đất TDP 16 Ninh Hòa"></div><div class="field"><label>Khu vực/địa chỉ</label><input class="input" id="parcel_area_name" placeholder="Phường Ninh Hòa, Khánh Hòa"></div><div class="field"><label>Số thửa</label><input class="input" id="parcel_number" placeholder="54"></div><div class="field"><label>Tờ bản đồ</label><input class="input" id="parcel_sheet" placeholder="14"></div><div class="field"><label>Diện tích trên giấy (m²)</label><input class="input" id="parcel_cert_area" inputmode="decimal" placeholder="1519,5"></div><div class="field"><label>Loại đất</label><input class="input" id="parcel_landtype" placeholder="Đất chuyên trồng lúa / đất ở..."></div><div class="field"><label>Diện tích vướng quy hoạch (m²)</label><input class="input" id="parcel_plan_area" inputmode="decimal" placeholder="313,6"></div><div class="field"><label>Giá bán (tỷ đồng)</label><input class="input" id="parcel_price" inputmode="decimal" placeholder="1.8"></div></div><div class="field" style="margin-top:12px"><label>Link Google Maps</label><input class="input" id="parcel_maps" placeholder="Dán link Google Maps nếu có"></div><div class="field" style="margin-top:12px"><label>Ghi chú/rủi ro đang biết</label><textarea id="parcel_note" placeholder="Ví dụ: đất lúa, quy hoạch thổ cư/đất ở, đường vào nhỏ, giá sau chuyển mục đích..."></textarea></div></div><div class="card"><h2>3. Tọa độ góc ranh</h2><p>Nhập theo từng dòng: STT X Y hoặc X Y. App sẽ tính diện tích ước lượng bằng công thức hình học và vẽ sơ đồ sơ bộ.</p><div class="field"><label>Bảng tọa độ X/Y</label><textarea id="parcel_coords" class="coordArea" placeholder="1   1383278,92   595884,76
 2   1383282,99   595885,94
 3   1383332,95   595905,57
 ..."></textarea></div><div class="pillRow"><span class="pillStrong">Không cần quyền vị trí</span><span class="pillStrong warn">Không kết luận pháp lý thay cơ quan nhà nước</span></div><button class="primary gold" style="width:100%;margin-top:14px" onclick="analyzeParcelProfile()">Tạo báo cáo thửa đất</button></div><div class="card result" id="parcelResult"></div><div class="card"><h2>Vẫn muốn dùng kiểm tra sổ kiểu cũ?</h2><p>Bạn có thể mở lại form đọc sổ V25 nếu chỉ muốn nhập thông tin sổ mà không cần tọa độ.</p><div class="actions"><button class="primary soft" onclick="renderV25CertificateForm()">Mở form đọc sổ cơ bản</button></div></div><div id="v25CertSlot"></div>`;
@@ -503,11 +511,11 @@ function showSavedCertReport(id){ const r=(state.certReports||[]).find(x=>x.id==
 
 
 // ===== V27 Live News Intelligence: tin mới hơn, quét liên tục hơn, phân tích sâu hơn =====
-const V27_MAX_NEWS = 360;
+const V27_MAX_NEWS = 160;
 const V27_BATCH_SIZE = 8;
-const V27_QUICK_LIMIT = 42;
-const V27_DEEP_LIMIT = 96;
-const V27_REFRESH_MINUTES = 20;
+const V27_QUICK_LIMIT = 32;
+const V27_DEEP_LIMIT = 72;
+const V27_REFRESH_MINUTES = 15;
 state.newsStatus = load('newsStatus',{mode:'Sẵn sàng',found:state.news.length||0,queries:0,ok:0,fail:0,updated:load('newsLastRefresh','')});
 state.newsSortMode = state.newsSortMode || 'Mới nhất';
 
@@ -550,10 +558,25 @@ function newsKey(n){return normalizeVN(String(n?.title||'')).replace(/ google ti
 function newsTs(n){let t=Number(n?.ts||0); if(!t&&n?.pubDate)t=Date.parse(n.pubDate)||0; return t||0}
 function freshLabel(n){const t=newsTs(n); if(!t)return '<span class="staleChip">Chưa rõ ngày</span>'; const h=(Date.now()-t)/36e5; if(h<24)return '<span class="freshChip">Mới 24h</span>'; if(h<168)return '<span class="freshChip">7 ngày</span>'; return '<span class="staleChip">30 ngày+</span>'}
 function trustedLabel(n){const s=cleanSourceName(n.source||'').toLowerCase(); const high=['báo khánh hòa','cổng ninh hòa','công báo','cổng tỉnh','báo chính phủ','tuổi trẻ','vnexpress','plo','nhân dân','vov','vietnamnet','thanh niên','dân trí']; return high.some(x=>s.includes(x))?'<span class="sourceTrust">Nguồn mạnh</span>':'<span class="sourceTrust">Cần đọc nguồn</span>'}
-function v27Rank(n){const t=newsTs(n); const h=t?Math.max(0,(Date.now()-t)/36e5):9999; const rec=t?Math.max(0,120-(h*2.4)):0; return (Number(n.impactScore||0)*1.25)+rec+(isRealImage(n)?4:0)}
+function v27Rank(n){return v271FreshImpactRank(n)}
+function v271FreshImpactRank(n){const t=newsTs(n); const h=t?Math.max(0,(Date.now()-t)/36e5):9999; const fresh=t?(h<24?120:h<168?90:h<720?45:8):0; const impact=Number(n.impactScore||0); const source=trustedLabel(n).includes('Nguồn mạnh')?8:0; return fresh+(impact*1.08)+source+(isRealImage(n)?2:0)}
 function mergeNewsItems(items){const by={}; items.map(normalizeNews).forEach(n=>{const k=newsKey(n); if(!k)return; const old=by[k]; if(!old || v27Rank(n)>v27Rank(old)) by[k]=n;}); return Object.values(by).sort((a,b)=>v27Rank(b)-v27Rank(a)).slice(0,V27_MAX_NEWS)}
 function getAllNews(){return mergeNewsItems([...(state.news||[]),...fallbackNews])}
-function getFilteredNews(filter=state.filter){let list=getAllNews();if(filter&&filter!=='Tất cả'){const f=filter.toLowerCase();list=list.filter(n=>(n.category||'').toLowerCase().includes(f)||(n.title||'').toLowerCase().includes(f)||(n.summary||'').toLowerCase().includes(f)||(n.area||[]).join(' ').toLowerCase().includes(f))}if(state.area&&state.area!=='Tất cả'){const a=areaProfiles.find(x=>x.name===state.area);if(a){list=list.filter(n=>matchesArea(n,a))}}if(state.newsSortMode==='Tác động cao')return list.sort((a,b)=>(b.impactScore||0)-(a.impactScore||0));return list.sort((a,b)=>v27Rank(b)-v27Rank(a))}
+function getFilteredNews(filter=state.filter){
+  let list=getAllNews();
+  const sortByHighImpact = filter==='Tác động cao' || state.newsSortMode==='Tác động cao';
+  const sortByNewest = filter==='Mới nhất' || state.newsSortMode==='Mới nhất';
+  if(filter && !['Tất cả','Mới nhất','Tác động cao'].includes(filter)){
+    const f=filter.toLowerCase();
+    list=list.filter(n=>(n.category||'').toLowerCase().includes(f)||(n.title||'').toLowerCase().includes(f)||(n.summary||'').toLowerCase().includes(f)||(n.area||[]).join(' ').toLowerCase().includes(f))
+  }
+  if(state.area&&state.area!=='Tất cả'){
+    const a=areaProfiles.find(x=>x.name===state.area);if(a){list=list.filter(n=>matchesArea(n,a))}
+  }
+  if(sortByHighImpact)return list.sort((a,b)=>((b.impactScore||0)-(a.impactScore||0)) || (newsTs(b)-newsTs(a))).slice(0,120);
+  if(sortByNewest)return list.sort((a,b)=>v271FreshImpactRank(b)-v271FreshImpactRank(a)).slice(0,120);
+  return list.sort((a,b)=>v271FreshImpactRank(b)-v271FreshImpactRank(a)).slice(0,120)
+}
 function parseRss(xml,q){const doc=new DOMParser().parseFromString(xml,'text/xml');return [...doc.querySelectorAll('item')].slice(0,24).map(item=>{const title=item.querySelector('title')?.textContent||'';const link=item.querySelector('link')?.textContent||'';const desc=item.querySelector('description')?.textContent||'';const source=item.querySelector('source')?.textContent||'Google Tin tức';const pubDate=item.querySelector('pubDate')?.textContent||'';let image='';const media=item.getElementsByTagName('media:content')[0]||item.getElementsByTagName('media:thumbnail')[0];if(media)image=media.getAttribute('url')||'';const enc=item.querySelector('enclosure');if(!image&&enc)image=enc.getAttribute('url')||'';if(!image){const m=desc.match(/<img[^>]+src=["']([^"']+)["']/i);if(m)image=m[1].replace(/&amp;/g,'&')}const clean=desc.replace(/<[^>]*>/g,' ').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();return normalizeNews({title,source,url:link,image,summary:clean||'Tin liên quan cần mở nguồn để đọc chi tiết.',category:categoryOf(title+' '+clean+' '+q),area:deriveAreas(title+' '+clean+' '+q),impactScore:scoreImpact(title+' '+clean+' '+q),pubDate,ts:Date.parse(pubDate)||0,query:q})}).filter(x=>x.title && !/youtube|tiktok|facebook/i.test(x.title))}
 async function v27FetchQuery(q){const url='https://news.google.com/rss/search?q='+encodeURIComponent(q)+'&hl=vi&gl=VN&ceid=VN:vi';const xml=await v27Timeout(nativeFetch(url),11000,'Hết thời gian');return parseRss(xml,q)}
 async function refreshNews(mode='deep'){
@@ -570,15 +593,552 @@ async function refreshNews(mode='deep'){
   state.news=merged; const stamp=new Date().toLocaleString('vi-VN'); store('news',state.news); store('newsLastRefresh',stamp); state.newsStatus={mode:'Đã cập nhật',found:found.length,queries:qs.length,ok,fail,progress:100,updated:stamp,ms:Date.now()-start}; store('newsStatus',state.newsStatus); state.filter='Tất cả'; state.area='Tất cả'; render(); hydrateNewsImages(); toast('Đã cập nhật '+state.news.length+' tin');
 }
 function renderNewsStatusOnly(){const el=document.getElementById('liveNewsStatus'); if(!el)return; el.innerHTML=v27StatusHtml()}
-function v27StatusHtml(){const st=state.newsStatus||{}; const total=state.news?.length||fallbackNews.length; const last=load('newsLastRefresh','Chưa cập nhật'); return `<div class="liveRow"><span class="liveBadge"><i></i>${esc(st.mode||'Sẵn sàng')}</span><button class="mini gold" onclick="refreshNews('quick')">Cập nhật nhanh</button><button class="mini" onclick="refreshNews('deep')">Quét sâu</button></div><div class="scanProgress"><i style="width:${Number(st.progress||0)}%"></i></div><div class="newsHealth"><div><b>${total}</b><span>Tin đang lưu</span></div><div><b>${st.ok||0}/${st.queries||0}</b><span>Nguồn quét OK</span></div><div><b>${esc(last).split(' ')[0]}</b><span>Lần cập nhật</span></div></div>`}
-function renderNews(){const cats=['Tất cả','Mới nhất','Hạ tầng','Quy hoạch','Pháp lý','Vân Phong','Ninh Hòa','Dốc Lết'];const areas=['Tất cả',...areaProfiles.map(a=>a.name)];let oldFilter=state.filter;if(state.filter==='Mới nhất'){state.newsSortMode='Mới nhất';oldFilter='Tất cả'} const list=getFilteredNews(oldFilter);const lead=list[0];document.getElementById('news').innerHTML=`<div class="liveNewsPanel"><h2>Bảng tin mới liên tục</h2><p>Ưu tiên tin mới 24h/7 ngày, nguồn chính thống và tin có tác động đến Ninh Hòa, Vân Phong, hạ tầng, quy hoạch, pháp lý.</p><div id="liveNewsStatus">${v27StatusHtml()}</div></div><div class="feedToolbar"><button class="${state.newsSortMode==='Mới nhất'?'active':''}" onclick="state.newsSortMode='Mới nhất';renderNews()">Mới nhất</button><button class="${state.newsSortMode==='Tác động cao'?'active':''}" onclick="state.newsSortMode='Tác động cao';renderNews()">Tác động cao</button><button onclick="refreshNews('quick')">Quét 24h/7 ngày</button><button onclick="refreshNews('deep')">Quét sâu nhiều nguồn</button></div><div class="chips">${cats.map(c=>`<button class="chip ${state.filter===c?'active':''}" onclick="state.filter='${c}';state.area='Tất cả';renderNews()">${c}</button>`).join('')}</div><div class="chips">${areas.map(a=>`<button class="chip ${state.area===a?'active':''}" onclick="state.area='${a}';renderNews()">${a}</button>`).join('')}</div><div class="deepScanHint">Nếu tin còn ít hoặc chưa mới, bấm <b>Quét sâu nhiều nguồn</b>. Bản No API sẽ lấy tin khi mở app/nhấn làm mới; muốn cập nhật 24/7 ngoài nền cần backend riêng.</div>${lead?leadCard(lead):''}<div class="sectionTitle"><h2>${state.area==='Tất cả'?'Tin đầu tư mới nhất':'Tin quanh '+state.area}</h2><span>${list.length} kết quả</span></div><div class="newsGrid">${list.slice(1,180).map(newsCard).join('')}</div>`}
+function v27StatusHtml(){const st=state.newsStatus||{}; const total=state.news?.length||fallbackNews.length; const last=load('newsLastRefresh','Chưa cập nhật'); return `<div class="liveRow compact"><span class="liveBadge"><i></i>${esc(st.mode||'Sẵn sàng')}</span><span class="smallStat">${total} tin chọn lọc</span><span class="smallStat">${esc(String(last)).split(' ')[0]}</span></div>${Number(st.progress||0)>0&&Number(st.progress||0)<100?`<div class="scanProgress"><i style="width:${Number(st.progress||0)}%"></i></div>`:''}`}
+function renderNews(){
+  const cats=['Mới nhất','Tác động cao','Ninh Hòa','Vân Phong','Hạ tầng','Pháp lý'];
+  const list=getFilteredNews();
+  const lead=list[0];
+  const filterLabel = state.filter==='Tất cả' ? 'Mới nhất' : state.filter;
+  document.getElementById('news').innerHTML=`
+    <div class="liveNewsPanel compactLive">
+      <div class="compactLiveTop"><div><h2>Bảng tin ưu tiên</h2><p>Tập trung tin mới, nguồn tốt và tác động mạnh. Không hiển thị quá nhiều bộ lọc để dễ dùng hơn.</p></div><button class="mini gold" onclick="refreshNews('quick')">Cập nhật</button></div>
+      <div id="liveNewsStatus">${v27StatusHtml()}</div>
+    </div>
+    <div class="chips focusedFilters">${cats.map(c=>`<button class="chip ${filterLabel===c?'active':''}" onclick="state.filter='${c}';state.area='Tất cả';state.newsSortMode=(c==='Tác động cao'?'Tác động cao':'Mới nhất');renderNews()">${c}</button>`).join('')}</div>
+    ${lead?leadCard(lead):''}
+    <div class="sectionTitle"><h2>${filterLabel==='Tác động cao'?'Tin tác động mạnh':'Tin mới đáng chú ý'}</h2><span>${list.length} tin đã lọc</span></div>
+    <div class="newsGrid">${list.slice(1,90).map(newsCard).join('')}</div>`
+}
 function leadCard(n){n=normalizeNews(n);const a=analysisFor(n);return `<article class="leadNews proLead">${leadVisual(n)}<div class="leadBody"><div class="tags"><span class="tag impact-high">Tác động ${n.impactScore}/100 · ${impactText(n.impactScore)}</span>${freshLabel(n)}${trustedLabel(n)}<span class="tag area">${esc((n.area||[]).slice(0,2).join(', ')||'Khánh Hòa')}</span><span class="tag verified">${esc(n.category||'Tin')}</span></div><h3>${esc(n.title)}</h3>${sourceLine(n)}<p><b>Góc nhìn đầu tư:</b> ${esc(a.action)}</p><div class="actions compact"><button class="mini gold" onclick='briefNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Phân tích sâu</button><button class="mini" onclick='quickRead(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Đọc nhanh</button><button class="mini" onclick="openUrl('${esc(n.url||'https://news.google.com/search?q=Ninh%20H%C3%B2a%20Kh%C3%A1nh%20H%C3%B2a&hl=vi&gl=VN&ceid=VN:vi')}')">Mở nguồn</button></div></div></article>`}
 function newsCard(n){n=normalizeNews(n);const a=analysisFor(n);const noPhoto=!isRealImage(n);return `<article class="newsCard ${noPhoto?'noPhoto':'hasPhoto'}">${newsVisual(n)}<div><div class="newsMetricRow"><span class="impactPill ${impactClass(n.impactScore)}">${n.impactScore}/100 · ${impactText(n.impactScore)}</span>${freshLabel(n)}<span class="impactPill">${esc((n.area||[])[0]||'Khánh Hòa')}</span><span class="impactPill">${esc(n.category||'Tin')}</span></div><h3>${esc(n.title)}</h3>${sourceLine(n)}<p>${esc((n.summary||a.action||'').slice(0,170))}</p><div class="actions compact"><button class="mini gold" onclick='briefNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Phân tích</button><button class="mini" onclick='saveNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Lưu</button><button class="mini" onclick="openUrl('${esc(n.url||'https://news.google.com')}')">Mở nguồn</button></div></div></article>`}
 function briefNews(n){n=normalizeNews(n);const a=analysisFor(n);showSheet(`<h2>Phân tích tác động tin</h2><h3>${esc(n.title)}</h3><p>${esc(n.summary)}</p><div class="impactBox"><div><b>${n.impactScore}/100</b><span>${impactText(n.impactScore)}</span></div><p><b>Khu vực ảnh hưởng:</b> ${esc((n.area||[]).join(', ')||'Khánh Hòa')}<br><b>Nhóm tác động:</b> ${esc(n.category||'Tin')}<br><b>Độ mới:</b> ${newsTs(n)?new Date(newsTs(n)).toLocaleString('vi-VN'):'Chưa rõ thời gian'}<br><b>Nguồn:</b> ${esc(cleanSourceName(n.source))}</p></div><div class="card" style="box-shadow:none"><h3>Góc nhìn đầu tư</h3><p>${esc(a.action)}</p></div><div class="card" style="box-shadow:none;background:#fff8e8"><h3>Rủi ro cần kiểm chứng</h3><p>${esc(a.risk)}</p></div><div class="card" style="box-shadow:none;background:#eefbf4"><h3>Hành động đề xuất</h3><p>${esc(a.next)}</p></div><div class="actions"><button class="primary gold" onclick='saveNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Lưu vào Sổ tay</button><button class="primary soft" onclick="openUrl('${esc(n.url||'https://news.google.com')}')">Mở nguồn</button></div>`)}
 function refreshIfStale(){const last=Date.parse(load('newsLastRefresh','')||'')||0; if(!last || Date.now()-last>V27_REFRESH_MINUTES*60*1000) refreshNews('quick');}
 function startV27AutoNews(){setInterval(()=>{if(!document.hidden)refreshIfStale()},V27_REFRESH_MINUTES*60*1000); document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshIfStale()});}
 
-if(!state.news.length)state.news=fallbackNews.map(normalizeNews);render();setTimeout(()=>{if((state.news||[]).length<180)refreshNews('deep');else refreshIfStale();hydrateNewsImages();startV27AutoNews();},800);
+
+
+// ===== V28 Smart News Quality Filter =====
+(function(){
+  const V28_MAX_NEWS = 150;
+  const V28_DISPLAY_MAX = 90;
+  const V28_STRONG_SOURCES = /baokhanhhoa|khanhhoa\.gov|ninhhoa\.khanhhoa|congbao\.khanhhoa|chinhphu|baochinhphu|tuoitre|vnexpress|plo\.vn|vietnamnet|vov\.vn|nhandan|dantri|cafeland|tapchicongthuong|ipa\.khanhhoa/i;
+  const V28_BAD_TERMS = /ninh bình|bình phước|bắc ninh|quảng ninh|tây ninh|ninh thuận|bình dương|đồng nai|long an|hà nội|tp\.hcm|hồ chí minh|đà nẵng|cần thơ/i;
+  const V28_CORE = /ninh hòa|ninh hoà|khánh hòa|khánh hoà|vân phong|van phong|ninh diêm|ninh hải|dốc lết|doc let|ninh xuân|ninh an|ninh thọ|ninh thủy|ninh phước|hòn hèo|cao tốc khánh hòa|khánh hòa buôn ma thuột|buôn ma thuột/i;
+  const V28_STRONG_TOPICS = /quy hoạch|phân khu|công báo|phê duyệt|ban hành|cao tốc|hạ tầng|khu kinh tế|vân phong|cảng|logistics|đô thị|khu công nghiệp|bảng giá đất|đất đai|nhà ở|dự án|đấu giá|giải phóng mặt bằng|thu hồi đất/i;
+  const V28_WEAK_TOPICS = /hoa hậu|bóng đá|showbiz|ẩm thực|du lịch hè|tai nạn|thời tiết|thể thao|giải trí|ca sĩ|phim|concert/i;
+
+  function v28Text(n){return normalizeVN([n?.title,n?.summary,n?.source,n?.category,(n?.area||[]).join(' '),n?.query].join(' '));}
+  function v28Raw(n){return [n?.title,n?.summary,n?.source,n?.category,(n?.area||[]).join(' '),n?.query].join(' ');}
+  function v28IsRelevant(n){
+    const raw=v28Raw(n); const t=normalizeVN(raw);
+    if(!n || !n.title) return false;
+    if(V28_BAD_TERMS.test(t) && !/khánh hòa|khánh hoà|ninh hòa|ninh hoà|vân phong|van phong/.test(t)) return false;
+    if(V28_WEAK_TOPICS.test(t) && !V28_STRONG_TOPICS.test(t)) return false;
+    return V28_CORE.test(t) || (/khánh hòa|khánh hoà/.test(t) && V28_STRONG_TOPICS.test(t)) || (V28_STRONG_SOURCES.test(raw) && V28_STRONG_TOPICS.test(t));
+  }
+  function v28SourceScore(n){
+    const s=String(n?.source||'')+' '+String(n?.url||'');
+    if(/ninhhoa\.khanhhoa|congbao\.khanhhoa|khanhhoa\.gov|baochinhphu|chinhphu/i.test(s)) return 25;
+    if(/baokhanhhoa|ipa\.khanhhoa/i.test(s)) return 22;
+    if(/tuoitre|vnexpress|plo\.vn|vietnamnet|vov\.vn|nhandan|dantri/i.test(s)) return 16;
+    if(/cafeland|tapchicongthuong/i.test(s)) return 10;
+    return 3;
+  }
+  function v28FreshScore(n){
+    const ts=newsTs(n); if(!ts) return 4;
+    const h=(Date.now()-ts)/36e5;
+    if(h<24) return 30;
+    if(h<72) return 24;
+    if(h<168) return 18;
+    if(h<720) return 8;
+    return 0;
+  }
+  function v28RelevanceScore(n){
+    const t=v28Text(n); let s=0;
+    if(/ninh hòa|ninh hoà/.test(t)) s+=26;
+    if(/ninh diêm|ninh hải|dốc lết|ninh xuân|ninh an|ninh thọ|ninh thủy|ninh phước|hòn hèo/.test(t)) s+=24;
+    if(/vân phong|van phong|khu kinh tế|cảng|logistics/.test(t)) s+=20;
+    if(/khánh hòa|khánh hoà/.test(t)) s+=10;
+    if(V28_STRONG_TOPICS.test(t)) s+=18;
+    if(/quy hoạch|phân khu|phê duyệt|công báo|cao tốc|hạ tầng/.test(t)) s+=10;
+    return Math.min(55,s);
+  }
+  function v28QualityScore(n){
+    n=normalizeNews(n);
+    const impact=Number(n.impactScore||scoreImpact(v28Raw(n)))||0;
+    const score=Math.round(v28FreshScore(n)+v28RelevanceScore(n)+v28SourceScore(n)+(impact*0.48)+(isRealImage(n)?4:0));
+    return Math.max(0,Math.min(100,score));
+  }
+  function v28QualityLevel(n){const q=v28QualityScore(n);return q>=86?'Rất đáng đọc':q>=74?'Đáng đọc':q>=62?'Nên theo dõi':'Tham khảo'}
+  function v28Reasons(n){
+    const t=v28Text(n); const r=[];
+    if(newsTs(n)){const h=(Date.now()-newsTs(n))/36e5; if(h<24)r.push('tin trong 24h'); else if(h<168)r.push('tin trong 7 ngày')}
+    if(/ninh hòa|ninh hoà|ninh diêm|ninh hải|dốc lết|ninh xuân|ninh an/.test(t)) r.push('liên quan trực tiếp Ninh Hòa');
+    else if(/vân phong|van phong|khánh hòa|khánh hoà/.test(t)) r.push('ảnh hưởng Khánh Hòa/Vân Phong');
+    if(/quy hoạch|phân khu|công báo|phê duyệt|ban hành/.test(t)) r.push('có yếu tố pháp lý/quy hoạch');
+    if(/cao tốc|hạ tầng|cảng|logistics|khu công nghiệp|đô thị/.test(t)) r.push('có tác động hạ tầng/đô thị');
+    if(v28SourceScore(n)>=16) r.push('nguồn mạnh');
+    return r.slice(0,3).join(' · ') || 'được giữ vì có liên quan đầu tư';
+  }
+  function v28DedupeKey(n){
+    let t=normalizeVN(String(n?.title||''));
+    t=t.replace(/\b(cafeland|vnexpress|tuoitre|bao khanh hoa|bao moi|plo|dan tri|vietnamnet|google tin tuc|tap chi|bao chinh phu)\b/g,'');
+    t=t.replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+    const words=t.split(' ').filter(w=>w.length>2&&!/^(tin|moi|nhat|khánh|hòa|ninh|duoc|phe|ve|tai|hon|gan|khu|the|nhung|nhieu)$/.test(w));
+    return words.slice(0,9).join('-') || t.slice(0,60);
+  }
+  function v28CleanMerge(items){
+    const by={};
+    (items||[]).map(normalizeNews).forEach(n=>{
+      if(!v28IsRelevant(n)) return;
+      n.qualityScore=v28QualityScore(n); n.qualityLevel=v28QualityLevel(n); n.qualityReason=v28Reasons(n);
+      if(n.qualityScore<54) return;
+      const k=v28DedupeKey(n);
+      const old=by[k];
+      if(!old || n.qualityScore>old.qualityScore || (n.qualityScore===old.qualityScore && v27Rank(n)>v27Rank(old))) by[k]=n;
+    });
+    return Object.values(by).sort((a,b)=>(b.qualityScore-a.qualityScore)||v271FreshImpactRank(b)-v271FreshImpactRank(a)).slice(0,V28_MAX_NEWS);
+  }
+
+  window.mergeNewsItems=function(items){return v28CleanMerge(items)};
+  window.getAllNews=function(){return v28CleanMerge([...(state.news||[]),...fallbackNews])};
+  window.getFilteredNews=function(filter=state.filter){
+    let list=getAllNews();
+    const f=filter||'Mới nhất';
+    if(f==='Tác động cao') list=list.filter(n=>Number(n.impactScore||0)>=75 || Number(n.qualityScore||0)>=78);
+    else if(!['Tất cả','Mới nhất'].includes(f)){
+      const ff=normalizeVN(f);
+      list=list.filter(n=>v28Text(n).includes(ff));
+    }
+    if(state.area&&state.area!=='Tất cả'){
+      const a=areaProfiles.find(x=>x.name===state.area);
+      if(a) list=list.filter(n=>matchesArea(n,a));
+    }
+    return list.sort((a,b)=> (f==='Tác động cao' ? ((b.impactScore||0)-(a.impactScore||0)) : ((b.qualityScore||0)-(a.qualityScore||0))) || v271FreshImpactRank(b)-v271FreshImpactRank(a)).slice(0,V28_DISPLAY_MAX);
+  };
+  window.v27BuildQueries=function(mode='deep'){
+    const base=[
+      'Ninh Hòa Khánh Hòa bất động sản OR quy hoạch OR hạ tầng',
+      'Ninh Hòa Khánh Hòa quy hoạch sử dụng đất',
+      'Ninh Hòa Khánh Hòa cao tốc hạ tầng',
+      'Ninh Diêm Ninh Hòa Vân Phong',
+      'Dốc Lết Ninh Hải Ninh Hòa quy hoạch du lịch',
+      'Ninh Xuân Ninh An Ninh Hòa quy hoạch',
+      'Khu kinh tế Vân Phong Ninh Hòa',
+      'cao tốc Khánh Hòa Buôn Ma Thuột Ninh Hòa',
+      'Khánh Hòa phê duyệt quy hoạch phân khu Ninh Hòa',
+      'Công báo Khánh Hòa Ninh Hòa quy hoạch',
+      'bảng giá đất Khánh Hòa Ninh Hòa',
+      'IPA Khánh Hòa Ninh Hòa Vân Phong'
+    ];
+    const fresh=['when:1d','when:7d','when:30d'];
+    let qs=[]; base.forEach(q=>{fresh.forEach(w=>qs.push(q+' '+w))});
+    if(mode==='quick') qs=qs.filter((_,i)=>i%3!==2).slice(0,18);
+    return qs.slice(0,36);
+  };
+  window.v27StatusHtml=function(){const st=state.newsStatus||{}; const total=getAllNews().length; const last=load('newsLastRefresh','Chưa cập nhật'); return `<div class="liveRow compact"><span class="liveBadge"><i></i>${esc(st.mode||'Bộ lọc chất lượng')}</span><span class="smallStat">${total} tin chất lượng</span><span class="smallStat">${esc(String(last)).split(' ')[0]}</span></div>${Number(st.progress||0)>0&&Number(st.progress||0)<100?`<div class="scanProgress"><i style="width:${Number(st.progress||0)}%"></i></div>`:''}`};
+  window.render=function(){document.getElementById('nav').innerHTML=navs.map(n=>`<button data-tab="${n[0]}" class="${state.tab===n[0]?'active':''}" onclick="go('${n[0]}')"><span>${n[1]}</span>${n[2]}</button>`).join('');document.getElementById('quickFilters').innerHTML=quick.map(q=>`<button class="qf ${state.filter===q?'active':''}" onclick="state.filter='${q}';go('news')">${q}</button>`).join('');document.getElementById('countTop').textContent=getAllNews().length+' tin';renderTab(state.tab)};
+  window.renderTab=function(t){if(t==='home')renderHome();if(t==='news')renderNews();if(t==='check')renderCheck();if(t==='areas')renderAreas();if(t==='legal')renderLegal();if(t==='saved')renderSaved();document.getElementById('countTop').textContent=getAllNews().length+' tin'};
+  window.renderNews=function(){
+    const cats=['Mới nhất','Tác động cao','Ninh Hòa','Vân Phong','Hạ tầng','Pháp lý'];
+    const list=getFilteredNews(); const lead=list[0]; const label=state.filter==='Tất cả'?'Mới nhất':state.filter;
+    document.getElementById('news').innerHTML=`
+      <div class="liveNewsPanel compactLive qualityPanel"><div class="compactLiveTop"><div><h2>Bộ lọc chất lượng cao</h2><p>Ưu tiên tin mới, đúng khu vực, nguồn mạnh, tác động cao và tự ẩn tin trùng/tin lệch khu vực.</p></div><button class="mini gold" onclick="refreshNews('quick')">Cập nhật</button></div><div id="liveNewsStatus">${v27StatusHtml()}</div></div>
+      <div class="chips focusedFilters">${cats.map(c=>`<button class="chip ${label===c?'active':''}" onclick="state.filter='${c}';state.area='Tất cả';state.newsSortMode=(c==='Tác động cao'?'Tác động cao':'Mới nhất');renderNews()">${c}</button>`).join('')}</div>
+      ${lead?leadCard(lead):''}
+      <div class="sectionTitle"><h2>${label==='Tác động cao'?'Tin tác động mạnh':'Tin đáng đọc nhất'}</h2><span>${list.length} tin sau lọc</span></div>
+      <div class="newsGrid">${list.slice(1,86).map(newsCard).join('')}</div>`
+  };
+  window.leadCard=function(n){n=normalizeNews(n);const a=analysisFor(n);return `<article class="leadNews proLead qualityLead">${leadVisual(n)}<div class="leadBody"><div class="tags"><span class="tag impact-high">Tác động ${n.impactScore}/100 · ${impactText(n.impactScore)}</span><span class="tag verified">${esc(n.qualityLevel||v28QualityLevel(n))}</span><span class="tag area">${esc((n.area||[]).slice(0,2).join(', ')||'Khánh Hòa')}</span><span class="tag">${esc(n.category||'Tin')}</span></div><h3>${esc(n.title)}</h3>${sourceLine(n)}<p><b>Vì sao đáng đọc:</b> ${esc(n.qualityReason||v28Reasons(n))}</p><p><b>Góc nhìn đầu tư:</b> ${esc(a.action)}</p><div class="actions compact"><button class="mini gold" onclick='briefNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Phân tích sâu</button><button class="mini" onclick='quickRead(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Đọc nhanh</button><button class="mini" onclick="openUrl('${esc(n.url||'https://news.google.com/search?q=Ninh%20H%C3%B2a%20Kh%C3%A1nh%20H%C3%B2a&hl=vi&gl=VN&ceid=VN:vi')}')">Mở nguồn</button></div></div></article>`};
+  window.newsCard=function(n){n=normalizeNews(n);const a=analysisFor(n);const noPhoto=!isRealImage(n);return `<article class="newsCard ${noPhoto?'noPhoto':'hasPhoto'} qualityNews">${newsVisual(n)}<div><div class="newsMetricRow"><span class="impactPill ${impactClass(n.impactScore)}">${n.impactScore}/100</span><span class="impactPill qscore">Chất lượng ${n.qualityScore||v28QualityScore(n)}/100</span><span class="impactPill">${esc((n.area||[])[0]||'Khánh Hòa')}</span><span class="impactPill">${esc(n.category||'Tin')}</span></div><h3>${esc(n.title)}</h3>${sourceLine(n)}<p><b>Đáng đọc vì:</b> ${esc(n.qualityReason||v28Reasons(n))}</p><p>${esc((a.action||n.summary||'').slice(0,150))}</p><div class="actions compact"><button class="mini gold" onclick='briefNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Phân tích</button><button class="mini" onclick='saveNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Lưu</button><button class="mini" onclick="openUrl('${esc(n.url||'https://news.google.com')}')">Mở nguồn</button></div></div></article>`};
+  window.briefNews=function(n){n=normalizeNews(n);const a=analysisFor(n);showSheet(`<h2>Phân tích chất lượng tin</h2><h3>${esc(n.title)}</h3><div class="impactBox"><p><b>Điểm chất lượng:</b> ${v28QualityScore(n)}/100 · ${esc(v28QualityLevel(n))}<br><b>Lý do đáng đọc:</b> ${esc(n.qualityReason||v28Reasons(n))}<br><b>Tác động đầu tư:</b> ${n.impactScore}/100 · ${impactText(n.impactScore)}<br><b>Khu vực:</b> ${esc((n.area||[]).join(', ')||'Khánh Hòa')}<br><b>Nguồn:</b> ${esc(cleanSourceName(n.source))}</p></div><div class="card" style="box-shadow:none"><h3>Góc nhìn đầu tư</h3><p>${esc(a.action)}</p></div><div class="card" style="box-shadow:none;background:#fff8e8"><h3>Rủi ro cần kiểm chứng</h3><p>${esc(a.risk)}</p></div><div class="card" style="box-shadow:none;background:#eefbf4"><h3>Hành động đề xuất</h3><p>${esc(a.next)}</p></div><div class="actions"><button class="primary gold" onclick='saveNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Lưu vào Sổ tay</button><button class="primary soft" onclick="openUrl('${esc(n.url||'https://news.google.com')}')">Mở nguồn</button></div>`)};
+
+  const style=document.createElement('style');style.textContent=`.qualityPanel{border:1px solid rgba(215,165,49,.22)}.qualityLead{border:1px solid rgba(215,165,49,.28)}.qualityNews{border-left:4px solid rgba(215,165,49,.72)}.impactPill.qscore{background:#eefbf4;color:#0a6b42}.qualityNews p b{color:#082236}.qualityPanel p{max-width:460px}.sourceLine{font-size:12px}`;document.head.appendChild(style);
+  setTimeout(()=>{try{state.news=v28CleanMerge([...(state.news||[]),...fallbackNews]);store('news',state.news);render();}catch(e){console.warn('V28 init',e)}},100);
+})();
+
+
+if(!state.news.length)state.news=fallbackNews.map(normalizeNews);render();setTimeout(()=>{if((state.news||[]).length<100)refreshNews('quick');else refreshIfStale();hydrateNewsImages();startV27AutoNews();},800);
 </script>
+
+<script>
+(function(){
+  const V29_MAX_NEWS=160;
+  const V29_DISPLAY_MAX=120;
+  const V29_DIRECT=/ninh\s*h[oòóỏõọoaàáảãạ]\b|ninh\s+di[eê]m|ninh\s+h[aả]i|d[oô]c\s+l[eê]t|ninh\s+xu[aâ]n|ninh\s+an|ninh\s+th[oọ]|ninh\s+th[uủ]y|ninh\s+ph[uụ]ng|ninh\s+ph[uư][oơ]c|ninh\s+[ií]ch|ninh\s+sim|t[aâ]n\s+[dđ]ịnh|bắc\s+hòn\s+h[eè]o|đông\s+bắc\s+ninh\s+h[oòóỏõọoaàáảãạ]/i;
+  const V29_STRATEGIC=/v[aâ]n\s+phong|nam\s+v[aâ]n\s+phong|khu\s+kinh\s+t[eế]\s+v[aâ]n\s+phong|cao\s+t[oố]c\s+kh[aá]nh\s+h[oòóỏõọoaàáảãạ]\s*[-–]\s*bu[oô]n\s+ma\s+thu[oộ]t|cao\s+t[oố]c\s+v[aâ]n\s+phong|ph[aâ]n\s+khu\s+1[679]|logistics|c[aả]ng|bắc\s+hòn\s+h[eè]o/i;
+  const V29_BAD=/ninh\s+b[iì]nh|bắc\s+ninh|t[aâ]y\s+ninh|ninh\s+thu[aậ]n|ninh\s+b[iì]nh|h[oò]a\s+b[iì]nh|qu[aả]ng\s+ninh/i;
+  const V29_KHANHHOA=/kh[aá]nh\s+h[oòóỏõọoaàáảãạ]/i;
+  const v29Filters=['Mới nhất','Tác động cao','Ninh Hòa','Vân Phong','Hạ tầng','Quy hoạch','Pháp lý'];
+  const v29AreaFilters=['Ninh Hòa','Ninh Diêm','Dốc Lết / Ninh Hải','Ninh Xuân','Ninh An','Vân Phong'];
+  if(Array.isArray(areaProfiles)&&!areaProfiles.some(a=>a.name==='Ninh Hòa')){
+    areaProfiles.unshift({id:'ninhhoa',name:'Ninh Hòa',img:'center',type:'Trọng tâm chính',score:90,keys:['ninh hòa','ninh hoà','thị xã ninh hòa','phường ninh hòa','tân định','ninh diêm','dốc lết','ninh hải','ninh xuân','ninh an','vân phong']});
+  }
+  function v29Raw(n){return (((n&&n.title)||'')+' '+((n&&n.summary)||'')+' '+((n&&n.source)||'')+' '+((n&&n.category)||'')+' '+((n&&n.area)||[]).join(' ')).toLowerCase()}
+  function v29Text(n){return normalizeVN(v29Raw(n))}
+  function v29IsRelevant(n){
+    const raw=v29Raw(n), txt=normalizeVN(raw);
+    if(V29_BAD.test(raw)) return false;
+    if(V29_DIRECT.test(raw)) return true;
+    if(V29_STRATEGIC.test(raw) && V29_KHANHHOA.test(raw)) return true;
+    if(/van phong|bac hon heo|nam van phong|phan khu 16|phan khu 17|phan khu 19|doc let/.test(txt)) return true;
+    return false;
+  }
+  function v29SourceScore(n){
+    const s=normalizeVN(String(n?.source||''));
+    if(/cong bao|cong tinh|ninh hoa|khanh hoa|bao khanh hoa|ipa|chinh phu/.test(s)) return 22;
+    if(/tuoi tre|vnexpress|plo|vov|nhan dan|vietnamnet|dan tri|thanh nien/.test(s)) return 16;
+    if(/cafeland|cafef/.test(s)) return 9;
+    return 5;
+  }
+  function v29FocusScore(n){
+    n=normalizeNews(n); const raw=v29Raw(n), txt=normalizeVN(raw);
+    let s=0;
+    if(/ninh hoa|ninh hoà/.test(txt)) s+=34;
+    if(/ninh diem|ninh hai|doc let|ninh xuan|ninh an|ninh tho|ninh thuy|ninh phuoc|tan dinh/.test(txt)) s+=30;
+    if(/van phong|bac hon heo|nam van phong|dong bac ninh hoa|phan khu 16|phan khu 17|phan khu 19/.test(txt)) s+=24;
+    if(/quy hoach|su dung dat|cong bao|phe duyet|phap ly|bang gia dat/.test(txt)) s+=18;
+    if(/cao toc|ha tang|do thi|cang|logistics|khu cong nghiep|du lich|doc let/.test(txt)) s+=15;
+    s+=v29SourceScore(n);
+    s+=Math.min(22, Math.round((Number(n.impactScore||scoreImpact(raw))||0)*0.22));
+    if(newsTs(n)){const h=(Date.now()-newsTs(n))/36e5; if(h<24)s+=18; else if(h<168)s+=14; else if(h<720)s+=7;}
+    return Math.max(0,Math.min(100,s));
+  }
+  function v29Reason(n){
+    const txt=v29Text(n), r=[];
+    if(/ninh hoa|ninh hoà/.test(txt)) r.push('trực tiếp Ninh Hòa');
+    if(/ninh diem|ninh hai|doc let|ninh xuan|ninh an|tan dinh/.test(txt)) r.push('đúng khu vực con');
+    if(/van phong|phan khu|bac hon heo|nam van phong/.test(txt)) r.push('liên quan Vân Phong/phân khu');
+    if(/quy hoach|cong bao|phap ly|su dung dat/.test(txt)) r.push('có yếu tố quy hoạch/pháp lý');
+    if(/cao toc|ha tang|cang|logistics|du lich/.test(txt)) r.push('có tác động hạ tầng/kinh tế');
+    if(newsTs(n)){const h=(Date.now()-newsTs(n))/36e5;if(h<24)r.unshift('tin trong 24h'); else if(h<168)r.unshift('tin trong 7 ngày')}
+    return r.slice(0,3).join(' · ')||'được giữ vì có liên quan rõ đến Ninh Hòa';
+  }
+  function v29Merge(items){
+    const by={};
+    (items||[]).map(normalizeNews).forEach(n=>{
+      if(!v29IsRelevant(n)) return;
+      n.qualityScore=v29FocusScore(n); n.qualityLevel=n.qualityScore>=86?'Trọng tâm cao':n.qualityScore>=74?'Đáng đọc':n.qualityScore>=62?'Theo dõi':'Tham khảo'; n.qualityReason=v29Reason(n);
+      if(n.qualityScore<58) return;
+      const k=(typeof v28DedupeKey==='function'?v28DedupeKey(n):normalizeVN(n.title||'').slice(0,90));
+      if(!by[k] || n.qualityScore>by[k].qualityScore || (n.qualityScore===by[k].qualityScore && (n.impactScore||0)>(by[k].impactScore||0))) by[k]=n;
+    });
+    return Object.values(by).sort((a,b)=>(b.qualityScore-a.qualityScore)||((b.impactScore||0)-(a.impactScore||0))).slice(0,V29_MAX_NEWS);
+  }
+  window.mergeNewsItems=function(items){return v29Merge(items)};
+  window.getAllNews=function(){return v29Merge([...(state.news||[]),...fallbackNews])};
+  window.getFilteredNews=function(filter=state.filter){
+    let list=getAllNews(); const f=filter||'Mới nhất'; const ff=normalizeVN(f);
+    if(f==='Tác động cao') list=list.filter(n=>(n.impactScore||0)>=75 || (n.qualityScore||0)>=78);
+    else if(f==='Ninh Hòa') list=list.filter(n=>/ninh hoa|ninh hoà|ninh diem|ninh hai|doc let|ninh xuan|ninh an|tan dinh/.test(v29Text(n)));
+    else if(f==='Vân Phong') list=list.filter(n=>/van phong|bac hon heo|nam van phong|phan khu 16|phan khu 17|phan khu 19|logistics|cang/.test(v29Text(n)));
+    else if(['Hạ tầng','Quy hoạch','Pháp lý'].includes(f)) list=list.filter(n=>v29Text(n).includes(ff));
+    if(state.area&&state.area!=='Tất cả'){
+      const a=areaProfiles.find(x=>x.name===state.area);
+      if(a) list=list.filter(n=>matchesArea(n,a));
+    }
+    return list.sort((a,b)=> (f==='Mới nhất'?((newsTs(b)||0)-(newsTs(a)||0)):((b.qualityScore||0)-(a.qualityScore||0))) || ((b.impactScore||0)-(a.impactScore||0))).slice(0,V29_DISPLAY_MAX);
+  };
+  window.v27BuildQueries=function(mode='deep'){
+    const core=[
+      'Ninh Hòa Khánh Hòa mới nhất',
+      'Ninh Hòa quy hoạch sử dụng đất mới nhất',
+      'Ninh Hòa quy hoạch chung 2040 mới nhất',
+      'Ninh Hòa hạ tầng đô thị mới nhất',
+      'Ninh Hòa bất động sản pháp lý mới nhất',
+      'Ninh Diêm Ninh Hòa Vân Phong mới nhất',
+      'Dốc Lết Ninh Hải Ninh Hòa mới nhất',
+      'Ninh Xuân Ninh Hòa cao tốc mới nhất',
+      'Ninh An Ninh Hòa Vân Phong mới nhất',
+      'Tân Định Ninh Hòa đô thị mới nhất',
+      'Đông Bắc Ninh Hòa phân khu 16 mới nhất',
+      'Bắc Hòn Hèo Ninh Hòa phân khu 17 mới nhất',
+      'Nam Vân Phong Ninh Hòa phân khu 19 mới nhất',
+      'Khu kinh tế Vân Phong Ninh Hòa mới nhất',
+      'cao tốc Khánh Hòa Buôn Ma Thuột Ninh Hòa mới nhất',
+      'Công báo Khánh Hòa Ninh Hòa quy hoạch mới nhất',
+      'Cổng Ninh Hòa kế hoạch sử dụng đất mới nhất',
+      'Báo Khánh Hòa Ninh Hòa mới nhất',
+      'IPA Khánh Hòa Ninh Hòa Vân Phong mới nhất',
+      'bảng giá đất Khánh Hòa Ninh Hòa mới nhất'
+    ];
+    const sourceSpecific=[
+      'site:ninhhoa.khanhhoa.gov.vn Ninh Hòa quy hoạch sử dụng đất',
+      'site:ninhhoa.khanhhoa.gov.vn Ninh Hòa 2040',
+      'site:congbao.khanhhoa.gov.vn Ninh Hòa quy hoạch',
+      'site:baokhanhhoa.vn Ninh Hòa',
+      'site:ipa.khanhhoa.gov.vn Ninh Hòa Vân Phong',
+      'site:khanhhoa.gov.vn Ninh Hòa quy hoạch',
+      'site:tuoitre.vn Ninh Hòa Khánh Hòa',
+      'site:vnexpress.net Ninh Hòa Khánh Hòa',
+      'site:plo.vn Ninh Hòa Khánh Hòa',
+      'site:cafeland.vn Ninh Hòa Khánh Hòa'
+    ];
+    const fresh=mode==='quick'?['when:1d','when:7d']:['when:1d','when:7d','when:30d'];
+    let qs=[];[...core,...sourceSpecific].forEach(q=>fresh.forEach(w=>qs.push(q+' '+w)));
+    return qs.slice(0,mode==='quick'?28:55);
+  };
+  window.render=function(){
+    document.getElementById('nav').innerHTML=navs.map(n=>`<button data-tab="${n[0]}" class="${state.tab===n[0]?'active':''}" onclick="go('${n[0]}')"><span>${n[1]}</span>${n[2]}</button>`).join('');
+    document.getElementById('quickFilters').innerHTML=v29Filters.map(q=>`<button class="qf ${state.filter===q?'active':''}" onclick="state.filter='${q}';state.area='Tất cả';go('news')">${q}</button>`).join('');
+    document.getElementById('countTop').textContent=getAllNews().length+' tin';
+    const bt=document.querySelector('.brandText span'); if(bt)bt.textContent='Chỉ tập trung Ninh Hòa';
+    renderTab(state.tab);
+  };
+  window.renderNews=function(){
+    const list=getFilteredNews(); const lead=list[0]; const label=state.filter==='Tất cả'?'Mới nhất':state.filter;
+    document.getElementById('news').innerHTML=`
+      <div class="ninhFocusPanel"><div><h2>Bảng tin Ninh Hòa trọng tâm</h2><p>Chỉ giữ tin liên quan trực tiếp Ninh Hòa hoặc có tác động rõ đến Ninh Hòa qua Vân Phong, hạ tầng, quy hoạch, pháp lý.</p></div><button class="mini gold" onclick="refreshNews('quick')">Cập nhật</button></div>
+      <div class="chips focusedFilters">${v29Filters.map(c=>`<button class="chip ${label===c?'active':''}" onclick="state.filter='${c}';state.area='Tất cả';renderNews()">${c}</button>`).join('')}</div>
+      <div class="chips areaFocusFilters">${v29AreaFilters.map(a=>`<button class="chip ${state.area===a?'active':''}" onclick="state.area='${a}';state.filter='Mới nhất';renderNews()">${a}</button>`).join('')}</div>
+      ${lead?leadCard(lead):''}
+      <div class="sectionTitle"><h2>${state.area&&state.area!=='Tất cả'?'Tin quanh '+state.area:(label==='Tác động cao'?'Tin tác động mạnh':'Tin Ninh Hòa đáng đọc')}</h2><span>${list.length} tin tinh lọc</span></div>
+      <div class="newsGrid">${list.slice(1,70).map(newsCard).join('')}</div>`;
+  };
+  window.briefNews=function(n){n=normalizeNews(n);const a=analysisFor(n);showSheet(`<h2>Phân tích tin theo trọng tâm Ninh Hòa</h2><h3>${esc(n.title)}</h3><div class="impactBox"><p><b>Điểm trọng tâm Ninh Hòa:</b> ${v29FocusScore(n)}/100<br><b>Lý do giữ tin:</b> ${esc(v29Reason(n))}<br><b>Tác động đầu tư:</b> ${n.impactScore}/100 · ${impactText(n.impactScore)}<br><b>Khu vực ảnh hưởng:</b> ${esc((n.area||[]).join(', ')||'Ninh Hòa')}<br><b>Nguồn:</b> ${esc(cleanSourceName(n.source))}</p></div><div class="card" style="box-shadow:none"><h3>Góc nhìn đầu tư</h3><p>${esc(a.action)}</p></div><div class="card" style="box-shadow:none;background:#fff8e8"><h3>Rủi ro cần kiểm chứng</h3><p>${esc(a.risk)} Không nên xem tin cấp tỉnh là tín hiệu mua ngay nếu không liên quan rõ đến vị trí lô đất tại Ninh Hòa.</p></div><div class="card" style="box-shadow:none;background:#eefbf4"><h3>Hành động đề xuất</h3><p>${esc(a.next)} Ưu tiên đối chiếu Cổng Ninh Hòa, Công báo Khánh Hòa và hồ sơ pháp lý thửa đất.</p></div><div class="actions"><button class="primary gold" onclick='saveNews(${JSON.stringify(n).replace(/'/g,"&#039;")})'>Lưu vào Sổ tay</button><button class="primary soft" onclick="openUrl('${esc(n.url||'https://news.google.com/search?q=Ninh%20H%C3%B2a%20Kh%C3%A1nh%20H%C3%B2a&hl=vi&gl=VN&ceid=VN:vi')}')">Mở nguồn</button></div>`)};
+  const css=document.createElement('style');css.textContent=`
+    .ninhFocusPanel{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(135deg,#062238,#074f72);color:white;border-radius:22px;padding:15px 16px;margin-bottom:12px;box-shadow:0 12px 28px rgba(6,27,44,.13)}
+    .ninhFocusPanel h2{margin:0 0 4px;font-size:18px}.ninhFocusPanel p{margin:0;color:rgba(255,255,255,.82);font-size:13px;line-height:1.35}
+    .areaFocusFilters{padding-bottom:10px}.areaFocusFilters .chip{background:#fff;border-color:#dbe8ee}.areaFocusFilters .chip.active{background:#d7a531;color:#082236;border-color:#d7a531}
+    .qualityPanel,.liveNewsPanel{display:none!important}.authorLine{font-size:12px}.brandText span{font-weight:700}
+  `;document.head.appendChild(css);
+  setTimeout(()=>{try{state.news=v29Merge([...(state.news||[]),...fallbackNews]);store('news',state.news);render()}catch(e){console.warn('V29 init',e)}},150);
+})();
+</script>
+
+
+<script>
+// ===== V29.1 Thổ cư Value Fix: nhận diện quy hoạch đất ở/thổ cư và mô phỏng hệ số x5 =====
+(function(){
+  function landPlanSignals(parts){
+    const raw=(Array.isArray(parts)?parts.join(' '):String(parts||''));
+    const txt=normalizeVN(raw);
+    const isAgri=/lua|trong lua|dat lua|nong nghiep|cln|hnk|dat cay lau nam|dat hang nam/.test(txt);
+    const isResidentialNow=/dat o|dat tho cu|tho cu|o do thi|o nong thon|odt|ont/.test(txt) && !/quy hoach/.test(txt);
+    const plannedResidential=/quy hoach[^\.\n]*(tho cu|dat o|o do thi|o nong thon|odt|ont|khu dan cu)|quy hoach th[oơ] cu|quy hoach dat o|len tho cu|chuyen muc dich[^\.\n]*(dat o|tho cu)|dat o theo quy hoach|du kien dat o/.test(txt);
+    const badPlanning=/giao thong|lo gioi|thu hoi|cong vien|cay xanh|hanh lang|duong quy hoach|dgt|dkv/.test(txt);
+    return {txt,isAgri,isResidentialNow,plannedResidential,badPlanning,raw};
+  }
+  function upliftBox(d,s){
+    if(!s || !s.upside) return '';
+    const u=s.upside;
+    return `<div class="goodStrong upliftBox"><h3>Cơ hội quy hoạch thổ cư</h3><p><b>Kịch bản:</b> đất hiện tại có dấu hiệu là đất nông nghiệp/đất lúa nhưng thông tin quy hoạch ghi nhận theo hướng đất ở/thổ cư.</p><div class="coordTools"><div class="coordBox"><b>x5</b><span>hệ số người dùng giả định</span></div><div class="coordBox"><b>${u.currentM2?fmtNum(u.currentM2)+' tr/m²':'--'}</b><span>giá hiện tại ước tính</span></div><div class="coordBox"><b>${u.targetM2?fmtNum(u.targetM2)+' tr/m²':'--'}</b><span>giá sau x5 ước tính</span></div><div class="coordBox"><b>${u.targetTotal?fmtNum(u.targetTotal)+' tỷ':'--'}</b><span>giá trị mô phỏng</span></div></div><p class="smallMuted">Đây chỉ là mô phỏng cơ hội. Giá trị thật còn phụ thuộc khả năng chuyển mục đích, nghĩa vụ tài chính, chỉ tiêu/kế hoạch sử dụng đất, đường vào và thanh khoản thực tế.</p></div>`;
+  }
+  window.scoreParcelProfile=function(d){
+    const sig=landPlanSignals([d.landType,d.note,d.areaName]); let legal=58, geometry=50, planning=62, location=55, value=55; const warnings=[], strengths=[];
+    if(d.parcel&&d.sheet){legal+=15; strengths.push('Có số thửa và tờ bản đồ để đối chiếu.');} else warnings.push('Thiếu số thửa/tờ bản đồ, nên bổ sung để kiểm tra chính xác hơn.');
+    if(d.certArea){legal+=7; strengths.push('Có diện tích trên giấy: '+fmtNum(d.certArea)+' m².');}
+    if(d.pts.length>=3){geometry+=25; strengths.push('Có '+d.pts.length+' điểm tọa độ để vẽ ranh sơ bộ.');} else warnings.push('Chưa có đủ tọa độ góc ranh để vẽ sơ đồ thửa.');
+    if(d.coordArea&&d.certArea){ if(d.areaDiff<=5){geometry+=15; strengths.push('Diện tích tính từ tọa độ khá gần diện tích trên giấy.');} else {geometry-=18; warnings.push('Diện tích tính từ tọa độ lệch khoảng '+fmtNum(d.areaDiff)+'% so với diện tích trên giấy. Cần kiểm tra thứ tự điểm/tọa độ.');}}
+    if(sig.isResidentialNow){legal+=14; value+=12; location+=5; strengths.push('Loại đất hiện tại có dấu hiệu là đất ở/thổ cư.');}
+    if(sig.isAgri){legal-=10; value-=5; warnings.push('Hiện trạng có dấu hiệu là đất nông nghiệp/đất lúa, chưa phải đất ở.');}
+    if(sig.plannedResidential){planning+=26; value+=24; location+=6; strengths.push('Thông tin quy hoạch có dấu hiệu theo hướng đất ở/thổ cư, đây là điểm cộng lớn nếu được xác minh chính thức.');}
+    if(sig.isAgri && sig.plannedResidential){legal-=3; value+=12; strengths.push('Nếu đất lúa được phép chuyển sang đất ở/thổ cư, giá trị có thể tăng mạnh; app mô phỏng theo giả định x5 của người dùng.'); warnings.push('Không xem quy hoạch thổ cư là chắc chắn được chuyển mục đích. Cần kiểm tra kế hoạch sử dụng đất, chỉ tiêu chuyển mục đích và tiền sử dụng đất.');}
+    if(sig.badPlanning || d.planArea){planning-=sig.plannedResidential?12:30; value-=sig.plannedResidential?4:12; warnings.push('Vẫn có dấu hiệu liên quan giao thông/lộ giới/diện tích ảnh hưởng. Cần xác minh phần này nằm ở đâu trên thửa.');}
+    if(d.planPct){ warnings.push('Diện tích bị ghi chú ảnh hưởng khoảng '+fmtNum(d.planPct)+'% tổng diện tích.'); if(d.planPct>20) planning-=sig.plannedResidential?6:12; }
+    if(d.mapsCoord){location+=15; strengths.push('Có tọa độ Google Maps để đi thực địa và lưu hồ sơ.');}
+    if(d.pricePerM2){ if(d.pricePerM2>25){value-=8; warnings.push('Giá/m² cao, cần so sánh nhiều lô cùng khu.');} if(d.pricePerM2<5){value-=2; warnings.push('Giá/m² thấp bất thường, cần kiểm tra pháp lý và khả năng sử dụng.');} }
+    let upside=null;
+    if(sig.isAgri && sig.plannedResidential){
+      const currentM2=d.pricePerM2||0; const targetM2=currentM2?currentM2*5:0; const targetTotal=(targetM2&&d.certArea)?targetM2*d.certArea/1000:0;
+      upside={currentM2,targetM2,targetTotal,multiplier:5};
+    }
+    legal=Math.max(10,Math.min(95,legal)); geometry=Math.max(10,Math.min(95,geometry)); planning=Math.max(8,Math.min(95,planning)); location=Math.max(15,Math.min(95,location)); value=Math.max(10,Math.min(95,value));
+    const total=Math.round(legal*.20+geometry*.16+planning*.26+location*.16+value*.22);
+    const verdict=total>=80?'Cơ hội tốt nếu xác minh quy hoạch và chuyển mục đích rõ ràng':total>=64?'Có thể nghiên cứu tiếp, trọng tâm là kiểm chứng quy hoạch thổ cư':total>=48?'Có cơ hội nhưng rủi ro còn lớn, cần hỏi thêm trước khi đi sâu':'Nên tạm dừng hoặc chỉ theo dõi thêm';
+    return {legal,geometry,planning,location,value,total,verdict,warnings,strengths,upside};
+  };
+  const oldParcelReport=window.renderParcelReport;
+  window.renderParcelReport=function(r){oldParcelReport(r); const box=document.getElementById('parcelResult'); if(box && r && r.scores && r.scores.upside){box.insertAdjacentHTML('afterbegin', upliftBox(r.data,r.scores));}};
+
+  window.analyzeCertificateDeal=function(){
+    const data={
+      parcel:document.getElementById('cert_parcel')?.value.trim(), mapSheet:document.getElementById('cert_sheet')?.value.trim(), area:parseViNumber(document.getElementById('cert_area')?.value), landType:document.getElementById('cert_landtype')?.value.trim(), expiry:document.getElementById('cert_expiry')?.value.trim(), address:document.getElementById('cert_address')?.value.trim(), planningNote:document.getElementById('cert_planning')?.value.trim(), planningArea:parseViNumber(document.getElementById('cert_planarea')?.value), price:parseViNumber(document.getElementById('cert_price')?.value), maps:document.getElementById('cert_maps')?.value.trim(), note:document.getElementById('cert_note')?.value.trim(), ocrText:document.getElementById('cert_ocr')?.value.trim()
+    };
+    const sig=landPlanSignals([data.landType,data.planningNote,data.note,data.ocrText]);
+    let legal=60, planning=62, position=55, liquidity=55, investment=55; const warns=[], strengths=[];
+    if(data.parcel&&data.mapSheet){legal+=12;strengths.push('Có số thửa/tờ bản đồ để đối chiếu tại nguồn chính thức.');}
+    if(data.area){legal+=5;strengths.push('Có diện tích rõ: '+fmtNum(data.area)+' m².');}
+    if(data.landType){legal+=5;} else warns.push('Chưa nhập/đọc được loại đất, cần xem kỹ mục đích sử dụng đất trên sổ.');
+    if(sig.isResidentialNow){investment+=12;liquidity+=10;planning+=6;strengths.push('Loại đất hiện tại có dấu hiệu là đất ở/thổ cư.');}
+    if(sig.isAgri){legal-=10;investment-=4;liquidity-=4;warns.push('Hiện trạng có dấu hiệu là đất nông nghiệp/đất trồng lúa, chưa phải đất ở.');}
+    if(sig.plannedResidential){planning+=30;investment+=26;liquidity+=8;strengths.push('Quy hoạch/định hướng có dấu hiệu là đất ở/thổ cư. Đây là cơ hội tăng giá nếu thông tin chính xác và được phép chuyển mục đích.');}
+    if(sig.isAgri && sig.plannedResidential){legal-=4;investment+=16;warns.push('Cần kiểm tra khả năng chuyển mục đích từ đất lúa sang đất ở, tiền sử dụng đất và kế hoạch sử dụng đất hằng năm.');}
+    if(sig.badPlanning){planning-=sig.plannedResidential?12:28;investment-=sig.plannedResidential?4:18;warns.push('Có dấu hiệu liên quan giao thông/lộ giới/công viên/hành lang. Cần xác định rõ phần này nằm ở đâu.');}
+    let affectedPct=0; if(data.area&&data.planningArea){affectedPct=data.planningArea/data.area*100; planning-=sig.plannedResidential?6:(affectedPct>=20?16:9); warns.push('Khoảng '+fmtNum(affectedPct)+'% diện tích có thể bị ảnh hưởng theo ghi chú quy hoạch.');}
+    if(data.maps){position+=10; strengths.push('Có link Google Maps để lưu và kiểm tra thực địa.');}
+    if(data.price&&data.area){ const trm2=data.price*1000/data.area; data.pricePerM2=trm2; if(trm2>25){investment-=6;warns.push('Giá/m² khá cao, cần so sánh với ít nhất 3 lô cùng khu.');} if(trm2<5){investment-=2;warns.push('Giá/m² thấp bất thường, cần kiểm tra kỹ pháp lý và khả năng sử dụng.');} }
+    let upside=null; if(sig.isAgri && sig.plannedResidential){const currentM2=data.pricePerM2||0; const targetM2=currentM2?currentM2*5:0; const targetTotal=(targetM2&&data.area)?targetM2*data.area/1000:0; upside={currentM2,targetM2,targetTotal,multiplier:5};}
+    legal=Math.max(15,Math.min(95,legal)); planning=Math.max(10,Math.min(95,planning)); position=Math.max(20,Math.min(90,position)); liquidity=Math.max(15,Math.min(90,liquidity)); investment=Math.max(15,Math.min(95,investment));
+    const total=Math.round(legal*.22+planning*.30+position*.14+liquidity*.12+investment*.22);
+    const verdict= total>=78?'Cơ hội đáng nghiên cứu nếu xác minh quy hoạch thổ cư rõ ràng':total>=60?'Có thể xem tiếp, trọng tâm là kiểm chứng chuyển mục đích':total>=44?'Có cơ hội nhưng rủi ro còn cao, chưa nên đặt cọc':'Nên tạm dừng, chưa đủ dữ liệu an toàn';
+    const report={id:Date.now(),area:data.address||'Lô đất từ sổ',score:total,decision:verdict,date:new Date().toLocaleString('vi-VN'),status:'Cần hỏi thêm',source:'AI Đọc sổ',data,scores:{legal,planning,position,liquidity,investment,total,upside},warnings:warns,strengths};
+    window.__lastCertReport=report; renderCertReport(report);
+  };
+  const oldCertReport=window.renderCertReport;
+  window.renderCertReport=function(r){oldCertReport(r); const box=document.getElementById('certResult'); if(box && r && r.scores && r.scores.upside){box.insertAdjacentHTML('afterbegin', upliftBox(r.data,r.scores));}};
+  const css=document.createElement('style'); css.textContent=`.upliftBox{border:1px solid #8bd6b1;background:linear-gradient(135deg,#eefbf4,#ffffff);margin-bottom:14px}.upliftBox .smallMuted{color:#526878}`; document.head.appendChild(css);
+})();
+</script>
+
+
+<script>
+// ===== V29.2 Yếu tố tăng/giảm giá trị lô đất: lô góc, hai mặt tiền, gần mộ, quy hoạch trường/công viên/đường =====
+(function(){
+  function normVN(v){
+    return String(v||'').toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/đ/g,'d');
+  }
+  function joinText(parts){return normVN((parts||[]).filter(Boolean).join(' '));}
+  function riskValueSignals(parts, d){
+    const t=joinText(parts);
+    const planPct = Number(d && d.planPct || d && d.planningArea && d.area ? d.planningArea/d.area*100 : 0);
+    const hasCorner = /\blo goc\b|dat goc|thua goc|goc duong|nga ba|nga tu|goc nga/.test(t);
+    const hasTwoFront = /hai mat tien|2 mat tien|2mt|hai mt|hai duong|2 duong|hai mat duong|hai canh duong/.test(t);
+    const hasOneFront = /mot mat tien|1 mat tien|1mt|mat tien duong/.test(t) && !hasTwoFront;
+    const nearGrave = /gan mo|gan ma|mo ma|nghia trang|nghia dia|dat gan mo|canh mo|sat mo|gan khu mo|dat co mo/.test(t);
+    const badRoad = /quy hoach[^\n\.]{0,45}(duong|giao thong|lo gioi|dgt)|duong quy hoach|lo gioi|vach duong|mo duong|giao thong/.test(t);
+    const badSchool = /quy hoach[^\n\.]{0,45}(truong hoc|giao duc|dgd)|truong hoc|dat giao duc|khu giao duc/.test(t);
+    const badPark = /quy hoach[^\n\.]{0,45}(cong vien|cay xanh|dkv|cx)|cong vien|cay xanh|khu vui choi|dat cong cong/.test(t);
+    const publicPlan = badRoad || badSchool || badPark || /cong trinh cong cong|hanh lang|thu hoi|dat cong/.test(t);
+    const fullPlan = /quy hoach het|dinh het quy hoach|toan bo.*quy hoach|quy hoach toan bo|100%|mat trang/.test(t) || planPct >= 70;
+    const partialPlan = !!planPct || /dinh mot phan|vuong mot phan|mot phan.*quy hoach|co phan.*quy hoach|dinh.*quy hoach/.test(t);
+    const narrowRoad = /hem nho|duong nho|duong dat|duong chua ro|loi di nho|duong rieng|di nho/.test(t);
+    return {t,hasCorner,hasTwoFront,hasOneFront,nearGrave,badRoad,badSchool,badPark,publicPlan,fullPlan,partialPlan,narrowRoad,planPct};
+  }
+  function fmt(v){try{return (typeof fmtNum==='function')?fmtNum(v):Number(v||0).toFixed(1)}catch(e){return Number(v||0).toFixed(1)}}
+  function applyValueRules(base, d, parts){
+    const s=riskValueSignals(parts,d||{});
+    const notes=[];
+    base.valueFactors={positive:[],negative:[],critical:[],signals:s};
+    function plus(msg){base.strengths.push(msg);base.valueFactors.positive.push(msg);}
+    function minus(msg){base.warnings.push(msg);base.valueFactors.negative.push(msg);}
+    function critical(msg){base.warnings.unshift(msg);base.valueFactors.critical.push(msg);}
+    if(s.hasCorner || s.hasTwoFront){
+      base.location+=18; base.value+=20; if('liquidity' in base) base.liquidity+=16; if('investment' in base) base.investment+=16;
+      plus('Lô góc/hai mặt tiền là yếu tố tăng giá trị mạnh: dễ nhận diện, dễ kinh doanh hơn và thanh khoản thường tốt hơn lô một mặt tiền nếu đường vào hợp pháp.');
+    } else if(s.hasOneFront){
+      base.location+=5; base.value+=4; plus('Có mặt tiền đường là điểm cộng, nhưng giá trị thường thấp hơn đáng kể so với lô góc/hai mặt tiền.');
+    }
+    if(s.narrowRoad){
+      base.location-=10; if('liquidity' in base) base.liquidity-=8; base.value-=8; minus('Đường nhỏ/đường đất/lối đi chưa rõ làm giảm thanh khoản và cần kiểm tra quyền sử dụng đường.');
+    }
+    if(s.nearGrave){
+      base.location-=28; base.value-=30; if('liquidity' in base) base.liquidity-=35; if('investment' in base) base.investment-=26;
+      critical('Gần mộ/nghĩa trang là điểm trừ rất lớn: nhiều người mua kiêng, khó bán lại và thường phải chiết khấu mạnh.');
+    }
+    if(s.publicPlan){
+      let target=[]; if(s.badRoad)target.push('đường/giao thông/lộ giới'); if(s.badSchool)target.push('trường học/giáo dục'); if(s.badPark)target.push('công viên/cây xanh/công cộng'); if(!target.length)target.push('công trình công cộng');
+      const targetText=target.join(', ');
+      if(s.fullPlan){
+        base.planning-=55; base.value-=45; if('liquidity' in base) base.liquidity-=35; if('investment' in base) base.investment-=45;
+        critical('Có dấu hiệu quy hoạch gần như toàn bộ vào '+targetText+'. Trường hợp này không nên định giá như đất ở/đất thương mại; nên loại hoặc chỉ xem nếu giá đã trừ rủi ro rất mạnh.');
+      } else if(s.partialPlan){
+        const pct=s.planPct?(' khoảng '+fmt(s.planPct)+'% diện tích'):'';
+        base.planning-=22; base.value-=18; if('liquidity' in base) base.liquidity-=14; if('investment' in base) base.investment-=16;
+        critical('Một phần lô đất có dấu hiệu vướng quy hoạch '+targetText+pct+'. Phần bị quy hoạch gần như không nên tính giá như phần sử dụng bình thường.');
+      } else {
+        base.planning-=18; base.value-=12; if('liquidity' in base) base.liquidity-=10;
+        minus('Có tín hiệu liên quan '+targetText+'. Cần xác định rõ ranh quy hoạch trước khi đặt cọc.');
+      }
+    }
+    if(s.hasCorner || s.hasTwoFront || s.nearGrave || s.publicPlan){
+      notes.push('Giá trị thật không chỉ phụ thuộc diện tích/m²; cần điều chỉnh mạnh theo mặt tiền, góc đường, yếu tố tâm linh và phần diện tích bị quy hoạch.');
+    }
+    base.valueFactors.notes=notes;
+    return base;
+  }
+  function clampAllParcel(x){
+    x.legal=Math.max(10,Math.min(95,Math.round(x.legal)));
+    x.geometry=Math.max(10,Math.min(95,Math.round(x.geometry)));
+    x.planning=Math.max(5,Math.min(95,Math.round(x.planning)));
+    x.location=Math.max(5,Math.min(95,Math.round(x.location)));
+    x.value=Math.max(5,Math.min(95,Math.round(x.value)));
+    return x;
+  }
+  function clampAllCert(x){
+    x.legal=Math.max(10,Math.min(95,Math.round(x.legal)));
+    x.planning=Math.max(5,Math.min(95,Math.round(x.planning)));
+    x.position=Math.max(5,Math.min(95,Math.round(x.position)));
+    x.liquidity=Math.max(5,Math.min(95,Math.round(x.liquidity)));
+    x.investment=Math.max(5,Math.min(95,Math.round(x.investment)));
+    return x;
+  }
+  function valueFactorBox(f){
+    if(!f || (!f.positive.length && !f.negative.length && !f.critical.length)) return '';
+    return `<div class="valueFactorBox"><h3>Yếu tố làm tăng/giảm giá trị</h3>${f.critical.length?`<div class="vfDanger"><b>Điểm trừ mạnh</b><ul>${f.critical.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}${f.positive.length?`<div class="vfGood"><b>Điểm cộng</b><ul>${f.positive.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}${f.negative.length?`<div class="vfWarn"><b>Cần trừ vào giá</b><ul>${f.negative.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}<p class="smallMuted">Gợi ý định giá: lô góc/hai mặt tiền có thể đáng giá hơn nhiều nếu đường hợp pháp; ngược lại gần mộ hoặc vướng trường học/công viên/đường thì cần chiết khấu mạnh, thậm chí nên loại nếu ảnh hưởng lớn.</p></div>`;
+  }
+  const prevScoreParcel=window.scoreParcelProfile;
+  if(prevScoreParcel){
+    window.scoreParcelProfile=function(d){
+      let r=prevScoreParcel(d);
+      r=applyValueRules(r,d,[d.landType,d.note,d.areaName,d.name,d.maps,d.rawText]);
+      r=clampAllParcel(r);
+      r.total=Math.round(r.legal*.18+r.geometry*.14+r.planning*.28+r.location*.18+r.value*.22);
+      const sig=r.valueFactors?.signals||{};
+      if(sig.nearGrave || sig.fullPlan || (sig.publicPlan&&sig.planPct>=45)) r.verdict='Nên tạm dừng hoặc loại khỏi danh sách nếu giá chưa trừ mạnh rủi ro';
+      else if((sig.hasCorner||sig.hasTwoFront) && r.total>=60) r.verdict='Có điểm cộng lớn về vị trí, nhưng vẫn phải kiểm chứng pháp lý/quy hoạch';
+      else if(r.total>=80) r.verdict='Cơ hội tốt nếu xác minh pháp lý và quy hoạch rõ ràng';
+      else if(r.total>=64) r.verdict='Có thể nghiên cứu tiếp, cần định giá lại theo rủi ro thực tế';
+      else if(r.total>=48) r.verdict='Có cơ hội nhưng rủi ro còn lớn, cần hỏi thêm trước khi đi sâu';
+      else r.verdict='Nên tạm dừng hoặc chỉ theo dõi thêm';
+      return r;
+    };
+  }
+  const prevRenderParcel=window.renderParcelReport;
+  if(prevRenderParcel){
+    window.renderParcelReport=function(r){prevRenderParcel(r); const box=document.getElementById('parcelResult'); if(box&&r?.scores?.valueFactors){box.insertAdjacentHTML('afterbegin',valueFactorBox(r.scores.valueFactors));}}
+  }
+  const prevAnalyzeCert=window.analyzeCertificateDeal;
+  if(prevAnalyzeCert){
+    window.analyzeCertificateDeal=function(){
+      prevAnalyzeCert();
+      const r=window.__lastCertReport; if(!r) return;
+      let base={legal:r.scores.legal,planning:r.scores.planning,position:r.scores.position,liquidity:r.scores.liquidity,investment:r.scores.investment,value:r.scores.investment,location:r.scores.position,warnings:r.warnings||[],strengths:r.strengths||[]};
+      const d=r.data||{};
+      base=applyValueRules(base,{...d,planPct:d.area&&d.planningArea?d.planningArea/d.area*100:0},[d.landType,d.planningNote,d.note,d.ocrText,d.address,d.maps]);
+      base=clampAllCert(base);
+      r.scores.legal=base.legal; r.scores.planning=base.planning; r.scores.position=base.position; r.scores.liquidity=base.liquidity; r.scores.investment=base.investment; r.warnings=base.warnings; r.strengths=base.strengths; r.scores.valueFactors=base.valueFactors;
+      r.score=Math.round(r.scores.legal*.20+r.scores.planning*.30+r.scores.position*.16+r.scores.liquidity*.16+r.scores.investment*.18);
+      const sig=base.valueFactors?.signals||{};
+      r.decision=(sig.nearGrave||sig.fullPlan||(sig.publicPlan&&sig.planPct>=45))?'Nên tạm dừng/loại nếu giá chưa trừ mạnh rủi ro':(sig.hasCorner||sig.hasTwoFront)?'Có điểm cộng lớn về vị trí, nhưng phải kiểm tra pháp lý/quy hoạch':'Cần kiểm chứng thêm trước khi đặt cọc';
+      window.__lastCertReport=r; renderCertReport(r);
+    }
+  }
+  const prevCertRender=window.renderCertReport;
+  if(prevCertRender){
+    window.renderCertReport=function(r){prevCertRender(r); const box=document.getElementById('certResult'); if(box&&r?.scores?.valueFactors){box.insertAdjacentHTML('afterbegin',valueFactorBox(r.scores.valueFactors));}}
+  }
+  window.addRiskNote=function(txt){
+    const ids=['parcel_note','cert_note','c_note','parcel_raw','cert_ocr'];
+    const el=ids.map(id=>document.getElementById(id)).find(Boolean);
+    if(!el) return;
+    const prefix=el.value&& !el.value.endsWith('\n')?'\n':'';
+    el.value+=prefix+txt;
+    el.focus();
+  }
+  const prevRenderCheck=window.renderCheck;
+  if(prevRenderCheck){
+    window.renderCheck=function(){
+      prevRenderCheck();
+      const note=document.getElementById('parcel_note')||document.getElementById('c_note');
+      if(note){
+        note.placeholder='Ví dụ: lô góc hai mặt tiền; gần mộ/nghĩa trang; dính một phần quy hoạch đường; quy hoạch trường học/công viên; đất lúa quy hoạch thổ cư...';
+        const wrap=document.createElement('div');
+        wrap.className='quickValueRules';
+        wrap.innerHTML=`<b>Gợi ý ghi chú để app chấm đúng hơn</b><div class="chipGrid"><button onclick="addRiskNote('Lô góc hai mặt tiền')">Lô góc 2 mặt tiền</button><button onclick="addRiskNote('Một mặt tiền')">Một mặt tiền</button><button onclick="addRiskNote('Gần mộ/nghĩa trang')">Gần mộ</button><button onclick="addRiskNote('Dính một phần quy hoạch đường/lộ giới')">Dính đường</button><button onclick="addRiskNote('Một phần quy hoạch trường học')">Dính trường học</button><button onclick="addRiskNote('Một phần quy hoạch công viên/cây xanh')">Dính công viên</button></div>`;
+        note.parentElement.insertAdjacentElement('afterend',wrap);
+      }
+    }
+  }
+  const css=document.createElement('style');
+  css.textContent=`
+  .valueFactorBox{border:1px solid rgba(198,145,31,.35);background:linear-gradient(135deg,#fff9e9,#ffffff);border-radius:28px;padding:18px;margin:0 0 14px;box-shadow:0 14px 35px rgba(9,41,59,.08)}
+  .valueFactorBox h3{margin:0 0 10px;color:#082d45}.vfDanger,.vfWarn,.vfGood{border-radius:20px;padding:12px 14px;margin:10px 0}.vfDanger{background:#fff0f0;color:#7a1e1e}.vfWarn{background:#fff8e5;color:#654311}.vfGood{background:#eefbf4;color:#105034}.valueFactorBox ul{margin:8px 0 0 18px;padding:0}.valueFactorBox li{margin:6px 0;line-height:1.45}.quickValueRules{margin:12px 0;padding:14px;border-radius:22px;background:#f5fbff;border:1px solid rgba(8,45,69,.12)}.quickValueRules b{display:block;margin-bottom:10px;color:#082d45}.chipGrid{display:flex;gap:8px;flex-wrap:wrap}.chipGrid button{border:0;border-radius:999px;background:#e8f2f8;color:#082d45;padding:10px 12px;font-weight:800}`;
+  document.head.appendChild(css);
+})();
+</script>
+
 </body>
 </html>
