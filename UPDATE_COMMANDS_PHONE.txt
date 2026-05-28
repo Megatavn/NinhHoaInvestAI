@@ -1,8 +1,8 @@
-unzip -o NinhHoaInvestAI_NoAPI_V26_TroLyThuaDatToaDo.zip
-cp -r NinhHoaInvestAI_NoAPI_V26_TroLyThuaDatToaDo/. .
-rm -rf NinhHoaInvestAI_NoAPI_V26_TroLyThuaDatToaDo NinhHoaInvestAI_NoAPI_V26_TroLyThuaDatToaDo.zip
+unzip -o NinhHoaInvestAI_NoAPI_V27_LiveNewsIntelligence.zip
+cp -r NinhHoaInvestAI_NoAPI_V27_LiveNewsIntelligence/. .
+rm -rf NinhHoaInvestAI_NoAPI_V27_LiveNewsIntelligence NinhHoaInvestAI_NoAPI_V27_LiveNewsIntelligence.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Update V26 Tro ly thua dat toa do"
+git commit -m "Update V27 Live News Intelligence"
 git push

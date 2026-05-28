@@ -1,15 +1,13 @@
-# Ninh Hòa Invest AI V26 – Trợ lý thửa đất & tọa độ
+# Ninh Hòa Invest AI V27 – Live News Intelligence
 
-Ứng dụng hỗ trợ nhà đầu tư bất động sản Ninh Hòa theo dõi tin tức, lưu sổ tay đầu tư và tạo hồ sơ thửa đất từ thông tin sổ, tọa độ góc ranh, Google Maps và giá bán.
+Ứng dụng hỗ trợ theo dõi tin tức mới, phân tích tác động đầu tư, kiểm tra lô đất, sổ tay đầu tư cá nhân và trợ lý thửa đất/tọa độ cho khu vực Ninh Hòa – Khánh Hòa.
 
-## Điểm mới V26
+## Điểm mới V27
+- Nâng cấp bảng tin mới liên tục: ưu tiên tin 24h/7 ngày và quét sâu nhiều nguồn.
+- Tăng giới hạn lưu tin lên 360 tin.
+- Quét theo cụm nguồn chính thống/báo lớn: Báo Khánh Hòa, Cổng Ninh Hòa, Công báo Khánh Hòa, Cổng tỉnh, IPA/KKT Vân Phong, Tuổi Trẻ, VnExpress, PLO, Báo Chính phủ, Dân Trí, Vietnamnet, VOV, Nhân Dân...
+- Thêm trạng thái cập nhật: số nguồn quét, số nguồn OK, lần cập nhật gần nhất.
+- Tự cập nhật khi mở app/quay lại app nếu dữ liệu cũ quá 20 phút.
+- Phân tích tin sâu hơn theo độ mới, nguồn, khu vực ảnh hưởng, mức tác động và hành động đề xuất.
 
-- Trợ lý thửa đất & tọa độ.
-- Nhập bảng tọa độ X/Y từ sổ để vẽ sơ bộ hình thửa.
-- Tính diện tích ước lượng từ tọa độ và so sánh với diện tích trên giấy.
-- Dán link Google Maps để lưu vị trí.
-- Chấm điểm pháp lý, tọa độ/diện tích, quy hoạch, vị trí và giá trị đầu tư.
-- Lưu hồ sơ thửa đất vào Sổ tay đầu tư cá nhân.
-- Không yêu cầu quyền vị trí, không cần API/backend.
-
-Tác giả sản phẩm: Vũ Hoàng
+Tác giả sản phẩm: Vũ Hoàng.
