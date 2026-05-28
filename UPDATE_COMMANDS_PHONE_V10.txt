@@ -1,0 +1,7 @@
+unzip -o NinhHoaInvestAI_NoAPI_V10_PremiumUI.zip
+cp -r NinhHoaInvestAI_NoAPI_V10_PremiumUI/. .
+rm -rf NinhHoaInvestAI_NoAPI_V10_PremiumUI NinhHoaInvestAI_NoAPI_V10_PremiumUI.zip
+
+git add .
+git commit -m "Update V10 Premium UI"
+git push
