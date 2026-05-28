@@ -1544,5 +1544,177 @@ if(!state.news.length)state.news=fallbackNews.map(normalizeNews);render();setTim
 })();
 </script>
 
+
+
+<script>
+// ===== V30.1 Strict Visible News Fix =====
+// Sửa lỗi tin tỉnh khác (ví dụ Ninh Bình/Hà Nội...) lọt vào vì cache cũ đã gắn nhầm tag khu vực.
+// Từ bản này, quyết định giữ/bỏ tin chỉ dựa trên nội dung nhìn thấy của bài: tiêu đề, mô tả, nguồn và URL; không tin vào tag area/category đã cache trước đó.
+(function(){
+  const V301_MAX_NEWS = 150;
+  const V301_DISPLAY_MAX = 80;
+  const V301_FILTERS = ['Mới nhất','Tác động cao','Cần lưu ý','Ninh Hòa','Vân Phong','Hạ tầng','Pháp lý'];
+  const V301_TIME_FILTERS = ['24h','7 ngày','30 ngày','Cũ hơn','Tất cả'];
+  function vn(s){
+    try{return normalizeVN(String(s||''));}
+    catch(e){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d');}
+  }
+  function visibleRaw(n){return [n?.title,n?.summary,n?.source,n?.url].filter(Boolean).join(' ')}
+  function visible(n){return vn(visibleRaw(n))}
+  function ntime(n){return typeof newsTs==='function'?(newsTs(n)||0):(Number(n?.ts||0)||Date.parse(n?.pubDate||'')||0)}
+  const BAD_PLACE=/ha noi|thu do|ninh binh|bac ninh|tay ninh|ninh thuan|quang ninh|hoa binh|binh dinh|binh duong|binh phuoc|long an|dong nai|lam dong|nghe an|thanh hoa|quang ngai|quang nam|da nang|hai phong|can tho/;
+  const DIRECT=/ninh hoa|thi xa ninh hoa|phuong ninh hoa|ninh diem|ninh hai|doc let|ninh xuan|ninh an|ninh tho|ninh thuy|ninh phung|ninh phuoc|ninh ich|ninh sim|tan dinh|bac hon heo|dong bac ninh hoa/;
+  const KH=/khanh hoa|van phong|nha trang|ninh hoa/;
+  const STRATEGIC=/van phong|nam van phong|bac van phong|khu kinh te van phong|bac hon heo|dong bac ninh hoa|phan khu 16|phan khu 17|phan khu 19|cao toc khanh hoa buon ma thuot|cao toc van phong|logistics|trung tam logistics|trung chuyen quoc te|cang/;
+  const TOPIC=/quy hoach|su dung dat|cong bao|phap ly|bang gia dat|cao toc|ha tang|do thi|cang|logistics|khu cong nghiep|du lich|du an|thu hoi dat|giai phong mat bang/;
+  function isForeignBad(n){
+    const t=visible(n);
+    if(!BAD_PLACE.test(t)) return false;
+    // Nếu chính tiêu đề/mô tả nói rõ Khánh Hòa/Ninh Hòa/Vân Phong thì giữ; nếu chỉ có tag cache thì không tính.
+    return !(DIRECT.test(t) || (KH.test(t) && STRATEGIC.test(t)) || /khanh hoa/.test(t));
+  }
+  function isRelevantV301(n){
+    const t=visible(n);
+    if(!n || !n.title) return false;
+    if(isForeignBad(n)) return false;
+    if(DIRECT.test(t)) return true;
+    if(STRATEGIC.test(t) && KH.test(t)) return true;
+    // Vân Phong/Bắc Hòn Hèo/Nam Vân Phong là khu chiến lược liên quan Ninh Hòa, vẫn giữ nếu xuất hiện trong chính bài.
+    if(/van phong|bac hon heo|nam van phong|dong bac ninh hoa|phan khu 16|phan khu 17|phan khu 19/.test(t)) return true;
+    return false;
+  }
+  function sourceNameV301(n){return (typeof cleanSourceName==='function'?cleanSourceName(n?.source||''):String(n?.source||'')).trim()||'Nguồn tin'}
+  function sourceScoreV301(n){
+    const s=vn((n?.source||'')+' '+(n?.url||''));
+    if(/ninhhoa\.khanhhoa|congbao\.khanhhoa|khanhhoa\.gov|bao khanh hoa|baokhanhhoa|chinhphu|baochinhphu/.test(s)) return 24;
+    if(/ipa\.khanhhoa/.test(s)) return 22;
+    if(/tuoitre|vnexpress|plo\.vn|vov|nhandan|vietnamnet|dantri|thanhnien/.test(s)) return 17;
+    if(/cafeland|cafef|nguoi quan sat|tapchicongthuong/.test(s)) return 10;
+    return 5;
+  }
+  function areaFromVisible(n){
+    const t=visible(n); const a=[];
+    if(/ninh hoa|thi xa ninh hoa|phuong ninh hoa/.test(t)) a.push('Ninh Hòa');
+    if(/ninh diem/.test(t)) a.push('Ninh Diêm');
+    if(/doc let|ninh hai/.test(t)) a.push('Dốc Lết / Ninh Hải');
+    if(/ninh xuan/.test(t)) a.push('Ninh Xuân');
+    if(/ninh an/.test(t)) a.push('Ninh An');
+    if(/tan dinh/.test(t)) a.push('Tân Định');
+    if(/van phong|bac hon heo|nam van phong|dong bac ninh hoa|phan khu 16|phan khu 17|phan khu 19|cang|logistics/.test(t)) a.push('Vân Phong');
+    if(!a.length && (STRATEGIC.test(t)&&KH.test(t))) a.push('Ninh Hòa');
+    return [...new Set(a)].slice(0,3);
+  }
+  function categoryFromVisible(n){return typeof categoryOf==='function'?categoryOf(visibleRaw(n)):'Tin'}
+  function qualityV301(n){
+    const t=visible(n); let s=0;
+    if(/ninh hoa|thi xa ninh hoa|phuong ninh hoa/.test(t)) s+=34;
+    if(/ninh diem|ninh hai|doc let|ninh xuan|ninh an|tan dinh/.test(t)) s+=30;
+    if(/van phong|bac hon heo|nam van phong|phan khu 16|phan khu 17|phan khu 19|logistics|cang/.test(t)) s+=24;
+    if(/cao toc khanh hoa buon ma thuot/.test(t)) s+=23;
+    if(TOPIC.test(t)) s+=18;
+    s+=sourceScoreV301(n);
+    const impact=Number(n?.impactScore||0)||Number(typeof scoreImpact==='function'?scoreImpact(visibleRaw(n)):0)||0;
+    s+=Math.min(20,Math.round(impact*0.2));
+    const ts=ntime(n); if(ts){const h=(Date.now()-ts)/36e5; if(h<24)s+=22; else if(h<168)s+=17; else if(h<720)s+=8;}
+    if(n?.pinned || /cao toc khanh hoa buon ma thuot|trung tam logistics|trung chuyen quoc te/.test(t)) s=Math.max(s,92);
+    return Math.max(0,Math.min(100,Math.round(s)));
+  }
+  function reasonV301(n){
+    const t=visible(n), r=[];
+    const ai=typeof ageInfo==='function'?ageInfo(n):null;
+    if(ai && ai.bucket==='24h') r.push('mới trong 24h'); else if(ai && ai.bucket==='7 ngày') r.push('trong 7 ngày');
+    if(/ninh hoa|thi xa ninh hoa|phuong ninh hoa/.test(t)) r.push('trực tiếp Ninh Hòa');
+    if(/ninh diem|ninh hai|doc let|ninh xuan|ninh an|tan dinh/.test(t)) r.push('đúng khu vực con');
+    if(/van phong|logistics|cang|bac hon heo|nam van phong/.test(t)) r.push('liên quan Vân Phong/logistics');
+    if(/cao toc khanh hoa buon ma thuot/.test(t)) r.push('hạ tầng vùng ảnh hưởng Ninh Hòa');
+    if(/quy hoach|phap ly|cong bao|su dung dat|phe duyet/.test(t)) r.push('có yếu tố quy hoạch/pháp lý');
+    return r.slice(0,3).join(' · ') || 'liên quan rõ đến trọng tâm Ninh Hòa';
+  }
+  function normalizeV301(n){
+    n=normalizeNews(Object.assign({},n||{}));
+    n.category=categoryFromVisible(n);
+    n.area=areaFromVisible(n);
+    if(!n.area.length) n.area=['Ninh Hòa'];
+    n.impactScore=Math.max(Number(n.impactScore||0), Number(typeof scoreImpact==='function'?scoreImpact(visibleRaw(n)+' '+n.category):0)||0);
+    if(n.pinned || /cao toc khanh hoa buon ma thuot|trung tam logistics|trung chuyen quoc te/.test(visible(n))) n.impactScore=Math.max(n.impactScore,88);
+    n.qualityScore=qualityV301(n);
+    n.qualityLevel=n.pinned?'Tin cần lưu ý':n.qualityScore>=86?'Trọng tâm rất cao':n.qualityScore>=74?'Đáng đọc':n.qualityScore>=62?'Theo dõi':'Tham khảo';
+    n.qualityReason=reasonV301(n);
+    return n;
+  }
+  function keyV301(n){
+    let t=vn(n?.title||'');
+    t=t.replace(/toan van|quyet dinh|ubnd|google tin tuc|bao dien tu|tap chi|tin moi|moi nhat/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+    if(/cao toc khanh hoa buon ma thuot/.test(t)) return 'cao-toc-khanh-hoa-buon-ma-thuot';
+    if(/trung tam logistics|trung chuyen quoc te|logistics/.test(t) && /khanh hoa|van phong/.test(t)) return 'logistics-khanh-hoa-van-phong';
+    return t.split(' ').filter(w=>w.length>2&&!/^(tin|moi|nhat|khanh|hoa|ninh|duoc|phe|quy|hoach)$/.test(w)).slice(0,12).join('-')||t.slice(0,80);
+  }
+  function mergeV301(items){
+    const by={};
+    (items||[]).forEach(x=>{
+      const n=normalizeV301(x);
+      if(!isRelevantV301(n)) return;
+      if(n.qualityScore<58 && !n.pinned) return;
+      const k=keyV301(n); const old=by[k];
+      if(!old || n.qualityScore>old.qualityScore || (n.qualityScore===old.qualityScore && (ntime(n)||0)>(ntime(old)||0))){
+        n._sources=[...new Set([...(old?old._sources||[]:[]), sourceNameV301(n)].filter(Boolean))];
+        by[k]=n;
+      } else if(old){
+        old._sources=[...new Set([...(old._sources||[]), sourceNameV301(n)].filter(Boolean))];
+      }
+    });
+    return Object.values(by).sort((a,b)=>(ntime(b)||0)-(ntime(a)||0) || (b.qualityScore||0)-(a.qualityScore||0) || (b.impactScore||0)-(a.impactScore||0)).slice(0,V301_MAX_NEWS);
+  }
+  window.mergeNewsItems=function(items){return mergeV301(items)};
+  window.getAllNews=function(){return mergeV301([...(state.news||[]),...fallbackNews])};
+  function passTime(n){
+    const tr=state.timeRange||'Tất cả';
+    if(tr==='Tất cả') return true;
+    const ai=typeof ageInfo==='function'?ageInfo(n):{bucket:'Cũ hơn'};
+    if(tr==='24h') return ai.bucket==='24h';
+    if(tr==='7 ngày') return ['24h','7 ngày'].includes(ai.bucket);
+    if(tr==='30 ngày') return ['24h','7 ngày','30 ngày'].includes(ai.bucket);
+    if(tr==='Cũ hơn') return ai.bucket==='Cũ hơn';
+    return true;
+  }
+  window.getFilteredNews=function(filter=state.filter){
+    let list=getAllNews().filter(passTime); const f=filter||'Mới nhất'; const ff=vn(f);
+    if(f==='Tác động cao') list=list.filter(n=>n.pinned || (n.impactScore||0)>=82 || (n.qualityScore||0)>=86);
+    else if(f==='Cần lưu ý') list=list.filter(n=>n.pinned || /cao toc khanh hoa buon ma thuot|logistics|trung chuyen quoc te|cong bao|quy hoach|phap ly/.test(visible(n)) || (n.impactScore||0)>=88);
+    else if(f==='Ninh Hòa') list=list.filter(n=>DIRECT.test(visible(n)) || (n.area||[]).includes('Ninh Hòa'));
+    else if(f==='Vân Phong') list=list.filter(n=>/van phong|bac hon heo|nam van phong|phan khu 16|phan khu 17|phan khu 19|logistics|cang|trung chuyen/.test(visible(n)));
+    else if(['Hạ tầng','Quy hoạch','Pháp lý'].includes(f)) list=list.filter(n=>visible(n).includes(ff) || vn(n.category||'').includes(ff));
+    return list.sort((a,b)=> (f==='Tác động cao'?((b.impactScore||0)-(a.impactScore||0)):((ntime(b)||0)-(ntime(a)||0))) || ((b.qualityScore||0)-(a.qualityScore||0))).slice(0,V301_DISPLAY_MAX);
+  };
+  window.parseRss=function(xml,q){
+    const doc=new DOMParser().parseFromString(xml,'text/xml');
+    return [...doc.querySelectorAll('item')].slice(0,24).map(item=>{
+      const title=item.querySelector('title')?.textContent||'';
+      const link=item.querySelector('link')?.textContent||'';
+      const desc=item.querySelector('description')?.textContent||'';
+      const source=item.querySelector('source')?.textContent||'Google Tin tức';
+      const pubDate=item.querySelector('pubDate')?.textContent||'';
+      let image=''; const media=item.getElementsByTagName('media:content')[0]||item.getElementsByTagName('media:thumbnail')[0]; if(media)image=media.getAttribute('url')||'';
+      const enc=item.querySelector('enclosure'); if(!image&&enc)image=enc.getAttribute('url')||'';
+      if(!image){const m=desc.match(/<img[^>]+src=["']([^"']+)["']/i); if(m)image=m[1].replace(/&amp;/g,'&')}
+      const clean=desc.replace(/<[^>]*>/g,' ').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();
+      return normalizeV301({title,source,url:link,image,summary:clean||'Tin liên quan cần mở nguồn để đọc chi tiết.',pubDate,ts:Date.parse(pubDate)||0});
+    }).filter(n=>n.title && isRelevantV301(n) && !/youtube|tiktok|facebook/i.test(n.title));
+  };
+  const oldRenderNewsV301=window.renderNews;
+  window.renderNews=function(){
+    oldRenderNewsV301();
+    document.querySelectorAll('.newsCard h3,.leadBody h3').forEach(h=>{
+      const t=vn(h.textContent||'');
+      if(BAD_PLACE.test(t) && !/(khanh hoa|ninh hoa|van phong)/.test(t)){
+        const card=h.closest('article'); if(card) card.remove();
+      }
+    });
+  };
+  const css=document.createElement('style'); css.textContent=`.strictNotice,.v294Note,.v295Panel{display:none!important}`; document.head.appendChild(css);
+  setTimeout(()=>{try{state.news=mergeV301([...(state.news||[]),...fallbackNews]);store('news',state.news);render();}catch(e){console.warn('V30.1 strict visible fix',e)}},260);
+})();
+</script>
+
 </body>
 </html>
