@@ -28,7 +28,8 @@ public class MainActivity extends Activity {
         @JavascriptInterface
         public void openExternal(String url) {
             try {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                String safeUrl = normalizeOpenUrl(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(safeUrl));
                 startActivity(intent);
             } catch (Exception e) {
                 Toast.makeText(MainActivity.this, "Không mở được liên kết", Toast.LENGTH_SHORT).show();
@@ -63,6 +64,26 @@ public class MainActivity extends Activity {
         }
     }
 
+    private String normalizeOpenUrl(String url) {
+        if (url == null || url.trim().isEmpty()) return "https://news.google.com/search?q=Ninh%20Hoa%20Khanh%20Hoa&hl=vi&gl=VN&ceid=VN:vi";
+        String u = url.trim();
+        if (u.contains("news.google.com/rss/search")) {
+            return u.replace("/rss/search", "/search");
+        }
+        if (u.contains("congbao.chinhphu.vn/rss")) {
+            return "https://congbao.chinhphu.vn/";
+        }
+        if ((u.contains("/rss/") || u.endsWith(".rss")) && !u.contains("news.google.com")) {
+            try {
+                Uri uri = Uri.parse(u);
+                if (uri.getScheme() != null && uri.getHost() != null) {
+                    return uri.getScheme() + "://" + uri.getHost() + "/";
+                }
+            } catch (Exception ignored) {}
+        }
+        return u;
+    }
+
     private String httpGet(String urlText) throws Exception {
         URL url = new URL(urlText);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -70,7 +91,7 @@ public class MainActivity extends Activity {
         conn.setConnectTimeout(12000);
         conn.setReadTimeout(15000);
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/7.0");
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) NinhHoaInvestAI/7.1");
         conn.setRequestProperty("Accept", "application/rss+xml, application/xml, text/xml, text/html, */*");
         conn.setRequestProperty("Accept-Language", "vi-VN,vi;q=0.9,en;q=0.7");
         int code = conn.getResponseCode();
@@ -128,7 +149,7 @@ public class MainActivity extends Activity {
         settings.setAllowFileAccess(true);
         settings.setAllowContentAccess(true);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/7.0-NoAPI");
+        settings.setUserAgentString(settings.getUserAgentString() + " NinhHoaInvestAI/7.1-NoAPI");
 
         webView.addJavascriptInterface(new AndroidBridge(), "Android");
         webView.setWebChromeClient(new WebChromeClient());
@@ -138,7 +159,7 @@ public class MainActivity extends Activity {
                 String url = request.getUrl().toString();
                 if (url.startsWith("file:///android_asset/") || url.startsWith("about:")) return false;
                 try {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(normalizeOpenUrl(url)));
                     startActivity(intent);
                     return true;
                 } catch (Exception e) {
