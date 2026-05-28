@@ -1,0 +1,7 @@
+unzip -o NinhHoaInvestAI_NoAPI_V6_InvestorBriefingAI.zip
+cp -r NinhHoaInvestAI_NoAPI_V6/. .
+rm -rf NinhHoaInvestAI_NoAPI_V6 NinhHoaInvestAI_NoAPI_V6_InvestorBriefingAI.zip
+
+git add .
+git commit -m "Update V6 Investor Briefing AI"
+git push

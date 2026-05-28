@@ -44,5 +44,5 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NinhHoaInvestAI-noapi-debug-apk
+          name: NinhHoaInvestAI-v6-investor-briefing-apk
           path: app/build/outputs/apk/debug/*.apk
