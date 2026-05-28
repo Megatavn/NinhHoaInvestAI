@@ -1,0 +1,13 @@
+# Ninh Hòa Invest AI V12 – Planning Map & VN2000
+
+Upload file NinhHoaInvestAI_NoAPI_V12_PlanningMapVN2000.zip vào Codespaces, rồi chạy:
+
+unzip -o NinhHoaInvestAI_NoAPI_V12_PlanningMapVN2000.zip
+cp -r NinhHoaInvestAI_NoAPI_V12_PlanningMapVN2000/. .
+rm -rf NinhHoaInvestAI_NoAPI_V12_PlanningMapVN2000 NinhHoaInvestAI_NoAPI_V12_PlanningMapVN2000.zip
+
+git add .
+git commit -m "Update V12 Planning Map VN2000"
+git push
+
+Sau đó vào GitHub → Actions → Build APK → Artifacts → tải APK mới.

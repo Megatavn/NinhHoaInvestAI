@@ -1,17 +1,21 @@
-# Ninh Hòa Invest AI - V11 Product Ready UI
+# Ninh Hòa Invest AI V12 – Planning Map & VN2000
 
-Bản V11 tập trung biến app thành sản phẩm dùng lâu dài cho người dùng phổ thông:
+Bản V12 bổ sung tab **Bản đồ** để hỗ trợ nhà đầu tư tra cứu vị trí, nhập tọa độ GPS/VN2000, vẽ ranh thửa sơ bộ, đo diện tích ước tính và mở nguồn quy hoạch chính thức để kiểm chứng.
 
-- Giao diện gọn hơn, không còn phần mô tả update chiếm diện tích.
-- Header ngắn hơn, ưu tiên nội dung và công cụ chính.
-- Ẩn các thông tin kỹ thuật như API/backend/version khỏi trải nghiệm chính.
-- Giữ đầy đủ tính năng V10/V8: tin tức No API, briefing, khu đất, pháp lý, phân tích lô đất, lưu dữ liệu.
-- Tối ưu màn hình điện thoại: card gọn, nút làm mới nhỏ, thanh tìm kiếm dễ dùng.
+## Điểm mới
 
-## Cách build APK
+- Không cần API/backend/token.
+- Bản đồ OpenStreetMap trong app.
+- Định vị GPS khi người dùng cấp quyền vị trí.
+- Nhập tọa độ GPS và ghim vị trí.
+- Nhập tọa độ VN2000, chuyển sang GPS tham khảo.
+- Hỗ trợ kinh tuyến trục Khánh Hòa 108°15′ và một số lựa chọn khác.
+- Chạm bản đồ để thêm điểm ranh.
+- Vẽ ranh lô đất sơ bộ bằng nhiều điểm.
+- Tính diện tích ước lượng.
+- Lưu hồ sơ vị trí vào mục đã lưu.
+- Mở nhanh nguồn quy hoạch/GIS/Công báo/Cổng tỉnh để đối chiếu.
 
-Repo có sẵn GitHub Actions. Push source lên GitHub, vào Actions và tải APK ở Artifacts.
+## Lưu ý pháp lý
 
-## Tác giả
-
-Vũ Hoàng
+Tính năng bản đồ và chuyển đổi tọa độ chỉ dùng để hỗ trợ sàng lọc đầu tư. Không thay thế trích lục địa chính, bản đồ quy hoạch chính thức, giấy chứng nhận quyền sử dụng đất hoặc xác nhận từ cơ quan có thẩm quyền.
