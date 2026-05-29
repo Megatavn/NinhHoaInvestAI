@@ -1716,5 +1716,63 @@ if(!state.news.length)state.news=fallbackNews.map(normalizeNews);render();setTim
 })();
 </script>
 
+
+<script>
+// V30.2 – Critical Highway Seed Fix
+// Giữ các tin hạ tầng cực quan trọng ngay cả khi Google News/RSS không trả về trong lần quét.
+(function(){
+  const CRITICAL_V302 = [
+    {
+      title:'Thông xe 22 km đầu cao tốc Khánh Hòa - Buôn Ma Thuột',
+      source:'VnExpress',
+      url:'https://vnexpress.net/thong-xe-22-km-dau-cao-toc-khanh-hoa-buon-ma-thuot-5078951.html',
+      summary:'Tin hạ tầng cực quan trọng: đoạn đầu cao tốc Khánh Hòa - Buôn Ma Thuột được thông xe, tác động đến kết nối vùng, logistics, dòng di chuyển và kỳ vọng đầu tư quanh Ninh Hòa - Khánh Hòa.',
+      category:'Hạ tầng',
+      area:['Ninh Hòa','Ninh Xuân','Khánh Hòa','Vân Phong'],
+      impactScore:99,
+      qualityScore:99,
+      qualityLevel:'Tin cực quan trọng',
+      pinned:true,
+      pubDate:'2026-05-28',
+      ts:new Date('2026-05-28T09:00:00+07:00').getTime()
+    }
+  ];
+  try{
+    if(Array.isArray(fallbackNews)){
+      CRITICAL_V302.forEach(n=>{
+        const exists=fallbackNews.some(x=>String(x.url||'')===n.url || String(x.title||'').toLowerCase()===n.title.toLowerCase());
+        if(!exists) fallbackNews.unshift(n);
+      });
+    }
+    if(Array.isArray(queries)){
+      [
+        'VnExpress thông xe 22 km đầu cao tốc Khánh Hòa Buôn Ma Thuột',
+        'thông xe 22 km đầu cao tốc Khánh Hòa Buôn Ma Thuột',
+        'thông xe cao tốc Khánh Hòa Buôn Ma Thuột VnExpress',
+        'cao tốc Khánh Hòa Buôn Ma Thuột thông xe 22 km Ninh Hòa'
+      ].forEach(q=>{if(!queries.includes(q)) queries.unshift(q)});
+    }
+    // Xóa cache tin đã lọc quá cũ nếu thiếu tin cao tốc quan trọng.
+    const old=load('news',[]);
+    const hasHighway=Array.isArray(old) && old.some(n=>/thong xe|thông xe|22 km|20 km/i.test(String(n.title||n.summary||'')) && /khánh hòa|khanh hoa/i.test(String(n.title||n.summary||'')) && /buôn ma thuột|buon ma thuot/i.test(String(n.title||n.summary||'')));
+    if(!hasHighway){
+      state.news=[...CRITICAL_V302,...(state.news||[])];
+      store('news',state.news);
+    }
+    const prevRenderNews=window.renderNews;
+    if(typeof prevRenderNews==='function'){
+      window.renderNews=function(){
+        prevRenderNews();
+        // Đảm bảo tin cực quan trọng không bị rơi khỏi bộ lọc Cần lưu ý/Tác động cao do cache cũ.
+        const all=(typeof getAllNews==='function'?getAllNews():[]);
+        const missing=!all.some(n=>String(n.url||'')===CRITICAL_V302[0].url);
+        if(missing && Array.isArray(fallbackNews)) fallbackNews.unshift(CRITICAL_V302[0]);
+      };
+    }
+    setTimeout(()=>{try{render()}catch(e){}},350);
+  }catch(e){console.warn('V30.2 critical news seed',e)}
+})();
+</script>
+
 </body>
 </html>
