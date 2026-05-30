@@ -1,8 +1,10 @@
-unzip -o NinhHoaInvestAI_NoAPI_V31_TasteSkillKnowledgeHub.zip
-cp -r NinhHoaInvestAI_NoAPI_V31_TasteSkillKnowledgeHub/. .
-rm -rf NinhHoaInvestAI_NoAPI_V31_TasteSkillKnowledgeHub NinhHoaInvestAI_NoAPI_V31_TasteSkillKnowledgeHub.zip
+# Update V32 Portfolio Ready Edition
+
+unzip -o NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition.zip
+cp -r NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition/. .
+rm -rf NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Update V31 Taste Skill Knowledge Hub"
+git commit -m "Update V32 Portfolio Ready Edition"
 git push

@@ -1,84 +1,75 @@
-# Ninh Hòa Invest AI
+# Ninh Hòa Invest AI V32 – Portfolio Ready Edition
 
-**Ninh Hòa Invest AI** là ứng dụng Android hỗ trợ theo dõi tin tức, phân tích khu vực và kiểm tra thông tin lô đất dành cho nhà đầu tư bất động sản quan tâm đến **Ninh Hòa – Khánh Hòa**.
+**Ninh Hòa Invest AI** là ứng dụng Android hỗ trợ theo dõi tin tức, phân tích khu vực và kiểm tra sơ bộ lô đất dành cho nhà đầu tư bất động sản quan tâm đến **Ninh Hòa – Khánh Hòa**.
 
-Ứng dụng được xây dựng với định hướng **dễ dùng cho người phổ thông**, không yêu cầu cấu hình phức tạp, không cần người dùng tự nhập API, tập trung vào việc hỗ trợ ra quyết định cẩn trọng trước khi xem đất, hỏi môi giới hoặc đặt cọc.
+Bản V32 được tối ưu theo hướng **portfolio project**: dùng để đưa vào GitHub, CV, Facebook, LinkedIn hoặc trình bày trong phỏng vấn xin việc.
 
 **Tác giả sản phẩm:** Vũ Hoàng
 
 ---
 
-## Mục tiêu sản phẩm
+## Project Overview
 
-Ninh Hòa Invest AI được tạo ra để hỗ trợ gia đình và người dùng quan tâm đến bất động sản Ninh Hòa có thêm một công cụ tham khảo khi:
+Ninh Hòa Invest AI là một case study sản phẩm thực tế, xuất phát từ nhu cầu gia đình: cần một công cụ dễ dùng để theo dõi tin tức bất động sản Ninh Hòa, lưu hồ sơ đầu tư, kiểm tra thông tin lô đất và giảm rủi ro khi ra quyết định.
 
-- Theo dõi tin tức mới về Ninh Hòa, Vân Phong, hạ tầng, quy hoạch và pháp lý.
-- Đánh giá sơ bộ một lô đất trước khi đi xem thực địa.
-- Lưu lại tin tức, khu vực, ghi chú và hồ sơ đầu tư.
-- Nhận diện các rủi ro thường gặp như đất nông nghiệp, quy hoạch giao thông, lộ giới, đất gần mộ, đất khó thanh khoản.
-- Học thêm kiến thức về kinh doanh, bất động sản, pháp lý, đàm phán và đầu tư.
-
-Ứng dụng không thay thế cơ quan nhà nước, luật sư, chuyên gia thẩm định giá hoặc kết quả kiểm tra pháp lý chính thức.
+Ứng dụng không thay thế cơ quan nhà nước, luật sư hoặc chuyên gia thẩm định. App chỉ hỗ trợ sàng lọc ban đầu, gợi ý việc cần kiểm tra và giúp người dùng tổ chức thông tin tốt hơn.
 
 ---
 
-## Tính năng chính
+## Problem
 
-### 1. Bảng tin Ninh Hòa trọng tâm
+Nhà đầu tư nhỏ lẻ hoặc gia đình khi tìm hiểu đất tại Ninh Hòa thường gặp các vấn đề:
 
-Ứng dụng ưu tiên tin tức liên quan đến:
+- Tin tức hạ tầng, quy hoạch, pháp lý nằm rải rác ở nhiều nguồn.
+- Khó phân biệt tin mới, tin cũ, tin tác động cao và tin chỉ mang tính tham khảo.
+- Không có nơi lưu lại lô đất, ghi chú, link Google Maps, tin liên quan và trạng thái thương vụ.
+- Người không rành công nghệ dễ bị rối khi kiểm tra pháp lý, quy hoạch, giá/m², thanh khoản và rủi ro đặt cọc.
 
-- Ninh Hòa
-- Ninh Diêm
-- Dốc Lết / Ninh Hải
-- Ninh Xuân
-- Ninh An
-- Vân Phong
-- Cao tốc Khánh Hòa – Buôn Ma Thuột
-- Hạ tầng, logistics, cảng, khu công nghiệp
-- Quy hoạch, pháp lý và thị trường bất động sản Khánh Hòa có tác động đến Ninh Hòa
+---
+
+## Solution
+
+Xây dựng một ứng dụng Android tập trung vào Ninh Hòa, có giao diện tiếng Việt dễ dùng, gồm:
+
+- Bảng tin Ninh Hòa theo thời gian.
+- Phân tích tác động tin tức theo góc nhìn nhà đầu tư.
+- Kiểm tra sơ bộ lô đất.
+- Trợ lý thửa đất và tọa độ.
+- Sổ tay đầu tư cá nhân.
+- Tri thức đầu tư: lưu bài báo/video về kinh doanh, bất động sản, pháp lý và đàm phán.
+- Portfolio/Case Study Mode để trình bày dự án khi xin việc.
+
+---
+
+## Key Features
+
+### 1. News Timeline Intelligence
 
 Tin tức được phân loại theo:
 
-- Mới nhất
-- Tác động cao
-- Cần lưu ý
 - 24h qua
 - 7 ngày
 - 30 ngày
 - Cũ hơn 30 ngày
+- Tác động cao
+- Cần lưu ý
 
----
+App ưu tiên tin liên quan đến Ninh Hòa, Vân Phong, cao tốc Khánh Hòa – Buôn Ma Thuột, logistics, quy hoạch và pháp lý có ảnh hưởng đến khu vực.
 
-### 2. Phân tích tác động tin tức
+### 2. News Impact Analysis
 
-Mỗi tin có thể được đánh giá theo góc nhìn nhà đầu tư:
+Mỗi tin có phân tích:
 
-- Mức độ tác động
+- Mức tác động
 - Khu vực ảnh hưởng
-- Chủ đề chính: hạ tầng, quy hoạch, pháp lý, Vân Phong, logistics
-- Độ mới của tin
-- Mức liên quan đến Ninh Hòa
-- Gợi ý hành động: theo dõi, lưu lại, kiểm chứng thêm hoặc chưa nên dùng làm cơ sở xuống tiền
+- Nhóm tin: hạ tầng, quy hoạch, pháp lý, logistics, Vân Phong
+- Góc nhìn đầu tư
+- Rủi ro cần kiểm chứng
+- Hành động đề xuất
 
-Ứng dụng ưu tiên nhiều nguồn tin để tạo góc nhìn rộng hơn, gồm nhóm nguồn chính thống, báo lớn và nguồn chuyên ngành.
+### 3. Land Check
 
----
-
-### 3. Kiểm tra lô đất
-
-Người dùng có thể nhập thông tin cơ bản của một lô đất:
-
-- Khu vực
-- Diện tích
-- Giá bán
-- Loại đất
-- Ghi chú quy hoạch
-- Diện tích vướng quy hoạch nếu có
-- Link Google Maps
-- Ghi chú từ chủ đất hoặc môi giới
-
-Ứng dụng sẽ hỗ trợ chấm điểm sơ bộ theo các nhóm:
+Người dùng nhập thông tin lô đất để app hỗ trợ chấm điểm sơ bộ:
 
 - Pháp lý
 - Quy hoạch
@@ -86,190 +77,142 @@ Người dùng có thể nhập thông tin cơ bản của một lô đất:
 - Thanh khoản
 - Giá trị đầu tư
 
-Kết quả được trình bày dễ hiểu, giúp người dùng biết nên xem tiếp, hỏi thêm hay tạm dừng.
+### 4. Parcel & Coordinate Assistant
 
----
-
-### 4. Trợ lý thửa đất & tọa độ
-
-Ứng dụng hỗ trợ nhập thông tin từ sổ đất:
+Hỗ trợ nhập:
 
 - Số thửa
 - Tờ bản đồ
 - Diện tích trên giấy
 - Loại đất
-- Bảng tọa độ X/Y nếu có
-- Link vị trí Google Maps
+- Link Google Maps
+- Tọa độ X/Y nếu có
 
-Từ dữ liệu nhập vào, ứng dụng có thể:
+App có thể vẽ sơ bộ hình thửa, tính diện tích ước lượng và cảnh báo chênh lệch.
 
-- Vẽ sơ bộ hình thửa đất.
-- Tính diện tích ước lượng từ tọa độ.
-- So sánh diện tích tính được với diện tích trên giấy.
-- Phát hiện độ lệch nếu có.
-- Tạo cảnh báo khi có ghi chú quy hoạch, lộ giới, giao thông, công viên hoặc trường học.
+### 5. Personal Investment Notebook
 
----
+Lưu và quản lý:
 
-### 5. Quy tắc đánh giá giá trị và rủi ro lô đất
-
-Ứng dụng bổ sung các yếu tố thực tế khi đánh giá lô đất:
-
-- Lô góc, hai mặt tiền thường có giá trị và thanh khoản tốt hơn.
-- Lô chỉ một mặt tiền được đánh giá thận trọng hơn.
-- Đất gần mộ hoặc nghĩa trang có thể khó bán, cần chiết khấu mạnh.
-- Đất dính quy hoạch giao thông, trường học, công viên hoặc công trình công cộng không nên tính giá như phần đất sử dụng bình thường.
-- Đất lúa/nông nghiệp nhưng có quy hoạch thổ cư có thể có tiềm năng tăng giá, nhưng cần kiểm tra khả năng chuyển mục đích, kế hoạch sử dụng đất và chi phí liên quan.
-
----
-
-### 6. Sổ tay đầu tư cá nhân
-
-Người dùng có thể lưu:
-
-- Tin tức quan trọng
 - Lô đất đang theo dõi
+- Tin tức quan trọng
 - Khu vực quan tâm
 - Ghi chú pháp lý
 - Báo cáo phân tích
-- Link bài viết hoặc video về đầu tư
+- Trạng thái thương vụ
 
-Mỗi lô đất có thể được gắn trạng thái:
+### 6. Portfolio Ready Mode
 
-- Đang theo dõi
-- Cần hỏi thêm
-- Đi xem thực địa
-- Đang đàm phán
-- Tạm dừng
-- Đã loại bỏ
+Bản V32 thêm mục **Dự án**, gồm:
 
----
-
-### 7. Tri thức đầu tư
-
-Mục Tri thức cho phép lưu và xem các nội dung hữu ích về:
-
-- Kinh doanh
-- Bất động sản
-- Pháp lý đất đai
-- Đàm phán
-- Đặt cọc
-- Đọc sổ đất
-- Tránh rủi ro khi mua đất
-- Video hoặc bài viết tham khảo
-
-Người dùng có thể tự thêm link bài báo, video, ghi chú và phân loại nội dung.
+- Giới thiệu dự án
+- Case Study
+- Vai trò của tác giả
+- Kỹ năng thể hiện
+- Demo Mode
+- Roadmap
+- Mô tả dùng trong CV
 
 ---
 
-## Định hướng thiết kế
+## My Role
 
-Ứng dụng được thiết kế theo phong cách:
+Trong dự án này, Vũ Hoàng đảm nhiệm:
 
-- Mobile-first
-- Dễ dùng cho người không rành công nghệ
-- Tiếng Việt rõ ràng
-- Ít thuật ngữ kỹ thuật
-- Giao diện gọn, sạch, dễ bấm
-- Màu chủ đạo: xanh navy, vàng đất, trắng
-- Tập trung vào hành động cụ thể thay vì hiển thị quá nhiều dữ liệu thô
-
----
-
-## Lưu ý pháp lý
-
-Ninh Hòa Invest AI chỉ là công cụ hỗ trợ tham khảo và sàng lọc thông tin ban đầu.
-
-Trước khi giao dịch bất động sản, người dùng vẫn cần kiểm tra:
-
-- Sổ đỏ/sổ hồng
-- Chủ sở hữu
-- Quy hoạch
-- Lộ giới
-- Tranh chấp
-- Thế chấp ngân hàng
-- Đường vào hợp pháp
-- Kế hoạch sử dụng đất
-- Điều khoản đặt cọc
-- Xác nhận tại cơ quan có thẩm quyền
-
-Ứng dụng không đưa ra kết luận pháp lý cuối cùng và không thay thế tư vấn chuyên môn.
+- Product idea
+- Product thinking
+- UI/UX direction
+- AI-assisted development
+- News filtering logic
+- Real estate analysis flow
+- Android APK build workflow
+- GitHub/Codespaces project workflow
 
 ---
 
-## Công nghệ sử dụng
+## Tech Stack
 
-Dự án được xây dựng theo hướng Android APK đơn giản, dễ build trên GitHub Codespaces/GitHub Actions.
+- Android WebView App
+- HTML/CSS/JavaScript
+- Gradle / Android build
+- GitHub Actions build APK
+- LocalStorage for offline personal notebook
+- Google News RSS/source links for public news discovery
 
-Cấu trúc chính:
+---
+
+## Product Thinking Highlights
+
+- Thiết kế cho người dùng non-tech.
+- Tập trung Ninh Hòa thay vì gom tin quá rộng.
+- Không ép GIS khi nguồn công khai không ổn định.
+- Không yêu cầu quyền vị trí khi không cần bản đồ.
+- Bỏ ảnh minh họa giả trong feed tin tức để app chuyên nghiệp hơn.
+- Tách tin mới 24h/7 ngày/30 ngày để tránh nhầm tin cũ là tin mới.
+- Thêm Demo Mode để nhà tuyển dụng có thể hiểu app nhanh hơn.
+
+---
+
+## What I Learned
+
+- Cách biến nhu cầu thật của gia đình thành sản phẩm.
+- Cách dùng AI để xây app theo nhiều vòng cải tiến.
+- Cách thiết kế trải nghiệm cho người dùng phổ thông.
+- Cách xử lý dữ liệu tin tức không ổn định.
+- Cách cân bằng giữa tính năng AI và rủi ro pháp lý.
+- Cách build APK bằng GitHub Actions.
+- Cách trình bày sản phẩm thành portfolio project.
+
+---
+
+## CV Description
 
 ```text
-.github/
-app/
-build.gradle
-settings.gradle
-README.md
-UPDATE_COMMANDS_PHONE.txt
+Ninh Hòa Invest AI – Android Real Estate Intelligence App
+- Xây dựng ứng dụng Android hỗ trợ theo dõi tin tức, phân tích khu vực và kiểm tra sơ bộ lô đất tại Ninh Hòa, Khánh Hòa.
+- Thiết kế trải nghiệm mobile-first cho người dùng non-tech, tập trung vào tiếng Việt dễ hiểu và thao tác đơn giản.
+- Phát triển các module: news intelligence, timeline filter, investment notebook, land parcel scoring, legal checklist, coordinate assistant.
+- Tối ưu logic lọc tin theo độ mới, mức tác động, khu vực và nguồn tin.
+- Triển khai build APK bằng GitHub Actions và quản lý mã nguồn trên GitHub.
 ```
 
-Ứng dụng ưu tiên hướng:
-
-- Không cần API người dùng nhập thủ công.
-- Không cần backend ở bản hiện tại.
-- Không yêu cầu quyền vị trí.
-- Không phụ thuộc GIS tự động do dữ liệu công khai chưa ổn định.
-- Tập trung vào tin tức, phân tích, sổ tay và kiểm tra lô đất.
-
 ---
 
-## Cách build APK bằng GitHub Actions
+## Build APK
 
-Sau khi cập nhật code lên GitHub:
+Sau khi push code lên GitHub:
 
-1. Vào repository trên GitHub.
+1. Vào repository.
 2. Chọn tab **Actions**.
-3. Chọn workflow **Build APK**.
-4. Chờ workflow chạy xong.
-5. Vào phần **Artifacts**.
-6. Tải file APK về máy Android.
-7. Cài đặt APK.
+3. Chạy workflow **Build APK**.
+4. Tải file APK trong phần **Artifacts**.
+5. Cài trên Android.
 
 ---
 
-## Cách cập nhật code trong Codespaces
-
-Upload file ZIP bản mới vào Codespaces, sau đó chạy:
+## Update Commands in Codespaces
 
 ```bash
-unzip -o <ten-file-zip>.zip
-cp -r <ten-thu-muc-giai-nen>/. .
-rm -rf <ten-thu-muc-giai-nen> <ten-file-zip>.zip
+unzip -o NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition.zip
+cp -r NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition/. .
+rm -rf NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Update Ninh Hoa Invest AI"
+git commit -m "Update V32 Portfolio Ready Edition"
 git push
 ```
 
-Sau đó vào **GitHub → Actions → Build APK → Artifacts** để tải APK mới.
+---
+
+## Legal Disclaimer
+
+Ninh Hòa Invest AI chỉ là công cụ hỗ trợ tham khảo và sàng lọc thông tin ban đầu. Người dùng cần kiểm tra pháp lý, quy hoạch, lộ giới, tranh chấp, thế chấp, chủ sở hữu và xác nhận tại cơ quan có thẩm quyền trước khi giao dịch bất động sản.
 
 ---
 
-## Tác giả
+## Author
 
 **Vũ Hoàng**
 
-Dự án được xây dựng từ nhu cầu thực tế của gia đình trong việc theo dõi và đánh giá cơ hội bất động sản tại Ninh Hòa – Khánh Hòa.
-
----
-
-## Ghi chú
-
-Dự án vẫn đang được phát triển liên tục. Các phiên bản tiếp theo có thể tập trung vào:
-
-- Bản tin đầu tư hằng ngày.
-- So sánh nhiều lô đất.
-- Cảnh báo trước khi đặt cọc.
-- Báo cáo PDF cho từng lô đất.
-- Quản lý danh mục đầu tư cá nhân.
-- Cải thiện chất lượng nguồn tin và phân tích tác động.
+Dự án được xây dựng từ nhu cầu thực tế của gia đình và được phát triển thành portfolio project để thể hiện năng lực xây sản phẩm bằng AI, tư duy sản phẩm, UI/UX và quy trình triển khai Android APK.
