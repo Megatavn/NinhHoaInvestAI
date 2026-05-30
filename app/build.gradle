@@ -13,8 +13,8 @@ android {
         applicationId 'com.vuhoang.ninhhoainvestai'
         minSdk 23
         targetSdk 35
-        versionCode 61
-        versionName '30.2.0-critical-highway-seed-fix'
+        versionCode 62
+        versionName '31.0.0-taste-skill-knowledge-hub'
     }
 }
 

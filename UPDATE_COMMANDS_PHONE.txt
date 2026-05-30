@@ -1,8 +1,8 @@
-unzip -o NinhHoaInvestAI_NoAPI_V30_NewsTimelineIntelligence.zip
-cp -r NinhHoaInvestAI_NoAPI_V30_NewsTimelineIntelligence/. .
-rm -rf NinhHoaInvestAI_NoAPI_V30_NewsTimelineIntelligence NinhHoaInvestAI_NoAPI_V30_NewsTimelineIntelligence.zip
+unzip -o NinhHoaInvestAI_NoAPI_V31_TasteSkillKnowledgeHub.zip
+cp -r NinhHoaInvestAI_NoAPI_V31_TasteSkillKnowledgeHub/. .
+rm -rf NinhHoaInvestAI_NoAPI_V31_TasteSkillKnowledgeHub NinhHoaInvestAI_NoAPI_V31_TasteSkillKnowledgeHub.zip
 rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
 
 git add -A
-git commit -m "Update V30 News Timeline Intelligence"
+git commit -m "Update V31 Taste Skill Knowledge Hub"
 git push
