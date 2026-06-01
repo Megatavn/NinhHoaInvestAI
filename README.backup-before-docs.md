@@ -225,22 +225,3 @@ Dự án được xây dựng từ nhu cầu thực tế của gia đình và đ
 Bản này kiểm tra lại logic tin tức và bổ sung cơ chế giữ các tin hạ tầng cấp vùng cực quan trọng, đặc biệt nhóm tin về **cao tốc Khánh Hòa – Buôn Ma Thuột**. Ứng dụng không còn gộp tất cả tin cao tốc thành một tin duy nhất, giúp người dùng thấy được nhiều nguồn như Thanh Niên, VnExpress, PLO, Tuổi Trẻ nếu cùng đưa tin về một chủ đề quan trọng.
 
 Các tin hạ tầng/logistics quan trọng có thể được ghim vào nhóm **Cần lưu ý** và **Tác động cao**, kể cả khi bài viết không nhắc trực tiếp “Ninh Hòa” nhưng có ảnh hưởng rõ đến kết nối vùng Khánh Hòa – Vân Phong – Ninh Hòa.
-
----
-
-## Ảnh minh họa ứng dụng
-
-> Thêm ảnh chụp màn hình vào thư mục `screenshots/` để GitHub hiển thị trực tiếp trong README.
-
-| Trang chủ | Bảng tin |
-|---|---|
-| ![Trang chủ](screenshots/home.png) | ![Bảng tin](screenshots/news.png) |
-
-| Kiểm tra lô đất | Sổ tay đầu tư |
-|---|---|
-| ![Kiểm tra lô đất](screenshots/land-check.png) | ![Sổ tay đầu tư](screenshots/notebook.png) |
-
-| Dự án / Portfolio |
-|---|
-| ![Dự án Portfolio](screenshots/portfolio.png) |
-
