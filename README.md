@@ -1,415 +1,227 @@
-# Ninh Hòa Invest AI V33 — Android Real Estate Intelligence App
+# Ninh Hòa Invest AI V32 – Portfolio Ready Edition
 
-![Android](https://img.shields.io/badge/Android-WebView-3DDC84?logo=android&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-App%20Logic-F7DF1E?logo=javascript&logoColor=black)
-![HTML](https://img.shields.io/badge/HTML-Mobile%20UI-E34F26?logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS-Responsive%20Design-1572B6?logo=css3&logoColor=white)
-![Gradle](https://img.shields.io/badge/Gradle-APK%20Build-02303A?logo=gradle&logoColor=white)
-![Offline First](https://img.shields.io/badge/Mode-Offline--First-brightgreen)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+**Ninh Hòa Invest AI** là ứng dụng Android hỗ trợ theo dõi tin tức, phân tích khu vực và kiểm tra sơ bộ lô đất dành cho nhà đầu tư bất động sản quan tâm đến **Ninh Hòa – Khánh Hòa**.
 
-**Ninh Hòa Invest AI** là một Android portfolio app tập trung vào khu vực **Ninh Hòa, Khánh Hòa**, hỗ trợ người dùng theo dõi tin tức bất động sản, phân tích tín hiệu khu vực, kiểm tra sơ bộ lô đất và lưu sổ tay đầu tư cá nhân.
+Bản V32 được tối ưu theo hướng **portfolio project**: dùng để đưa vào GitHub, CV, Facebook, LinkedIn hoặc trình bày trong phỏng vấn xin việc.
 
-> Đây là dự án **portfolio / case study**. App chỉ hỗ trợ sàng lọc thông tin ban đầu, không thay thế cơ quan nhà nước, luật sư, chuyên gia quy hoạch, đơn vị thẩm định giá hoặc nguồn dữ liệu pháp lý chính thức.
+**Tác giả sản phẩm:** Vũ Hoàng
 
 ---
 
-## Preview / Ảnh demo
+## Project Overview
 
-<p align="center">
-  <img src="screenshots/home-portfolio.jpg" width="220" alt="Home Portfolio" />
-  <img src="screenshots/news-timeline.jpg" width="220" alt="News Timeline" />
-  <img src="screenshots/news-analysis.jpg" width="220" alt="News Analysis" />
-</p>
+Ninh Hòa Invest AI là một case study sản phẩm thực tế, xuất phát từ nhu cầu gia đình: cần một công cụ dễ dùng để theo dõi tin tức bất động sản Ninh Hòa, lưu hồ sơ đầu tư, kiểm tra thông tin lô đất và giảm rủi ro khi ra quyết định.
 
-<p align="center">
-  <img src="screenshots/land-check.jpg" width="220" alt="Land Check" />
-  <img src="screenshots/region-profile.jpg" width="220" alt="Region Profile" />
-  <img src="screenshots/investment-notebook.jpg" width="220" alt="Investment Notebook" />
-</p>
+Ứng dụng không thay thế cơ quan nhà nước, luật sư hoặc chuyên gia thẩm định. App chỉ hỗ trợ sàng lọc ban đầu, gợi ý việc cần kiểm tra và giúp người dùng tổ chức thông tin tốt hơn.
 
 ---
 
-## Project Summary / Tóm tắt dự án
+## Problem
 
-| Hạng mục | Nội dung |
-|---|---|
-| Tên dự án | Ninh Hòa Invest AI |
-| Phiên bản | V33 — Public Portfolio Edition |
-| Lĩnh vực | Real Estate Intelligence / PropertyTech |
-| Khu vực tập trung | Ninh Hòa, Khánh Hòa |
-| Người dùng mục tiêu | Người quan tâm BĐS địa phương, nhà đầu tư nhỏ, người dùng non-tech |
-| Nền tảng | Android app |
-| Cách lưu dữ liệu | LocalStorage / local demo data |
-| Backend | Chưa có trong bản portfolio |
-| API tin tức thật | Chưa tích hợp trong bản portfolio |
-| Mục tiêu chính | Theo dõi tin, phân tích tín hiệu, lưu ghi chú đầu tư, hỗ trợ kiểm tra sơ bộ |
+Nhà đầu tư nhỏ lẻ hoặc gia đình khi tìm hiểu đất tại Ninh Hòa thường gặp các vấn đề:
+
+- Tin tức hạ tầng, quy hoạch, pháp lý nằm rải rác ở nhiều nguồn.
+- Khó phân biệt tin mới, tin cũ, tin tác động cao và tin chỉ mang tính tham khảo.
+- Không có nơi lưu lại lô đất, ghi chú, link Google Maps, tin liên quan và trạng thái thương vụ.
+- Người không rành công nghệ dễ bị rối khi kiểm tra pháp lý, quy hoạch, giá/m², thanh khoản và rủi ro đặt cọc.
 
 ---
 
-## Problem / Vấn đề
+## Solution
 
-Người quan tâm bất động sản tại một khu vực địa phương như Ninh Hòa thường gặp các vấn đề:
+Xây dựng một ứng dụng Android tập trung vào Ninh Hòa, có giao diện tiếng Việt dễ dùng, gồm:
 
-- Tin tức hạ tầng, pháp lý, quy hoạch và thị trường nằm rải rác ở nhiều nguồn.
-- Khó phân biệt tin mới, tin cũ, tin có tác động cao và tin chỉ mang tính tham khảo.
-- Không có nơi lưu lại lô đất, khu vực, ghi chú, link Google Maps và trạng thái kiểm tra.
-- Dễ bỏ sót các bước kiểm chứng như pháp lý, quy hoạch, giá/m², thanh khoản và rủi ro đặt cọc.
-- Người dùng phổ thông cần giao diện tiếng Việt rõ ràng, ít thao tác, dễ dùng trên điện thoại.
-
----
-
-## Solution / Giải pháp
-
-Ninh Hòa Invest AI xây dựng một trải nghiệm **mobile-first** giúp người dùng:
-
-- Theo dõi tin tức liên quan đến Ninh Hòa và khu vực lân cận.
-- Phân loại tin theo độ mới, mức tác động và nhóm chủ đề.
-- Tạo góc nhìn đầu tư sơ bộ từ tin tức và dữ liệu nhập tay.
-- Lưu hồ sơ lô đất/khu vực quan tâm.
-- Ghi chú pháp lý, vị trí, tọa độ, link bản đồ và việc cần kiểm tra tiếp.
-- Nhắc người dùng xác minh thông tin chính thức trước khi ra quyết định.
+- Bảng tin Ninh Hòa theo thời gian.
+- Phân tích tác động tin tức theo góc nhìn nhà đầu tư.
+- Kiểm tra sơ bộ lô đất.
+- Trợ lý thửa đất và tọa độ.
+- Sổ tay đầu tư cá nhân.
+- Tri thức đầu tư: lưu bài báo/video về kinh doanh, bất động sản, pháp lý và đàm phán.
+- Portfolio/Case Study Mode để trình bày dự án khi xin việc.
 
 ---
 
-## Key Features / Tính năng chính
+## Key Features
 
-### 1. Bảng tin Ninh Hòa
+### 1. News Timeline Intelligence
 
-Theo dõi các tin liên quan đến:
+Tin tức được phân loại theo:
 
-- Ninh Hòa
-- Vân Phong
-- Hạ tầng
-- Pháp lý
-- Quy hoạch
-- Thị trường
-- Tin cần lưu ý
-
-Bộ lọc mô phỏng:
-
-- Mới nhất
+- 24h qua
+- 7 ngày
+- 30 ngày
+- Cũ hơn 30 ngày
 - Tác động cao
 - Cần lưu ý
-- 24h / 7 ngày / 30 ngày / cũ hơn
 
----
+App ưu tiên tin liên quan đến Ninh Hòa, Vân Phong, cao tốc Khánh Hòa – Buôn Ma Thuột, logistics, quy hoạch và pháp lý có ảnh hưởng đến khu vực.
 
-### 2. News Timeline Intelligence
+### 2. News Impact Analysis
 
-Mô phỏng logic phân tích tin tức theo dòng thời gian:
+Mỗi tin có phân tích:
 
-- Độ mới của tin
-- Điểm tác động
-- Chất lượng tin
-- Khu vực liên quan
-- Nguồn chính
-- Góc nhìn nhiều nguồn
+- Mức tác động
+- Khu vực ảnh hưởng
+- Nhóm tin: hạ tầng, quy hoạch, pháp lý, logistics, Vân Phong
 - Góc nhìn đầu tư
 - Rủi ro cần kiểm chứng
+- Hành động đề xuất
 
----
+### 3. Land Check
 
-### 3. News Impact Analysis
+Người dùng nhập thông tin lô đất để app hỗ trợ chấm điểm sơ bộ:
 
-Mỗi tin có thể được phân tích theo các lớp:
+- Pháp lý
+- Quy hoạch
+- Vị trí
+- Thanh khoản
+- Giá trị đầu tư
 
-- Tác động đến khu vực nào
-- Tác động ngắn hạn hay dài hạn
-- Mức độ cần theo dõi
-- Rủi ro thông tin chưa xác minh
-- Việc cần kiểm tra tiếp
+### 4. Parcel & Coordinate Assistant
 
----
-
-### 4. Trợ lý thửa đất & tọa độ
-
-Người dùng có thể nhập thông tin sơ bộ về lô đất:
+Hỗ trợ nhập:
 
 - Số thửa
 - Tờ bản đồ
-- Diện tích
+- Diện tích trên giấy
 - Loại đất
-- Ghi chú quy hoạch
-- Tọa độ góc ranh nếu có
 - Link Google Maps
-- Trạng thái kiểm tra
+- Tọa độ X/Y nếu có
 
-Mục tiêu là tạo một bản ghi ban đầu trước khi đi xác minh thực tế.
+App có thể vẽ sơ bộ hình thửa, tính diện tích ước lượng và cảnh báo chênh lệch.
 
----
+### 5. Personal Investment Notebook
 
-### 5. Hồ sơ khu vực
-
-Module khu vực giúp gom tín hiệu theo từng địa bàn hoặc nhóm quan tâm:
-
-- Khu vực
-- Tin liên quan
-- Tín hiệu hạ tầng
-- Pháp lý cần kiểm tra
-- Điểm tác động cao nhất
-- Ghi chú cá nhân
-
----
-
-### 6. Sổ tay đầu tư cá nhân
-
-Người dùng có thể lưu lại:
+Lưu và quản lý:
 
 - Lô đất đang theo dõi
-- Tin tức đã lưu
+- Tin tức quan trọng
 - Khu vực quan tâm
 - Ghi chú pháp lý
-- Checklist kiểm tra
-- Việc cần làm tiếp theo
+- Báo cáo phân tích
+- Trạng thái thương vụ
+
+### 6. Portfolio Ready Mode
+
+Bản V32 thêm mục **Dự án**, gồm:
+
+- Giới thiệu dự án
+- Case Study
+- Vai trò của tác giả
+- Kỹ năng thể hiện
+- Demo Mode
+- Roadmap
+- Mô tả dùng trong CV
 
 ---
 
-## Mobile-first Vietnamese UX
+## My Role
 
-Ứng dụng được thiết kế cho người dùng Việt Nam, ưu tiên:
+Trong dự án này, Vũ Hoàng đảm nhiệm:
 
-- Chữ lớn, dễ đọc
-- Card rõ ràng
-- Ít thao tác
-- Điều hướng dưới màn hình
-- Nút lớn, dễ bấm
-- Ngôn ngữ tiếng Việt dễ hiểu
-- Trải nghiệm giống app mobile thật, không phải website thu nhỏ
+- Product idea
+- Product thinking
+- UI/UX direction
+- AI-assisted development
+- News filtering logic
+- Real estate analysis flow
+- Android APK build workflow
+- GitHub/Codespaces project workflow
+
+---
+
+## Tech Stack
+
+- Android WebView App
+- HTML/CSS/JavaScript
+- Gradle / Android build
+- GitHub Actions build APK
+- LocalStorage for offline personal notebook
+- Google News RSS/source links for public news discovery
 
 ---
 
 ## Product Thinking Highlights
 
-Dự án thể hiện các năng lực sản phẩm:
-
-- Xác định một ngách rõ ràng: **bất động sản Ninh Hòa / Khánh Hòa**.
-- Thiết kế app theo hành vi người dùng phổ thông.
-- Biến tin tức rời rạc thành timeline và intelligence cards.
-- Tách rõ vai trò app: hỗ trợ sàng lọc, không thay thế thẩm định.
-- Tối ưu UI/UX theo hướng mobile-native.
-- Có disclaimer để tránh định vị sai về pháp lý/đầu tư.
-- Có thể trình bày như một case study trong CV và phỏng vấn.
+- Thiết kế cho người dùng non-tech.
+- Tập trung Ninh Hòa thay vì gom tin quá rộng.
+- Không ép GIS khi nguồn công khai không ổn định.
+- Không yêu cầu quyền vị trí khi không cần bản đồ.
+- Bỏ ảnh minh họa giả trong feed tin tức để app chuyên nghiệp hơn.
+- Tách tin mới 24h/7 ngày/30 ngày để tránh nhầm tin cũ là tin mới.
+- Thêm Demo Mode để nhà tuyển dụng có thể hiểu app nhanh hơn.
 
 ---
 
-## Tech Stack / Công nghệ sử dụng
+## What I Learned
 
-| Công nghệ | Vai trò |
-|---|---|
-| HTML | Cấu trúc giao diện |
-| CSS | Thiết kế UI mobile-first |
-| JavaScript | Logic tương tác và xử lý dữ liệu demo |
-| Android WebView | Đóng gói trải nghiệm web thành app Android |
-| Java | Lớp Android native/WebView wrapper |
-| Gradle | Build Android APK |
-| GitHub Actions | Workflow build/tự động hóa |
-| LocalStorage | Lưu dữ liệu offline/demo trên thiết bị |
-| GitHub Codespaces | Môi trường chỉnh sửa/build project |
-
----
-
-## Project Structure / Cấu trúc thư mục
-
-```text
-NinhHoaInvestAI/
-├── .github/
-│   └── workflows/
-├── app/
-│   └── src/
-├── screenshots/
-│   ├── home-portfolio.jpg
-│   ├── news-timeline.jpg
-│   ├── news-analysis.jpg
-│   ├── land-check.jpg
-│   ├── region-profile.jpg
-│   └── investment-notebook.jpg
-├── README.md
-├── UPDATE_COMMANDS_PHONE.txt
-├── build.gradle
-└── settings.gradle
-```
-
----
-
-## APK Demo
-
-Bạn có thể tạo GitHub Release cho APK demo với thông tin đề xuất:
-
-```text
-Tag: v33.0.0
-Title: Ninh Hòa Invest AI V33 — Android APK Demo
-```
-
-Release notes gợi ý:
-
-```md
-Android APK demo for Ninh Hòa Invest AI V33 — a real estate intelligence portfolio app focused on Ninh Hòa, Khánh Hòa.
-
-Includes:
-- News Timeline Intelligence
-- News Impact Analysis
-- Land Check workflow
-- Parcel & Coordinate Assistant
-- Investment Notebook
-- Region Profile
-- Mobile-first Vietnamese UI
-- Android WebView build with Gradle
-```
-
----
-
-## Build APK
-
-Nếu project dùng Gradle Android:
-
-```bash
-./gradlew assembleDebug
-```
-
-APK thường nằm tại:
-
-```text
-app/build/outputs/apk/debug/
-```
-
-Nếu build bằng GitHub Actions, kiểm tra workflow tại:
-
-```text
-.github/workflows/
-```
-
----
-
-## Legal Disclaimer / Lưu ý pháp lý
-
-Ninh Hòa Invest AI chỉ là app hỗ trợ tham khảo và sàng lọc thông tin ban đầu.
-
-Ứng dụng **không thay thế**:
-
-- Cơ quan nhà nước
-- Văn phòng đăng ký đất đai
-- Luật sư
-- Chuyên gia quy hoạch
-- Đơn vị thẩm định giá
-- Kiểm tra pháp lý trực tiếp
-- Nguồn dữ liệu chính thức về quy hoạch/pháp lý
-
-Người dùng cần xác minh thông tin từ nguồn chính thức trước khi mua bán, đặt cọc hoặc ra quyết định đầu tư.
-
----
-
-## Current Limitations / Giới hạn hiện tại
-
-Phiên bản portfolio hiện tại có giới hạn:
-
-- Dữ liệu demo/mô phỏng.
-- Chưa tích hợp API tin tức thật.
-- Chưa có backend/cloud database.
-- Chưa có đăng nhập tài khoản.
-- Chưa thay thế được tra cứu pháp lý chính thức.
-- Chưa có bản đồ quy hoạch chính thức.
-- Chưa có hệ thống xác minh nguồn dữ liệu tự động.
-
----
-
-## Roadmap / Hướng phát triển
-
-### Public Portfolio Edition
-
-- [x] README có ảnh demo.
-- [x] GitHub About + Topics.
-- [x] Legal disclaimer rõ ràng.
-- [x] CV snippet.
-- [ ] GitHub Release APK.
-- [ ] Demo video/GIF ngắn.
-- [ ] Bổ sung thêm ảnh walkthrough.
-
-### Future Commercial Direction
-
-- [ ] Tích hợp nguồn tin chính thống.
-- [ ] Thêm quản lý lô đất nâng cao.
-- [ ] Đồng bộ cloud.
-- [ ] Bản đồ/checklist vị trí.
-- [ ] AI tóm tắt tin tức thật.
-- [ ] Hệ thống cảnh báo theo khu vực.
-- [ ] Gói Free/Pro cho người dùng quan tâm BĐS địa phương.
-- [ ] Tài khoản người dùng và backup dữ liệu.
-
----
-
-## Portfolio Value
-
-This project demonstrates:
-
-- Product thinking for a real local real estate use case.
-- Mobile-first Vietnamese UX for non-technical users.
-- Local-first app logic using WebView and LocalStorage.
-- Real estate workflow design: news tracking, land check, region profile and investment notes.
-- Android APK build workflow with Gradle and GitHub Actions.
-- Clear legal/decision-making boundaries through disclaimers.
-- Ability to turn a local business/investment idea into a structured Android portfolio project.
+- Cách biến nhu cầu thật của gia đình thành sản phẩm.
+- Cách dùng AI để xây app theo nhiều vòng cải tiến.
+- Cách thiết kế trải nghiệm cho người dùng phổ thông.
+- Cách xử lý dữ liệu tin tức không ổn định.
+- Cách cân bằng giữa tính năng AI và rủi ro pháp lý.
+- Cách build APK bằng GitHub Actions.
+- Cách trình bày sản phẩm thành portfolio project.
 
 ---
 
 ## CV Description
 
 ```text
-Ninh Hòa Invest AI — Android Real Estate Intelligence App
-
-Built an Android portfolio app focused on Ninh Hòa, Khánh Hòa, helping users track real estate news, classify market signals, store investment notes, and perform preliminary land parcel checks.
-
-Designed mobile-first Vietnamese UX for non-technical users, with modules for news timeline intelligence, impact analysis, land scoring, investment notebook, legal checklist, and APK build workflow.
-
-Tech stack: HTML, CSS, JavaScript, Android WebView, Java, Gradle, GitHub Actions, LocalStorage.
-```
-
-Short CV bullet:
-
-```text
-Built Ninh Hòa Invest AI, an Android real estate intelligence portfolio app focused on Ninh Hòa, Khánh Hòa, featuring local news timeline, investment signal analysis, preliminary land-check workflows, parcel notes, investment notebook, LocalStorage persistence, and Android APK build workflow with Gradle.
+Ninh Hòa Invest AI – Android Real Estate Intelligence App
+- Xây dựng ứng dụng Android hỗ trợ theo dõi tin tức, phân tích khu vực và kiểm tra sơ bộ lô đất tại Ninh Hòa, Khánh Hòa.
+- Thiết kế trải nghiệm mobile-first cho người dùng non-tech, tập trung vào tiếng Việt dễ hiểu và thao tác đơn giản.
+- Phát triển các module: news intelligence, timeline filter, investment notebook, land parcel scoring, legal checklist, coordinate assistant.
+- Tối ưu logic lọc tin theo độ mới, mức tác động, khu vực và nguồn tin.
+- Triển khai build APK bằng GitHub Actions và quản lý mã nguồn trên GitHub.
 ```
 
 ---
 
-## GitHub About Suggestion
+## Build APK
 
-**Description**
+Sau khi push code lên GitHub:
 
-```text
-Android real estate intelligence portfolio app for tracking news, land notes, and investment signals in Ninh Hòa, Khánh Hòa.
+1. Vào repository.
+2. Chọn tab **Actions**.
+3. Chạy workflow **Build APK**.
+4. Tải file APK trong phần **Artifacts**.
+5. Cài trên Android.
+
+---
+
+## Update Commands in Codespaces
+
+```bash
+unzip -o NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition.zip
+cp -r NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition/. .
+rm -rf NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition NinhHoaInvestAI_NoAPI_V32_PortfolioReadyEdition.zip
+rm -f README_V*.md UPDATE_COMMANDS_PHONE_V*.txt
+
+git add -A
+git commit -m "Update V32 Portfolio Ready Edition"
+git push
 ```
 
-**Topics**
+---
 
-```text
-real-estate
-property-tech
-android
-webview
-javascript
-html
-css
-gradle
-localstorage
-portfolio
-vietnamese-app
-khanh-hoa
-ninh-hoa
-ai-product
-```
+## Legal Disclaimer
+
+Ninh Hòa Invest AI chỉ là công cụ hỗ trợ tham khảo và sàng lọc thông tin ban đầu. Người dùng cần kiểm tra pháp lý, quy hoạch, lộ giới, tranh chấp, thế chấp, chủ sở hữu và xác nhận tại cơ quan có thẩm quyền trước khi giao dịch bất động sản.
 
 ---
 
 ## Author
 
-**Vũ Hoàng**  
-AI Solutions Builder / Android App Portfolio
+**Vũ Hoàng**
 
-GitHub: [Megatavn](https://github.com/Megatavn)
+Dự án được xây dựng từ nhu cầu thực tế của gia đình và được phát triển thành portfolio project để thể hiện năng lực xây sản phẩm bằng AI, tư duy sản phẩm, UI/UX và quy trình triển khai Android APK.
+
 
 ---
 
-## License
+## V32.1 – News Logic Critical Fix
 
-This project is released under the MIT License.
+Bản này kiểm tra lại logic tin tức và bổ sung cơ chế giữ các tin hạ tầng cấp vùng cực quan trọng, đặc biệt nhóm tin về **cao tốc Khánh Hòa – Buôn Ma Thuột**. Ứng dụng không còn gộp tất cả tin cao tốc thành một tin duy nhất, giúp người dùng thấy được nhiều nguồn như Thanh Niên, VnExpress, PLO, Tuổi Trẻ nếu cùng đưa tin về một chủ đề quan trọng.
+
+Các tin hạ tầng/logistics quan trọng có thể được ghim vào nhóm **Cần lưu ý** và **Tác động cao**, kể cả khi bài viết không nhắc trực tiếp “Ninh Hòa” nhưng có ảnh hưởng rõ đến kết nối vùng Khánh Hòa – Vân Phong – Ninh Hòa.

@@ -13,8 +13,8 @@ android {
         applicationId 'com.vuhoang.ninhhoainvestai'
         minSdk 23
         targetSdk 35
-        versionCode 63
-        versionName '32.0.0-portfolio-ready-edition'
+        versionCode 64
+        versionName '32.1.0-news-logic-critical-fix'
     }
 }
 

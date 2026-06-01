@@ -1906,5 +1906,142 @@ html.taste-v31 .sectionTitle h2{letter-spacing:-.6px}.v31Hero{position:relative;
 })();
 </script>
 
+
+
+<script>
+// ===== V32.1 – News Logic Critical Fix =====
+// Kiểm tra lại logic tin: giữ tin hạ tầng cấp vùng quan trọng, phân biệt nhiều nguồn cùng chủ đề,
+// không gộp tất cả tin cao tốc Khánh Hòa - Buôn Ma Thuột thành một tin duy nhất.
+(function(){
+  const CRITICAL_V321 = [
+    {
+      title:'Cao tốc Khánh Hòa - Buôn Ma Thuột sẽ thông xe kỹ thuật trước 2.9',
+      source:'Thanh Niên',
+      url:'https://thanhnien.vn/cao-toc-khanh-hoa-buon-ma-thuot-se-thong-xe-ky-thuat-truoc-29-185260601104052878.htm',
+      summary:'Tin hạ tầng cực quan trọng: Bộ Xây dựng yêu cầu đẩy nhanh tiến độ cao tốc Khánh Hòa - Buôn Ma Thuột giai đoạn 1 để thông xe kỹ thuật trước ngày Quốc khánh 2.9. Đây là tín hiệu cần lưu ý với kết nối vùng, logistics và kỳ vọng đầu tư quanh Ninh Hòa - Khánh Hòa.',
+      category:'Hạ tầng',
+      area:['Ninh Hòa','Ninh Xuân','Khánh Hòa','Vân Phong'],
+      impactScore:99,
+      qualityScore:100,
+      qualityLevel:'Tin cực quan trọng',
+      qualityReason:'mới trong 24h · hạ tầng vùng ảnh hưởng Ninh Hòa · nguồn mạnh',
+      pinned:true,
+      critical:true,
+      pubDate:'2026-06-01T11:14:00+07:00',
+      ts:new Date('2026-06-01T11:14:00+07:00').getTime()
+    },
+    {
+      title:'Thông xe 22 km đầu cao tốc Khánh Hòa - Buôn Ma Thuột',
+      source:'VnExpress',
+      url:'https://vnexpress.net/thong-xe-22-km-dau-cao-toc-khanh-hoa-buon-ma-thuot-5078951.html',
+      summary:'Tin hạ tầng cực quan trọng: đoạn đầu cao tốc Khánh Hòa - Buôn Ma Thuột được thông xe, tác động đến kết nối vùng, logistics, dòng di chuyển và kỳ vọng đầu tư quanh Ninh Hòa - Khánh Hòa.',
+      category:'Hạ tầng',
+      area:['Ninh Hòa','Ninh Xuân','Khánh Hòa','Vân Phong'],
+      impactScore:99,
+      qualityScore:99,
+      qualityLevel:'Tin cực quan trọng',
+      qualityReason:'hạ tầng vùng ảnh hưởng Ninh Hòa · nguồn mạnh',
+      pinned:true,
+      critical:true,
+      pubDate:'2026-05-28T09:00:00+07:00',
+      ts:new Date('2026-05-28T09:00:00+07:00').getTime()
+    },
+    {
+      title:'Sắp triển khai thu phí không dừng trên cao tốc Khánh Hòa - Buôn Ma Thuột',
+      source:'PLO',
+      url:'https://plo.vn/sap-trien-khai-thu-phi-khong-dung-tren-cao-toc-khanh-hoa-buon-ma-thuot-post910040.html',
+      summary:'Tin cần lưu ý về vận hành cao tốc Khánh Hòa - Buôn Ma Thuột, ảnh hưởng đến kết nối vùng và kỳ vọng hạ tầng quanh Khánh Hòa - Ninh Hòa.',
+      category:'Hạ tầng',
+      area:['Ninh Hòa','Ninh Xuân','Khánh Hòa'],
+      impactScore:94,
+      qualityScore:96,
+      qualityLevel:'Tin cần lưu ý',
+      qualityReason:'hạ tầng vùng ảnh hưởng Ninh Hòa · nguồn mạnh',
+      pinned:true,
+      critical:true,
+      pubDate:'2026-05-24T08:00:00+07:00',
+      ts:new Date('2026-05-24T08:00:00+07:00').getTime()
+    },
+    {
+      title:'Đã nghiệm thu 20km đầu cao tốc Khánh Hòa - Buôn Ma Thuột, tuần tới đưa vào hoạt động',
+      source:'Tuổi Trẻ',
+      url:'https://tuoitre.vn/da-nghiem-thu-20km-dau-cao-toc-khanh-hoa-buon-ma-thuot-tuan-toi-dua-vao-hoat-dong-20260524181351034.htm',
+      summary:'Tin tiến độ cao tốc Khánh Hòa - Buôn Ma Thuột. Cần theo dõi tác động đến kết nối khu vực, tâm lý thị trường và nhóm đất gần trục giao thông.',
+      category:'Hạ tầng',
+      area:['Ninh Hòa','Ninh Xuân','Khánh Hòa'],
+      impactScore:96,
+      qualityScore:97,
+      qualityLevel:'Tin cần lưu ý',
+      qualityReason:'hạ tầng vùng ảnh hưởng Ninh Hòa · nguồn mạnh',
+      pinned:true,
+      critical:true,
+      pubDate:'2026-05-24T18:13:00+07:00',
+      ts:new Date('2026-05-24T18:13:00+07:00').getTime()
+    },
+    {
+      title:'Việt Nam dự kiến có thêm trung tâm logistics và trung chuyển quốc tế tại Khánh Hòa/Vân Phong',
+      source:'Người Quan Sát',
+      url:'https://nguoiquansat.vn/viet-nam-du-kien-co-them-trung-tam-logistics-va-trung-chuyen-quoc-te-tai-tinh-co-bo-bien-dai-nhat-ca-nuoc-292879.html',
+      summary:'Tin logistics cần lưu ý nếu liên quan Khánh Hòa/Vân Phong. Nhóm cảng, logistics và trung chuyển quốc tế có thể tác động gián tiếp đến kỳ vọng khu vực Vân Phong và Ninh Hòa.',
+      category:'Vân Phong',
+      area:['Vân Phong','Ninh Hòa','Khánh Hòa'],
+      impactScore:92,
+      qualityScore:94,
+      qualityLevel:'Tin cần lưu ý',
+      qualityReason:'liên quan Vân Phong/logistics · cần theo dõi',
+      pinned:true,
+      critical:true,
+      pubDate:'2026-05-27T08:00:00+07:00',
+      ts:new Date('2026-05-27T08:00:00+07:00').getTime()
+    }
+  ];
+  const MAX_NEWS = 150;
+  const DISPLAY_MAX = 90;
+  function norm(s){try{return normalizeVN(String(s||''));}catch(e){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d')}}
+  function visibleRaw(n){return [n?.title,n?.summary,n?.source,n?.url].filter(Boolean).join(' ')}
+  function visible(n){return norm(visibleRaw(n))}
+  function ntime(n){return typeof newsTs==='function'?(newsTs(n)||0):(Number(n?.ts||0)||Date.parse(n?.pubDate||'')||0)}
+  const BAD=/ha noi|thu do|ninh binh|bac ninh|tay ninh|ninh thuan|quang ninh|hoa binh|binh dinh|binh duong|binh phuoc|long an|dong nai|lam dong|nghe an|thanh hoa|quang ngai|quang nam|da nang|hai phong|can tho/;
+  const DIRECT=/ninh hoa|ninh hoà|thi xa ninh hoa|phuong ninh hoa|ninh diem|ninh hai|doc let|ninh xuan|ninh an|ninh tho|ninh thuy|ninh phung|ninh phuoc|ninh ich|ninh sim|tan dinh|bac hon heo|dong bac ninh hoa/;
+  const STRATEGIC=/khanh hoa|khánh hòa|van phong|vân phong|cao toc khanh hoa buon ma thuot|cao tốc khánh hòa buôn ma thuột|cao toc van phong|logistics|trung tam logistics|trung chuyen quoc te|cang|khu kinh te van phong|bac hon heo|nam van phong|phan khu 16|phan khu 17|phan khu 19/;
+  const TOPIC=/quy hoach|su dung dat|cong bao|phap ly|bang gia dat|cao toc|ha tang|do thi|cang|logistics|khu cong nghiep|du lich|du an|thu hoi dat|giai phong mat bang|thong xe|thu phi khong dung/;
+  function isCritical(n){const t=visible(n);return !!(n?.critical||n?.pinned||/cao toc khanh hoa buon ma thuot|cao tốc khánh hòa buôn ma thuột|trung tam logistics|trung chuyen quoc te/.test(t))}
+  function isBadForeign(n){const t=visible(n);return BAD.test(t)&&!(DIRECT.test(t)||(/khanh hoa|khánh hòa|van phong|vân phong/.test(t)&&STRATEGIC.test(t)))}
+  function relevant(n){const t=visible(n);if(!n||!n.title)return false;if(isBadForeign(n))return false;if(isCritical(n))return /khanh hoa|khánh hòa|van phong|vân phong|ninh hoa|ninh hoà/.test(t);if(DIRECT.test(t))return true;if(STRATEGIC.test(t)&&/khanh hoa|khánh hòa|van phong|vân phong/.test(t))return true;return false}
+  function sourceName(n){return (typeof cleanSourceName==='function'?cleanSourceName(n?.source||''):String(n?.source||'')).trim()||'Nguồn tin'}
+  function sourceScore(n){const s=norm((n?.source||'')+' '+(n?.url||''));if(/ninhhoa\.khanhhoa|congbao\.khanhhoa|khanhhoa\.gov|bao khanh hoa|baokhanhhoa|chinhphu|baochinhphu/.test(s))return 24;if(/ipa\.khanhhoa/.test(s))return 22;if(/tuoitre|vnexpress|plo\.vn|vov|nhandan|vietnamnet|dantri|thanhnien|thanh nien/.test(s))return 18;if(/cafeland|cafef|nguoi quan sat|tapchicongthuong/.test(s))return 11;return 5}
+  function areaFrom(n){const t=visible(n);const a=[];if(/ninh hoa|ninh hoà|thi xa ninh hoa|phuong ninh hoa/.test(t)||isCritical(n))a.push('Ninh Hòa');if(/ninh diem/.test(t))a.push('Ninh Diêm');if(/doc let|ninh hai/.test(t))a.push('Dốc Lết / Ninh Hải');if(/ninh xuan/.test(t)||/cao toc khanh hoa buon ma thuot/.test(t))a.push('Ninh Xuân');if(/ninh an/.test(t))a.push('Ninh An');if(/tan dinh/.test(t))a.push('Tân Định');if(/van phong|bac hon heo|nam van phong|dong bac ninh hoa|phan khu 16|phan khu 17|phan khu 19|cang|logistics|trung chuyen/.test(t))a.push('Vân Phong');return [...new Set(a)].slice(0,4)}
+  function quality(n){const t=visible(n);let s=0;if(isCritical(n))s=92;if(DIRECT.test(t))s+=34;if(/van phong|vân phong|logistics|cang|trung chuyen|bac hon heo|nam van phong/.test(t))s+=24;if(/cao toc khanh hoa buon ma thuot|cao tốc khánh hòa buôn ma thuột|thong xe|thu phi khong dung/.test(t))s+=28;if(TOPIC.test(t))s+=18;s+=sourceScore(n);const impact=Number(n?.impactScore||0)||Number(typeof scoreImpact==='function'?scoreImpact(visibleRaw(n)):0)||0;s+=Math.min(20,Math.round(impact*.2));const ts=ntime(n);if(ts){const h=(Date.now()-ts)/36e5;if(h<24)s+=24;else if(h<168)s+=18;else if(h<720)s+=8;}return Math.max(0,Math.min(100,Math.round(s)))}
+  function reason(n){const t=visible(n),r=[];if(isCritical(n))r.push('tin hạ tầng cần lưu ý');try{const ai=ageInfo(n);if(ai?.bucket==='24h')r.push('mới trong 24h');else if(ai?.bucket==='7 ngày')r.push('trong 7 ngày')}catch(e){}if(DIRECT.test(t))r.push('liên quan Ninh Hòa');if(/cao toc khanh hoa buon ma thuot|cao tốc khánh hòa buôn ma thuột/.test(t))r.push('cao tốc Khánh Hòa - Buôn Ma Thuột');if(/van phong|vân phong|logistics|cang|trung chuyen/.test(t))r.push('Vân Phong/logistics');if(/quy hoach|phap ly|cong bao|phe duyet/.test(t))r.push('quy hoạch/pháp lý');return r.slice(0,3).join(' · ')||'liên quan trọng tâm Ninh Hòa'}
+  function normItem(n){n=normalizeNews(Object.assign({},n||{}));n.category=n.category||categoryOf(visibleRaw(n));n.area=areaFrom(n);if(!n.area.length)n.area=['Ninh Hòa'];n.impactScore=Math.max(Number(n.impactScore||0),Number(typeof scoreImpact==='function'?scoreImpact(visibleRaw(n)+' '+n.category):0)||0);if(isCritical(n))n.impactScore=Math.max(n.impactScore,92);n.qualityScore=Math.max(Number(n.qualityScore||0),quality(n));n.qualityLevel=isCritical(n)?'Tin cần lưu ý':(n.qualityScore>=86?'Trọng tâm rất cao':n.qualityScore>=74?'Đáng đọc':n.qualityScore>=62?'Theo dõi':'Tham khảo');n.qualityReason=n.qualityReason||reason(n);return n}
+  function sourceSlug(n){return norm(sourceName(n)).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,32)||'source'}
+  function titleSlug(n){return norm(n?.title||'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,70)}
+  function dayKey(n){const t=ntime(n);if(!t)return 'unknown';const d=new Date(t);return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')}
+  function key(n){const t=visible(n);if(isCritical(n)&&/cao toc khanh hoa buon ma thuot|cao tốc khánh hòa buôn ma thuột/.test(t))return 'critical-highway-'+dayKey(n)+'-'+sourceSlug(n)+'-'+titleSlug(n);if(isCritical(n)&&/logistics|trung chuyen quoc te/.test(t))return 'critical-logistics-'+sourceSlug(n)+'-'+titleSlug(n);let k=norm(n?.title||'').replace(/google tin tuc|bao dien tu|tap chi|tin moi|moi nhat/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();return k.split(' ').filter(w=>w.length>2&&!/^(tin|moi|nhat|khanh|hoa|ninh|duoc|phe|quy|hoach)$/.test(w)).slice(0,14).join('-')||k.slice(0,80)}
+  function rank(n){const t=ntime(n)||0;return (isCritical(n)?10000000000000:0)+t+(Number(n.qualityScore||0)*1000000)+(Number(n.impactScore||0)*1000)}
+  function merge(items){const by={};[...CRITICAL_V321,...(items||[])].map(normItem).filter(relevant).forEach(n=>{if(n.qualityScore<58&&!isCritical(n))return;const k=key(n);const old=by[k];if(!old||rank(n)>rank(old)){n._sources=[...new Set([...(old?old._sources||[]:[]),sourceName(n)].filter(Boolean))];by[k]=n}else{old._sources=[...new Set([...(old._sources||[]),sourceName(n)].filter(Boolean))]}});return Object.values(by).sort((a,b)=>rank(b)-rank(a)).slice(0,MAX_NEWS)}
+  window.mergeNewsItems=function(items){return merge(items)};
+  window.getAllNews=function(){return merge([...(state.news||[]),...(Array.isArray(fallbackNews)?fallbackNews:[])])};
+  function passTime(n){const tr=state.timeRange||'Tất cả';if(tr==='Tất cả')return true;let bucket='Cũ hơn';try{bucket=ageInfo(n)?.bucket||bucket}catch(e){}if(tr==='24h')return bucket==='24h';if(tr==='7 ngày')return ['24h','7 ngày'].includes(bucket);if(tr==='30 ngày')return ['24h','7 ngày','30 ngày'].includes(bucket);if(tr==='Cũ hơn')return bucket==='Cũ hơn';return true}
+  window.getFilteredNews=function(filter=state.filter){let list=getAllNews().filter(passTime);const f=filter||'Mới nhất';const ff=norm(f);if(f==='Tác động cao')list=list.filter(n=>isCritical(n)||(n.impactScore||0)>=82||(n.qualityScore||0)>=86);else if(f==='Cần lưu ý')list=list.filter(n=>isCritical(n)||/cao toc khanh hoa buon ma thuot|cao tốc khánh hòa buôn ma thuột|logistics|trung chuyen quoc te|cong bao|quy hoach|phap ly/.test(visible(n))||(n.impactScore||0)>=88);else if(f==='Ninh Hòa')list=list.filter(n=>DIRECT.test(visible(n))||isCritical(n)||(n.area||[]).includes('Ninh Hòa'));else if(f==='Vân Phong')list=list.filter(n=>/van phong|vân phong|bac hon heo|nam van phong|phan khu 16|phan khu 17|phan khu 19|logistics|cang|trung chuyen/.test(visible(n)));else if(['Hạ tầng','Quy hoạch','Pháp lý'].includes(f))list=list.filter(n=>visible(n).includes(ff)||norm(n.category||'').includes(ff));return list.sort((a,b)=>{if(f==='Mới nhất')return (ntime(b)-ntime(a))||(Number(b.qualityScore||0)-Number(a.qualityScore||0));return rank(b)-rank(a)}).slice(0,DISPLAY_MAX)};
+  const oldBuild=window.v27BuildQueries;
+  window.v27BuildQueries=function(mode='quick'){
+    const exact=[
+      'site:thanhnien.vn cao tốc Khánh Hòa Buôn Ma Thuột thông xe kỹ thuật trước 2.9',
+      'Thanh Niên cao tốc Khánh Hòa Buôn Ma Thuột thông xe kỹ thuật trước 2.9',
+      'cao tốc Khánh Hòa Buôn Ma Thuột sẽ thông xe kỹ thuật trước 2.9',
+      'site:vnexpress.net thông xe 22 km đầu cao tốc Khánh Hòa Buôn Ma Thuột',
+      'site:plo.vn thu phí không dừng cao tốc Khánh Hòa Buôn Ma Thuột',
+      'site:tuoitre.vn nghiệm thu 20km đầu cao tốc Khánh Hòa Buôn Ma Thuột'
+    ];
+    let old=[];try{old=typeof oldBuild==='function'?oldBuild(mode):[]}catch(e){}
+    return [...new Set([...exact,...old])].slice(0,mode==='quick'?32:72);
+  };
+  if(Array.isArray(queries)) CRITICAL_V321.concat([]).forEach(n=>{const q=n.title+' '+n.source;if(!queries.includes(q))queries.unshift(q)});
+  if(Array.isArray(fallbackNews)) CRITICAL_V321.slice().reverse().forEach(n=>{if(!fallbackNews.some(x=>String(x.url||'')===n.url))fallbackNews.unshift(n)});
+  try{state.news=merge([...(state.news||[]),...CRITICAL_V321,...(Array.isArray(fallbackNews)?fallbackNews:[])]);store('news',state.news);setTimeout(()=>{try{render()}catch(e){}},260)}catch(e){console.warn('V32.1 news critical fix',e)}
+})();
+</script>
+
 </body>
 </html>
