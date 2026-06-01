@@ -244,21 +244,21 @@ Các tin hạ tầng/logistics quan trọng có thể được ghim vào nhóm *
 |---|
 | ![Dự án Portfolio](screenshots/portfolio.png) |
 
-
 ---
 
 ## Screenshots
 
-> Một số hình ảnh giao diện của Ninh Hòa Invest AI.
+> Một số hình ảnh giao diện của **Ninh Hòa Invest AI**.
 
 <p align="center">
-  <img src="screenshots/home.png" width="220" alt="Trang chủ" />
-  <img src="screenshots/news.png" width="220" alt="Bảng tin" />
-  <img src="screenshots/land-check.png" width="220" alt="Kiểm tra lô đất" />
+  <img src="screenshots/home-portfolio.jpg" width="220" alt="Trang chủ / Portfolio" />
+  <img src="screenshots/news-timeline.jpg" width="220" alt="Bảng tin theo thời gian" />
+  <img src="screenshots/news-analysis.jpg" width="220" alt="Phân tích tin tức" />
 </p>
 
 <p align="center">
-  <img src="screenshots/notebook.png" width="220" alt="Sổ tay đầu tư" />
-  <img src="screenshots/portfolio.png" width="220" alt="Portfolio" />
+  <img src="screenshots/land-check.jpg" width="220" alt="Kiểm tra lô đất" />
+  <img src="screenshots/region-profile.jpg" width="220" alt="Hồ sơ khu vực" />
+  <img src="screenshots/investment-notebook.jpg" width="220" alt="Sổ tay đầu tư" />
 </p>
 
