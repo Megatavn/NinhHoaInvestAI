@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<title>Ninh Hòa Invest AI</title>
+<title>Ninh Hòa Invest AI V34 – Legal Policy Intelligence Edition</title>
 <style>
 :root{
   --navy:#061b2c;--navy2:#083654;--blue:#0d5b80;--ink:#082236;--text:#18364a;--muted:#536a78;
@@ -86,6 +86,7 @@ body.dark{background:#06121d;color:#eaf4f9}body.dark .card,body.dark .newsCard,b
     <section class="page" id="areas"></section>
     <section class="page" id="legal"></section>
     <section class="page" id="saved"></section>
+    <section class="page" id="policy"></section>
   </main>
 </div>
 
@@ -2040,6 +2041,317 @@ html.taste-v31 .sectionTitle h2{letter-spacing:-.6px}.v31Hero{position:relative;
   if(Array.isArray(queries)) CRITICAL_V321.concat([]).forEach(n=>{const q=n.title+' '+n.source;if(!queries.includes(q))queries.unshift(q)});
   if(Array.isArray(fallbackNews)) CRITICAL_V321.slice().reverse().forEach(n=>{if(!fallbackNews.some(x=>String(x.url||'')===n.url))fallbackNews.unshift(n)});
   try{state.news=merge([...(state.news||[]),...CRITICAL_V321,...(Array.isArray(fallbackNews)?fallbackNews:[])]);store('news',state.news);setTimeout(()=>{try{render()}catch(e){}},260)}catch(e){console.warn('V32.1 news critical fix',e)}
+})();
+</script>
+
+<style id="v34-policy-css">
+/* V34 – Legal Policy Intelligence Edition */
+.policyHero{position:relative;overflow:hidden;border-radius:28px;padding:22px;margin-bottom:16px;color:#fff;background:radial-gradient(circle at 92% 8%,rgba(255,223,112,.28),transparent 28%),linear-gradient(138deg,#061b2c 0,#083e5d 63%,#966e16 150%);box-shadow:0 20px 52px rgba(6,27,44,.24)}
+.policyHero:after{content:"⚖";position:absolute;right:-8px;bottom:-35px;font-size:132px;line-height:1;color:rgba(255,255,255,.07);transform:rotate(-8deg)}
+.policyHero>*{position:relative;z-index:1}.policyHero h1{font-size:27px;line-height:1.08;letter-spacing:-.75px;margin:8px 0 10px}.policyHero p{color:rgba(255,255,255,.86);line-height:1.48;margin:0}
+.policyHeroTop{display:flex;gap:8px;flex-wrap:wrap}.policyHeroBadge{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);font-size:11px;font-weight:900}
+.policyMetrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}.policyMetric{min-height:74px;padding:11px;border-radius:18px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.16)}.policyMetric b{display:block;color:#ffdf70;font-size:18px;margin-bottom:4px}.policyMetric span{display:block;font-size:12px;line-height:1.24;font-weight:800;color:rgba(255,255,255,.86)}
+.policyIntro{border-radius:22px;padding:15px;margin-bottom:14px;background:#fff8e8;border:1px solid #efd798;color:#684d12;line-height:1.45;font-weight:750}.policyIntro b{color:#493400}
+.policySectionHead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:22px 4px 12px}.policySectionHead h2{font-size:22px;letter-spacing:-.5px;margin:0}.policySectionHead span{font-size:12px;font-weight:850;color:var(--muted);text-align:right}
+.policyFilters{display:flex;gap:8px;overflow:auto;padding:0 1px 13px;scrollbar-width:none}.policyFilters::-webkit-scrollbar{display:none}.policyChip{white-space:nowrap;border:1px solid #d8e5ec;background:#fff;color:#18364a;border-radius:999px;padding:10px 13px;font-size:13px;font-weight:900}.policyChip.active{background:#082e49;color:#fff;border-color:#082e49;box-shadow:0 8px 18px rgba(6,27,44,.15)}
+.policyList{display:grid;gap:13px}.policyCard{background:#fff;border:1px solid rgba(8,34,54,.08);border-radius:24px;padding:17px;box-shadow:0 12px 34px rgba(6,27,44,.09)}.policyCard[hidden]{display:none}.policyCard h3{font-size:20px;line-height:1.18;letter-spacing:-.45px;margin:9px 0}.policyCard p{color:var(--muted);line-height:1.48;margin:8px 0}.policyCardTop{display:flex;justify-content:space-between;gap:10px;align-items:start}.policyNumber{width:34px;height:34px;flex:0 0 34px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#ffdf70,#d6a02d);font-weight:950;color:#082236}.policyBadges{display:flex;gap:6px;flex-wrap:wrap}
+.policyStatus{display:inline-flex;align-items:center;border-radius:999px;padding:6px 9px;font-size:10.5px;font-weight:950;line-height:1.1}.policyStatus.effective{background:#e8f8ef;color:#08643e}.policyStatus.roadmap{background:#e9f4ff;color:#07577f}.policyStatus.research{background:#fff0d5;color:#795000}.policyStatus.verify{background:#f2eefb;color:#61458d}.policyStatus.advice{background:#eef2f4;color:#536570}
+.policyImpact{display:inline-flex;margin:2px 0 5px;border-radius:999px;padding:7px 10px;background:#ffe8e2;color:#8a2c20;font-size:12px;font-weight:950}.policyImpact.potential{background:#fff0d5;color:#795000}
+.policyFacts{display:grid;gap:8px;margin:12px 0}.policyFact{border-radius:17px;padding:11px 12px;background:#f5f9fb;border:1px solid #e2ebf0}.policyFact b{display:block;font-size:12px;color:#12384f;margin-bottom:4px}.policyFact span{display:block;font-size:13px;line-height:1.42;color:#4c6574}.policyBasis{font-size:12px!important;border-left:3px solid #d7a531;padding-left:10px;color:#60727d!important}
+.policyCardActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.policyCardActions button{flex:1 1 145px}.policySavedMark{background:#e8f8ef!important;color:#08643e!important}
+.policyCompare{overflow:hidden;border-radius:23px;border:1px solid #dbe7ed;background:#fff;box-shadow:0 12px 30px rgba(6,27,44,.07)}.policyCompareRow{display:grid;grid-template-columns:.78fr 1fr 1fr;border-bottom:1px solid #e6eef2}.policyCompareRow:last-child{border-bottom:0}.policyCompareRow>div{padding:13px;line-height:1.4;color:#4d6573;font-size:13px}.policyCompareRow>div+div{border-left:1px solid #e6eef2}.policyCompareRow b{color:#0b2c41}.policyCompareHead{background:#082e49}.policyCompareHead>div{color:#fff!important;font-weight:900}.policyCompareHead>div+div{border-left-color:rgba(255,255,255,.15)}
+.policyMobileLabel{display:none}
+.policyForm{background:#fff;border:1px solid rgba(8,34,54,.08);box-shadow:0 15px 38px rgba(6,27,44,.1);border-radius:25px;padding:17px}.policyFormGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.policyField{display:flex;flex-direction:column;gap:7px}.policyField label{font-size:13px}.policyField select{width:100%;min-width:0}.policyScoreBtn{width:100%;margin-top:13px}
+.policyResult{display:none;margin-top:14px;border-radius:23px;padding:16px;background:linear-gradient(145deg,#071f32,#0a4b68);color:#fff}.policyResult.show{display:block}.policyResultTop{display:grid;grid-template-columns:86px 1fr;gap:13px;align-items:center}.policyScoreRing{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#ffdf70 var(--score-angle),rgba(255,255,255,.14) 0)}.policyScoreRing b{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:#082a40;color:#ffdf70;font-size:23px}.policyResult h3{margin:0 0 5px;font-size:21px}.policyResult p{color:rgba(255,255,255,.8);line-height:1.43}.policyResultGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px}.policyResultBox{border-radius:18px;padding:13px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14)}.policyResultBox b{display:block;color:#ffdf70;margin-bottom:7px}.policyResultBox ul{padding-left:18px;margin:0}.policyResultBox li{margin:0 0 6px;line-height:1.35;font-size:13px}.policyResult .primary{margin-top:12px;width:100%}
+.policyReports{display:grid;gap:8px}.policyReportItem{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;border:1px solid #e1ebf0;border-radius:18px;padding:11px;background:#fff}.policyReportScore{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;background:#082e49;color:#ffdf70;font-weight:950}.policyReportItem b,.policyReportItem small{display:block}.policyReportItem small{color:#627783;margin-top:3px}
+.policySources{display:grid;grid-template-columns:1fr 1fr;gap:9px}.policySource{border:1px solid #dce8ee;background:#fff;border-radius:18px;padding:13px;text-align:left;color:#12384f;font-weight:900}.policySource span{display:block;color:#6a7c87;font-size:11px;margin-top:4px;font-weight:750}.policyDisclaimer{border-radius:23px;padding:16px;margin:17px 0;background:#fff8d9;border:1px solid #ecd27d;color:#5e4711;line-height:1.48}.policyDisclaimer b{display:block;color:#463100;margin-bottom:5px}
+.policyHomeCta{background:linear-gradient(135deg,#061b2c,#0b5570 72%,#b88922 150%);color:#fff;border-radius:27px;padding:19px;margin:0 0 14px;box-shadow:0 18px 44px rgba(6,27,44,.2)}.policyHomeCta h2{font-size:23px;line-height:1.12;margin:8px 0}.policyHomeCta p{color:rgba(255,255,255,.82);line-height:1.42}.policyHomeCta button{margin-top:5px}.policyLinkCard{background:#eef7fa;border:1px solid #d6e7ed;border-radius:21px;padding:15px;margin-bottom:14px}.policyLinkCard h3{margin:0 0 5px}.policyLinkCard p{margin:0 0 10px;color:#536a78;line-height:1.4}
+body.dark .policyCard,body.dark .policyForm,body.dark .policyCompare,body.dark .policyReportItem,body.dark .policySource{background:#0b2234;color:#eaf4f9;border-color:rgba(255,255,255,.09)}body.dark .policyCard p,body.dark .policyCompareRow>div,body.dark .policyFact span,body.dark .policyReportItem small{color:#acc0cb}body.dark .policyFact{background:#0d2a3f;border-color:rgba(255,255,255,.08)}body.dark .policyChip{background:#0d2a3f;color:#e4f0f5;border-color:rgba(255,255,255,.1)}body.dark .policyChip.active{background:#fff;color:#082033}body.dark .policyCompareRow{border-color:rgba(255,255,255,.08)}body.dark .policyCompareRow>div+div{border-left-color:rgba(255,255,255,.08)}body.dark .policyLinkCard{background:#0d2a3f;border-color:rgba(255,255,255,.1)}
+@media(max-width:560px){.policyHero h1{font-size:24px}.policyMetrics{grid-template-columns:1fr}.policyMetric{min-height:0}.policyFormGrid,.policyResultGrid,.policySources{grid-template-columns:1fr}.policyCompareRow{grid-template-columns:1fr}.policyCompareRow>div+div{border-left:0;border-top:1px solid #e6eef2}.policyCompareHead{display:none}.policyMobileLabel{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:950;color:#8a6a1c;margin-bottom:4px}.policyResultTop{grid-template-columns:74px 1fr}.policyScoreRing{width:72px;height:72px}.policyScoreRing b{width:54px;height:54px}.policySectionHead{align-items:start;flex-direction:column}.policySectionHead span{text-align:left}.policyReportItem{grid-template-columns:auto 1fr}.policyReportItem>button{grid-column:1/-1}}
+</style>
+
+<script>
+// ===== V34 – Legal Policy Intelligence Edition =====
+(function(){
+  var POLICY_REPORT_KEY='v34_policyReports';
+  var POLICY_NOTE_KEY='v34_policySavedNotes';
+  var policyFilter='all';
+  var lastPolicyReport=null;
+  var POLICY_FILTERS=[
+    {id:'all',label:'Tất cả'},
+    {id:'speculator',label:'Dân buôn / đầu cơ'},
+    {id:'broker',label:'Môi giới'},
+    {id:'multi',label:'Người sở hữu nhiều BĐS'},
+    {id:'family',label:'Gia đình mua đất'},
+    {id:'long',label:'Nhà đầu tư dài hạn'}
+  ];
+  var POLICY_ITEMS=[
+    {
+      id:'land-price',group:'Bất lợi với dân buôn, môi giới, đầu cơ',
+      title:'Bỏ khung giá đất; bảng giá đất theo cơ chế mới',
+      impact:'Cao',badges:['Đã có hiệu lực','Cần kiểm chứng nguồn địa phương'],
+      audiences:['speculator','broker','multi','family','long'],
+      affected:'Người gom đất, người xin chuyển mục đích, gia đình mua đất và nhà đầu tư vốn mỏng.',
+      plain:'Luật Đất đai 2024 đã bỏ cơ chế khung giá đất của Chính phủ. Bảng giá đất do địa phương quyết định và được dùng trong nhiều trường hợp theo luật. Số tiền cụ thể phải tra bảng giá và hồ sơ đang áp dụng tại Khánh Hòa.',
+      why:'Tiền sử dụng đất, chi phí chuyển mục đích, thuế/phí hoặc chi phí gom đất có thể thay đổi. Không phải hồ sơ nào cũng tăng giống nhau.',
+      action:'Kiểm tra bảng giá đất và quyết định địa phương còn hiệu lực; tính lại toàn bộ chi phí chuyển mục đích, không chỉ nhìn giá mua ban đầu.',
+      basis:'Luật Đất đai 31/2024/QH15; Luật 43/2024/QH15; văn bản giá đất địa phương đang áp dụng.',
+      url:'https://vanban.chinhphu.vn/?docid=211189&pageid=27160'
+    },
+    {
+      id:'subdivision',group:'Bất lợi với dân buôn, môi giới, đầu cơ',
+      title:'Siết điều kiện phân lô bán nền',
+      impact:'Rất cao',badges:['Đã có hiệu lực','Cần kiểm chứng nguồn địa phương'],
+      audiences:['speculator','broker','family','long'],
+      affected:'Dân buôn đất nền, chủ đất lớn, môi giới chuyên phân lô và người mua nền trong dự án.',
+      plain:'Phân lô bán nền trong dự án và tách thửa đất của hộ gia đình/cá nhân là hai thủ tục khác nhau. Luật Kinh doanh BĐS 2023 đặt điều kiện chặt hơn với quyền sử dụng đất đã có hạ tầng trong dự án; còn tách thửa phải đối chiếu quy hoạch và quy định của tỉnh.',
+      why:'Mô hình mua đất lớn rồi kỳ vọng tách thửa, làm hạ tầng hoặc bán nền có thể không thực hiện được như dự tính nếu sai loại thủ tục hoặc sai khu vực.',
+      action:'Trước khi đặt cọc, hỏi rõ đây là tách thửa dân sự hay sản phẩm dự án; kiểm tra quy hoạch, hạ tầng, điều kiện tách thửa và văn bản Khánh Hòa.',
+      basis:'Luật Kinh doanh BĐS 29/2023/QH15; Nghị định 96/2024/NĐ-CP; quy định tách thửa của địa phương.',
+      url:'https://vanban.chinhphu.vn/?classid=1&docid=210798&pageid=27160&typegroupid=4'
+    },
+    {
+      id:'two-price',group:'Bất lợi với dân buôn, môi giới, đầu cơ',
+      title:'Minh bạch giá giao dịch; rủi ro hợp đồng hai giá',
+      impact:'Cao',badges:['Đã có hiệu lực','Theo lộ trình'],
+      audiences:['speculator','broker','multi','family','long'],
+      affected:'Người mua bán ngắn hạn, môi giới, bên dùng giấy tay hoặc thỏa thuận ghi giá thấp hơn giá thực.',
+      plain:'Khai giá không trung thực để giảm thuế không phải cách làm hợp pháp. Khi dữ liệu đất đai, thuế, thanh toán và hợp đồng được liên thông tốt hơn, chênh lệch giữa giá ghi trên giấy và dòng tiền thực có thể dễ bị phát hiện hơn.',
+      why:'Người giao dịch có thể bị truy thu, xử phạt, khó chứng minh số tiền thật khi tranh chấp và chịu rủi ro lớn nếu chỉ có thỏa thuận ngoài hợp đồng.',
+      action:'Ghi giá và dòng tiền rõ ràng, tính đúng thuế/phí, ưu tiên thanh toán có chứng từ và không ký giấy tay mập mờ.',
+      basis:'Nghĩa vụ khai thuế trung thực theo pháp luật thuế; Luật Kinh doanh BĐS 2023 và lộ trình số hóa dữ liệu thị trường.',
+      url:'https://baochinhphu.vn/huong-dan-chung-ve-khai-thue-102250903095435983.htm'
+    },
+    {
+      id:'second-home-tax',group:'Áp lực với người sở hữu nhiều nhà đất',
+      title:'Áp lực từ hướng nghiên cứu thuế BĐS thứ hai',
+      impact:'Tiềm năng rất cao',badges:['Đang nghiên cứu'],
+      audiences:['speculator','multi','long'],
+      affected:'Người sở hữu nhiều nhà đất, người ôm đất bỏ hoang và nhà đầu tư không tạo dòng tiền.',
+      plain:'Thuế với nhà đất thứ hai, bất động sản bỏ hoang hoặc công cụ thuế để hạn chế đầu cơ vẫn là hướng nghiên cứu chính sách. Chưa nên xem đây là một sắc thuế đã áp dụng đại trà chỉ vì có đề xuất hoặc bài báo nhắc tới.',
+      why:'Nếu một chính sách mới được ban hành trong tương lai, chi phí duy trì danh mục nhiều tài sản không tạo dòng tiền có thể cao hơn. Mức thuế và đối tượng chịu thuế hiện chưa thể tự suy đoán.',
+      action:'Theo dõi văn bản chính thức, thử kịch bản chi phí thay vì coi là nghĩa vụ đã phát sinh, và đánh giá khả năng tạo dòng tiền của từng tài sản.',
+      basis:'Bộ Tài chính cho biết chính sách thuế BĐS đang được nghiên cứu tổng thể; chưa phải thuế nhà đất thứ hai áp dụng đại trà.',
+      url:'https://baochinhphu.vn/bo-tai-chinh-hoan-thien-chinh-sach-thue-bat-dong-san-vang-casino-10225100321212994.htm'
+    },
+    {
+      id:'market-data',group:'Áp lực với người sở hữu nhiều nhà đất',
+      title:'Cơ sở dữ liệu nhà ở và thị trường BĐS',
+      impact:'Cao',badges:['Theo lộ trình'],
+      audiences:['speculator','broker','multi','family','long'],
+      affected:'Người đứng tên nhiều tài sản, bên giao dịch thường xuyên và hồ sơ có nguồn tiền hoặc giấy tờ thiếu nhất quán.',
+      plain:'Khung pháp lý về hệ thống thông tin, cơ sở dữ liệu nhà ở và thị trường BĐS đã được ban hành. Việc thu thập, chia sẻ và chuẩn hóa dữ liệu được triển khai theo lộ trình; không nên suy diễn rằng mọi tài sản đã có một mã định danh hoàn chỉnh ở mọi nơi.',
+      why:'Hồ sơ thiếu thống nhất hoặc giao dịch phức tạp có thể phát sinh thêm yêu cầu giải trình, bổ sung và đối chiếu khi dữ liệu được chuẩn hóa tốt hơn.',
+      action:'Chuẩn hóa sổ, hợp đồng, chứng từ thanh toán, thông tin chủ sở hữu và nguồn tiền; sửa sai lệch trước khi giao dịch.',
+      basis:'Nghị định 94/2024/NĐ-CP có hiệu lực từ 01/08/2024 về hệ thống thông tin, cơ sở dữ liệu nhà ở và thị trường BĐS.',
+      url:'https://vanban.chinhphu.vn/?classid=1&docid=210796&orggroupid=2&pageid=27160'
+    },
+    {
+      id:'holding-cost',group:'Áp lực với người sở hữu nhiều nhà đất',
+      title:'Chi phí giữ đất: tác động tổng hợp, không phải một sắc thuế riêng',
+      impact:'Cao',badges:['Cần kiểm chứng nguồn địa phương'],
+      audiences:['speculator','multi','long'],
+      affected:'Người ôm đất dài hạn, dùng vốn vay cao hoặc giữ tài sản không tạo dòng tiền.',
+      plain:'Chi phí giữ đất gồm lãi vay, thuế/phí hiện hành, chi phí cơ hội, bảo quản và thanh khoản. Con số này có thể tăng hoặc giảm theo từng tài sản; không có một mức “thuế giữ đất” chung được tự động áp cho mọi người.',
+      why:'Nếu chỉ chờ tăng giá mà không tính chi phí vốn và thời gian bán, lợi nhuận thực có thể thấp hơn nhiều so với con số chênh lệch giá.',
+      action:'Lập bảng holding cost 12–36 tháng, thử kịch bản lãi vay và thời gian bán, kiểm tra nghĩa vụ tài chính cụ thể của từng thửa.',
+      basis:'Đây là phân tích rủi ro tài chính từ nhiều yếu tố, không phải tên một chính sách thuế độc lập.',
+      url:'https://mof.gov.vn/'
+    }
+  ];
+  var POLICY_SOURCES=[
+    {name:'Cổng văn bản Chính phủ',note:'Tra số hiệu, toàn văn, ngày hiệu lực',url:'https://vanban.chinhphu.vn/'},
+    {name:'Cổng Chính phủ',note:'Tin chỉ đạo và giải thích chính sách',url:'https://baochinhphu.vn/'},
+    {name:'Cổng tỉnh Khánh Hòa',note:'Quyết định và thông tin địa phương',url:'https://khanhhoa.gov.vn/'},
+    {name:'Công báo Khánh Hòa',note:'Văn bản đã công bố tại tỉnh',url:'https://congbao.khanhhoa.gov.vn/'},
+    {name:'Cổng Ninh Hòa',note:'Thông tin quy hoạch và địa bàn',url:'https://ninhhoa.khanhhoa.gov.vn/'},
+    {name:'Bộ Xây dựng',note:'Nhà ở và thị trường BĐS',url:'https://moc.gov.vn/'},
+    {name:'Bộ Tài chính',note:'Chính sách thuế và tài chính',url:'https://mof.gov.vn/'}
+  ];
+  var POLICY_COMPARE=[
+    ['Giá đất','Bảng giá có thể cách xa giao dịch thực tế','Bảng giá theo cơ chế mới; phải tra văn bản địa phương'],
+    ['Phân lô','Dễ kỳ vọng tách thửa, bán nền, lướt sóng hơn','Điều kiện dự án và tách thửa phải kiểm tra riêng'],
+    ['Thuế / phí','Có người kỳ vọng giảm thuế bằng hợp đồng hai giá','Khai trung thực; dữ liệu và chứng từ minh bạch hơn'],
+    ['Sở hữu nhiều tài sản','Dữ liệu phân tán, khó đối chiếu hơn','Cơ sở dữ liệu được chuẩn hóa theo lộ trình'],
+    ['Đầu tư','Nặng kỳ vọng lướt sóng, tăng giá','Phải tính dòng tiền, pháp lý và giá trị sử dụng thật']
+  ];
+  function policyLoad(key,fallback){try{var raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback}catch(e){return fallback}}
+  function policySave(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch(e){toast('Không lưu được trên thiết bị');return false}}
+  function policyStatusClass(label){if(label==='Đã có hiệu lực')return'effective';if(label==='Theo lộ trình')return'roadmap';if(label==='Đang nghiên cứu')return'research';return'verify'}
+  function policyCard(item,index){
+    var saved=policyLoad(POLICY_NOTE_KEY,[]).some(function(x){return x.id===item.id});
+    return '<article class="policyCard" data-policy-audiences="'+esc(item.audiences.join(' '))+'">'+
+      '<div class="policyCardTop"><div class="policyBadges">'+item.badges.map(function(x){return'<span class="policyStatus '+policyStatusClass(x)+'">'+esc(x)+'</span>'}).join('')+'<span class="policyStatus advice">Không phải tư vấn pháp lý</span></div><span class="policyNumber">'+(index+1)+'</span></div>'+
+      '<p><b>'+esc(item.group)+'</b></p><h3>'+esc(item.title)+'</h3>'+
+      '<span class="policyImpact '+(item.impact.indexOf('Tiềm năng')===0?'potential':'')+'">Mức tác động: '+esc(item.impact)+'</span>'+
+      '<p>'+esc(item.plain)+'</p>'+
+      '<div class="policyFacts"><div class="policyFact"><b>Ai bị ảnh hưởng?</b><span>'+esc(item.affected)+'</span></div><div class="policyFact"><b>Vì sao bất lợi?</b><span>'+esc(item.why)+'</span></div><div class="policyFact"><b>Việc nên làm</b><span>'+esc(item.action)+'</span></div></div>'+
+      '<p class="policyBasis"><b>Căn cứ để kiểm tra:</b> '+esc(item.basis)+'</p>'+
+      '<div class="policyCardActions"><button type="button" class="mini '+(saved?'policySavedMark':'')+'" data-policy-save="'+esc(item.id)+'">'+(saved?'✓ Đã lưu ghi chú':'Lưu ghi chú')+'</button><button type="button" class="mini gold" data-policy-url="'+esc(item.url)+'">Đối chiếu nguồn</button></div></article>';
+  }
+  function policySelect(id,label,options){
+    return '<div class="policyField"><label for="'+id+'">'+esc(label)+'</label><select id="'+id+'">'+options.map(function(o){return'<option value="'+esc(o[0])+'">'+esc(o[1])+'</option>'}).join('')+'</select></div>';
+  }
+  function reportsHtml(){
+    var reports=policyLoad(POLICY_REPORT_KEY,[]).slice(0,3);
+    if(!reports.length)return'<div class="saveEmpty">Chưa có kết quả nào. Chấm thử để biết nhóm rủi ro cần kiểm tra trước.</div>';
+    return '<div class="policyReports">'+reports.map(function(r){return'<div class="policyReportItem"><span class="policyReportScore">'+esc(r.score)+'</span><div><b>'+esc(r.level)+'</b><small>'+esc(r.roleLabel)+' · '+esc(r.savedLabel||'Đã lưu')+'</small></div><button type="button" class="mini" data-open-notebook>Đến Sổ tay</button></div>'}).join('')+'</div>';
+  }
+  function renderPolicy(){
+    var el=document.getElementById('policy');if(!el)return;
+    var visible=POLICY_ITEMS.filter(function(x){return policyFilter==='all'||x.audiences.indexOf(policyFilter)>-1});
+    var reports=policyLoad(POLICY_REPORT_KEY,[]);
+    var notes=policyLoad(POLICY_NOTE_KEY,[]);
+    el.innerHTML=
+      '<div class="policyHero"><div class="policyHeroTop"><span class="policyHeroBadge">V34 Legal Policy Intelligence</span><span class="policyHeroBadge">Cập nhật nội dung: 27/06/2026</span></div><h1>Chính sách BĐS mới: Từ đầu cơ sang đầu tư giá trị</h1><p>Thay đổi pháp lý đang hướng thị trường đến minh bạch hơn. Nhà đầu tư cần tính kỹ chi phí vốn, pháp lý, thuế và khả năng tạo dòng tiền — nhưng mỗi nghĩa vụ cụ thể vẫn phải kiểm tra theo hồ sơ và địa phương.</p><div class="policyMetrics"><div class="policyMetric"><b>01</b><span>Minh bạch hơn</span></div><div class="policyMetric"><b>02</b><span>Chi phí giữ đất cao hơn</span></div><div class="policyMetric"><b>03</b><span>Đầu cơ khó hơn</span></div></div></div>'+
+      '<div class="policyIntro"><b>Đọc trạng thái trước khi đọc nhận định.</b> “Đã có hiệu lực” nói về căn cứ pháp lý; “Theo lộ trình” nói về khâu triển khai; “Đang nghiên cứu” chưa phải nghĩa vụ đã áp dụng; “Cần kiểm chứng” yêu cầu tra văn bản Khánh Hòa và hồ sơ cụ thể.</div>'+
+      '<div class="policySectionHead"><h2>Ai đang chịu tác động?</h2><span id="policyFilterCount">'+visible.length+' / '+POLICY_ITEMS.length+' nội dung phù hợp</span></div>'+
+      '<div class="policyFilters" role="group" aria-label="Lọc đối tượng bị ảnh hưởng">'+POLICY_FILTERS.map(function(f){return'<button type="button" class="policyChip '+(policyFilter===f.id?'active':'')+'" data-policy-filter="'+f.id+'" aria-pressed="'+(policyFilter===f.id?'true':'false')+'">'+esc(f.label)+'</button>'}).join('')+'</div>'+
+      '<div class="policyList">'+POLICY_ITEMS.map(policyCard).join('')+'</div>'+
+      '<div class="policySectionHead"><h2>Trước đây vs hiện nay / sắp tới</h2><span>So sánh để hiểu xu hướng, không thay văn bản pháp luật</span></div>'+
+      '<div class="policyCompare" role="table" aria-label="So sánh thay đổi chính sách"><div class="policyCompareRow policyCompareHead" role="row"><div>Nội dung</div><div>Trước đây</div><div>Hiện nay / sắp tới</div></div>'+POLICY_COMPARE.map(function(r){return'<div class="policyCompareRow" role="row"><div><span class="policyMobileLabel">Nội dung</span><b>'+esc(r[0])+'</b></div><div><span class="policyMobileLabel">Trước đây</span>'+esc(r[1])+'</div><div><span class="policyMobileLabel">Hiện nay / sắp tới</span>'+esc(r[2])+'</div></div>'}).join('')+'</div>'+
+      '<div class="policySectionHead"><h2>Chấm áp lực chính sách</h2><span>Điểm sàng lọc hành vi, không phải dự báo thuế</span></div>'+
+      '<div class="policyForm">'+
+        '<div class="policyFormGrid">'+
+          policySelect('policyRole','Tôi là',[['family','Gia đình mua đất'],['broker','Môi giới'],['multi','Nhà đầu tư nhiều BĐS'],['trader','Dân buôn đất nền']])+
+          policySelect('policyCount','Số BĐS đang nắm',[['one','0–1'],['few','2–3'],['many','Trên 3']])+
+          policySelect('policyCashflow','Tài sản có tạo dòng tiền?', [['yes','Có'],['notyet','Chưa'],['no','Không']])+
+          policySelect('policyLoan','Có vay vốn không?', [['none','Không'],['little','Có ít'],['much','Có nhiều']])+
+          policySelect('policyGoal','Mục tiêu',[['home','Ở thật'],['long','Đầu tư dài hạn'],['flip','Lướt sóng'],['subdivide','Phân lô bán nền']])+
+        '</div><button type="button" class="primary gold policyScoreBtn" id="policyScoreBtn">Chấm áp lực chính sách</button><div class="policyResult" id="policyResult" aria-live="polite"></div>'+
+      '</div>'+
+      '<div class="policySectionHead"><h2>Kết quả đã lưu</h2><span><b id="policySavedCount">'+reports.length+'</b> báo cáo · '+notes.length+' ghi chú chính sách</span></div><div id="policyReportsList">'+reportsHtml()+'</div>'+
+      '<div class="policySectionHead"><h2>Nguồn nên kiểm tra</h2><span>Chỉ mở nguồn ngoài, không cần API</span></div>'+
+      '<div class="policySources">'+POLICY_SOURCES.map(function(s){return'<button type="button" class="policySource" data-policy-url="'+esc(s.url)+'">'+esc(s.name)+'<span>'+esc(s.note)+'</span></button>'}).join('')+'</div>'+
+      '<div class="policyDisclaimer"><b>⚠ Lưu ý pháp lý cố định</b>Thông tin trong app chỉ giúp sàng lọc và học chính sách. Trước khi mua bán, đặt cọc, chuyển mục đích sử dụng đất hoặc khai thuế, cần kiểm tra văn bản chính thức và hỏi cơ quan chuyên môn, luật sư hoặc công chứng. App không thay thế cơ quan thuế, văn phòng đăng ký đất đai hay tư vấn pháp lý.</div>';
+    bindPolicyEvents(el);
+    setPolicyFilter(policyFilter,false);
+  }
+  function bindPolicyEvents(root){
+    root.querySelectorAll('[data-policy-filter]').forEach(function(btn){btn.addEventListener('click',function(){setPolicyFilter(btn.getAttribute('data-policy-filter'),true)})});
+    root.querySelectorAll('[data-policy-save]').forEach(function(btn){btn.addEventListener('click',function(){savePolicyNote(btn.getAttribute('data-policy-save'),btn)})});
+    root.querySelectorAll('[data-policy-url]').forEach(function(btn){btn.addEventListener('click',function(){openUrl(btn.getAttribute('data-policy-url'))})});
+    root.querySelectorAll('[data-open-notebook]').forEach(function(btn){btn.addEventListener('click',function(){go('saved')})});
+    var scoreBtn=root.querySelector('#policyScoreBtn');if(scoreBtn)scoreBtn.addEventListener('click',scorePolicyPressure);
+  }
+  function setPolicyFilter(id,announce){
+    policyFilter=POLICY_FILTERS.some(function(x){return x.id===id})?id:'all';
+    var cards=[].slice.call(document.querySelectorAll('#policy .policyCard'));
+    var shown=0;
+    cards.forEach(function(card){var ok=policyFilter==='all'||(' '+card.getAttribute('data-policy-audiences')+' ').indexOf(' '+policyFilter+' ')>-1;card.hidden=!ok;if(ok)shown++});
+    document.querySelectorAll('#policy [data-policy-filter]').forEach(function(btn){var active=btn.getAttribute('data-policy-filter')===policyFilter;btn.classList.toggle('active',active);btn.setAttribute('aria-pressed',active?'true':'false')});
+    var count=document.getElementById('policyFilterCount');if(count)count.textContent=shown+' / '+POLICY_ITEMS.length+' nội dung phù hợp';
+    if(announce)toast('Đang hiển thị '+shown+' nội dung');
+  }
+  function savePolicyNote(id,button){
+    var item=POLICY_ITEMS.find(function(x){return x.id===id});if(!item)return;
+    var list=policyLoad(POLICY_NOTE_KEY,[]);
+    if(!list.some(function(x){return x.id===id}))list.unshift({id:item.id,title:item.title,status:item.badges[0],action:item.action,savedAt:new Date().toISOString()});
+    policySave(POLICY_NOTE_KEY,list.slice(0,50));
+    if(state&&Array.isArray(state.notes)){
+      var text='Chính sách: '+item.title+' — Việc nên làm: '+item.action;
+      if(!state.notes.some(function(n){return n.text===text}))state.notes.unshift({date:new Date().toLocaleString('vi-VN'),text:text});
+      store('notes',state.notes.slice(0,100));
+    }
+    if(button){button.textContent='✓ Đã lưu ghi chú';button.classList.add('policySavedMark')}
+    toast('Đã lưu vào Sổ tay');
+  }
+  function selectedText(id){var el=document.getElementById(id);return el&&el.options[el.selectedIndex]?el.options[el.selectedIndex].text:''}
+  function addUnique(list,text){if(text&&list.indexOf(text)<0)list.push(text)}
+  function scorePolicyPressure(){
+    var role=document.getElementById('policyRole').value;
+    var count=document.getElementById('policyCount').value;
+    var cash=document.getElementById('policyCashflow').value;
+    var loan=document.getElementById('policyLoan').value;
+    var goal=document.getElementById('policyGoal').value;
+    var score={family:5,broker:18,multi:32,trader:35}[role]+{one:0,few:15,many:28}[count]+{yes:-8,notyet:10,no:18}[cash]+{none:0,little:8,much:20}[loan]+{home:-4,long:6,flip:22,subdivide:28}[goal];
+    score=Math.max(0,Math.min(100,score));
+    var level=score<25?'Thấp':score<50?'Trung bình':score<75?'Cao':'Rất cao';
+    var warnings=[],actions=[];
+    if(count!=='one'){addUnique(warnings,'Danh mục nhiều tài sản nhạy hơn với chi phí giữ đất và các hướng nghiên cứu thuế trong tương lai.');addUnique(actions,'Lập bảng chi phí và dòng tiền riêng cho từng tài sản trong 12–36 tháng.')}
+    if(goal==='subdivide'){addUnique(warnings,'Tách thửa của hộ/cá nhân khác với phân lô bán nền trong dự án; nhầm thủ tục có thể làm kế hoạch không thực hiện được.');addUnique(actions,'Kiểm tra quy hoạch, điều kiện tách thửa và văn bản Khánh Hòa trước khi đặt cọc.')}
+    if(goal==='flip'){addUnique(warnings,'Giao dịch ngắn hạn nhạy với thuế/phí, thanh khoản và rủi ro hợp đồng ghi giá không đúng thực tế.');addUnique(actions,'Tính lợi nhuận sau thuế/phí và chỉ dùng hợp đồng, chứng từ phản ánh đúng giao dịch.')}
+    if(cash!=='yes'){addUnique(warnings,'Tài sản chưa tạo dòng tiền làm chi phí vốn và thời gian nắm giữ trở nên quan trọng hơn.');addUnique(actions,'Xác định ngưỡng lỗ tối đa và phương án khai thác hợp pháp tạo dòng tiền.')}
+    if(loan==='much'){addUnique(warnings,'Vay nhiều có thể đẩy áp lực lên nhanh nếu lãi suất tăng hoặc thời gian bán kéo dài.');addUnique(actions,'Thử kịch bản lãi suất tăng và thanh khoản chậm thêm 12 tháng.')}
+    if(role==='broker'){addUnique(warnings,'Môi giới chịu rủi ro uy tín và chứng cứ nếu truyền đạt trạng thái pháp lý như một khẳng định chắc chắn.');addUnique(actions,'Ghi rõ nguồn, ngày kiểm tra và phần nào chỉ là dự thảo hoặc thông tin địa phương.')}
+    if(role==='multi'||role==='trader'){addUnique(warnings,'Dữ liệu thị trường được chuẩn hóa theo lộ trình, làm hồ sơ thiếu nhất quán dễ phát sinh yêu cầu đối chiếu hơn.');addUnique(actions,'Chuẩn hóa sổ, hợp đồng, nguồn tiền và chứng từ thanh toán của danh mục.')}
+    addUnique(warnings,'Bảng giá đất và điều kiện áp dụng khác theo địa phương, loại đất và hồ sơ cụ thể.');
+    addUnique(warnings,'Điểm này chỉ đo áp lực hành vi đầu tư, không xác định nghĩa vụ thuế hay kết luận pháp lý.');
+    addUnique(actions,'Mở văn bản gốc, kiểm tra ngày hiệu lực và hỏi cơ quan chuyên môn khi hồ sơ chưa rõ.');
+    addUnique(actions,'Không đặt cọc chỉ dựa trên tin tức, lời môi giới hoặc điểm số trong app.');
+    warnings=warnings.slice(0,3);actions=actions.slice(0,3);
+    lastPolicyReport={score:score,level:level,role:role,roleLabel:selectedText('policyRole'),count:selectedText('policyCount'),cashflow:selectedText('policyCashflow'),loan:selectedText('policyLoan'),goal:selectedText('policyGoal'),warnings:warnings,actions:actions,createdAt:new Date().toISOString(),savedLabel:new Date().toLocaleString('vi-VN')};
+    var result=document.getElementById('policyResult');
+    result.innerHTML='<div class="policyResultTop"><div class="policyScoreRing" style="--score-angle:'+(score*3.6)+'deg"><b>'+score+'</b></div><div><h3>Áp lực '+esc(level)+'</h3><p>Điểm sàng lọc 0–100 dựa trên số tài sản, dòng tiền, vốn vay và mục tiêu. Đây không phải kết luận pháp lý.</p></div></div><div class="policyResultGrid"><div class="policyResultBox"><b>3 cảnh báo chính</b><ul>'+warnings.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul></div><div class="policyResultBox"><b>3 việc nên làm tiếp</b><ul>'+actions.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul></div></div><button type="button" class="primary gold" id="savePolicyReport">Lưu vào Sổ tay</button>';
+    result.classList.add('show');
+    document.getElementById('savePolicyReport').addEventListener('click',savePolicyReport);
+    result.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  function savePolicyReport(){
+    if(!lastPolicyReport){toast('Hãy chấm áp lực trước');return}
+    var reports=policyLoad(POLICY_REPORT_KEY,[]);
+    reports.unshift(lastPolicyReport);
+    policySave(POLICY_REPORT_KEY,reports.slice(0,30));
+    if(state&&Array.isArray(state.notes)){
+      state.notes.unshift({date:new Date().toLocaleString('vi-VN'),text:'Áp lực chính sách '+lastPolicyReport.score+'/100 ('+lastPolicyReport.level+') — '+lastPolicyReport.roleLabel+'. Việc đầu tiên: '+lastPolicyReport.actions[0]});
+      store('notes',state.notes.slice(0,100));
+    }
+    var count=document.getElementById('policySavedCount');if(count)count.textContent=policyLoad(POLICY_REPORT_KEY,[]).length;
+    var list=document.getElementById('policyReportsList');if(list){list.innerHTML=reportsHtml();list.querySelectorAll('[data-open-notebook]').forEach(function(btn){btn.addEventListener('click',function(){go('saved')})})}
+    var button=document.getElementById('savePolicyReport');if(button){button.textContent='✓ Đã lưu vào Sổ tay';button.disabled=true}
+    toast('Đã lưu báo cáo vào Sổ tay');
+  }
+  function applyV34Nav(){
+    if(!Array.isArray(navs))return;
+    var wanted=[['home','🏠','Trang chủ'],['news','📰','Tin tức'],['check','🛡️','Kiểm tra'],['areas','📍','Khu vực'],['saved','⭐','Sổ tay']];
+    navs.splice(0,navs.length);
+    wanted.forEach(function(x){navs.push(x)});
+    var nav=document.getElementById('nav');
+    if(nav)nav.innerHTML=navs.map(function(n){return'<button data-tab="'+n[0]+'" class="'+(state.tab===n[0]?'active':'')+'" onclick="go(\''+n[0]+'\')"><span>'+n[1]+'</span>'+n[2]+'</button>'}).join('');
+  }
+  var previousRenderTab=window.renderTab||renderTab;
+  window.renderTab=renderTab=function(tab){if(tab==='policy')return renderPolicy();return previousRenderTab(tab)};
+  var previousRender=window.render||render;
+  window.render=render=function(){previousRender();applyV34Nav();if(state.tab==='policy')renderPolicy()};
+  var previousHome=window.renderHome||renderHome;
+  window.renderHome=renderHome=function(){
+    previousHome();
+    var home=document.getElementById('home');
+    if(home&&!home.querySelector('.policyHomeCta')){
+      home.insertAdjacentHTML('afterbegin','<div class="policyHomeCta"><span class="policyHeroBadge">⚖ V34 · Luật và chính sách</span><h2>Chính sách BĐS mới</h2><p>Hiểu điều gì đã có hiệu lực, điều gì mới theo lộ trình và điều gì vẫn đang nghiên cứu — trước khi tính chuyện đặt cọc.</p><button type="button" class="primary gold" data-go-policy>Khám phá chính sách mới</button></div>');
+      home.querySelector('[data-go-policy]').addEventListener('click',function(){go('policy')});
+    }
+  };
+  var previousLegal=window.renderLegal||renderLegal;
+  window.renderLegal=renderLegal=function(){
+    previousLegal();
+    var el=document.getElementById('legal');
+    if(el&&!el.querySelector('.policyLinkCard')){
+      el.insertAdjacentHTML('afterbegin','<div class="policyLinkCard"><h3>⚖ Chính sách BĐS mới</h3><p>Phân biệt luật đã có hiệu lực, lộ trình triển khai và đề xuất thuế vẫn đang nghiên cứu.</p><button type="button" class="primary gold" data-go-policy>Mở module chính sách</button></div>');
+      el.querySelector('[data-go-policy]').addEventListener('click',function(){go('policy')});
+    }
+  };
+  var previousCheck=window.renderCheck||renderCheck;
+  window.renderCheck=renderCheck=function(){
+    previousCheck();
+    var el=document.getElementById('check');
+    if(el&&!el.querySelector('.policyLinkCard')){
+      el.insertAdjacentHTML('afterbegin','<div class="policyLinkCard"><h3>Kiểm tra thêm áp lực chính sách</h3><p>Nếu đang mua để lướt sóng, phân lô hoặc giữ nhiều tài sản, hãy chấm thử trước khi đi tiếp.</p><button type="button" class="primary soft" data-go-policy>Chấm áp lực chính sách</button></div>');
+      el.querySelector('[data-go-policy]').addEventListener('click',function(){go('policy')});
+    }
+  };
+  function foldPolicyText(value){return String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d')}
+  var previousGlobalSearch=window.globalSearch||globalSearch;
+  window.globalSearch=globalSearch=function(query){
+    var q=foldPolicyText(query);
+    var terms=['luat','chinh sach','thue','phan lo','bang gia dat','dat dai 2024','moi gioi','bat dong san thu hai','giao dich hai gia'];
+    if(terms.some(function(term){return q.indexOf(term)>-1})){go('policy');return}
+    return previousGlobalSearch(query);
+  };
+  document.title='Ninh Hòa Invest AI V34 – Legal Policy Intelligence Edition';
+  document.documentElement.classList.add('legal-policy-v34');
+  applyV34Nav();
+  setTimeout(function(){try{render()}catch(e){console.warn('V34 policy init',e)}},820);
 })();
 </script>
 

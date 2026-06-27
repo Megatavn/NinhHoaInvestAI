@@ -44,5 +44,5 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NinhHoaInvestAI-v25-2-doc-so-build-safe-apk
+          name: NinhHoaInvestAI-v34-legal-policy-intelligence-apk
           path: app/build/outputs/apk/debug/*.apk
