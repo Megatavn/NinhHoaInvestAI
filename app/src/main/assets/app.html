@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<title>Ninh Hòa Invest AI V34 – Legal Policy Intelligence Edition</title>
+<title>Ninh Hòa Invest AI V34.1 – Policy Navigation & Official Planning News</title>
 <style>
 :root{
   --navy:#061b2c;--navy2:#083654;--blue:#0d5b80;--ink:#082236;--text:#18364a;--muted:#536a78;
@@ -61,6 +61,23 @@ body.dark{background:#06121d;color:#eaf4f9}body.dark .card,body.dark .newsCard,b
 .compactLive .mini{white-space:nowrap}.liveRow.compact{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.smallStat{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.12);font-size:12px;font-weight:900;color:white;border:1px solid rgba(255,255,255,.16)}
 .focusedFilters{padding-top:0;margin-top:0}.focusedFilters .chip{padding:10px 14px}
 .newsHealth,.deepScanHint,.feedToolbar{display:none!important}
+
+/* ===== V34.1 Official Planning News + six-item navigation ===== */
+.nav{grid-template-columns:repeat(6,minmax(0,1fr))}
+.nav button{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.nav button[data-tab="policy"]{color:#7c5b09}
+.nav button[data-tab="policy"].active{background:linear-gradient(145deg,#ffdf70,#d6a02d);color:#082033}
+.officialNews{border:1px solid rgba(215,165,49,.55)!important;box-shadow:0 14px 34px rgba(145,101,5,.14)!important}
+.officialNews .sourceLine{background:#fff8df;border:1px solid #ecd589;border-radius:14px;padding:8px 10px;margin:8px 0;color:#6f4e05}
+.tag.official,.impactPill.official{background:#fff0b8!important;color:#694900!important;border:1px solid #e4c35a!important}
+.sourceLine.official{flex-wrap:wrap}
+.sourceLine .decisionMeta{font-weight:900;color:#6f4e05}
+@media(max-width:430px){
+  .nav{gap:2px;padding:8px 6px}
+  .nav button{font-size:10px;padding:8px 1px;letter-spacing:-.2px}
+  .nav button span{font-size:17px}
+}
+
 </style>
 </head>
 <body>
@@ -2352,6 +2369,126 @@ body.dark .policyCard,body.dark .policyForm,body.dark .policyCompare,body.dark .
   document.documentElement.classList.add('legal-policy-v34');
   applyV34Nav();
   setTimeout(function(){try{render()}catch(e){console.warn('V34 policy init',e)}},820);
+})();
+</script>
+
+
+<script>
+/* ===== V34.1 Official Planning News ===== */
+(function(){
+  var OFFICIAL_PLANNING_URL='https://taynhatrang.khanhhoa.gov.vn/vi/quy-hoach-xay-dung/quyet-dinh-phe-duyet-dieu-chinh-quy-hoach-tinh-khanh-hoa-thoi-ky-2021-2030-tam-nhin-den-nam-2050';
+  var officialPlanningNews={
+    title:'Quyết định phê duyệt điều chỉnh Quy hoạch tỉnh Khánh Hòa thời kỳ 2021–2030, tầm nhìn đến năm 2050',
+    source:'Cổng TTĐT Tây Nha Trang – Khánh Hòa',
+    sourceType:'Quy hoạch xây dựng',
+    category:'Chính sách BĐS',
+    area:['Khánh Hòa','Ninh Hòa','Vân Phong'],
+    impactScore:96,
+    qualityScore:98,
+    qualityLevel:'Nguồn chính thức',
+    qualityReason:'Quyết định phê duyệt quy hoạch cấp tỉnh, có số hiệu và ngày ban hành để đối chiếu.',
+    url:OFFICIAL_PLANNING_URL,
+    summary:'Quyết định 2279/QĐ-UBND phê duyệt điều chỉnh quy hoạch toàn tỉnh sau sắp xếp đơn vị hành chính. Đây là định hướng cấp tỉnh; với từng lô đất vẫn phải kiểm tra quy hoạch chi tiết và hồ sơ tại cơ quan có thẩm quyền.',
+    pubDate:'2026-07-01T00:00:00+07:00',
+    ts:Date.parse('2026-07-01T00:00:00+07:00'),
+    official:true,
+    legalStatus:'Đã phê duyệt',
+    decision:'2279/QĐ-UBND · 26/06/2026'
+  };
+
+  if(Array.isArray(fallbackNews)&&!fallbackNews.some(function(n){return n&&n.url===OFFICIAL_PLANNING_URL})){
+    fallbackNews.unshift(officialPlanningNews);
+  }
+  if(Array.isArray(sources)&&!sources.some(function(s){return s&&s.url===OFFICIAL_PLANNING_URL})){
+    sources.unshift({name:'Quy hoạch xây dựng Khánh Hòa',url:OFFICIAL_PLANNING_URL});
+  }
+  if(Array.isArray(quick)&&quick.indexOf('Chính sách BĐS')<0)quick.push('Chính sách BĐS');
+
+  function applyV341Nav(){
+    if(!Array.isArray(navs))return;
+    var wanted=[
+      ['home','🏠','Trang chủ'],
+      ['news','📰','Tin tức'],
+      ['check','🛡️','Kiểm tra'],
+      ['areas','📍','Khu vực'],
+      ['saved','⭐','Sổ tay'],
+      ['policy','⚖️','Chính sách']
+    ];
+    navs.splice(0,navs.length);
+    wanted.forEach(function(item){navs.push(item)});
+    var nav=document.getElementById('nav');
+    if(!nav)return;
+    nav.innerHTML=navs.map(function(n){
+      return '<button type="button" data-tab="'+n[0]+'" class="'+(state.tab===n[0]?'active':'')+'" aria-label="'+n[2]+'"><span>'+n[1]+'</span>'+n[2]+'</button>';
+    }).join('');
+    nav.querySelectorAll('[data-tab]').forEach(function(button){
+      button.addEventListener('click',function(){go(button.getAttribute('data-tab'))});
+    });
+  }
+
+  var previousSourceLine=window.sourceLine||sourceLine;
+  window.sourceLine=sourceLine=function(n){
+    if(!n||!n.official)return previousSourceLine(n);
+    return '<div class="sourceLine official"><b>'+esc(cleanSourceName(n.source))+'</b><span>•</span><span>'+esc(n.sourceType||n.category||'Nguồn chính thức')+'</span><span>•</span><span class="decisionMeta">'+esc(n.decision||'')+'</span><span>•</span><span>'+esc(n.legalStatus||'Đã công bố')+'</span></div>';
+  };
+
+  var previousTrustedLabel=window.trustedLabel||trustedLabel;
+  window.trustedLabel=trustedLabel=function(n){
+    if(n&&n.official)return '<span class="sourceTrust">Nguồn chính thức</span>';
+    return previousTrustedLabel(n);
+  };
+
+  var previousLeadCard=window.leadCard||leadCard;
+  window.leadCard=leadCard=function(n){
+    var output=previousLeadCard(n);
+    if(!n||!n.official)return output;
+    var badges='<span class="tag official">Nguồn chính thức</span><span class="tag official">'+esc(n.legalStatus||'Đã công bố')+'</span>';
+    return output.replace('class="leadNews proLead qualityLead"','class="leadNews proLead qualityLead officialNews"').replace('<div class="tags">','<div class="tags">'+badges);
+  };
+
+  var previousNewsCard=window.newsCard||newsCard;
+  window.newsCard=newsCard=function(n){
+    var output=previousNewsCard(n);
+    if(!n||!n.official)return output;
+    return output.replace('qualityNews"','qualityNews officialNews"').replace('<div class="newsMetricRow">','<div class="newsMetricRow"><span class="impactPill official">Nguồn chính thức</span>');
+  };
+
+  window.renderNews=renderNews=function(){
+    var cats=['Mới nhất','Tác động cao','Chính sách BĐS','Ninh Hòa','Vân Phong','Hạ tầng','Pháp lý'];
+    var list=getFilteredNews();
+    var lead=list[0];
+    var label=state.filter==='Tất cả'?'Mới nhất':state.filter;
+    var root=document.getElementById('news');
+    root.innerHTML=
+      '<div class="liveNewsPanel compactLive qualityPanel"><div class="compactLiveTop"><div><h2>Bộ lọc chất lượng cao</h2><p>Ưu tiên tin mới, nguồn chính thức, đúng khu vực và tác động mạnh.</p></div><button type="button" class="mini gold" id="v341RefreshNews">Cập nhật</button></div><div id="liveNewsStatus">'+v27StatusHtml()+'</div></div>'+
+      '<div class="chips focusedFilters">'+cats.map(function(c){return '<button type="button" class="chip '+(label===c?'active':'')+'" data-v341-filter="'+esc(c)+'">'+esc(c)+'</button>'}).join('')+'</div>'+
+      (lead?leadCard(lead):'')+
+      '<div class="sectionTitle"><h2>'+(label==='Tác động cao'?'Tin tác động mạnh':label==='Chính sách BĐS'?'Tin chính sách và quy hoạch chính thức':'Tin đáng đọc nhất')+'</h2><span>'+list.length+' tin sau lọc</span></div>'+
+      '<div class="newsGrid">'+list.slice(1,86).map(newsCard).join('')+'</div>';
+    var refresh=root.querySelector('#v341RefreshNews');
+    if(refresh)refresh.addEventListener('click',function(){refreshNews('quick')});
+    root.querySelectorAll('[data-v341-filter]').forEach(function(button){
+      button.addEventListener('click',function(){
+        var value=button.getAttribute('data-v341-filter');
+        state.filter=value;
+        state.area='Tất cả';
+        state.newsSortMode=value==='Tác động cao'?'Tác động cao':'Mới nhất';
+        renderNews();
+      });
+    });
+  };
+
+  var previousRender=window.render||render;
+  window.render=render=function(){
+    previousRender();
+    applyV341Nav();
+    if(state.tab==='policy')renderPolicy();
+  };
+
+  document.title='Ninh Hòa Invest AI V34.1 – Policy Navigation & Official Planning News';
+  document.documentElement.classList.add('policy-news-v341');
+  applyV341Nav();
+  setTimeout(function(){try{render()}catch(error){console.warn('V34.1 init',error)}},900);
 })();
 </script>
 
