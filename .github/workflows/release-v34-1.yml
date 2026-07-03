@@ -1,0 +1,82 @@
+name: Release V34.1
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/release-v34-1.yml'
+
+jobs:
+  release:
+    name: Build and publish V34.1
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+
+      - name: Install Android SDK packages
+        run: |
+          yes | sdkmanager --licenses || true
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Build debug APK
+        run: gradle --no-daemon assembleDebug
+
+      - name: Prepare release asset and notes
+        run: |
+          cp app/build/outputs/apk/debug/app-debug.apk NinhHoaInvestAI-V34.1-Policy-News.apk
+          cat > V34.1_RELEASE_NOTES.md <<'EOF'
+          ## Ninh Hòa Invest AI V34.1
+
+          ### Policy Navigation & Official Planning News
+
+          - Added **Chính sách** as the sixth bottom-navigation destination, filling the unused right-hand space and making the policy module reachable in one tap.
+          - Added the official article **“Quyết định phê duyệt điều chỉnh Quy hoạch tỉnh Khánh Hòa thời kỳ 2021–2030, tầm nhìn đến năm 2050.”**
+          - Added a dedicated **Chính sách BĐS** news filter and official-source visual treatment.
+          - Shows **2279/QĐ-UBND · 26/06/2026** and **Đã phê duyệt** directly on the news item.
+          - Preserves the source link and distinguishes province-level planning direction from parcel-level legal verification.
+          - Updated Android version to `34.1.0-policy-navigation-official-news` (`versionCode 66`).
+
+          Source: https://taynhatrang.khanhhoa.gov.vn/vi/quy-hoach-xay-dung/quyet-dinh-phe-duyet-dieu-chinh-quy-hoach-tinh-khanh-hoa-thoi-ky-2021-2030-tam-nhin-den-nam-2050
+
+          > This app supports information screening only. Users must verify the latest detailed planning and parcel records with the competent authority before any transaction.
+          EOF
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NinhHoaInvestAI-v34-1-policy-news-apk
+          path: NinhHoaInvestAI-V34.1-Policy-News.apk
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view V34.1 >/dev/null 2>&1; then
+            gh release upload V34.1 NinhHoaInvestAI-V34.1-Policy-News.apk --clobber
+            gh release edit V34.1 \
+              --title "Ninh Hòa Invest AI V34.1 – Policy Navigation & Official Planning News" \
+              --notes-file V34.1_RELEASE_NOTES.md \
+              --latest
+          else
+            gh release create V34.1 NinhHoaInvestAI-V34.1-Policy-News.apk \
+              --target "$GITHUB_SHA" \
+              --title "Ninh Hòa Invest AI V34.1 – Policy Navigation & Official Planning News" \
+              --notes-file V34.1_RELEASE_NOTES.md \
+              --latest
+          fi
