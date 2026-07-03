@@ -2453,6 +2453,15 @@ body.dark .policyCard,body.dark .policyForm,body.dark .policyCompare,body.dark .
     return output.replace('qualityNews"','qualityNews officialNews"').replace('<div class="newsMetricRow">','<div class="newsMetricRow"><span class="impactPill official">Nguồn chính thức</span>');
   };
 
+  var previousGetFilteredNews=window.getFilteredNews||getFilteredNews;
+  window.getFilteredNews=getFilteredNews=function(filter){
+    var selected=filter||state.filter;
+    var list=previousGetFilteredNews(selected);
+    if(selected==='Chính sách BĐS'){
+      return list.filter(function(n){return n&&(n.official||n.category==='Chính sách BĐS')});
+    }
+    return list;
+  };
   window.renderNews=renderNews=function(){
     var cats=['Mới nhất','Tác động cao','Chính sách BĐS','Ninh Hòa','Vân Phong','Hạ tầng','Pháp lý'];
     var list=getFilteredNews();
