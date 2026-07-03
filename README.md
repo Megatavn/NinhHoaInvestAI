@@ -2,7 +2,7 @@
 
 # Ninh Hòa Invest AI
 
-### V34 · Legal Policy Intelligence Edition
+### V34.1 · Policy Navigation & Official Planning News
 
 **Android real-estate intelligence for Ninh Hòa, Khánh Hòa — designed in plain Vietnamese for non-technical users.**
 
@@ -13,7 +13,7 @@
 ![Privacy](https://img.shields.io/badge/Privacy-No%20account%20%C2%B7%20No%20location-147D64?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-6B7280?style=flat-square)
 
-[**Download the latest APK**](https://github.com/Megatavn/NinhHoaInvestAI/releases/latest) · [View build history](https://github.com/Megatavn/NinhHoaInvestAI/actions) · [Read the V34 release notes](https://github.com/Megatavn/NinhHoaInvestAI/releases/tag/V34)
+[**Download the latest APK**](https://github.com/Megatavn/NinhHoaInvestAI/releases/latest) · [View build history](https://github.com/Megatavn/NinhHoaInvestAI/actions) · [Read the V34.1 release notes](https://github.com/Megatavn/NinhHoaInvestAI/releases/tag/V34.1)
 
 <sub>Product author: <strong>Vũ Hoàng</strong></sub>
 
@@ -28,7 +28,7 @@
 The app is intentionally built for people who are not comfortable with complex property software:
 
 - Vietnamese-first copy with short, practical explanations;
-- large touch targets and a clear five-item navigation;
+- large touch targets and a clear six-item navigation with direct access to real-estate policy;
 - no account, backend, paid API or sensitive Android permission;
 - offline access to core legal-policy learning content;
 - explicit separation between confirmed law, implementation roadmaps and research-stage policy.
@@ -53,9 +53,9 @@ The app is intentionally built for people who are not comfortable with complex p
 
 ---
 
-## V34 spotlight — Legal Policy Intelligence
+## V34.1 spotlight — Policy Navigation & Official Planning News
 
-V34 adds a dedicated **Chính sách BĐS mới** module that translates major real-estate policy changes into plain Vietnamese. Every topic follows the same decision-friendly structure: what it means, who may be affected, why it matters, what to verify next and the current legal status.
+V34.1 gives the **Chính sách BĐS mới** module a dedicated sixth bottom-navigation destination and adds an official planning-news format. The underlying V34 module that translates major real-estate policy changes into plain Vietnamese. Every topic follows the same decision-friendly structure: what it means, who may be affected, why it matters, what to verify next and the current legal status.
 
 | Status shown in the app | What it means |
 |---|---|
@@ -152,7 +152,7 @@ Android Activity
 | Build | Gradle 8.10.2, JDK 17, Android SDK 35 |
 | CI/CD | GitHub Actions |
 
-No additional runtime dependency was introduced for V34.
+No additional runtime dependency was introduced for V34.1.
 
 ---
 
@@ -160,14 +160,14 @@ No additional runtime dependency was introduced for V34.
 
 ### Download a ready-to-install APK
 
-Open [**Releases**](https://github.com/Megatavn/NinhHoaInvestAI/releases/latest), expand **Assets** and download the V34 APK.
+Open [**Releases**](https://github.com/Megatavn/NinhHoaInvestAI/releases/latest), expand **Assets** and download the latest V34.x APK.
 
 ### Build with GitHub Actions
 
 1. Open the repository's [Actions](https://github.com/Megatavn/NinhHoaInvestAI/actions) page.
 2. Select **Build APK**.
 3. Choose **Run workflow**, or push a change to `main`.
-4. Download `NinhHoaInvestAI-v34-legal-policy-intelligence-apk` from the completed run.
+4. Download `NinhHoaInvestAI-v34-1-policy-news-apk` from the completed run.
 
 ### Build locally
 
@@ -224,6 +224,7 @@ This project demonstrates product discovery, Vietnamese UX writing, mobile infor
 
 ## Release history
 
+- **V34.1 — Policy Navigation & Official Planning News:** sixth bottom-navigation destination for Policy, official-source badges, Decision 2279/QĐ-UBND metadata and a dedicated policy-news filter.
 - **V34 — Legal Policy Intelligence Edition:** policy-status system, six policy explainers, audience filters, before/after comparison, pressure scoring and notebook persistence.
 - **V32.1 — News Logic Critical Fix:** stronger handling of high-impact regional infrastructure signals and multi-source news.
 - Earlier versions progressively introduced the notebook, land check, parcel tools, area profiles, timeline intelligence and portfolio mode.
