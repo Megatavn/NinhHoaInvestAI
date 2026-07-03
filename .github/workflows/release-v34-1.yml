@@ -29,10 +29,14 @@ jobs:
         with:
           gradle-version: '8.10.2'
 
-      - name: Install Android SDK packages
+      - name: Check Android SDK packages
         run: |
-          yes | sdkmanager --licenses || true
-          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+          if command -v sdkmanager >/dev/null 2>&1; then
+            yes | sdkmanager --licenses || true
+            sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" || true
+          else
+            echo "sdkmanager is not on PATH; using the runner's preinstalled Android SDK."
+          fi
 
       - name: Build debug APK
         run: gradle --no-daemon assembleDebug
