@@ -55,7 +55,7 @@ The app is intentionally built for people who are not comfortable with complex p
 
 ## V34.1 spotlight — Policy Navigation & Official Planning News
 
-V34.1 gives the **Chính sách BĐS mới** module a dedicated sixth bottom-navigation destination and adds an official planning-news format. The underlying V34 module that translates major real-estate policy changes into plain Vietnamese. Every topic follows the same decision-friendly structure: what it means, who may be affected, why it matters, what to verify next and the current legal status.
+V34.1 gives the **Chính sách BĐS mới** module a dedicated sixth bottom-navigation destination and adds an official planning-news format. The underlying V34 module translates major real-estate policy changes into plain Vietnamese. Every topic follows the same decision-friendly structure: what it means, who may be affected, why it matters, what to verify next and the current legal status.
 
 | Status shown in the app | What it means |
 |---|---|
