@@ -18,11 +18,14 @@ import android.widget.Toast;
 
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 public class MainActivity extends Activity {
     private static final int REQ_FILE_CHOOSER = 601;
@@ -34,6 +37,7 @@ public class MainActivity extends Activity {
         public void openExternal(String url) {
             try {
                 String safeUrl = normalizeOpenUrl(url);
+                if (!isSafeExternalUrl(safeUrl)) throw new IllegalArgumentException("Chỉ mở liên kết HTTPS hợp lệ");
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(safeUrl));
                 startActivity(intent);
             } catch (Exception e) {
@@ -79,6 +83,29 @@ public class MainActivity extends Activity {
                 }
             }).start();
         }
+
+        /** Safe fetch used by the client-only Intelligence module. */
+        @JavascriptInterface
+        public void fetchUrlSafe(final String requestId, final String url) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String payload;
+                    try {
+                        payload = safeHttpGet(url);
+                    } catch (Exception e) {
+                        payload = "__ERROR__" + e.getMessage();
+                    }
+                    final String script = "window.__intelFetchDone && window.__intelFetchDone(" + quote(requestId) + "," + quote(payload) + ")";
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (webView != null) webView.evaluateJavascript(script, null);
+                        }
+                    });
+                }
+            }).start();
+        }
     }
 
     private void sendOcrResult(final String text) {
@@ -112,6 +139,21 @@ public class MainActivity extends Activity {
         return u;
     }
 
+    private boolean isSafeExternalUrl(String urlText) {
+        try {
+            URI uri = new URI(urlText);
+            if (!"https".equalsIgnoreCase(uri.getScheme())) return false;
+            if (uri.getHost() == null || uri.getHost().trim().isEmpty()) return false;
+            if (uri.getUserInfo() != null) return false;
+            String host = uri.getHost().toLowerCase(Locale.US);
+            if (host.contains("..") || "localhost".equals(host) || host.endsWith(".local")) return false;
+            if (host.matches("\\d{1,3}(?:\\.\\d{1,3}){3}") || host.startsWith("[")) return false;
+            return uri.getPort() == -1 || uri.getPort() == 443;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
     private String httpGet(String urlText) throws Exception {
         URL url = new URL(urlText);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -134,6 +176,84 @@ public class MainActivity extends Activity {
         conn.disconnect();
         if (code >= 400) throw new Exception("HTTP " + code);
         return sb.toString();
+    }
+
+    private boolean isSafeFetchUrl(String urlText) {
+        try {
+            if (!isSafeExternalUrl(urlText)) return false;
+            URL url = new URL(urlText);
+            String host = url.getHost().toLowerCase(Locale.US);
+            String[] allowed = new String[]{
+                    "news.google.com",
+                    "bqlkktkcn.khanhhoa.gov.vn",
+                    "vanphong.khanhhoa.gov.vn",
+                    "khanhhoa.gov.vn",
+                    "www.khanhhoa.gov.vn",
+                    "baochinhphu.vn",
+                    "taynhatrang.khanhhoa.gov.vn",
+                    "congbaokhanhhoa.gov.vn",
+                    "vanban.chinhphu.vn",
+                    "vbpl.vn"
+            };
+            for (String domain : allowed) {
+                if (host.equals(domain) || host.endsWith("." + domain)) return true;
+            }
+        } catch (Exception ignored) {
+            // The caller receives a safe, user-visible source error.
+        }
+        return false;
+    }
+
+    private String safeHttpGet(String urlText) throws Exception {
+        return safeHttpGet(urlText, 0);
+    }
+
+    private String safeHttpGet(String urlText, int redirectCount) throws Exception {
+        if (!isSafeFetchUrl(urlText)) throw new Exception("Nguồn không nằm trong allowlist HTTPS");
+        HttpURLConnection conn = null;
+        InputStream is = null;
+        try {
+            URL url = new URL(urlText);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setInstanceFollowRedirects(false);
+            conn.setConnectTimeout(12000);
+            conn.setReadTimeout(15000);
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", "NinhHoaInvestAI/34.1 Intelligence");
+            conn.setRequestProperty("Accept", "application/rss+xml, application/xml, text/xml, text/html;q=0.9, */*;q=0.1");
+            conn.setRequestProperty("Accept-Language", "vi-VN,vi;q=0.9,en;q=0.7");
+            int code = conn.getResponseCode();
+            if (code >= 300 && code < 400) {
+                if (redirectCount >= 2) throw new Exception("Nguồn chuyển hướng quá số lần cho phép");
+                String location = conn.getHeaderField("Location");
+                if (location == null || !isSafeFetchUrl(location)) throw new Exception("Nguồn chuyển hướng ra ngoài allowlist");
+                return safeHttpGet(location, redirectCount + 1);
+            }
+            is = code >= 400 ? conn.getErrorStream() : conn.getInputStream();
+            if (is == null) throw new Exception("HTTP " + code);
+            String length = conn.getHeaderField("Content-Length");
+            if (length != null) {
+                try {
+                    if (Long.parseLong(length) > 1024L * 1024L) throw new Exception("Nội dung nguồn vượt giới hạn 1 MB");
+                } catch (NumberFormatException ignored) {
+                    // Stream limit below still applies.
+                }
+            }
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            byte[] buf = new byte[8192];
+            int n;
+            int total = 0;
+            while ((n = is.read(buf)) != -1) {
+                total += n;
+                if (total > 1024 * 1024) throw new Exception("Nội dung nguồn vượt giới hạn 1 MB");
+                out.write(buf, 0, n);
+            }
+            if (code >= 400) throw new Exception("HTTP " + code);
+            return new String(out.toByteArray(), StandardCharsets.UTF_8);
+        } finally {
+            if (is != null) try { is.close(); } catch (Exception ignored) {}
+            if (conn != null) conn.disconnect();
+        }
     }
 
     private String quote(String s) {
@@ -208,7 +328,9 @@ public class MainActivity extends Activity {
                 if (!request.isForMainFrame()) return false;
                 if (url.startsWith("file:///android_asset/") || url.startsWith("about:")) return false;
                 try {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(normalizeOpenUrl(url)));
+                    String safeUrl = normalizeOpenUrl(url);
+                    if (!isSafeExternalUrl(safeUrl)) return true;
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(safeUrl));
                     startActivity(intent);
                     return true;
                 } catch (Exception e) {
