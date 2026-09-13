@@ -108,7 +108,10 @@
   function listingQualityScore(x){
     var score=0;if(x.priceBillion!=null)score+=20;if(x.areaM2!=null)score+=20;if(x.areaName&&x.areaName!=='Khác')score+=15;if(x.propertyType&&x.propertyType!=='Khác')score+=10;if(hasCertificateHint(x))score+=15;if(hasOwnerHint(x))score+=10;if(x.publishedAt)score+=10;return score;
   }
-  function listingSourceConfigured(x){return LISTING_SOURCE_PROFILES.some(function(source){return source.id===x.sourceId||fold(source.name)===fold(x.portalName||'')||fold(source.host)===fold(x.listingSource||'')})}
+  function listingSourceConfigured(x){
+    var profile=null;LISTING_SOURCE_PROFILES.forEach(function(source){if(!profile&&(source.id===x.sourceId||fold(source.name)===fold(x.portalName||'')||fold(source.host)===fold(x.listingSource||'')))profile=source});
+    if(!profile)return false;if(!x.sourceUrl)return true;try{var host=new URL(x.sourceUrl).hostname.toLowerCase();return host===profile.host||host.endsWith('.'+profile.host)}catch(e){return false}
+  }
   function isDisplayableListing(x){
     if(!x||!x.title||!x.url||!listingSourceConfigured(x))return false;
     var body=fold((x.title||'')+' '+(x.summary||'')),hasSale=/(ban|mua ban|rao ban|chinh chu|can ban|dat nen|nha dat)/.test(body),hasProperty=/(dat|nha|lo dat|mat bang|bat dong san)/.test(body),hasFact=x.priceBillion!=null||x.areaM2!=null;
@@ -181,19 +184,19 @@
   }
   function parseArea(v){var m=text(v).match(/(\d[\d\s.,]*)\s*(?:m2|m²|met\s*vuông)\b/i);return m?parseLocaleAreaNumber(m[1]):null}
   function listingArea(t){var s=fold(t);if(s.indexOf('doc let')>-1||s.indexOf('ninh hai')>-1)return 'Dốc Lết / Ninh Hải';if(s.indexOf('ninh thuy')>-1)return 'Ninh Thủy';if(s.indexOf('ninh xuan')>-1)return 'Ninh Xuân';if(s.indexOf('ninh diem')>-1)return 'Ninh Diêm';return 'Khác' }
-  function likelyListing(t){return /(mua bán|bán đất|bán nhà|đất nền|sổ hồng|sổ đỏ|m²|m2|giá|tỷ|triệu|lô đất|mặt tiền|thổ cư|chính chủ)/i.test(t)}
+  function likelyListing(t){var s=fold(t);return /(mua ban|ban dat|ban nha|rao ban|dat nen|so hong|so do|lo dat|mat tien|tho cu|chinh chu)/i.test(s)&&/(m2|gia|ty|trieu|lo dat|dien tich)/i.test(s)}
   function parseRssListings(xml,feed,seenAt){
     var doc=new DOMParser().parseFromString(text(xml),'text/xml');
     return Array.prototype.slice.call(doc.querySelectorAll('item')).slice(0,MAX_RSS_ITEMS).map(function(item){
       var title=redactPII(xmlValue(item,'title')).trim();
       var url=externalUrlSafe(xmlValue(item,'link'));
       var raw=redactPII(stripHtml(xmlValue(item,'description'))).slice(0,600);
-      var source=redactPII(xmlValue(item,'source'))||feed.sourceName;
+      var sourceNode=item.querySelector('source'),source=redactPII(sourceNode?sourceNode.textContent:'')||feed.sourceName,sourceUrl=externalUrlSafe(sourceNode&&sourceNode.getAttribute('url')||'');
       var published=parseDate(xmlValue(item,'pubDate'));
       var combined=title+' '+raw+' '+feed.query;
       var price=parseMoney(combined),area=parseArea(combined);
       var perM2=(price!=null&&area!=null&&area>0&&isFinite(price)&&isFinite(area))?price*1000/area:null;
-      return normalizeListing({kind:'listing',contentType:'listing',title:title,summary:raw||'Mở nguồn để đọc chi tiết tin rao.',url:url,source:'Google Tin tức · '+source,sourceType:'RSS site-filter · '+feed.sourceName,portalName:feed.sourceName,sourceId:feed.sourceId,feedId:feed.id,areaId:feed.areaId,areaName:listingArea(combined)||feed.area,areaValueM2:area,areaM2:area,price:price,priceBillion:price,pricePerM2:perM2,confidence:'thấp',badge:'unverified',claimStatus:'reported',status:'observed',query:feed.query,listingSource:feed.sourceName,firstSeenAt:seenAt,lastSeenAt:seenAt,lastCheckedAt:seenAt});
+      return normalizeListing({kind:'listing',contentType:'listing',title:title,summary:raw||'Mở nguồn để đọc chi tiết tin rao.',url:url,source:'Google Tin tức · '+source,sourceType:'RSS site-filter · '+feed.sourceName,portalName:feed.sourceName,sourceId:feed.sourceId,feedId:feed.id,areaId:feed.areaId,areaName:listingArea(combined)||feed.area,areaValueM2:area,areaM2:area,price:price,priceBillion:price,pricePerM2:perM2,confidence:'thấp',badge:'unverified',claimStatus:'reported',status:'observed',query:feed.query,listingSource:feed.sourceName,sourceUrl:sourceUrl,firstSeenAt:seenAt,lastSeenAt:seenAt,lastCheckedAt:seenAt});
     }).filter(function(x){return x&&isDisplayableListing(x)&&likelyListing(x.title+' '+x.summary)})
   }
   function betterListing(a,b){var as=listingQualityScore(a),bs=listingQualityScore(b);if(bs!==as)return bs>as?b:a;var ad=new Date(a.publishedAt||0).getTime()||0,bd=new Date(b.publishedAt||0).getTime()||0;return bd>ad?b:a}
