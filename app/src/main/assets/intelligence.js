@@ -6,10 +6,10 @@
 (function(){
   'use strict';
 
-  var INTEL_VERSION='1.3.0';
+  var INTEL_VERSION='1.4.0';
   var REFRESH_MINUTES=30;
   var MAX_RSS_ITEMS=40;
-  var MAX_LISTING_REQUESTS=7;
+  var MAX_LISTING_REQUESTS=12;
   var FETCH_TIMEOUT_MS=12000;
   var SAFE_HOSTS=[
     'news.google.com','bqlkktkcn.khanhhoa.gov.vn','vanphong.khanhhoa.gov.vn',
@@ -17,22 +17,26 @@
     'taynhatrang.khanhhoa.gov.vn','congbaokhanhhoa.gov.vn',
     'vanban.chinhphu.vn','vbpl.vn'
   ];
-  var LISTING_SITE_HOSTS=['batdongsan.com.vn','bds68.com.vn','nhatot.com','chotot.com','meeyland.com','alonhadat.com.vn'];
-  var LISTING_QUERIES=[
-    {label:'Dốc Lết · toàn bộ tin bán',query:'"Dốc Lết" ("bán đất" OR "bán nhà")'},
-    {label:'Ninh Hải · Dốc Lết',query:'"Ninh Hải" "Dốc Lết" ("bán đất" OR "bán nhà")'},
-    {label:'Ninh Thủy · Dốc Lết',query:'"Ninh Thủy" "Dốc Lết" "bán đất"'},
-    {label:'Ninh Xuân · KCN',query:'"Ninh Xuân" ("khu công nghiệp" OR "KCN") "bán đất"'},
-    {label:'Đối diện KCN Ninh Xuân',query:'"KCN Ninh Xuân" "bán đất"'},
-    {label:'Ninh Xuân · ĐT8',query:'"Ninh Xuân" "ĐT8" "bán đất"'},
-    {label:'Ninh Hòa · gần KCN',query:'"Ninh Hòa" "gần KCN Ninh Xuân"'}
+  var LISTING_SOURCE_PROFILES=[
+    {id:'batdongsan',name:'Batdongsan.com.vn',host:'batdongsan.com.vn',directUrl:'https://batdongsan.com.vn/ban-dat-phuong-ninh-thuy'},
+    {id:'bds68',name:'BĐS68',host:'bds68.com.vn',directUrl:'https://bds68.com.vn/nha-dat-ban/khanh-hoa/ninh-hoa/phuong-ninh-thuy'},
+    {id:'nhatot',name:'Nhà Tốt',host:'nhatot.com',directUrl:'https://www.nhatot.com/mua-ban-dat-xa-ninh-xuan-thi-xa-ninh-hoa-khanh-hoa?land_type=1'},
+    {id:'chotot',name:'Chợ Tốt',host:'chotot.com',directUrl:'https://www.chotot.com/mua-ban-bat-dong-san'}
   ];
+  var LISTING_AREA_PROFILES=[
+    {id:'doclet',label:'Dốc Lết / Ninh Hải',area:'Dốc Lết / Ninh Hải',query:'("Dốc Lết" OR "Ninh Hải") ("bán đất" OR "bán nhà")'},
+    {id:'ninhthuy',label:'Ninh Thủy',area:'Ninh Thủy',query:'"Ninh Thủy" ("bán đất" OR "bán nhà")'},
+    {id:'ninhxuan',label:'KCN Ninh Xuân / ĐT8',area:'Ninh Xuân',query:'("KCN Ninh Xuân" OR "Ninh Xuân" OR "ĐT8") ("bán đất" OR "bán nhà")'}
+  ];
+  var LISTING_FEEDS=[];
+  LISTING_SOURCE_PROFILES.forEach(function(source){LISTING_AREA_PROFILES.forEach(function(area){LISTING_FEEDS.push({id:source.id+'-'+area.id,sourceId:source.id,sourceName:source.name,host:source.host,areaId:area.id,areaLabel:area.label,area:area.area,query:area.query,label:source.name+' · '+area.label})})});
   var LISTING_SOURCES=[
-    {id:'batdongsan-doclet',name:'Batdongsan · Dốc Lết / Ninh Thủy',url:'https://batdongsan.com.vn/ban-dat-phuong-ninh-thuy',area:'Dốc Lết / Ninh Hải'},
-    {id:'batdongsan-ninhxuan',name:'Batdongsan · KCN Ninh Xuân',url:'https://batdongsan.com.vn/ban-dat-xa-ninh-xuan',area:'Ninh Xuân'},
+    {id:'batdongsan-doclet',name:'Batdongsan · Dốc Lết / Ninh Thủy',sourceId:'batdongsan',url:'https://batdongsan.com.vn/ban-dat-phuong-ninh-thuy',area:'Dốc Lết / Ninh Hải'},
+    {id:'batdongsan-ninhxuan',name:'Batdongsan · KCN Ninh Xuân',sourceId:'batdongsan',url:'https://batdongsan.com.vn/ban-dat-xa-ninh-xuan',area:'Ninh Xuân'},
     {id:'batdongsan-doclet-tag',name:'Batdongsan · tìm Dốc Lết',url:'https://batdongsan.com.vn/tags/ban/ban-dat-doc-let-ninh-hoa-khanh-hoa',area:'Dốc Lết / Ninh Hải'},
-    {id:'bds68-ninhthuy',name:'BĐS68 · Ninh Thủy',url:'https://bds68.com.vn/nha-dat-ban/khanh-hoa/ninh-hoa/phuong-ninh-thuy',area:'Dốc Lết / Ninh Hải'},
-    {id:'nhatot-ninhxuan',name:'Nhà Tốt · Ninh Xuân',url:'https://www.nhatot.com/mua-ban-dat-xa-ninh-xuan-thi-xa-ninh-hoa-khanh-hoa?land_type=1',area:'Ninh Xuân'}
+    {id:'bds68-ninhthuy',name:'BĐS68 · Ninh Thủy',sourceId:'bds68',url:'https://bds68.com.vn/nha-dat-ban/khanh-hoa/ninh-hoa/phuong-ninh-thuy',area:'Dốc Lết / Ninh Hải'},
+    {id:'nhatot-ninhxuan',name:'Nhà Tốt · Ninh Xuân',sourceId:'nhatot',url:'https://www.nhatot.com/mua-ban-dat-xa-ninh-xuan-thi-xa-ninh-hoa-khanh-hoa?land_type=1',area:'Ninh Xuân'},
+    {id:'chotot-batdongsan',name:'Chợ Tốt · BĐS Ninh Hòa',sourceId:'chotot',url:'https://www.chotot.com/mua-ban-bat-dong-san',area:'Khác'}
   ];
   var OFFICIAL_SOURCES=[
     {id:'kkt-overview',name:'Tổng quan KKT Vân Phong',url:'https://bqlkktkcn.khanhhoa.gov.vn/gioi-thieu-chung-khu-kinh-te-van-phong.html',match:['vân phong','van phong','phân khu']},
@@ -54,7 +58,7 @@
     listings:loadListings(),
     listingMeta:loadSafe('intel_listing_meta',{lastRefreshAt:null,status:'Chưa cập nhật',sources:[]}),
     van:loadSafe('intel_vanphong',null),
-    filter:{area:'Tất cả',source:'Tất cả',type:'all',fresh:'all'},
+    filter:{area:'Tất cả',source:'Tất cả',type:'all',legal:'all',fresh:'all',minPrice:'',maxPrice:'',minArea:'',maxArea:'',minM2:'',maxM2:'',sort:'newest'},
     running:false
   };
   var pending={};
@@ -66,7 +70,7 @@
   function fold(v){return text(v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d')}
   function stripHtml(v){var raw=text(v).replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ');var doc=new DOMParser().parseFromString(raw,'text/html');return text(doc.body&&doc.body.textContent||'').replace(/\s+/g,' ').trim()}
   function redactPII(v){return text(v).replace(/(?:\+?84|0)(?:[ .-]?\d){8,10}/g,'[đã ẩn số điện thoại]').replace(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/g,'[đã ẩn email]')}
-  function parseDate(v){var d=v?new Date(v):new Date();return isNaN(d.getTime())?null:d.toISOString()}
+  function parseDate(v){if(!v)return null;var d=new Date(v);return isNaN(d.getTime())?null:d.toISOString()}
   function dateLabel(v){if(!v)return 'Chưa có dữ liệu';var d=new Date(v);return isNaN(d.getTime())?'Chưa có dữ liệu':d.toLocaleString('vi-VN',{dateStyle:'short',timeStyle:'short'})}
   function shortDate(v){if(!v)return 'Chưa có dữ liệu';var d=new Date(v);return isNaN(d.getTime())?'Chưa có dữ liệu':d.toLocaleDateString('vi-VN')}
   function hostAllowed(url){try{var u=new URL(url);if(u.protocol!=='https:')return false;var h=u.hostname.toLowerCase();return SAFE_HOSTS.some(function(x){return h===x||h.endsWith('.'+x)})}catch(e){return false}}
@@ -90,10 +94,35 @@
     }catch(e){if(typeof toast==='function')toast('Không mở được liên kết');return false}
   }
   window.openUrlSafe=openUrlSafe;
+  function optionalDate(v){if(!v)return null;var d=new Date(v);return isNaN(d.getTime())?null:d.toISOString()}
+  function canonicalListingUrl(raw){
+    var url=externalUrlSafe(raw);if(!url)return '';
+    try{
+      var u=new URL(url);['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid'].forEach(function(k){u.searchParams.delete(k)});u.hash='';return u.href;
+    }catch(e){return url}
+  }
+  function listingText(x){return fold((x&&x.title||'')+' '+(x&&x.summary||''))}
+  function classifyPropertyType(x){var s=listingText(x);if(/\b(can ho|chung cu|nha rieng|nha pho|biet thu|nha mat pho|nha cap 4)\b/.test(s))return 'Nhà';if(/\b(dat|lo dat|dat nen|tho cu|dat vuon|mat bang)\b/.test(s))return 'Đất';return 'Khác'}
+  function hasCertificateHint(x){return /\b(so hong|so do|phap ly ro|phap ly day du|giay chung nhan)\b/.test(listingText(x))}
+  function hasOwnerHint(x){return /\b(chinh chu|chu dat|chu nha|khong qua moi gioi)\b/.test(listingText(x))}
+  function listingQualityScore(x){
+    var score=0;if(x.priceBillion!=null)score+=20;if(x.areaM2!=null)score+=20;if(x.areaName&&x.areaName!=='Khác')score+=15;if(x.propertyType&&x.propertyType!=='Khác')score+=10;if(hasCertificateHint(x))score+=15;if(hasOwnerHint(x))score+=10;if(x.publishedAt)score+=10;return score;
+  }
+  function listingSemanticKey(x){
+    var title=fold(x&&x.title||'').replace(/[^a-z0-9]+/g,' ').trim(),area=fold(x&&x.areaName||''),price=x&&x.priceBillion!=null?Number(x.priceBillion).toFixed(4):'',size=x&&x.areaM2!=null?Number(x.areaM2).toFixed(2):'';
+    return (title+'|'+area+'|'+price+'|'+size).replace(/\|+$/,'');
+  }
+  function listingIdentityKey(x){var url=canonicalListingUrl(x&&x.url);return url?'url:'+url:'semantic:'+listingSemanticKey(x)}
+  function sourceNameFor(x){return x&&x.portalName||x&&x.listingSource||x&&x.source||'Nguồn chưa xác định'}
+  function normalizeListing(x){
+    if(!x||typeof x!=='object')return null;
+    var copy=Object.assign({},x);copy.kind='listing';copy.contentType='listing';copy.title=text(copy.title).trim();copy.url=externalUrlSafe(copy.url);if(!copy.title||!copy.url)return null;
+    copy.canonicalUrl=copy.canonicalUrl||canonicalListingUrl(copy.url);copy.publishedAt=optionalDate(copy.publishedAt);copy.firstSeenAt=optionalDate(copy.firstSeenAt)||optionalDate(copy.observedAt)||copy.publishedAt;copy.lastSeenAt=optionalDate(copy.lastSeenAt)||optionalDate(copy.observedAt)||copy.firstSeenAt;copy.lastCheckedAt=optionalDate(copy.lastCheckedAt)||copy.lastSeenAt||copy.firstSeenAt;copy.observedAt=copy.lastSeenAt||copy.lastCheckedAt;
+    copy.portalName=copy.portalName||copy.listingSource||'Nguồn chưa xác định';copy.propertyType=copy.propertyType||classifyPropertyType(copy);copy.hasCertificate=typeof copy.hasCertificate==='boolean'?copy.hasCertificate:hasCertificateHint(copy);copy.hasOwner=typeof copy.hasOwner==='boolean'?copy.hasOwner:hasOwnerHint(copy);copy.qualityScore=Number(copy.qualityScore)||listingQualityScore(copy);copy.duplicateCount=Math.max(1,Number(copy.duplicateCount)||1);copy.duplicateSources=Array.isArray(copy.duplicateSources)&&copy.duplicateSources.length?copy.duplicateSources.slice(0,8):[copy.portalName];copy.missingChecks=Math.max(0,Number(copy.missingChecks)||0);copy.status=copy.status||'observed';return copy;
+  }
   function loadListings(){
-    var raw=loadSafe('intel_listings',[]);
-    if(!Array.isArray(raw))return [];
-    return raw.filter(function(x){return x&&typeof x==='object'&&(x.kind==='listing'||!x.kind)&&typeof x.title==='string'&&typeof x.url==='string'&&!!externalUrlSafe(x.url)}).slice(0,160);
+    var raw=loadSafe('intel_listings',[]);if(!Array.isArray(raw))return [];
+    return raw.map(normalizeListing).filter(function(x){return x&&!!externalUrlSafe(x.url)}).slice(0,160);
   }
   function bindSavedListingEvents(){
     if(window.__intelSavedEventsBound)return;
@@ -128,7 +157,7 @@
     })
   }
   function pause(ms){return new Promise(function(resolve){setTimeout(resolve,ms)})}
-  function listingQueryText(spec){var q=typeof spec==='string'?spec:spec.query;return q+' ('+LISTING_SITE_HOSTS.map(function(h){return 'site:'+h}).join(' OR ')+')'}
+  function listingQueryText(feed){return feed.query+' site:'+feed.host}
   function rssUrl(q){var p=new URLSearchParams({q:q,hl:'vi',gl:'VN',ceid:'VN:vi'});return 'https://news.google.com/rss/search?'+p.toString()}
   function xmlValue(item,selector){var el=item.querySelector(selector);return el?text(el.textContent):''}
   function numberValue(v){var m=text(v).replace(/\s/g,'').match(/\d+(?:[.,]\d+)?/);if(!m)return null;return parseFloat(m[0].replace(',','.'))}
@@ -147,29 +176,49 @@
   function parseArea(v){var m=text(v).match(/(\d[\d\s.,]*)\s*(?:m2|m²|met\s*vuông)\b/i);return m?parseLocaleAreaNumber(m[1]):null}
   function listingArea(t){var s=fold(t);if(s.indexOf('doc let')>-1||s.indexOf('ninh hai')>-1)return 'Dốc Lết / Ninh Hải';if(s.indexOf('ninh thuy')>-1)return 'Ninh Thủy';if(s.indexOf('ninh xuan')>-1)return 'Ninh Xuân';if(s.indexOf('ninh diem')>-1)return 'Ninh Diêm';return 'Khác' }
   function likelyListing(t){return /(mua bán|bán đất|bán nhà|đất nền|sổ hồng|sổ đỏ|m²|m2|giá|tỷ|triệu|lô đất|mặt tiền|thổ cư|chính chủ)/i.test(t)}
-  function parseRssListings(xml,query){
+  function parseRssListings(xml,feed,seenAt){
     var doc=new DOMParser().parseFromString(text(xml),'text/xml');
     return Array.prototype.slice.call(doc.querySelectorAll('item')).slice(0,MAX_RSS_ITEMS).map(function(item){
       var title=redactPII(xmlValue(item,'title')).trim();
       var url=externalUrlSafe(xmlValue(item,'link'));
       var raw=redactPII(stripHtml(xmlValue(item,'description'))).slice(0,600);
-      var source=redactPII(xmlValue(item,'source'))||'Google Tin tức RSS';
+      var source=redactPII(xmlValue(item,'source'))||feed.sourceName;
       var published=parseDate(xmlValue(item,'pubDate'));
-      var observed=new Date().toISOString();
-      var combined=title+' '+raw+' '+query;
+      var combined=title+' '+raw+' '+feed.query;
       var price=parseMoney(combined),area=parseArea(combined);
       var perM2=(price!=null&&area!=null&&area>0&&isFinite(price)&&isFinite(area))?price*1000/area:null;
-      return {kind:'listing',contentType:'listing',title:title,summary:raw||'Mở nguồn để đọc chi tiết tin rao.',url:url,source:'Google Tin tức · '+source,sourceType:'RSS site-filter',observedAt:observed,observed_at:observed,publishedAt:published,areaName:listingArea(combined),areaValueM2:area,areaM2:area,price:price,priceBillion:price,pricePerM2:perM2,confidence:'thấp',badge:'unverified',claimStatus:'reported',status:'active',query:query,listingSource:source};
-    }).filter(function(x){return x.title&&x.url&&likelyListing(x.title+' '+x.summary+' '+x.query)})
+      return normalizeListing({kind:'listing',contentType:'listing',title:title,summary:raw||'Mở nguồn để đọc chi tiết tin rao.',url:url,source:'Google Tin tức · '+source,sourceType:'RSS site-filter · '+feed.sourceName,portalName:feed.sourceName,sourceId:feed.sourceId,feedId:feed.id,areaId:feed.areaId,areaName:listingArea(combined)||feed.area,areaValueM2:area,areaM2:area,price:price,priceBillion:price,pricePerM2:perM2,confidence:'thấp',badge:'unverified',claimStatus:'reported',status:'observed',query:feed.query,listingSource:feed.sourceName,firstSeenAt:seenAt,lastSeenAt:seenAt,lastCheckedAt:seenAt});
+    }).filter(function(x){return x&&x.title&&x.url&&likelyListing(x.title+' '+x.summary+' '+feed.query)})
+  }
+  function betterListing(a,b){var as=listingQualityScore(a),bs=listingQualityScore(b);if(bs!==as)return bs>as?b:a;var ad=new Date(a.publishedAt||0).getTime()||0,bd=new Date(b.publishedAt||0).getTime()||0;return bd>ad?b:a}
+  function mergeDuplicate(a,b){
+    var winner=betterListing(a,b),copy=Object.assign({},winner),sources=(a.duplicateSources||[]).concat(b.duplicateSources||[],[a.portalName,b.portalName]).filter(Boolean),urls=[a.url,b.url].filter(Boolean),seen={};copy.duplicateCount=Math.max(Number(a.duplicateCount)||1,1)+Math.max(Number(b.duplicateCount)||1,1);copy.duplicateSources=sources.filter(function(s){var k=fold(s);if(seen[k])return false;seen[k]=true;return true}).slice(0,8);copy.duplicateUrls=urls.filter(function(u,i){return urls.indexOf(u)===i}).slice(0,8);return copy;
   }
   function dedupeListings(items){
-    var by={};(items||[]).forEach(function(x){var key=fold(x.title).replace(/[^a-z0-9]+/g,' ').trim();if(!key)return;if(!by[key]||new Date(x.publishedAt||0)>new Date(by[key].publishedAt||0))by[key]=x});
-    return Object.keys(by).map(function(k){return by[k]}).sort(function(a,b){return new Date(b.publishedAt||b.observedAt||0)-new Date(a.publishedAt||a.observedAt||0)}).slice(0,160)
+    var by={};(items||[]).map(normalizeListing).filter(Boolean).forEach(function(x){var key=listingSemanticKey(x)||listingIdentityKey(x);by[key]=by[key]?mergeDuplicate(by[key],x):x});
+    return Object.keys(by).map(function(k){var x=by[k];x.duplicateGroupId=k;return x}).sort(function(a,b){return listingSortDate(b)-listingSortDate(a)}).slice(0,160)
   }
+  function listingSortDate(x){var d=new Date(x&&x.publishedAt||x&&x.firstSeenAt||x&&x.lastSeenAt||0).getTime();return isFinite(d)?d:0}
+  function listingAgeDays(x){var d=listingSortDate(x);return d?Math.max(0,(Date.now()-d)/86400000):Infinity}
   function moneyLabel(v){return v==null?'Chưa có dữ liệu':(v<1?v.toFixed(2):v.toFixed(2).replace(/\.00$/,''))+' tỷ'}
   function areaLabel(v){return v==null?'Chưa có dữ liệu':v.toLocaleString('vi-VN')+' m²'}
   function m2Label(v){return v==null?'Chưa có dữ liệu':v.toLocaleString('vi-VN',{maximumFractionDigits:2})+' triệu/m²'}
-  function listingFreshness(x){var d=new Date(x.observedAt||x.observed_at||x.publishedAt||0);if(isNaN(d.getTime()))return 'stale';var days=(Date.now()-d.getTime())/86400000;return days<=7?'fresh':days<=30?'recent':'stale'}
+  function listingFreshness(x){var days=listingAgeDays(x);return days<=1?'day':days<=7?'fresh':days<=30?'recent':'stale'}
+  function listingFreshnessLabel(x){var days=listingAgeDays(x);if(!isFinite(days))return 'Ngày đăng chưa rõ';if(days<1)return 'Nguồn đăng trong 24 giờ';if(days<=7)return 'Nguồn đăng trong 7 ngày';if(days<=30)return 'Nguồn đăng trong 30 ngày';return 'Nguồn đăng cũ'}
+  function listingAvailabilityLabel(x){return x&&x.status==='observed'?'Vừa thấy trong lần kiểm tra':'Chưa thấy lại '+(x&&x.missingChecks?x.missingChecks+' lần kiểm tra':'trong lần gần nhất')}
+  function appendPriceHistory(old,next,at){
+    var history=Array.isArray(old&&old.priceHistory)?old.priceHistory.slice():[];
+    if(old&&old.priceBillion!=null&&!history.length)history.push({priceBillion:old.priceBillion,at:old.publishedAt||old.firstSeenAt||at});
+    if(next&&next.priceBillion!=null&&(!old||old.priceBillion==null||Number(old.priceBillion)!==Number(next.priceBillion)))history.push({priceBillion:next.priceBillion,at:next.publishedAt||at});
+    return history.slice(-12);
+  }
+  function mergeListingHistory(found,previous,checkedAt){
+    var current=dedupeListings(found),oldItems=(previous||[]).map(normalizeListing).filter(Boolean),byUrl={},bySemantic={},seen={};
+    oldItems.forEach(function(x){byUrl[canonicalListingUrl(x.url)]=x;bySemantic[listingSemanticKey(x)]=x});
+    var merged=[];current.forEach(function(x){var old=byUrl[canonicalListingUrl(x.url)]||bySemantic[listingSemanticKey(x)],copy=Object.assign({},old||{},x),sources=(x.duplicateSources||[]).concat(old&&old.duplicateSources||[]),sourceSeen={};if(!x.publishedAt&&old&&old.publishedAt)copy.publishedAt=old.publishedAt;copy.firstSeenAt=old&&old.firstSeenAt||x.firstSeenAt||checkedAt;copy.lastSeenAt=checkedAt;copy.lastCheckedAt=checkedAt;copy.observedAt=checkedAt;copy.status='observed';copy.missingChecks=0;copy.sightings=(old&&Number(old.sightings)||0)+1;copy.priceHistory=appendPriceHistory(old,x,checkedAt);copy.qualityScore=listingQualityScore(copy);copy.duplicateCount=Math.max(Number(x.duplicateCount)||1,Number(old&&old.duplicateCount)||1);copy.duplicateSources=sources.filter(function(s){var k=fold(s);if(sourceSeen[k])return false;sourceSeen[k]=true;return true}).slice(0,8);copy.duplicateGroupId=listingSemanticKey(copy);merged.push(copy);seen[listingIdentityKey(x)]=true;seen['semantic:'+listingSemanticKey(x)]=true});
+    oldItems.forEach(function(x){var urlKey=listingIdentityKey(x),semKey='semantic:'+listingSemanticKey(x);if(seen[urlKey]||seen[semKey])return;var copy=Object.assign({},x);copy.lastCheckedAt=checkedAt;copy.missingChecks=(Number(x.missingChecks)||0)+1;copy.status='not_seen';copy.duplicateGroupId=listingSemanticKey(copy);merged.push(copy)});
+    return merged.sort(function(a,b){return listingSortDate(b)-listingSortDate(a)}).slice(0,160)
+  }
 
   function seedVan(){return {
     version:INTEL_VERSION,
@@ -209,14 +258,15 @@
     if(source.id==='ninhxuan-progress'&&f.indexOf('ninh xuan')>-1){v.kcns.forEach(function(k){if(/ninh xuan/.test(fold(k.name))){k.progressLive=true;k.retrievedAt=when}});}
   }
   async function refreshListings(){
-    var found=[],statuses=[];
-    for(var i=0;i<Math.min(LISTING_QUERIES.length,MAX_LISTING_REQUESTS);i++){
-      var spec=LISTING_QUERIES[i],q=listingQueryText(spec),label=typeof spec==='string'?spec:spec.label,url=rssUrl(q),entry={name:'RSS · '+label,query:q,url:url,status:'loading',retrievedAt:null,error:''};statuses.push(entry);renderIntelStatus();
-      try{var xml=await fetchSafe(url);found=found.concat(parseRssListings(xml,q));entry.status='ok';entry.retrievedAt=new Date().toISOString()}catch(e){entry.status='error';entry.error=text(e.message||e)}
-      if(i<LISTING_QUERIES.length-1)await pause(180);
+    var found=[],statuses=[],checkedAt=new Date().toISOString(),feeds=LISTING_FEEDS.slice(0,MAX_LISTING_REQUESTS);
+    for(var i=0;i<feeds.length;i++){
+      var feed=feeds[i],q=listingQueryText(feed),url=rssUrl(q),entry={id:feed.id,sourceId:feed.sourceId,sourceName:feed.sourceName,areaId:feed.areaId,areaLabel:feed.areaLabel,name:'RSS · '+feed.label,query:q,url:url,status:'loading',retrievedAt:null,items:0,error:''};statuses.push(entry);renderIntelStatus();
+      try{var xml=await fetchSafe(url),items=parseRssListings(xml,feed,checkedAt);found=found.concat(items);entry.status='ok';entry.items=items.length;entry.retrievedAt=new Date().toISOString()}catch(e){entry.status='error';entry.error=text(e.message||e)}
+      if(i<feeds.length-1)await pause(180);
     }
-    var next=dedupeListings(found);if(next.length){intel.listings=next;saveSafe('intel_listings',intel.listings)}
-    intel.listingMeta={lastRefreshAt:new Date().toISOString(),status:statuses.some(function(s){return s.status==='ok'})?'Đã cập nhật một phần':'Nguồn RSS không khả dụng',sources:statuses};saveSafe('intel_listing_meta',intel.listingMeta);
+    var next=mergeListingHistory(found,intel.listings,checkedAt);if(next.length){intel.listings=next;saveSafe('intel_listings',intel.listings)}
+    var ok=statuses.filter(function(s){return s.status==='ok'}).length;
+    intel.listingMeta={version:INTEL_VERSION,lastRefreshAt:checkedAt,lastCheckedAt:checkedAt,status:ok?'Đã kiểm tra '+ok+'/'+statuses.length+' luồng nguồn':'Nguồn RSS không khả dụng',totalListings:intel.listings.length,currentListings:found.length,sources:statuses};saveSafe('intel_listing_meta',intel.listingMeta);
   }
   async function refreshVan(){
     var prior=intel.van&&isFinite(Number(intel.van.selectedKcnIndex))?Number(intel.van.selectedKcnIndex):0;
@@ -239,34 +289,56 @@
   function renderIntelStatus(){var a=document.getElementById('intelListingsStatus');if(a)a.innerHTML=statusHtml(intel.listingMeta);var b=document.getElementById('intelVanStatus');if(b)b.innerHTML=statusHtml(intel.van||{});}
   function sourceBadge(status){var map={ok:['official','official'],official:['official','official'],seed:['official','seed'],reported:['reported','reported'],conflicting:['conflicting','conflicting'],parse_error:['error','parse error'],error:['error','unavailable'],loading:['loading','loading'],'link-out':['muted','link-out only'],blocked:['error','blocked']};var x=map[status]||['muted','reported'];return '<span class="intelBadge '+x[0]+'">'+x[1]+'</span>'}
   function listingFacts(x){return '<div class="intelFacts"><div><b>'+escIntel(moneyLabel(x.priceBillion))+'</b><small>Giá đọc được</small></div><div><b>'+escIntel(areaLabel(x.areaM2))+'</b><small>Diện tích</small></div><div><b>'+escIntel(m2Label(x.pricePerM2))+'</b><small>Giá/m²</small></div></div>'}
-  function listingCard(x,index){var saved=Array.isArray(state.saved)&&state.saved.some(function(n){return n&&(n.kind==='listing'||n.kind==='estate_news')&&n.url===x.url});return '<article class="intelListingCard"><div class="intelCardTop"><span class="intelBadge reported">Tin rao mới</span><span class="intelBadge muted">Chưa thẩm định</span></div><h3>'+escIntel(x.title)+'</h3><p class="intelMuted">'+escIntel(x.areaName||'Khác')+' · Ghi nhận '+escIntel(dateLabel(x.observedAt||x.observed_at))+' · '+escIntel(x.source||'Nguồn RSS')+'</p>'+listingFacts(x)+'<p>'+escIntel(x.summary||'Mở nguồn để đọc chi tiết tin rao.')+'</p><div class="intelListingNote"><b>Dùng để:</b> so sánh tin đang rao, không phải giá giao dịch thành công. <b>Kiểm tra:</b> vị trí, loại đất, sổ, quy hoạch và người đăng.</div><div class="intelSource"><span>'+escIntel(x.sourceType||'RSS site-filter')+'</span><span>'+escIntel(x.confidence||'thấp')+'</span></div><div class="actions"><button type="button" class="mini gold" data-intel-save="'+index+'">'+(saved?'✓ Đã lưu':'Lưu vào Sổ tay')+'</button><button type="button" class="mini" data-intel-detail="'+index+'">Chi tiết tin</button><button type="button" class="mini" data-intel-open="'+index+'">Mở tin gốc</button></div></article>'}
-  function listingSourceMatch(x,name){var s=fold((x.source||'')+' '+(x.listingSource||''));return name==='Tất cả'||s.indexOf(fold(name))>-1}
-  function filteredListings(){var list=(intel.listings||[]).slice();var f=intel.filter||{};if(f.area&&f.area!=='Tất cả')list=list.filter(function(x){return x.areaName===f.area});if(f.source&&f.source!=='Tất cả')list=list.filter(function(x){return listingSourceMatch(x,f.source)});if(f.fresh==='fresh')list=list.filter(function(x){return listingFreshness(x)==='fresh'});return list}
+  function listingDateForFreshness(x){return x&&x.publishedAt||x&&x.firstSeenAt||x&&x.lastSeenAt||null}
+  function listingCard(x,index){
+    var saved=Array.isArray(state.saved)&&state.saved.some(function(n){return n&&n.kind==='listing'&&(n.canonicalUrl||n.url)===(x.canonicalUrl||x.url)}),duplicate=x.duplicateCount>1?'<span class="intelBadge duplicate">Có thể tin đăng lại · '+x.duplicateCount+' bản ghi</span>':'';
+    return '<article class="intelListingCard"><div class="intelCardTop"><span class="intelBadge reported">'+escIntel(listingFreshnessLabel(x))+'</span><span class="intelBadge muted">'+escIntel(x.propertyType||'Khác')+'</span>'+duplicate+'</div><h3>'+escIntel(x.title)+'</h3><p class="intelMuted">'+escIntel(x.areaName||'Khác')+' · <b>Đăng nguồn:</b> '+escIntel(dateLabel(x.publishedAt))+' · <b>App thấy:</b> '+escIntel(dateLabel(x.lastSeenAt))+'</p>'+listingFacts(x)+'<div class="intelListingMeta"><span>'+escIntel(listingAvailabilityLabel(x))+'</span><span>Kiểm tra: '+escIntel(dateLabel(x.lastCheckedAt))+'</span></div><p>'+escIntel(x.summary||'Mở nguồn để đọc chi tiết tin rao.')+'</p><div class="intelQuality"><b>Độ đầy đủ '+escIntel(String(x.qualityScore||0))+'/100</b><span>'+(x.hasCertificate?'Có dấu hiệu sổ':'Chưa thấy thông tin sổ')+' · '+(x.hasOwner?'Có dấu hiệu chính chủ':'Chưa rõ người đăng')+'</span></div><div class="intelListingNote"><b>Dùng để:</b> so sánh tin đang rao, không phải giá giao dịch thành công. <b>Kiểm tra:</b> vị trí, loại đất, sổ, quy hoạch và người đăng.</div><div class="intelSource"><span>'+escIntel(x.portalName||x.sourceType||'Nguồn RSS')+'</span><span>'+escIntel(x.confidence||'thấp')+'</span></div><div class="actions"><button type="button" class="mini gold" data-intel-save="'+index+'">'+(saved?'✓ Đã lưu':'Lưu vào Sổ tay')+'</button><button type="button" class="mini" data-intel-detail="'+index+'">Chi tiết tin</button><button type="button" class="mini" data-intel-open="'+index+'">Mở tin gốc</button></div></article>'
+  }
+  function listingSourceMatch(x,name){var s=fold((x.portalName||'')+' '+(x.source||'')+' '+(x.listingSource||''));return name==='Tất cả'||s.indexOf(fold(name))>-1}
+  function filterNumber(v){if(v==null||text(v).trim()==='')return null;var n=Number(text(v).replace(',','.'));return isFinite(n)?n:null}
+  function listingMatchesFreshness(x,filter){var age=listingAgeDays(x);if(filter==='24h')return age<=1;if(filter==='7d')return age<=7;if(filter==='30d')return age<=30;return true}
+  function numericRangeMatch(value,min,max){if(min==null&&max==null)return true;if(value==null||!isFinite(Number(value)))return false;if(min!=null&&Number(value)<min)return false;if(max!=null&&Number(value)>max)return false;return true}
+  function compareListingNumber(a,b,descending){var av=Number(a),bv=Number(b),am=isFinite(av),bm=isFinite(bv);if(!am&&!bm)return 0;if(!am)return 1;if(!bm)return -1;return descending?bv-av:av-bv}
+  function sortListings(list,mode){return list.sort(function(a,b){if(mode==='price')return compareListingNumber(a.priceBillion,b.priceBillion,false);if(mode==='area')return compareListingNumber(a.areaM2,b.areaM2,true);if(mode==='m2')return compareListingNumber(a.pricePerM2,b.pricePerM2,false);if(mode==='quality')return compareListingNumber(a.qualityScore,b.qualityScore,true);return listingSortDate(b)-listingSortDate(a)})}
+  function filteredListings(){
+    var list=(intel.listings||[]).slice(),f=intel.filter||{},minPrice=filterNumber(f.minPrice),maxPrice=filterNumber(f.maxPrice),minArea=filterNumber(f.minArea),maxArea=filterNumber(f.maxArea),minM2=filterNumber(f.minM2),maxM2=filterNumber(f.maxM2);
+    if(f.area&&f.area!=='Tất cả')list=list.filter(function(x){return x.areaName===f.area});
+    if(f.source&&f.source!=='Tất cả')list=list.filter(function(x){return listingSourceMatch(x,f.source)});
+    if(f.type&&f.type!=='all')list=list.filter(function(x){return x.propertyType===f.type});
+    if(f.legal==='certificate')list=list.filter(function(x){return x.hasCertificate});
+    if(f.legal==='owner')list=list.filter(function(x){return x.hasOwner});
+    if(f.fresh&&f.fresh!=='all')list=list.filter(function(x){return listingMatchesFreshness(x,f.fresh)});
+    list=list.filter(function(x){return numericRangeMatch(x.priceBillion,minPrice,maxPrice)&&numericRangeMatch(x.areaM2,minArea,maxArea)&&numericRangeMatch(x.pricePerM2,minM2,maxM2)});
+    return sortListings(list,f.sort||'newest')
+  }
   function listingDetail(x){
     if(!x)return;
-    showSheet('<h2>Chi tiết tin rao</h2><h3>'+escIntel(x.title)+'</h3><p><b>Phân lớp:</b> Tin rao từ RSS site-filter · chưa thẩm định</p><div class="intelDetailGrid"><div><b>Khu vực</b><span>'+escIntel(x.areaName||'Chưa có dữ liệu')+'</span></div><div><b>Giá đọc được</b><span>'+escIntel(moneyLabel(x.priceBillion))+'</span></div><div><b>Diện tích</b><span>'+escIntel(areaLabel(x.areaM2))+'</span></div><div><b>Giá/m²</b><span>'+escIntel(m2Label(x.pricePerM2))+'</span></div><div><b>Ghi nhận</b><span>'+escIntel(dateLabel(x.observedAt||x.observed_at))+'</span></div><div><b>Độ tin cậy</b><span>'+escIntel(x.confidence||'thấp')+'</span></div><div><b>Nguồn</b><span>'+escIntel(x.source||'Nguồn RSS')+'</span></div><div><b>Trạng thái</b><span>Tin đang được phát hiện</span></div></div><p>'+escIntel(x.summary||'Chưa có dữ liệu')+'</p><div class="intelWarning">Tin rao có thể hết hạn, trùng tin, sai vị trí hoặc dùng giá quảng cáo. Hãy mở tin gốc và kiểm tra sổ, quy hoạch, loại đất, lối đi, người có quyền bán và thực địa.</div><button type="button" class="primary gold" id="intelListingSourceBtn">Mở tin gốc</button>');
+    var history=(x.priceHistory||[]).slice(-4).map(function(h){return moneyLabel(h.priceBillion)+' ('+shortDate(h.at)+')'}).join(' · ')||'Chưa có lịch sử giá';
+    showSheet('<h2>Chi tiết tin rao</h2><h3>'+escIntel(x.title)+'</h3><p><b>Phân lớp:</b> Tin rao từ RSS site-filter · chưa thẩm định</p><div class="intelDetailGrid"><div><b>Khu vực</b><span>'+escIntel(x.areaName||'Chưa có dữ liệu')+'</span></div><div><b>Loại BĐS</b><span>'+escIntel(x.propertyType||'Khác')+'</span></div><div><b>Giá đọc được</b><span>'+escIntel(moneyLabel(x.priceBillion))+'</span></div><div><b>Diện tích</b><span>'+escIntel(areaLabel(x.areaM2))+'</span></div><div><b>Giá/m²</b><span>'+escIntel(m2Label(x.pricePerM2))+'</span></div><div><b>Độ đầy đủ</b><span>'+escIntel(String(x.qualityScore||0))+'/100</span></div><div><b>Ngày đăng nguồn</b><span>'+escIntel(dateLabel(x.publishedAt))+'</span></div><div><b>Lần đầu phát hiện</b><span>'+escIntel(dateLabel(x.firstSeenAt))+'</span></div><div><b>Lần thấy gần nhất</b><span>'+escIntel(dateLabel(x.lastSeenAt))+'</span></div><div><b>Lần kiểm tra gần nhất</b><span>'+escIntel(dateLabel(x.lastCheckedAt))+'</span></div><div><b>Trạng thái</b><span>'+escIntel(listingAvailabilityLabel(x))+'</span></div><div><b>Nguồn</b><span>'+escIntel(x.portalName||x.source||'Nguồn RSS')+'</span></div></div><p><b>Lịch sử giá đọc được:</b> '+escIntel(history)+'</p><p>'+escIntel(x.summary||'Chưa có dữ liệu')+'</p><div class="intelWarning">Tin rao có thể hết hạn, trùng tin, sai vị trí hoặc dùng giá quảng cáo. Hãy mở tin gốc và kiểm tra sổ, quy hoạch, loại đất, lối đi, người có quyền bán và thực địa.</div><button type="button" class="primary gold" id="intelListingSourceBtn">Mở tin gốc</button>');
     var btn=document.getElementById('intelListingSourceBtn');if(btn)btn.addEventListener('click',function(){openUrlSafe(x.url)})
   }
   function saveListing(x){if(!x)return;if(!Array.isArray(state.saved))state.saved=[];if(!state.saved.some(function(n){return n&&(n.kind==='listing'||n.kind==='estate_news')&&n.url===x.url})){var copy=Object.assign({},x,{savedAt:new Date().toLocaleString('vi-VN')});state.saved.unshift(copy);store('saved',state.saved);toast('Đã lưu tin vào Sổ tay')}else toast('Tin đã có trong Sổ tay');renderListings()}
+  function resetListingFilters(){intel.filter={area:'Tất cả',source:'Tất cả',type:'all',legal:'all',fresh:'all',minPrice:'',maxPrice:'',minArea:'',maxArea:'',minM2:'',maxM2:'',sort:'newest'};renderListings()}
   function bindListingEvents(root,list){
     root.querySelectorAll('[data-intel-save]').forEach(function(b){b.addEventListener('click',function(){saveListing(list[Number(b.dataset.intelSave)])})});
     root.querySelectorAll('[data-intel-detail]').forEach(function(b){b.addEventListener('click',function(){listingDetail(list[Number(b.dataset.intelDetail)])})});
     root.querySelectorAll('[data-intel-open]').forEach(function(b){b.addEventListener('click',function(){var item=list[Number(b.dataset.intelOpen)];if(item)openUrlSafe(item.url)})});
-    var a=root.querySelector('#intelAreaFilter');if(a)a.addEventListener('change',function(){intel.filter.area=a.value;renderListings()});
-    var s=root.querySelector('#intelSourceFilter');if(s)s.addEventListener('change',function(){intel.filter.source=s.value;renderListings()});
-    var f=root.querySelector('#intelFreshFilter');if(f)f.addEventListener('change',function(){intel.filter.fresh=f.value;renderListings()})
+    var fields=[['intelAreaFilter','area'],['intelSourceFilter','source'],['intelTypeFilter','type'],['intelLegalFilter','legal'],['intelFreshFilter','fresh'],['intelSortFilter','sort'],['intelMinPrice','minPrice'],['intelMaxPrice','maxPrice'],['intelMinArea','minArea'],['intelMaxArea','maxArea'],['intelMinM2','minM2'],['intelMaxM2','maxM2']];
+    fields.forEach(function(pair){var el=root.querySelector('#'+pair[0]);if(el)el.addEventListener('change',function(){intel.filter[pair[1]]=el.value;renderListings()})});
+    var reset=root.querySelector('#intelResetFilters');if(reset)reset.addEventListener('click',resetListingFilters)
   }
   function renderListings(){
     var root=document.getElementById('listings');if(!root)return;
-    var list=filteredListings(),areas=['Tất cả','Dốc Lết / Ninh Hải','Ninh Thủy','Ninh Xuân','Khác'],sourceNames=['Tất cả'].concat(LISTING_SITE_HOSTS.slice(0,5));
+    var f=intel.filter||{},list=filteredListings(),areas=['Tất cả','Dốc Lết / Ninh Hải','Ninh Thủy','Ninh Xuân','Khác'],sourceNames=['Tất cả'].concat(LISTING_SOURCE_PROFILES.map(function(s){return s.name}));
     var rssSources=Array.isArray(intel.listingMeta&&intel.listingMeta.sources)?intel.listingMeta.sources:[],rssOk=rssSources.filter(function(s){return s.status==='ok'}).length;
     var sourceButtons=LISTING_SOURCES.map(function(s,i){return '<button type="button" class="mini" data-intel-source-index="'+i+'">'+escIntel(s.name)+'</button>'}).join('');
-    var queryButtons=LISTING_QUERIES.slice(0,MAX_LISTING_REQUESTS).map(function(spec,i){var label=typeof spec==='string'?spec:spec.label;return '<button type="button" class="mini" data-intel-query-index="'+i+'">'+escIntel(label)+'</button>'}).join('');
-    root.innerHTML='<div class="intelHero"><div><span class="intelEyebrow">LISTING INTELLIGENCE · CLIENT CACHE</span><h2>Tin rao bán BĐS Dốc Lết & KCN Ninh Xuân</h2><p>Tập trung vào tin đang rao bán đất/nhà tại Dốc Lết, Ninh Hải, Ninh Thủy và khu vực KCN Ninh Xuân. Giá, diện tích và giá/m² chỉ là dữ liệu đọc được từ tin rao; không phải giá giao dịch thành công.</p></div><button type="button" class="primary gold" id="intelRefreshListings">↻ Cập nhật tin rao</button></div><div id="intelListingsStatus">'+statusHtml(intel.listingMeta)+'</div><div class="intelFilterGrid"><label>Khu vực<select id="intelAreaFilter">'+areas.map(function(x){return '<option value="'+escIntel(x)+'" '+(intel.filter.area===x?'selected':'')+'>'+escIntel(x)+'</option>'}).join('')+'</select></label><label>Trang rao<select id="intelSourceFilter">'+sourceNames.map(function(x){return '<option value="'+escIntel(x)+'" '+(intel.filter.source===x?'selected':'')+'>'+escIntel(x)+'</option>'}).join('')+'</select></label><label>Độ mới<select id="intelFreshFilter"><option value="all" '+(intel.filter.fresh==='all'?'selected':'')+'>Tất cả</option><option value="fresh" '+(intel.filter.fresh==='fresh'?'selected':'')+'>Trong 7 ngày</option></select></label></div><div class="intelSourceStrip"><b>Trang rao trực tiếp</b><span>Mở để xem hàng đang có trên từng trang:</span>'+sourceButtons+'<b>Tìm nhanh</b>'+queryButtons+'</div><div class="sectionTitle"><h2>'+list.length+' tin rao</h2><span>'+MAX_LISTING_REQUESTS+' truy vấn · '+(rssOk?rssOk+' luồng RSS đã đọc':'chưa cập nhật RSS')+'</span></div>'+(list.length?'<div class="intelListGrid">'+list.map(listingCard).join('')+'</div>':'<div class="emptyHint">Chưa có tin rao trong cache. Hãy bấm “Cập nhật tin rao” khi có mạng hoặc mở trang rao trực tiếp.</div>')+'<div class="intelDisclaimer">Tin rao có thể hết hạn, trùng tin hoặc thay đổi giá. App không tự crawl trực tiếp nội dung/ảnh/số điện thoại của marketplace; hãy mở tin gốc để kiểm tra pháp lý, quy hoạch và thực địa.</div>';
+    var queryButtons=LISTING_FEEDS.slice(0,MAX_LISTING_REQUESTS).map(function(feed,i){return '<button type="button" class="mini" data-intel-query-index="'+i+'">'+escIntel(feed.label)+'</button>'}).join('');
+    var selected=function(v,x){return v===x?'selected':''},value=function(k){return escIntel(f[k]==null?'':f[k])};
+    root.innerHTML='<div class="intelHero"><div><span class="intelEyebrow">LISTING INTELLIGENCE · CLIENT CACHE</span><h2>Tin rao bán BĐS Dốc Lết & KCN Ninh Xuân</h2><p>App tự đọc truy vấn riêng theo từng trang rao, lưu lịch sử phát hiện trên thiết bị và chỉ dùng tin rao để tham khảo. Phần Tin tức vẫn giữ nguyên.</p></div><button type="button" class="primary gold" id="intelRefreshListings">↻ Cập nhật tin rao</button></div><div id="intelListingsStatus">'+statusHtml(intel.listingMeta)+'</div><div class="intelFilterGrid"><label>Khu vực<select id="intelAreaFilter">'+areas.map(function(x){return '<option value="'+escIntel(x)+'" '+selected(f.area,x)+'>'+escIntel(x)+'</option>'}).join('')+'</select></label><label>Trang rao<select id="intelSourceFilter">'+sourceNames.map(function(x){return '<option value="'+escIntel(x)+'" '+selected(f.source,x)+'>'+escIntel(x)+'</option>'}).join('')+'</select></label><label>Loại BĐS<select id="intelTypeFilter"><option value="all" '+selected(f.type,'all')+'>Tất cả</option><option value="Đất" '+selected(f.type,'Đất')+'>Đất</option><option value="Nhà" '+selected(f.type,'Nhà')+'>Nhà</option><option value="Khác" '+selected(f.type,'Khác')+'>Khác</option></select></label><label>Pháp lý/người đăng<select id="intelLegalFilter"><option value="all" '+selected(f.legal,'all')+'>Tất cả</option><option value="certificate" '+selected(f.legal,'certificate')+'>Có dấu hiệu sổ</option><option value="owner" '+selected(f.legal,'owner')+'>Có dấu hiệu chính chủ</option></select></label><label>Độ mới<select id="intelFreshFilter"><option value="all" '+selected(f.fresh,'all')+'>Tất cả</option><option value="24h" '+selected(f.fresh,'24h')+'>Nguồn đăng trong 24 giờ</option><option value="7d" '+selected(f.fresh,'7d')+'>Nguồn đăng trong 7 ngày</option><option value="30d" '+selected(f.fresh,'30d')+'>Nguồn đăng trong 30 ngày</option></select></label><label>Sắp xếp<select id="intelSortFilter"><option value="newest" '+selected(f.sort,'newest')+'>Mới nhất</option><option value="price" '+selected(f.sort,'price')+'>Giá thấp nhất</option><option value="area" '+selected(f.sort,'area')+'>Diện tích lớn nhất</option><option value="m2" '+selected(f.sort,'m2')+'>Giá/m² thấp nhất</option><option value="quality" '+selected(f.sort,'quality')+'>Độ đầy đủ cao nhất</option></select></label></div><div class="intelFilterAdvanced"><label>Giá từ (tỷ)<input id="intelMinPrice" type="number" step="0.01" min="0" value="'+value('minPrice')+'" placeholder="0"></label><label>Giá đến (tỷ)<input id="intelMaxPrice" type="number" step="0.01" min="0" value="'+value('maxPrice')+'" placeholder="Không giới hạn"></label><label>Diện tích từ (m²)<input id="intelMinArea" type="number" step="1" min="0" value="'+value('minArea')+'" placeholder="0"></label><label>Diện tích đến (m²)<input id="intelMaxArea" type="number" step="1" min="0" value="'+value('maxArea')+'" placeholder="Không giới hạn"></label><label>Giá/m² từ (triệu)<input id="intelMinM2" type="number" step="0.01" min="0" value="'+value('minM2')+'" placeholder="0"></label><label>Giá/m² đến (triệu)<input id="intelMaxM2" type="number" step="0.01" min="0" value="'+value('maxM2')+'" placeholder="Không giới hạn"></label><button type="button" class="mini" id="intelResetFilters">Xóa bộ lọc</button></div><div class="intelSourceStrip"><b>Trang rao trực tiếp</b><span>Nếu RSS chưa có kết quả, mở thẳng trang nguồn:</span>'+sourceButtons+'<b>Truy vấn trong app</b>'+queryButtons+'</div><div class="sectionTitle"><h2>'+list.length+' tin đang hiển thị</h2><span>'+(intel.listings||[]).length+' tin trong máy · '+MAX_LISTING_REQUESTS+' luồng nguồn · '+(rssOk?rssOk+' luồng đã đọc':'chưa cập nhật RSS')+'</span></div>'+(list.length?'<div class="intelListGrid">'+list.map(listingCard).join('')+'</div>':'<div class="emptyHint">Chưa có tin phù hợp trong cache. Hãy bấm “Cập nhật tin rao” khi có mạng hoặc mở trang rao trực tiếp.</div>')+'<div class="intelDisclaimer">Tin rao có thể hết hạn, trùng tin hoặc thay đổi giá. App không tự crawl trực tiếp nội dung/ảnh/số điện thoại của marketplace; hãy mở tin gốc để kiểm tra pháp lý, quy hoạch và thực địa. Ngày đăng nguồn, lần đầu thấy, lần thấy gần nhất và lần kiểm tra được lưu riêng trên thiết bị.</div>';
     var b=root.querySelector('#intelRefreshListings');if(b)b.addEventListener('click',refreshAll);
     bindListingEvents(root,list);
     root.querySelectorAll('[data-intel-source-index]').forEach(function(x){x.addEventListener('click',function(){var s=LISTING_SOURCES[Number(x.dataset.intelSourceIndex)];if(s)openUrlSafe(s.url)})});
-    root.querySelectorAll('[data-intel-query-index]').forEach(function(x){x.addEventListener('click',function(){var spec=LISTING_QUERIES[Number(x.dataset.intelQueryIndex)];if(spec)openUrlSafe(rssUrl(listingQueryText(spec)))})})
+    root.querySelectorAll('[data-intel-query-index]').forEach(function(x){x.addEventListener('click',function(){var feed=LISTING_FEEDS[Number(x.dataset.intelQueryIndex)];if(feed)openUrlSafe(rssUrl(listingQueryText(feed)))})})
   }
   function kcnStatus(k){var parts=[];if(k.approval)parts.push(k.approval);if(k.clearance)parts.push('GPMB: '+k.clearance);if(k.infrastructure)parts.push('Hạ tầng: '+k.infrastructure);return parts.join(' · ')}
   function kcnRow(k,i){return '<tr><td><b>'+escIntel(k.name)+'</b><small>'+escIntel(k.investor||'Chưa có dữ liệu')+'</small></td><td>'+escIntel(k.area||'Chưa có dữ liệu')+'</td><td>'+escIntel(k.capital||'Chưa có dữ liệu')+'</td><td>'+escIntel(kcnStatus(k))+'</td><td>'+sourceBadge(k.claimStatus||'reported')+'<small>Snapshot: '+escIntel(shortDate(k.sourceDate))+'</small><small>Đọc live: '+escIntel(shortDate(k.retrievedAt))+'</small></td><td><button type="button" class="mini" data-kcn-detail="'+i+'">Mở</button></td></tr>'}
@@ -311,6 +383,7 @@
   }
   var kcnStyle=document.createElement('style');kcnStyle.textContent='.kcnMetaGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:#fff;border:1px solid rgba(8,34,54,.08);border-radius:18px;padding:12px;margin-bottom:13px}.kcnMetaGrid>div{padding:5px 8px;border-right:1px solid #e5edf1}.kcnMetaGrid>div:nth-child(even){border-right:0}.kcnMetaGrid b{display:block;font-size:11px;color:#637783}.kcnMetaGrid span{display:block;margin-top:4px;color:#12354a;font-weight:850;font-size:13px}.kcnFullTable{min-width:1080px}.kcnFullTable td:first-child{font-weight:950;color:#21475d;text-align:center}.kcnStatusPill{display:inline-block;border-radius:10px;padding:5px 7px;background:#e9f3f8;color:#164d68;font-weight:850;font-size:11px}.kcnDetailPanel{margin-top:13px}.kcnDetailPanel .sectionTitle{margin-bottom:10px}.kcnScenePlaceholder{min-height:145px;border-radius:18px;padding:20px;background:linear-gradient(145deg,#dceff1 0%,#b6d2d8 48%,#698e9c 49%,#315f70 100%);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);text-shadow:0 1px 2px rgba(0,0,0,.35)}.kcnScenePlaceholder span{font-size:10px;font-weight:950;letter-spacing:1px;color:#fff5c8}.kcnScenePlaceholder b{font-size:23px;margin-top:7px}.kcnScenePlaceholder small{font-size:11px;margin-top:8px;color:rgba(255,255,255,.9)}.kcnDetailGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}.kcnDetailGrid>div{background:#f5f9fc;border-radius:15px;padding:10px}.kcnDetailGrid b{display:block;font-size:11px;color:#607681}.kcnDetailGrid span{display:block;color:#12354a;font-size:13px;font-weight:850;margin-top:4px}.kcnDetailText{line-height:1.5;color:#345463}.kcnDetailPanel .primary{width:100%}@media(max-width:520px){.kcnMetaGrid{grid-template-columns:1fr}.kcnMetaGrid>div{border-right:0;border-bottom:1px solid #e5edf1;padding-bottom:9px}.kcnMetaGrid>div:last-child{border-bottom:0}.kcnDetailGrid{grid-template-columns:1fr}}';document.head.appendChild(kcnStyle);
   var intelExtraStyle=document.createElement('style');intelExtraStyle.textContent='.intelSignalGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}.intelSignalGrid>div{background:#fff8eb;border:1px solid #f0d999;border-radius:14px;padding:10px}.intelSignalGrid b{display:block;color:#76520a;font-size:11px}.intelSignalGrid span{display:block;margin-top:4px;color:#3f5560;font-size:12px;line-height:1.4}.kcnSignalsCard{margin-top:13px}.kcnSignalGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.kcnSignal{border:1px solid #e0ebf0;border-radius:16px;padding:12px;background:#fbfdfe}.kcnSignal h4{margin:10px 0 6px;font-size:14px;line-height:1.3}.kcnSignal p{font-size:12px;line-height:1.45;color:#345463;min-height:70px}.kcnSignal small{display:block;color:#637783;font-size:11px;margin-bottom:9px}.kcnSignal .mini{width:100%}@media(max-width:700px){.kcnSignalGrid{grid-template-columns:1fr}.intelSignalGrid{grid-template-columns:1fr}}';document.head.appendChild(intelExtraStyle);
+  var listingExtraStyle=document.createElement('style');listingExtraStyle.textContent='.intelFilterAdvanced{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;align-items:end;background:#f7fbfd;border:1px solid #e0ebf0;border-radius:18px;padding:11px;margin-bottom:13px}.intelFilterAdvanced label{display:flex;flex-direction:column;gap:6px;font-size:11px;color:#607681}.intelFilterAdvanced input{box-sizing:border-box;width:100%;padding:10px;border:1px solid #d5e2e8;border-radius:12px;background:#fff;color:#12354a;font-size:13px}.intelFilterAdvanced #intelResetFilters{min-height:39px}.intelListingMeta{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;background:#f7fbfd;border-radius:12px;padding:8px 10px;color:#5a707c;font-size:11px}.intelQuality{display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap;background:#f0faf5;border:1px solid #d5eddf;border-radius:12px;padding:8px 10px;margin:9px 0;color:#0b6440;font-size:11px}.intelQuality b{font-size:12px}.intelBadge.duplicate{background:#fff0d3;color:#85510b;border:1px solid #efd797}.intelListingCard .actions{margin-top:10px}@media(max-width:700px){.intelFilterAdvanced{grid-template-columns:1fr 1fr}}@media(max-width:520px){.intelFilterAdvanced{grid-template-columns:1fr}.intelListingMeta{display:block}.intelListingMeta span{display:block;margin:3px 0}}';document.head.appendChild(listingExtraStyle);
   renderVan=renderVanComplete;
   window.NinhHoaIntelligence={refresh:refreshAll,renderListings:renderListings,renderVan:renderVan,version:INTEL_VERSION};
 })();
