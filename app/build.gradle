@@ -13,8 +13,8 @@ android {
         applicationId 'com.vuhoang.ninhhoainvestai'
         minSdk 23
         targetSdk 35
-        versionCode 66
-        versionName '34.1.0-policy-navigation-official-news'
+        versionCode 67
+        versionName '34.2.0-live-browser-fallback'
     }
 }
 

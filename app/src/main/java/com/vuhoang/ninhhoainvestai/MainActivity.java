@@ -2,10 +2,12 @@ package com.vuhoang.ninhhoainvestai;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.graphics.Color;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
+import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
@@ -14,7 +16,9 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.Toast;
+import android.webkit.CookieManager;
 
 
 import java.io.BufferedReader;
@@ -27,10 +31,18 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
+import org.json.JSONTokener;
+
 public class MainActivity extends Activity {
     private static final int REQ_FILE_CHOOSER = 601;
     private WebView webView;
+    private WebView sourceWebView;
     private ValueCallback<Uri[]> filePathCallback;
+    private final Handler mainHandler = new Handler();
+    private boolean browserFetchInProgress = false;
+    private String browserFetchRequestId;
+    private String browserFetchUrl;
+    private int browserFetchGeneration = 0;
 
     public class AndroidBridge {
         @JavascriptInterface
@@ -94,17 +106,158 @@ public class MainActivity extends Activity {
                     try {
                         payload = safeHttpGet(url);
                     } catch (Exception e) {
+                        if (shouldUseBrowserFetch(url)) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    fetchWithBrowser(requestId, url);
+                                }
+                            });
+                            return;
+                        }
                         payload = "__ERROR__" + e.getMessage();
                     }
-                    final String script = "window.__intelFetchDone && window.__intelFetchDone(" + quote(requestId) + "," + quote(payload) + ")";
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (webView != null) webView.evaluateJavascript(script, null);
-                        }
-                    });
+                    deliverIntelFetch(requestId, payload);
                 }
             }).start();
+        }
+    }
+
+    private void deliverIntelFetch(final String requestId, final String payload) {
+        final String script = "window.__intelFetchDone && window.__intelFetchDone(" + quote(requestId) + "," + quote(payload) + ")";
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (webView != null) webView.evaluateJavascript(script, null);
+            }
+        });
+    }
+
+    /**
+     * Some listing portals return 403 to a plain HttpURLConnection request,
+     * even though their public listing page is readable in a normal browser.
+     * Keep the collector client-only, but let a sandboxed WebView execute the
+     * portal's public page scripts and return its rendered HTML to the parser.
+     */
+    private boolean shouldUseBrowserFetch(String urlText) {
+        try {
+            URL url = new URL(urlText);
+            String host = url.getHost().toLowerCase(Locale.US);
+            String[] portals = new String[]{"batdongsan.com.vn", "bds68.com.vn", "nhatot.com", "chotot.com"};
+            for (String portal : portals) {
+                if (host.equals(portal) || host.endsWith("." + portal)) return true;
+            }
+        } catch (Exception ignored) {
+            // The regular safe-fetch error is delivered to the app.
+        }
+        return false;
+    }
+
+    private void ensureSourceWebView() {
+        if (sourceWebView != null) return;
+        sourceWebView = new WebView(this);
+        sourceWebView.setVisibility(View.VISIBLE);
+        sourceWebView.setAlpha(0.01f);
+        sourceWebView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        sourceWebView.setLayoutParams(new FrameLayout.LayoutParams(1, 1));
+
+        WebSettings settings = sourceWebView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setDatabaseEnabled(true);
+        settings.setJavaScriptCanOpenWindowsAutomatically(false);
+        settings.setMediaPlaybackRequiresUserGesture(true);
+        settings.setLoadWithOverviewMode(false);
+        settings.setUseWideViewPort(false);
+        settings.setAllowFileAccess(false);
+        settings.setAllowContentAccess(false);
+        // Use the standard Android WebView identity. The app-specific UA is
+        // intentionally kept only for the native HTTP path because listing
+        // portals commonly block custom collector identities.
+        CookieManager.getInstance().setAcceptCookie(true);
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            CookieManager.getInstance().setAcceptThirdPartyCookies(sourceWebView, true);
+        }
+        sourceWebView.setWebChromeClient(new WebChromeClient());
+        sourceWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                if (!request.isForMainFrame()) return false;
+                return !isSafeFetchUrl(request.getUrl().toString());
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                final int generation = browserFetchGeneration;
+                mainHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!browserFetchInProgress || generation != browserFetchGeneration || sourceWebView == null) return;
+                        sourceWebView.evaluateJavascript(
+                                "(function(){return document.documentElement ? document.documentElement.outerHTML : '';})()",
+                                new ValueCallback<String>() {
+                                    @Override
+                                    public void onReceiveValue(String value) {
+                                        if (!browserFetchInProgress || generation != browserFetchGeneration) return;
+                                        String html = decodeJavascriptString(value);
+                                        finishBrowserFetch(browserFetchRequestId, html);
+                                    }
+                                });
+                    }
+                }, 700L);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, android.webkit.WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                if (request.isForMainFrame() && browserFetchInProgress) {
+                    finishBrowserFetch(browserFetchRequestId, "__ERROR__Không đọc được trang rao trong WebView");
+                }
+            }
+        });
+    }
+
+    private void fetchWithBrowser(final String requestId, final String url) {
+        if (!isSafeFetchUrl(url)) {
+            deliverIntelFetch(requestId, "__ERROR__Nguồn không nằm trong allowlist HTTPS");
+            return;
+        }
+        if (browserFetchInProgress) {
+            deliverIntelFetch(requestId, "__ERROR__Trình đọc nguồn đang bận");
+            return;
+        }
+        ensureSourceWebView();
+        browserFetchInProgress = true;
+        browserFetchRequestId = requestId;
+        browserFetchUrl = url;
+        final int generation = ++browserFetchGeneration;
+        mainHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (browserFetchInProgress && generation == browserFetchGeneration) {
+                    finishBrowserFetch(requestId, "__ERROR__Nguồn không phản hồi trong thời gian cho phép");
+                }
+            }
+        }, 11000L);
+        sourceWebView.loadUrl(url);
+    }
+
+    private void finishBrowserFetch(String requestId, String payload) {
+        if (!browserFetchInProgress || requestId == null || !requestId.equals(browserFetchRequestId)) return;
+        browserFetchInProgress = false;
+        browserFetchRequestId = null;
+        browserFetchUrl = null;
+        deliverIntelFetch(requestId, payload == null ? "__ERROR__Nguồn rao trống" : payload);
+    }
+
+    private String decodeJavascriptString(String value) {
+        if (value == null || "null".equals(value)) return "";
+        try {
+            Object decoded = new JSONTokener(value).nextValue();
+            return decoded == null ? "" : decoded.toString();
+        } catch (Exception ignored) {
+            return value;
         }
     }
 
@@ -342,8 +495,12 @@ public class MainActivity extends Activity {
                 }
             }
         });
+        FrameLayout root = new FrameLayout(this);
+        root.addView(webView);
+        ensureSourceWebView();
+        root.addView(sourceWebView);
         webView.loadUrl("file:///android_asset/app.html");
-        setContentView(webView);
+        setContentView(root);
     }
 
     @Override
@@ -371,5 +528,20 @@ public class MainActivity extends Activity {
     @Override
     public void onBackPressed() {
         webView.evaluateJavascript("window.__appBack && window.__appBack()", null);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (sourceWebView != null) {
+            sourceWebView.stopLoading();
+            sourceWebView.destroy();
+            sourceWebView = null;
+        }
+        if (webView != null) {
+            webView.stopLoading();
+            webView.destroy();
+            webView = null;
+        }
+        super.onDestroy();
     }
 }

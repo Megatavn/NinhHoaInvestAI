@@ -6,7 +6,7 @@
 (function(){
   'use strict';
 
-  var INTEL_VERSION='1.5.0';
+  var INTEL_VERSION='1.6.0';
   var REFRESH_MINUTES=30;
   var MAX_RSS_ITEMS=40;
   var MAX_LISTING_REQUESTS=12;
