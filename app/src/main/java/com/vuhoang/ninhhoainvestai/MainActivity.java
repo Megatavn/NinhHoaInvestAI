@@ -185,6 +185,10 @@ public class MainActivity extends Activity {
             String host = url.getHost().toLowerCase(Locale.US);
             String[] allowed = new String[]{
                     "news.google.com",
+                    "batdongsan.com.vn",
+                    "bds68.com.vn",
+                    "nhatot.com",
+                    "chotot.com",
                     "bqlkktkcn.khanhhoa.gov.vn",
                     "vanphong.khanhhoa.gov.vn",
                     "khanhhoa.gov.vn",
