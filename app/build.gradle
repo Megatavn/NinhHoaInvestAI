@@ -13,8 +13,8 @@ android {
         applicationId 'com.vuhoang.ninhhoainvestai'
         minSdk 23
         targetSdk 35
-        versionCode 67
-        versionName '34.2.0-live-browser-fallback'
+        versionCode 68
+        versionName '34.3.0-kcn-live-filters'
     }
 }
 
